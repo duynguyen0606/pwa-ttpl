@@ -1,0 +1,72 @@
+@import '../../styles/mixins.scss';
+#introduce-page {
+  background: linear-gradient(
+    180deg,
+    #bdd7ff 0%,
+    rgba(255, 255, 255, 0) 105.76%
+  );
+  #introduce-banner {
+    .banner-content {
+      color: #fff;
+      position: absolute;
+      top: 35%;
+      right: 50%;
+      z-index: 10;
+      transform: translate(25%, -50%);
+    }
+    .banner-actions {
+      margin-top: 20px;
+      button {
+        min-width: 200px;
+        border-radius: 1000px;
+        border: var(--primary-color);
+        color: #fff;
+        background-color: var(--primary-color);
+      }
+    }
+  }
+  .procedure {
+    .title {
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 10px;
+      &::after {
+        position: absolute;
+        content: '';
+        width: 100px;
+        height: 2px;
+        background-color: #000;
+        bottom: 0;
+        right: 0;
+        transform: translate(-50%, 50%);
+      }
+    }
+  }
+
+  .banner-connect {
+    padding-left: 100px;
+    height: 400px;
+    overflow: hidden;
+    background: linear-gradient(
+      96.9deg,
+      rgba(108, 188, 252, 0.8) 10.52%,
+      rgba(69, 141, 252, 0.8) 95%
+    );
+  }
+
+  .ant-menu-item:hover::after {
+    border-bottom: unset !important;
+  }
+  .ant-menu-item::after {
+    border-bottom: unset !important;
+  }
+}
+.profile-slider-title {
+  min-height: 44px;
+  @include ellipsis-text(2);
+}
+
+.profile-slider-desc {
+  min-height: 154px;
+  @include ellipsis-text(7);
+}

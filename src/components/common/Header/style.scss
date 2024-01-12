@@ -1,0 +1,16 @@
+#header {
+  .ant-tabs-nav {
+    margin-bottom: unset;
+    &::before {
+      border-bottom: unset !important;
+    }
+  }
+
+  .ant-tabs-tab {
+    font-weight: 500 !important;
+  }
+
+  .ant-tabs-ink-bar {
+    height: 3px !important;
+  }
+}

@@ -1,0 +1,36 @@
+.law-qa-banner {
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(1, 1, 1, 0.5);
+  }
+}
+
+.qa-list {
+  .qa-title {
+    font-weight: 500;
+    color: #8a8a8a;
+  }
+  .qa-desc {
+    font-weight: 600;
+  }
+  .qa-subdesc {
+    font-style: italic;
+    color: #4a433f;
+  }
+
+  .qa-children {
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    p {
+      color: #f58533;
+    }
+  }
+}

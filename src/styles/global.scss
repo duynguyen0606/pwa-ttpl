@@ -1,0 +1,24 @@
+@import '~tailwindcss/base';
+@import '~tailwindcss/components';
+@import '~tailwindcss/utilities';
+@import '../styles/mixins.scss';
+
+:root {
+  --primary-color: #f58533;
+  --description-color: #979797;
+}
+
+*,
+html {
+  scroll-behavior: smooth !important;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  font-size: 12px;
+
+  .fixed-height {
+    height: 80vh !important;
+    overflow: auto;
+  }
+}

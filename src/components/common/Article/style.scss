@@ -1,0 +1,8 @@
+@import '../../../styles/mixins.scss';
+
+#article {
+  .title,
+  .description {
+    @include ellipsis-text(1);
+  }
+}

@@ -1,0 +1,7 @@
+@import '../../../styles/mixins.scss';
+
+#rank-procedure {
+  .desc {
+    @include ellipsis-text(1);
+  }
+}

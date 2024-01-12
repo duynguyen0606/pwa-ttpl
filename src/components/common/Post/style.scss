@@ -1,0 +1,14 @@
+@import '../../../styles/mixins.scss';
+
+#post {
+  .post-desc {
+    @include ellipsis-text(4);
+  }
+
+  .post-actions {
+    button {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

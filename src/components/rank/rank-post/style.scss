@@ -1,0 +1,6 @@
+@import '../../../styles/mixins.scss';
+#rank-post {
+  .rank-post-desc {
+    @include ellipsis-text(4);
+  }
+}
