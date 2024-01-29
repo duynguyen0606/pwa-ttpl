@@ -2,6 +2,7 @@ import React from 'react';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Link from 'next/link';
+import ProcedureModel from '@/src/models/Procedure';
 
 interface DataType {
   key: string;
@@ -15,6 +16,7 @@ const columns: ColumnsType<DataType> = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
+    width: '40%',
     render: (text) => (
       <div className='max-w-60 text-sky-500'>
         <Link href='/'>{text}</Link>
@@ -25,67 +27,34 @@ const columns: ColumnsType<DataType> = [
     title: 'Cơ quan thực hiện',
     dataIndex: 'agent',
     key: 'agent',
+    width: '30%',
     // render: (text) => <a>{text}</a>,
   },
   {
     title: 'Kết quả thực hiện',
     dataIndex: 'result',
     key: 'result',
+    width: '30%',
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-  {
-    key: '2',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-  {
-    key: '3',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-  {
-    key: '4',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-  {
-    key: '5',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-  {
-    key: '6',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-  {
-    key: '7',
-    name: 'Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước',
-    agent: 'Cục lãnh sự - Bộ ngoại giao',
-    result: 'Chứng nhận hợp pháp hoá lãnh sự',
-  },
-];
+function TableProcedure(props: { data: Array<ProcedureModel> }) {
+  const { data: listProcedure } = props;
+  const listData: DataType[] = listProcedure.map((item) => {
+    return {
+      key: item.id,
+      name: item.title,
+      agent: item.co_quan_thuc_hien,
+      result: item.result,
+    };
+  });
 
-function TableProcedure() {
   return (
     <div id='table-procedure'>
       <Table
         bordered
         columns={columns}
-        dataSource={data}
+        dataSource={listData}
         pagination={{ position: ['bottomCenter'] }}
       />
     </div>

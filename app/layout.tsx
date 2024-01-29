@@ -4,6 +4,7 @@ import '@/src/styles/global.scss';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
+import StoreProvider from './StoreProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,10 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <DefaultLayout>{children}</DefaultLayout>
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang='en'>
+        <body className={inter.className}>{children}</body>
+      </html>
+    </StoreProvider>
   );
 }

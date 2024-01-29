@@ -1,0 +1,8 @@
+@import '../../../styles/mixins.scss';
+
+.list-categories {
+  .category-name {
+    max-height: 20px;
+    @include ellipsis-text(1);
+  }
+}

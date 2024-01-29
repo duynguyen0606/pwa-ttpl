@@ -1,3 +1,5 @@
+'use client';
+
 import IntroducePage from '@/src/components/introduce';
 
 function Index() {

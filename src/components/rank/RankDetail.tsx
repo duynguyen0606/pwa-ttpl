@@ -7,6 +7,8 @@ import Image from 'next/image';
 import RankLawyer, { RankType } from './rank-lawyer';
 import RankBusiness from './rank-business';
 import RankProcedure from './rank-procedure';
+import RankQA from './rank-QA';
+import RankStaff from './rank-staff';
 
 const items: CollapseProps['items'] = [
   {
@@ -239,23 +241,11 @@ function RankDetail({ activeTab }: { activeTab: number }) {
   const renderContent = useMemo(() => {
     switch (activeTab) {
       case OptionsSidebar.post:
-        return (
-          <div>
-            <RankPost />
-          </div>
-        );
+        return <RankPost />;
       case OptionsSidebar.procedure:
         return <RankProcedure />;
       case OptionsSidebar.answer:
-        return (
-          <Collapse
-            style={{ backgroundColor: '#fff' }}
-            bordered={false}
-            expandIcon={({ isActive }) => renderCollapseIcon(isActive)}
-            expandIconPosition='end'
-            items={items}
-          />
-        );
+        return <RankQA />;
       case OptionsSidebar.lawyer:
         return (
           <div className='min-w-full overflow-auto'>
@@ -263,13 +253,13 @@ function RankDetail({ activeTab }: { activeTab: number }) {
           </div>
         );
       case OptionsSidebar.lawCompany:
-        return <RankBusiness />;
+        return <RankBusiness type={1} />;
       case OptionsSidebar.business:
-        return <RankBusiness />;
+        return <RankBusiness type={2} />;
       case OptionsSidebar.account:
         return (
           <div className='min-w-full overflow-auto'>
-            <RankLawyer type={RankType.account} />
+            <RankStaff type={RankType.account} />
           </div>
         );
       default:

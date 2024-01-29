@@ -12,7 +12,6 @@ import './style.scss';
 import ModalProfile from './ModalProfile';
 import ModalMarketing from './ModalMarketing';
 import { useRouter } from 'next/navigation';
-import { useRouter as useRouter2 } from 'next/router';
 
 const navArr = [
   {
@@ -128,8 +127,6 @@ const items = navArr.map((item, index) => ({
 
 function IntroducePage() {
   const router = useRouter();
-  const router2 = useRouter2();
-  console.log(router2);
   // const selectedTab = router.
   const [isFixed, setIsFixed] = useState(false);
   const [showModalProfile, setShowModalProfile] = useState(false);
@@ -147,11 +144,13 @@ function IntroducePage() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [window.scrollY]);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, []);
 
   return (
     <Layout id='introduce-page'>

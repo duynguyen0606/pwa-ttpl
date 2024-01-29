@@ -9,10 +9,17 @@ import {
 import Input from 'antd/es/input/Input';
 import Table, { ColumnsType } from 'antd/es/table';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TableProcedureDetail from './TableProcedureDetail';
+import {
+  apiGetListChildrentAgentByProcedureAgentId,
+  apiGetListProcedureAgentByType,
+} from '@/src/api/procedure';
 
-const navbarArr = ['Cấp bộ', 'Cấp tỉnh'];
+const navbarArr = [
+  { name: 'Cấp bộ', type: 'bo' },
+  { name: 'Cấp tỉnh', type: 'tinh' },
+];
 
 interface DataType {
   key: string;
@@ -24,6 +31,14 @@ interface DataType {
 
 function TableProcedureAgent() {
   const [showDetail, setShowDetail] = useState(false);
+  const [typeAgent, setTypeAgent] = useState<string>('bo');
+  const [dataListAgent, setDataListAgent] = useState<
+    Array<{ id: string; name: string }>
+  >([]);
+  const [dataChildAgent, setDataChildAgent] = useState<
+    Array<{ id: string; name: string }>
+  >([]);
+  const [detailAgentName, setDetailAgentName] = useState('');
   const columns: ColumnsType<DataType> = [
     {
       title: 'Tên cơ quan',
@@ -34,61 +49,18 @@ function TableProcedureAgent() {
           <div style={{ width: '70%' }}>{object.name}</div>
           <Button
             style={{ backgroundColor: 'var(--primary-color)', color: '#fff' }}
-            onClick={() => setShowDetail(true)}
+            onClick={() => {
+              setShowDetail(true);
+              handleFetchDataDetailAgent(object.id);
+              setDetailAgentName(object.name);
+            }}
           >
-            Cơ quan tổ chức
+            {object.action}
           </Button>
         </div>
       ),
     },
   ];
-
-  const data: DataType[] = [
-    {
-      key: '1',
-      actionObject: {
-        name: 'Toà án nhân dân thành phố HN',
-        action: 'Cơ quan tổ chức',
-      },
-    },
-    {
-      key: '2',
-      actionObject: {
-        name: 'Toà án nhân dân thành phố HN',
-        action: 'Cơ quan tổ chức',
-      },
-    },
-    {
-      key: '3',
-      actionObject: {
-        name: 'Toà án nhân dân thành phố HN',
-        action: 'Cơ quan tổ chức',
-      },
-    },
-    {
-      key: '4',
-      actionObject: {
-        name: 'Toà án nhân dân thành phố HN',
-        action: 'Cơ quan tổ chức',
-      },
-    },
-    {
-      key: '5',
-      actionObject: {
-        name: 'Toà án nhân dân thành phố HN',
-        action: 'Cơ quan tổ chức',
-      },
-    },
-    {
-      key: '6',
-      actionObject: {
-        name: 'Toà án nhân dân thành phố HN',
-        action: 'Cơ quan tổ chức',
-      },
-    },
-  ];
-
-  console.log(showDetail);
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
@@ -98,6 +70,24 @@ function TableProcedureAgent() {
     pageSize
   ) => {
     console.log(current, pageSize);
+  };
+
+  useEffect(() => {
+    (async () => {
+      const dataRes = await apiGetListProcedureAgentByType({ type: typeAgent });
+
+      if (dataRes.status && dataRes.data) {
+        setDataListAgent(dataRes.data.result);
+      }
+    })();
+  }, [typeAgent]);
+
+  const handleFetchDataDetailAgent = async (id: string) => {
+    const dataRes = await apiGetListChildrentAgentByProcedureAgentId(id);
+
+    if (dataRes.status && dataRes.data) {
+      setDataChildAgent(dataRes.data.result);
+    }
   };
 
   return (
@@ -119,10 +109,11 @@ function TableProcedureAgent() {
         <Tabs
           items={navbarArr.map((item) => {
             return {
-              label: item,
-              key: item,
+              label: item.name,
+              key: item.type,
             };
           })}
+          onTabClick={(type) => setTypeAgent(type)}
         />
       </ConfigProvider>
       <div className='float-right pb-4'>
@@ -138,50 +129,27 @@ function TableProcedureAgent() {
             />
           }
         />
-        {/* &nbsp; Hiển thị &nbsp;
-        <Select
-          defaultValue={'10'}
-          style={{ width: 80 }}
-          onChange={handleChange}
-          options={[
-            { value: '10', label: 10 },
-            { value: '25', label: 25 },
-            { value: '50', label: 50 },
-            { value: '100', label: 100 },
-          ]}
-        /> */}
-
-        {/* <Pagination
-          showSizeChanger
-          onShowSizeChange={onShowSizeChange}
-          defaultCurrent={3}
-          total={500}
-        /> */}
       </div>
-      {showDetail ? (
-        <>
-          <Button
-            className='flex items-center'
-            type='text'
-            onClick={() => setShowDetail(false)}
-            icon={
-              <Image
-                src='/images/icons/left-arrow.png'
-                width={20}
-                height={20}
-                alt='back icon'
-              />
-            }
-          >
-            UBND tỉnh yên bái
-          </Button>
-          <TableProcedureDetail />
-        </>
+      {showDetail && dataChildAgent ? (
+        <TableProcedureDetail
+          onClickBack={() => setShowDetail(false)}
+          data={dataChildAgent}
+          name={detailAgentName}
+        />
       ) : (
         <Table
           bordered
           columns={columns}
-          dataSource={data}
+          dataSource={dataListAgent.map((item) => {
+            return {
+              key: item.id,
+              actionObject: {
+                name: item.name,
+                action: 'Cơ cấu tổ chức',
+                id: item.id,
+              },
+            };
+          })}
           pagination={{ position: ['bottomCenter'], pageSize: 10 }}
         />
       )}

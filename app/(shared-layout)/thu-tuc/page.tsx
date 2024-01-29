@@ -1,14 +1,20 @@
 'use client';
 
+import { apiGetListMostViewArticle } from '@/src/api/home-page';
+import {
+  apiGetListProcedure,
+  apiGetListProcedureAgentByType,
+} from '@/src/api/procedure';
 import { Article } from '@/src/components/common';
-import DefaultLayout from '@/src/components/layout';
 import {
   TableProcedure,
   TableProcedureAgent,
 } from '@/src/components/procedure';
-import { Col, ConfigProvider, Row, Tabs } from 'antd';
+import ArticleModel from '@/src/models/Article';
+import ProcedureModel from '@/src/models/Procedure';
+import { Col, Row } from 'antd';
 import Sider from 'antd/es/layout/Sider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const navbarArr = [
   { name: 'Thủ tục', tabActive: 1 },
@@ -17,8 +23,28 @@ const navbarArr = [
 
 function Index() {
   const [tabActive, setTabActive] = useState(1);
+  const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
+  const [listProcedure, setListProcedure] = useState<Array<ProcedureModel>>([]);
+
+  useEffect(() => {
+    (async () => {
+      const dataRes = await apiGetListMostViewArticle();
+      if (dataRes.status) {
+        setListArticle(dataRes.data);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const dataRes = await apiGetListProcedure();
+      if (dataRes.status && dataRes.data) {
+        setListProcedure(dataRes.data);
+      }
+    })();
+  }, []);
+
   return (
-    // <DefaultLayout>
     <Row gutter={16}>
       <Col span={16}>
         <div className='rounded-lg overflow-hidden bg-white fixed-height'>
@@ -39,7 +65,11 @@ function Index() {
               </nav>
             ))}
           </div>
-          {tabActive === 1 ? <TableProcedure /> : <TableProcedureAgent />}
+          {tabActive === 1 ? (
+            <TableProcedure data={listProcedure} />
+          ) : (
+            <TableProcedureAgent />
+          )}
         </div>
       </Col>
       <Col span={8}>
@@ -53,13 +83,13 @@ function Index() {
           <div className='font-medium text-lg'>
             Bài viết được xem nhiều nhất
           </div>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <Article />
-          ))}
+          {listArticle.length > 0 &&
+            listArticle?.map((item) => (
+              <Article article={item} key={item.id} />
+            ))}
         </Sider>
       </Col>
     </Row>
-    // </DefaultLayout>
   );
 }
 
