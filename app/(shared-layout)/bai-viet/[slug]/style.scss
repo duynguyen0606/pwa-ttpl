@@ -1,0 +1,11 @@
+@import '../../../../src/styles/mixins.scss';
+
+.detail-post-description {
+  * img {
+    width: 100%;
+    height: auto;
+  }
+}
+.detail-short-description {
+  @include ellipsis-text(3);
+}

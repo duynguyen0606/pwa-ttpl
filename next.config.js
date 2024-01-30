@@ -44,7 +44,7 @@ module.exports = withPWA({
     importLoaders: true,
   },
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, 'src/styles')],
   },
   images: {
     remotePatterns: [
