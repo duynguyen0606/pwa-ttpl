@@ -1,12 +1,12 @@
-type PostItem = {
+type BlogItem = {
     organ: string;
     field: string;
 }
 
-function PostItem(props: PostItem) {
+function BlogItem(props: BlogItem) {
     return ( 
         <div className="mt-4 rounded-2xl  bg-[#F4F5F8]">
-            <header className="py-4 pl-4  bg-[#FCFCFE]">
+            <header className="py-4 pl-4 bg-[#FCFCFE]">
                 <div className="flex mb-4">
                     <div className="
                         w-20 h-9 
@@ -39,4 +39,4 @@ function PostItem(props: PostItem) {
     );
 }
 
-export default PostItem;
+export default BlogItem;
