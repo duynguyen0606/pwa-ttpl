@@ -6,11 +6,20 @@ function ModalForgotPassword(props: ModalProps) {
     const [form] = useForm();
 
     return (
-        <Modal open={open} onCancel={onCancel} footer={null}>
-            <div className=''>
-                <div className='flex flex-col items-center justify-center py-2'>
+        <Modal 
+            open={open} 
+            onCancel={onCancel} 
+            footer={null}
+            // closeIcon={
+            //     <button className='w-7 h-7 rounded-full bg-[#f6f6fd]'>
+            //         <img src="https://ttpl.vn/assets/images/mobile/type-back-login.png" alt="" />
+            //     </button>
+            // }
+        >
+            <div>
+                <div className='flex flex-col items-center justify-center pb-2 pt-5'>
                     <h3 className='text-base font-bold uppercase pb-1'>Quên mật khẩu</h3>
-                    <h4 className='py-1'>Điền email của bạn để xác nhận đặt lại mật khẩu</h4>
+                    <h4 className='py-1 text-xs'>Điền email của bạn để xác nhận đặt lại mật khẩu</h4>
                 </div>
 
                 <Form
@@ -18,7 +27,13 @@ function ModalForgotPassword(props: ModalProps) {
                     layout='vertical'
                 >
                     <Form.Item name='email'>
-                        <Input size='large' placeholder='Email' />
+                        <Input style={{
+                            backgroundColor: '#F4F5F8',
+                            border: 'none'
+                            }} 
+                            size='large' 
+                            placeholder='Email' 
+                        />
                     </Form.Item>
 
                     <Form.Item>
@@ -27,7 +42,8 @@ function ModalForgotPassword(props: ModalProps) {
                             color: '#fff',
                             border: 'none',
                             width: '100%',
-                            borderRadius: '8px',
+                            borderRadius: '20px',
+                            fontWeight: 600,
                         }} 
                         htmlType='submit' 
                         size='large'
