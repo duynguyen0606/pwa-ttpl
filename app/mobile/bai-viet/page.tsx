@@ -3,7 +3,7 @@ import PostItem from "./PostItem";
 
 function Post() {
     return ( 
-        <div>
+        <div className="bg-[#F4F5F8]">
             <h2>Bai viet page</h2>
             <Header />
             <PostItem />
