@@ -9,16 +9,24 @@ function BlogItem(props: BlogItem) {
             <header className="py-4 pl-4 bg-[#FCFCFE]">
                 <div className="flex mb-4">
                     <div className="
-                        w-20 h-9 
+                        w-[100px] h-[38px] 
                         text-xs font-bold text-white 
                         bg-[#4755D4]
                         rounded 
                         mr-4 
-                        px-4 py-1
+                        px-[14px] py-1
+                        line-clamp-2
                     "> 
                         {props.organ}
                     </div>
-                    <div className="w-20 h-9 text-xs font-bold text-[#515666] rounded px-4 py-1 bg-[#EBEDF3]">
+                    <div className="
+                        w-[100px] h-[38px] 
+                        text-xs font-bold text-[#515666] 
+                        rounded 
+                        px-[14px] py-1 
+                        bg-[#EBEDF3]
+                        line-clamp-2
+                    ">
                         {props.field}
                     </div>
                 </div>
