@@ -24,7 +24,12 @@ function PostItem({ data }) {
 
             <div>
                 <div className="overflow-hidden">
-                    <img loading="lazy" src={`${data.src ? data.src : 'https://lh3.googleusercontent.com/d/1Rjt7q0xvL0JFWcoTql-stBdJSAJnguVU=s1000?authuser=0'}`} alt="Bài viết" />
+                    <img 
+                        className="w-full" 
+                        loading="lazy" 
+                        src={`${data.src ? data.src : 'https://lh3.googleusercontent.com/d/1Rjt7q0xvL0JFWcoTql-stBdJSAJnguVU=s1000?authuser=0'}`} 
+                        alt="Bài viết" 
+                    />
                 </div>
                 <div className="mt-2">
                     <a href="#" className="text-sm font-bold text-[#262C41] overflow-hidden">

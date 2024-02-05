@@ -55,7 +55,7 @@ function Post() {
 
     return ( 
         <div className="bg-[#F4F5F8]">
-            <Header fixed/>
+            <Header />
             {data.map((_data) => (
                 <PostItem key={_data.id} data={_data} />
             ))}
