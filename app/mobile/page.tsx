@@ -1,6 +1,7 @@
 import Header from "./components/header/Header";
 import Blog from "./components/blog/Blog";
 import Slider from "./components/slider/Slider";
+import Footer from "./components/footer/Footer";
 
 function Home() {
     const data = [
@@ -42,6 +43,7 @@ function Home() {
                 </div>
             </a>
 
+            <Footer />
         </div> 
     );
 }
