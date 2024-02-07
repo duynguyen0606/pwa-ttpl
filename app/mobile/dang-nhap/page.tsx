@@ -1,16 +1,18 @@
 'use client'
 
 import { ModalForgotPassword } from '@/src/components/modal'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 function Login() {
+    const router = useRouter()
     const [showForgotPassword, setShowForgotPassword] = useState(false)
     const [register, setRegister] = useState(false)
 
     return ( 
         <div className='relative'>
             <div className=' pt-3 pl-[11px] pl-0 pb-2'>
-                <button className='w-7 h-7 rounded-full  bg-[#f6f6fd]'>
+                <button className='w-7 h-7 rounded-full  bg-[#f6f6fd]' onClick={() => router.push('/mobile')}>
                     <img src="https://ttpl.vn/assets/images/mobile/type-back-login.png" alt="" />
                 </button>
             </div>

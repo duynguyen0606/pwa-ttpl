@@ -1,4 +1,5 @@
 import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
+import Link from "next/link";
 
 function PostItem({ data }) {
     return ( 
@@ -7,9 +8,9 @@ function PostItem({ data }) {
                 <div className="flex">
                     <img src="https://ttpl.vn/assets/images/logo/logo-legalzone.png" className="w-10 h-10 object-cover rounded-full" alt="avatar"/>
                     <div className="flex flex-col ml-2 justify-center">
-                        <a href="#" className="text-sm font-bold text-[#262C41]">
+                        <Link href="/mobile/trang-ca-nhan" className="text-sm font-bold text-[#262C41]">
                             {`${data.user}`}
-                        </a>
+                        </Link>
                         <p className="text-xs text-[#B5B9C7]">
                             {`${data.publishAt} ngày trước`}
                         </p>
