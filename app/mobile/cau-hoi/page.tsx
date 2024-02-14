@@ -284,8 +284,8 @@ function CauHoi() {
             tabActive: TypeQA.QA_USER,
         },
     ]);
-    const [activeQuesListChildTab, setActiveQuesListChildTab] = useState(TypeQA.QA_FAQ);
-    const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] = useState(TypeQA.QA_FREE);
+    const [activeQuesListChildTab, setActiveQuesListChildTab] = useState(0);
+    const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] = useState(0);
 
     const handleChangeNav = (tabActive: number) => {
         setActiveNav(tabActive);
