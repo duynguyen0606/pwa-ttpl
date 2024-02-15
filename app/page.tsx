@@ -1,22 +1,84 @@
 'use client';
 
-import { Header, Category, Post, Article } from '@/src/components/common';
+import { apiGetListMostViewArticle, apiGetListPost } from '@/src/api/home-page';
+import { Article, Category, Post } from '@/src/components/common';
+import DefaultLayout from '@/src/components/layout';
+import ArticleModel from '@/src/models/Article';
+import { Divider, List, Skeleton } from 'antd';
 // import DefaultLayout from '@/src/components/layout';
 import Sider from 'antd/es/layout/Sider';
-import dynamic from 'next/dynamic';
-import { useMediaQuery } from 'react-responsive';
-
-const DefaultLayout = dynamic(() => import('@/src/components/layout'));
+import { NextRequest, NextResponse } from 'next/server';
+import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function Index() {
-  const isMobileUI = useMediaQuery({ query: 'min-widt' });
+  const [loading, setLoading] = useState(false);
+  const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
+  const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    (async () => {
+      const dataRes = await apiGetListMostViewArticle();
+      if (dataRes.status) {
+        setListArticle(dataRes.data);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const dataRes = await apiGetListPost({ page: 1 });
+      if (dataRes.status) {
+        setListPost(dataRes.data);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    loadMoreData();
+  }, []);
+
+  const loadMoreData = async () => {
+    setPage((prev) => prev + 1);
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const res = await apiGetListPost({ page: page + 1 });
+    if (res.status) {
+      setListPost((prev) => [...prev, ...res.data]);
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  };
+
   return (
-    <>
+    <DefaultLayout>
       <Category />
       <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
-        {[1, 2, 3, 4].map((item) => (
-          <Post key={item} />
-        ))}
+        <div
+          id='scrollableDiv'
+          style={{
+            overflow: 'auto',
+          }}
+        >
+          <InfiniteScroll
+            dataLength={listPost.length}
+            next={loadMoreData}
+            hasMore={listPost.length !== 15000}
+            loader={<Skeleton style={{ width: '100%', height: 100 }} active />}
+            endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+            scrollableTarget='scrollableDiv'
+          >
+            <div>
+              {listPost.map((item) => (
+                <Post post={item} key={item.id} />
+              ))}
+            </div>
+          </InfiniteScroll>
+        </div>
       </div>
       {
         <Sider
@@ -30,11 +92,10 @@ export default function Index() {
           <div className='font-medium text-lg'>
             Bài viết được xem nhiều nhất
           </div>
-          {[1, 2, 3, 4].map((item) => (
-            <Article />
-          ))}
+          {listArticle.length > 0 &&
+            listArticle.map((item) => <Article article={item} key={item.id} />)}
         </Sider>
       }
-    </>
+    </DefaultLayout>
   );
 }

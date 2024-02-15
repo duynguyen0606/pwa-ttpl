@@ -12,15 +12,17 @@ import {
   theme,
 } from 'antd';
 import './style.scss';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+// import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { ModalLogin } from '../../modal';
 const { Header } = Layout;
 
 const navbarArr = [
   {
     name: 'Bài viết',
-    link: '/bai-viet',
+    link: '/',
   },
   {
     name: 'Thủ tục pháp luật',
@@ -41,21 +43,33 @@ const navbarArr = [
 ];
 
 function HeaderCom() {
+  const pathName = usePathname();
+  // const { activeTab } = props;
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [tabActive, setTabActive] = useState('');
   const router = useRouter();
-  console.log(router);
+  const [isMobile, setIsMobile] = useState(false);
+  const [openModalLogin, setOpenModalLogin] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+
+  useEffect(() => {
+    setTabActive(pathName);
+  }, [pathName]);
+
+  useEffect(() => {
+    setIsMobile(isMobileUI);
+  }, [isMobileUI]);
 
   return (
     <Header
       id='header'
       className={`flex bg-white w-full items-center justify-between px-9 ${
-        !isMobileUI ? 'h-20' : 'h-15'
+        !isMobile ? 'h-20' : 'h-15'
       } fixed t-0 z-50`}
     >
-      {isMobileUI ? (
+      {isMobile ? (
         <>
           <div>
             <Image
@@ -146,9 +160,10 @@ function HeaderCom() {
               }}
             >
               <Tabs
-                activeKey='Bài viết'
+                // activeKey='Bài viết'
+                // activeKey={activeTab || '/bai-viet'}
+                activeKey={tabActive}
                 onTabClick={(item) => router.push(item)}
-                // activeKey={}
                 items={navbarArr.map((item) => {
                   return {
                     label: item.name.toUpperCase(),
@@ -171,11 +186,12 @@ function HeaderCom() {
               }
             />
             <Button
+              onClick={() => setOpenModalLogin(true)}
               type='link'
               icon={
                 <Image
                   src='/images/icons/account.png'
-                  alt='search'
+                  alt='account'
                   width={50}
                   height={50}
                 />
@@ -184,6 +200,11 @@ function HeaderCom() {
           </div>
         </>
       )}
+      <ModalLogin
+        open={openModalLogin}
+        onCancel={() => setOpenModalLogin(false)}
+        onOk={() => setOpenModalLogin(false)}
+      />
     </Header>
   );
 }

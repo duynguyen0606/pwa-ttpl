@@ -6,14 +6,15 @@ import RankDetail from './RankDetail';
 
 function RankPage() {
   const [activeTab, setActiveTab] = useState(OptionsSidebar.post);
-  console.log(activeTab);
   return (
-    <div className='flex gap-4'>
+    <div className='flex gap-4 w-full'>
       <RankSideBar
         activeTab={activeTab}
         onSelectedTab={(active: number) => setActiveTab(active)}
       />
-      <RankDetail activeTab={activeTab} />
+      <div className='flex-1 overflow-auto' style={{ maxHeight: '80vh' }}>
+        <RankDetail activeTab={activeTab} />
+      </div>
     </div>
   );
 }

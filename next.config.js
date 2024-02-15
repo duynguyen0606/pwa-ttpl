@@ -1,5 +1,6 @@
 const prod = process.env.NODE_ENV === 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 const withPWA = require('next-pwa')({
   dest: 'public',
@@ -41,6 +42,9 @@ module.exports = withPWA({
   lessLoaderOptions: {
     javascriptEnabled: true,
     importLoaders: true,
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
     remotePatterns: [

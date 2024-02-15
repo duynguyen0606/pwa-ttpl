@@ -307,7 +307,7 @@ function ModalProfile(props: ModalProps) {
             slidesPerGroup={3}
           >
             {customerThink.map((item, index) => (
-              <SwiperSlide>
+              <SwiperSlide key={item.desc}>
                 <div className='p-4 border-2 border-red-100 rounded-lg'>
                   <h2 className='dot-2 profile-slider-title'>{item.name}</h2>
                   <Rate disabled defaultValue={5} />

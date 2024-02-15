@@ -8,11 +8,7 @@ import { StyleProvider } from '@ant-design/cssinjs';
 import { useMediaQuery } from 'react-responsive';
 
 function DefaultLayout(props: PropsWithChildren) {
-  console.log('xxx');
   const { children } = props;
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
   return (
     <StyleProvider hashPriority='low'>
       <Layout>
@@ -24,7 +20,7 @@ function DefaultLayout(props: PropsWithChildren) {
             overflow: 'hidden',
           }}
         >
-          {isMobileUI ? children : <Layout className='p-6'>{children}</Layout>}
+          <Layout className='p-6'>{children}</Layout>
         </Content>
       </Layout>
     </StyleProvider>
