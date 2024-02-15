@@ -18,22 +18,22 @@ function FooterPostItem({ data }: { data: any }) {
                     ) : null}
                 </div>
                 <div className="comment-shared flex flex-row items-center font-medium">
-                    {/* comment */}
-                    {data.comment ? (
-                        <div className="comment">
-                            {`${data.comment} bình luận`}
+                    {/* seen */}
+                    {data.seen ? (
+                        <div className="seen">
+                            {`${data.seen} lượt xem`}
                         </div>
                     ) : null}
 
                     {/* dot */}
-                    {data.comment && data.share ? (
+                    {data.seen && data.comment ? (
                         <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full"></div>
                     ) : null}
 
-                    {/* share */}
-                    {data.share ? (
+                    {/* comment */}
+                    {data.comment ? (
                         <div className="shared">
-                            {`${data.share} lượt chia sẻ`}
+                            {`${data.comment} bình luận`}
                         </div>
                     ) : null}
                 </div>

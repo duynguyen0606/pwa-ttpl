@@ -14,8 +14,8 @@ function Index() {
             user: "Phạm Diễm Thư",
             publishAt: 18,
             like: 1423,
-            comment: 154,
-            share: 213,
+            seen: 154,
+            comment: 213,
             src: "https://drive.google.com/thumbnail?id=1aspHa-7NRtQHe3nzMIFSBXJY7wWfqQj5&sz=s1000",
             title: "Vi phạm nồng độ cồn có bị giữ xe không?",
             description:
@@ -35,7 +35,7 @@ function Index() {
             id: 2,
             user: "Phạm Diễm Thư",
             publishAt: 19,
-            comment: 24,
+            seen: 24,
             src: "https://drive.google.com/thumbnail?id=1Rjt7q0xvL0JFWcoTql-stBdJSAJnguVU&sz=s1000",
             title: "Mức tạm ứng tiền lương của người lao động là bao nhiêu?",
             description:
@@ -45,7 +45,7 @@ function Index() {
             id: 3,
             user: "Phạm Diễm Thư",
             publishAt: 19,
-            share: 4,
+            comment: 4,
             src: "https://drive.google.com/thumbnail?id=1Oe-cOGcqT3TJWXhOlYxNiP-cr-nVS31u&sz=s1000",
             title: "Phân biệt giới tính khi tuyển dụng lao động có bị xử phạt không?",
             description:
@@ -56,7 +56,7 @@ function Index() {
             user: "Phạm Diễm Thư",
             publishAt: 19,
             like: 71,
-            share: 4,
+            comment: 4,
             src: "https://drive.google.com/thumbnail?id=1aXlL5mkF6Mgie_K1LRGDEgcW0L2_DtgB&sz=s1000",
             title: "Người lao động được đi trễ, về sớm trong trường hợp nào?",
             description:
