@@ -1,12 +1,12 @@
 'use client';
 
-import Header from './components/header/Header';
-import Blog from './components/blog/Blog';
-import Slider from './components/slider/Slider';
-import Footer from './components/footer/Footer';
 import { useRouter } from 'next/navigation';
+import Header from '@/src/components/mobile/header/Header';
+import Slider from '@/src/components/mobile/slider/Slider';
+import Blog from '@/src/components/mobile/blog/Blog';
+import Footer from '@/src/components/mobile/footer/Footer';
 
-function Home() {
+function Index() {
   const router = useRouter();
   const data = [
     {
@@ -36,7 +36,7 @@ function Home() {
           <div className='flex text-base font-bold text-[#262C41] justify-between items-center'>
             Danh sách thủ tục
             <button
-              className='text-sm text-[#F58533]'
+              className='text-sm text-[--primary-color]'
               onClick={() => router.push('/mobile/thu-tuc')}
             >
               Xem tất cả
@@ -46,7 +46,7 @@ function Home() {
         </div>
 
         <a href='tel: 0888888888' className='fixed bottom-16 left-4 z-[2] '>
-          <div className='flex w-28 h-9 bg-[#F58533] rounded-3xl items-center justify-left pl-2'>
+          <div className='flex w-28 h-9 bg-[--primary-color] rounded-3xl items-center justify-left pl-2'>
             <img
               src='https://ttpl.vn/assets/images/icon/phone.png'
               alt='phone'
@@ -62,4 +62,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Index;

@@ -1,12 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import Footer from '../components/footer/Footer';
-import Header from '../components/header/Header';
-import PostItem from './PostItem';
 import { useState } from 'react';
+import Link from 'next/link';
 
-function Post() {
+import Header from '@/src/components/mobile/header/Header';
+import Footer from '@/src/components/mobile/footer/Footer';
+import PostItem from './PostItem';
+
+function Index() {
   const data = [
     {
       id: 0,
@@ -76,14 +77,14 @@ function Post() {
       {/* create-post-draggable */}
       <div
         onClick={handleClick}
-        className='
-                flex items-center justify-center
-                text-4xl text-white 
-                w-12 h-12 
-                rounded-full 
-                bg-[#4755D4] 
-                fixed right-0 top-[20vh]
-            '
+        className=' 
+                    flex items-center justify-center
+                    text-4xl text-white 
+                    w-12 h-12 
+                    rounded-full 
+                    bg-[#4755D4] 
+                    fixed right-0 top-[20vh]
+                '
       >
         <div>+</div>
       </div>
@@ -93,22 +94,22 @@ function Post() {
         <div id='icon-paq' className='fixed top-[17vh] right-[60px]'>
           <div
             className='
-                        mb-5
-                        w-10 h-10
-                        rounded-full
-                        flex items-center justify-center
-                        bg-[#F58533]
-                    '
+                            mb-5
+                            w-10 h-10
+                            rounded-full
+                            flex items-center justify-center
+                            bg-[--primary-color]
+                        '
           >
             <img src='https://ttpl.vn/assets/images/icon/pencil.png' />
           </div>
           <div
             className='
-                        w-10 h-10
-                        rounded-full
-                        flex items-center justify-center
-                        bg-[#F58533]
-                    '
+                            w-10 h-10
+                            rounded-full
+                            flex items-center justify-center
+                            bg-[--primary-color]
+                        '
           >
             <Link href='/mobile/cau-hoi'>
               <img src='https://ttpl.vn/assets/images/icon/zoom-question.png' />
@@ -128,4 +129,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default Index;

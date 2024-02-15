@@ -7,7 +7,7 @@ import { Input } from "antd";
 import { ModalInfoRate } from "@/src/components/modal";
 import "./style.scss";
 
-function Profile() {
+function Index() {
     const tabs = [
         { name: "Bài viết", tabActive: 1 },
         { name: "Video", tabActive: 2 },
@@ -30,11 +30,11 @@ function Profile() {
                     {/* Search container */}
                     <div
                         className="
-                        mb-3 
-                        py-3 px-2 
-                        bg-white 
-                        rounded-lg
-                    "
+                            mb-3 
+                            py-3 px-2 
+                            bg-white 
+                            rounded-lg
+                        "
                     >
                         <span className="text-xs text-[#444] font-bold">
                             Tìm kiếm công ty Luật/ Doanh nghiệp
@@ -62,12 +62,12 @@ function Profile() {
                     {/* Follower container */}
                     <div
                         className="
-                        flex justify-between items-center 
-                        py-3 px-2 
-                        mb-3 
-                        bg-white 
-                        rounded-lg
-                    "
+                            flex justify-between items-center 
+                            py-3 px-2 
+                            mb-3 
+                            bg-white 
+                            rounded-lg
+                        "
                     >
                         <div>
                             <div className="text-xs text-[#444] font-bold">
@@ -91,12 +91,12 @@ function Profile() {
                     {/* Following container */}
                     <div
                         className="
-                        flex justify-between items-center 
-                        py-3 px-2 
-                        mb-3 
-                        bg-white 
-                        rounded-lg
-                    "
+                            flex justify-between items-center 
+                            py-3 px-2 
+                            mb-3 
+                            bg-white 
+                            rounded-lg
+                        "
                     >
                         <div>
                             <div className="text-xs text-[#444] font-bold">
@@ -132,11 +132,11 @@ function Profile() {
                 <div className="bg-white">
                     <div
                         className="
-                        flex 
-                        text-[10px] font-bold
-                        bg-white 
-                        rounded-lg
-                    "
+                            flex 
+                            text-[10px] font-bold
+                            bg-white 
+                            rounded-lg
+                        "
                     >
                         {followTabs.map((item) => (
                             <nav
@@ -145,7 +145,7 @@ function Profile() {
                                 style={{
                                     color:
                                         childTab === item.childTabActive
-                                            ? "#F58533"
+                                            ? "var(--primary-color)"
                                             : "#A1A5AC",
                                     backgroundColor:
                                         childTab === item.childTabActive
@@ -181,12 +181,12 @@ function Profile() {
                     {/* avatar */}
                     <div
                         className="
-                        w-24 h-24 
-                        flex justify-center items-center 
-                        absolute 
-                        right-1/2 translate-x-2/4 
-                        bg-white 
-                        rounded-full
+                            w-24 h-24 
+                            flex justify-center items-center 
+                            absolute 
+                            right-1/2 translate-x-2/4 
+                            bg-white 
+                            rounded-full
                         "
                         style={{ bottom: "-1.2rem" }}
                     >
@@ -202,9 +202,9 @@ function Profile() {
                 <div className="relative text-center mt-5 py-2 border-b-[1px] border-solid">
                     <span
                         className="
-                        inline-flex items-center 
-                        text-xl font-bold text-[#444]
-                    "
+                            inline-flex items-center 
+                            text-xl font-bold text-[#444]
+                        "
                     >
                         Phạm Diễm Thư
                     </span>
@@ -233,7 +233,7 @@ function Profile() {
                             style={{
                                 color:
                                     activeTab === tab.tabActive
-                                        ? "#F58533"
+                                        ? "var(--primary-color)"
                                         : "#A1A5AC",
                             }}
                         >
@@ -254,4 +254,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default Index;

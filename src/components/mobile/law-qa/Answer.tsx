@@ -22,11 +22,11 @@ function Answer({ user, content }: { user: any; content: any }) {
               </div>
             </div>
           ) : (
-            <h2 className='text-lg font-bold text-[#F58533]'>
+            <h2 className='text-lg font-bold text-[--primary-color]'>
               Câu trả lời tham khảo
             </h2>
           )}
-          <p className='text-[#F58533]'>{content}</p>
+          <p className='text-[--primary-color]'>{content}</p>
         </>
       )}
     </div>
