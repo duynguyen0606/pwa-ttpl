@@ -2,6 +2,7 @@
 
 import { apiGetListMostViewArticle, apiGetListPost } from '@/src/api/home-page';
 import { Article, Category, Post } from '@/src/components/common';
+import AlertMobile from '@/src/components/common/AlertMobile';
 import DefaultLayout from '@/src/components/layout';
 import ArticleModel from '@/src/models/Article';
 import { Divider, List, Skeleton } from 'antd';
@@ -17,9 +18,14 @@ export default function Index() {
   const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
   const [page, setPage] = useState(1);
+  const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+
+  useEffect(() => {
+    setOpenDrawerAlert(isMobileUI);
+  }, [isMobileUI]);
 
   useEffect(() => {
     (async () => {
@@ -99,6 +105,12 @@ export default function Index() {
           {listArticle.length > 0 &&
             listArticle.map((item) => <Article article={item} key={item.id} />)}
         </Sider>
+      )}
+      {isMobileUI && (
+        <AlertMobile
+          open={openDrawerAlert}
+          onClose={() => setOpenDrawerAlert(false)}
+        />
       )}
     </DefaultLayout>
   );
