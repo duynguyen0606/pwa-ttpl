@@ -7,8 +7,8 @@ import type { CollapseProps } from "antd";
 import { Button, Form, Select, Input, Collapse } from "antd";
 
 import ImageLegacy from "next/legacy/image";
-import Answer from "./components/Answer";
-import Question from "./components/Question";
+import Answer from "@/src/components/mobile/law-qa/Answer";
+import Question from "@/src/components/mobile/law-qa/Question";
 
 enum TypeQA {
     QA_FAQ = 1,
@@ -271,7 +271,7 @@ const items_USER: CollapseProps["items"] = [
     },
 ];
 
-function CauHoi() {
+function Index() {
     const [form] = Form.useForm();
     const [activeNav, setActiveNav] = useState(1);
     const [childTabs, setChildTabs] = useState([
@@ -285,7 +285,8 @@ function CauHoi() {
         },
     ]);
     const [activeQuesListChildTab, setActiveQuesListChildTab] = useState(0);
-    const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] = useState(0);
+    const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] =
+        useState(0);
 
     const handleChangeNav = (tabActive: number) => {
         setActiveNav(tabActive);
@@ -481,10 +482,10 @@ function CauHoi() {
                                     tính năng này!
                                 </p>
                                 <Button
-                                className="m-4 font-semibold"
+                                    className="m-4 font-semibold"
                                     style={{
-                                        height: '48px',
-                                        borderRadius: '24px',
+                                        height: "48px",
+                                        borderRadius: "24px",
                                         color: "#fff",
                                         backgroundColor: "#4755D4",
                                     }}
@@ -503,7 +504,7 @@ function CauHoi() {
         <div>
             {/* Contact */}
             <a href="tel: 0888888888" className="fixed bottom-16 left-4 z-[2] ">
-                <div className="flex w-28 h-9 bg-[#F58533] rounded-3xl items-center justify-left pl-2">
+                <div className="flex w-28 h-9 bg-[--primary-color] rounded-3xl items-center justify-left pl-2">
                     <img
                         src="https://ttpl.vn/assets/images/icon/phone.png"
                         alt="phone"
@@ -516,11 +517,11 @@ function CauHoi() {
             {/* Header */}
             <div
                 className="
-                p-4 
-                flex items-center 
-                text-xl font-bold text-[#262C41]
-                border-b-[1px] border-solid border-[#F1F1F1]
-            "
+                    p-4 
+                    flex items-center 
+                    text-xl font-bold text-[#262C41]
+                    border-b-[1px] border-solid border-[#F1F1F1]
+                "
             >
                 <Link href="/mobile">
                     <img
@@ -536,11 +537,11 @@ function CauHoi() {
                 {/* nav tab */}
                 <div
                     className="
-                    p-4 
-                    text-sm font-bold
-                    flex items-center justify-between 
-                    border-solid border-b-[1px] border-[#F1F1F1]
-                "
+                        p-4 
+                        text-sm font-bold
+                        flex items-center justify-between 
+                        border-solid border-b-[1px] border-[#F1F1F1]
+                    "
                 >
                     {navbarArr.map((item) => (
                         <nav
@@ -566,10 +567,10 @@ function CauHoi() {
                 {/* child nav tab */}
                 <div
                     className="
-                    px-7 
-                    text-sm font-bold text-[#B5B9C7]
-                    flex items-center justify-between
-                "
+                        px-7 
+                        text-sm font-bold text-[#B5B9C7]
+                        flex items-center justify-between
+                    "
                 >
                     {childTabs.map((item) => (
                         <nav
@@ -578,7 +579,9 @@ function CauHoi() {
                             onClick={() => {
                                 activeNav === 1
                                     ? setActiveQuesListChildTab(item.tabActive)
-                                    : setActiveQuesToLawyerChildTab(item.tabActive);
+                                    : setActiveQuesToLawyerChildTab(
+                                          item.tabActive
+                                      );
                             }}
                             style={{
                                 color:
@@ -629,4 +632,4 @@ function CauHoi() {
     );
 }
 
-export default CauHoi;
+export default Index;

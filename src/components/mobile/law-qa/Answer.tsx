@@ -1,4 +1,4 @@
-function Answer({ user, content }) {
+function Answer({ user, content } : { user: any; content: any }) {
     return (
         <div className="border-t-[1px] border-dashed border-[#E5E5E5] mt-3 pt-4">
             {content && (
@@ -24,11 +24,11 @@ function Answer({ user, content }) {
                             </div>
                         </div>
                     ) : (
-                        <h2 className="text-lg font-bold text-[#F58533]">
+                        <h2 className="text-lg font-bold text-[--primary-color]">
                             Câu trả lời tham khảo
                         </h2>
                     )}
-                    <p className="text-[#F58533]">{content}</p>
+                    <p className="text-[--primary-color]">{content}</p>
                 </>
             )}
         </div>

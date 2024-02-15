@@ -1,4 +1,14 @@
-function Question({ user, type, title, description }) {
+function Question({
+    user,
+    type,
+    title,
+    description,
+}: {
+    user: any;
+    type: any;
+    title: string;
+    description: any;
+}) {
     return (
         <div>
             {user && (
@@ -21,7 +31,11 @@ function Question({ user, type, title, description }) {
             )}
             <div>
                 <h2 className="text-[#8A8A8A] font-medium">{type}</h2>
-                <p className={`text-base font-semibold text-[#4A433F] ${user ? 'my-2' : 'my-1'}`}>
+                <p
+                    className={`text-base font-semibold text-[#4A433F] ${
+                        user ? "my-2" : "my-1"
+                    }`}
+                >
                     {title}
                 </p>
                 <p className="italic text-[#4A433F]">{description}</p>
