@@ -9,6 +9,10 @@ import { useMediaQuery } from 'react-responsive';
 
 function DefaultLayout(props: PropsWithChildren) {
   const { children } = props;
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+
   return (
     <StyleProvider hashPriority='low'>
       <Layout>
@@ -20,7 +24,7 @@ function DefaultLayout(props: PropsWithChildren) {
             overflow: 'hidden',
           }}
         >
-          <Layout className='p-6'>{children}</Layout>
+          <Layout className={`${!isMobileUI && 'p-6'}`}>{children}</Layout>
         </Content>
       </Layout>
     </StyleProvider>

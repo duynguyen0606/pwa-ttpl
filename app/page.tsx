@@ -10,12 +10,16 @@ import Sider from 'antd/es/layout/Sider';
 import { NextRequest, NextResponse } from 'next/server';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useMediaQuery } from 'react-responsive';
 
 export default function Index() {
   const [loading, setLoading] = useState(false);
   const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
   const [page, setPage] = useState(1);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
 
   useEffect(() => {
     (async () => {
@@ -56,7 +60,7 @@ export default function Index() {
 
   return (
     <DefaultLayout>
-      <Category />
+      {!isMobileUI && <Category />}
       <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
         <div
           id='scrollableDiv'
@@ -80,7 +84,7 @@ export default function Index() {
           </InfiniteScroll>
         </div>
       </div>
-      {
+      {!isMobileUI && (
         <Sider
           width={320}
           style={{
@@ -95,7 +99,7 @@ export default function Index() {
           {listArticle.length > 0 &&
             listArticle.map((item) => <Article article={item} key={item.id} />)}
         </Sider>
-      }
+      )}
     </DefaultLayout>
   );
 }

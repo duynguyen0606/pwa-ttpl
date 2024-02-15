@@ -1,21 +1,12 @@
 'use client';
 
+import { Button, ConfigProvider, Drawer, Layout, Tabs } from 'antd';
 import Image from 'next/image';
-import {
-  Breadcrumb,
-  Button,
-  ConfigProvider,
-  Drawer,
-  Layout,
-  Menu,
-  Tabs,
-  theme,
-} from 'antd';
+import { usePathname, useRouter } from 'next/navigation';
 import './style.scss';
-import { useRouter, usePathname } from 'next/navigation';
 // import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { useEffect, useMemo, useState } from 'react';
 import { ModalLogin } from '../../modal';
 const { Header } = Layout;
 
@@ -48,7 +39,6 @@ function HeaderCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [tabActive, setTabActive] = useState('');
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
@@ -58,18 +48,12 @@ function HeaderCom() {
     setTabActive(pathName);
   }, [pathName]);
 
-  useEffect(() => {
-    setIsMobile(isMobileUI);
-  }, [isMobileUI]);
-
   return (
     <Header
       id='header'
-      className={`flex bg-white w-full items-center justify-between px-9 ${
-        !isMobile ? 'h-20' : 'h-15'
-      } fixed t-0 z-50`}
+      className={`flex bg-white w-full items-center justify-between px-9 h-15 sm:h-20 fixed t-0 z-50`}
     >
-      {isMobile ? (
+      {isMobileUI ? (
         <>
           <div>
             <Image
