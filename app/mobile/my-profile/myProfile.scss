@@ -1,0 +1,22 @@
+#post-switcher {
+    width: 56px;
+    height: 30px;
+    background: #dedede;
+    border-radius: 20px;
+    opacity: 1;
+    position: relative;
+    transition: linear 100ms;
+    display: block;
+    float: left;
+}
+
+#post-switcher .thumb {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 100%;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: linear 100ms;
+}
