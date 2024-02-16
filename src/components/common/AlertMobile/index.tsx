@@ -1,7 +1,7 @@
 import { Drawer, DrawerProps } from 'antd';
 
-function AlertMobile(props: DrawerProps) {
-  const { open, onClose } = props;
+function AlertMobile(props: DrawerProps & { handleTransformView: () => void }) {
+  const { open, onClose, handleTransformView } = props;
   return (
     <Drawer
       placement='bottom'
@@ -12,8 +12,10 @@ function AlertMobile(props: DrawerProps) {
     >
       <span className='font-semibold'>
         Bạn đang sử dụng thiết bị di động, chọn{' '}
-        <span className='text-red-500'>Mobile</span> để hiển thị bản tối ưu hoá
-        hơn
+        <span onClick={handleTransformView} className='text-red-500 cursor-pointer'>
+          Mobile
+        </span>{' '}
+        để hiển thị bản tối ưu hoá hơn
       </span>
     </Drawer>
   );
