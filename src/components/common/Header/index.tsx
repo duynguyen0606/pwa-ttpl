@@ -40,6 +40,7 @@ function HeaderCom() {
   const [tabActive, setTabActive] = useState('');
   const router = useRouter();
   const [openModalLogin, setOpenModalLogin] = useState(false);
+  const [isMobileClient, setIsMobileClient] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
@@ -48,12 +49,16 @@ function HeaderCom() {
     setTabActive(pathName);
   }, [pathName]);
 
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <Header
       id='header'
       className={`flex bg-white w-full items-center justify-between px-9 h-15 sm:h-20 fixed t-0 z-50`}
     >
-      {isMobileUI ? (
+      {isMobileClient ? (
         <>
           <div>
             <Image
