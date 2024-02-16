@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { Switch } from "antd";
+
 import { BackIcon } from "@/src/assests/icons";
 import Footer from "@/src/components/mobile/footer/Footer";
 
@@ -11,6 +15,7 @@ const user = {
 };
 
 function Index() {
+    
     const info = [
         {
             icons: "https://ttpl.vn/assets/images/mobile/Icon-feather-phone.png",
@@ -25,6 +30,10 @@ function Index() {
             value: user.address,
         },
     ];
+
+    const onChange = (checked: boolean) => {
+        console.log(`switch to ${checked}`);
+    };
 
     return (
         <div className="bg-[#4755D4]">
@@ -96,7 +105,7 @@ function Index() {
 
                     {/* Edit profile */}
                     <Link
-                        href='my-profile/edit-profile'
+                        href="my-profile/edit-profile"
                         className="
                             flex items-center justify-center
                             text-[#4755D4] font-medium 
@@ -146,10 +155,10 @@ function Index() {
                         </div>
                         <div>30/09/2020</div>
                     </div>
-                    
+
                     {/* my procedure */}
                     <Link
-                        href='my-profile/my-procedure'
+                        href="my-profile/my-procedure"
                         className="
                             flex justify-between items-center
                             py-4
@@ -183,15 +192,17 @@ function Index() {
                             />
                             <span>Bật thông báo</span>
                         </div>
-                        
-                        <div id="post-switcher" className="switch-off">
-                            <div className="thumb"></div>
-                        </div>
+
+                        <Switch
+                            defaultChecked
+                            onChange={onChange}
+                            // style={{ backgroundColor: "#DEDEDE" }}
+                        />
                     </div>
 
                     {/* change password */}
                     <Link
-                        href='my-profile/change-password'
+                        href="my-profile/change-password"
                         className="
                             flex justify-between items-center
                             py-4
@@ -208,7 +219,6 @@ function Index() {
                             <img src="https://ttpl.vn/assets/images/mobile/carret-right.png" />
                         </div>
                     </Link>
-
                 </div>
 
                 <button
