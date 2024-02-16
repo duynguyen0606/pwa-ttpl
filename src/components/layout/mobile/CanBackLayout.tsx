@@ -14,6 +14,7 @@ function CanBackLayout({
         <div>
             <div
                 className="
+                    flex items-center
                     p-4 
                     text-[20px] text-[#262C41] font-semibold
                     border-b-[1px] border-solid border-[#F1F1F1]
@@ -21,8 +22,8 @@ function CanBackLayout({
             >
                 <Link href={back} className="flex items-center">
                     <BackIcon color="black" width="18px" height="18px" />
-                    <span className="ml-4">{title}</span>
                 </Link>
+                <span className="ml-4">{title}</span>
             </div>
             {children}
         </div>
