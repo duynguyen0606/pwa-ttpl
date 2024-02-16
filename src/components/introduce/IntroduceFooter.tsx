@@ -1,10 +1,24 @@
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 function IntroduceFooter() {
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <div className='relative'>
-      <div className='relative' style={{ paddingTop: '62.5%' }}>
+      <div
+        className={`relative ${isMobileClient && 'translate-y-1/2'}`}
+        style={{ paddingTop: isMobileClient ? '150%' : '62.5%' }}
+      >
         <ImageLegacy
           src='/images/introduce/footer.png'
           alt='footer'
@@ -12,7 +26,13 @@ function IntroduceFooter() {
           className='absolute'
         />
       </div>
-      <div className='absolute flex items-center bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 w-full text-white px-20'>
+      <div
+        className={`absolute flex items-center ${
+          !isMobileClient
+            ? 'bottom-1/2 translate-y-1/2 px-20'
+            : 'top-3/4 px-10 pt-10'
+        }  right-1/2 translate-x-1/2  w-full text-white`}
+      >
         <div className='flex-1'>
           <div className='text-xl font-semibold'>LegalZone cam kết</div>
           <p className='py-4'>
@@ -26,12 +46,14 @@ function IntroduceFooter() {
           </div>
           <div className='grid gap-2 py-4'>
             <div className='flex items-start gap-2'>
-              <Image
-                src='/images/introduce/location.png'
-                alt='location icon'
-                width={30}
-                height={30}
-              />
+              <div style={{ width: 46 }}>
+                <Image
+                  src='/images/introduce/location.png'
+                  alt='location icon'
+                  width={30}
+                  height={30}
+                />
+              </div>
               <div>
                 Phòng 1603, số 58 Tố Hữu, phường Trung Văn, quận Nam Từ Liêm,
                 thành phố Hà Nội
@@ -110,14 +132,16 @@ function IntroduceFooter() {
             />
           </div>
         </div>
-        <div className='relative flex-1' style={{ paddingTop: '42.5%' }}>
-          <ImageLegacy
-            src='/images/introduce/footer2.png'
-            alt='footer-2'
-            layout='fill'
-            className='absolute'
-          />
-        </div>
+        {!isMobileClient && (
+          <div className='relative flex-1' style={{ paddingTop: '42.5%' }}>
+            <ImageLegacy
+              src='/images/introduce/footer2.png'
+              alt='footer-2'
+              layout='fill'
+              className='absolute'
+            />
+          </div>
+        )}
       </div>
     </div>
   );

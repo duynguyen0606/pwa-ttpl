@@ -2,9 +2,20 @@ import { Button, Col, Form, Input, Row, Space } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 function BannerRegister() {
   const [form] = useForm();
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <div id='dang-ky' className='relative banner-register'>
       <div className='relative w-1/2 ml-auto' style={{ paddingTop: '62.5%' }}>
@@ -15,7 +26,11 @@ function BannerRegister() {
           className='absolute'
         />
       </div>
-      <div className='absolute bg-white p-10 rounded-lg bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 w-4/5'>
+      <div
+        className={`absolute bg-white p-10 rounded-lg ${
+          isMobileClient ? 'bottom-0 w-11/12' : 'bottom-1/2 w-4/5'
+        } right-1/2 translate-x-1/2 translate-y-1/2`}
+      >
         <Row gutter={[16, 16]}>
           <Col span={8}>
             <Image

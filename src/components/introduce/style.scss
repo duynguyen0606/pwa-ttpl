@@ -13,6 +13,10 @@
       right: 50%;
       z-index: 10;
       transform: translate(25%, -50%);
+
+      @media (max-width: 600px) {
+        top: 50%;
+      }
     }
     .banner-actions {
       margin-top: 20px;
@@ -52,6 +56,10 @@
       rgba(108, 188, 252, 0.8) 10.52%,
       rgba(69, 141, 252, 0.8) 95%
     );
+
+    @media (max-width: 600px) {
+      padding: 0 10px;
+    }
   }
 
   .ant-menu-item:hover::after {
@@ -69,4 +77,8 @@
 .profile-slider-desc {
   min-height: 154px;
   @include ellipsis-text(7);
+}
+
+.procedure-items-desc {
+  @include ellipsis-text(3);
 }
