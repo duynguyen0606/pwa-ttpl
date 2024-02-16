@@ -31,8 +31,8 @@ function Slider(props: SliderProps) {
                 className="whitespace-nowrap transition duration-1000 ease-liner"
                 style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
             >
-                {props.data.map((_d, index) => (
-                    <div className="inline-block w-full rounded-lg" key={index}>
+                {props.data.map((_d) => (
+                    <div className="inline-block w-full rounded-lg" key={_d.id}>
                         <img src={_d.img} alt="" className="mr-2" />
                     </div>
                 ))}

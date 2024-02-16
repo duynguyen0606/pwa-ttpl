@@ -140,6 +140,7 @@ function Index() {
                     >
                         {followTabs.map((item) => (
                             <nav
+                                key={item.childTabActive}
                                 className="flex justify-center items-center w-full h-8"
                                 onClick={() => setChildTab(item.childTabActive)}
                                 style={{
@@ -228,6 +229,7 @@ function Index() {
                 <div className="flex justify-center items-center">
                     {tabs.map((tab) => (
                         <nav
+                            key={tab.tabActive}
                             className="text-xs font-bold p-2.5"
                             onClick={() => setActiveTab(tab.tabActive)}
                             style={{

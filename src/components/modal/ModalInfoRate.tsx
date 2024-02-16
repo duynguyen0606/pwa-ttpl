@@ -120,6 +120,7 @@ function ModalInfoRate(props: ModalProps) {
                 <tbody>
                     {scoringRules.map((_rule) => (
                         <tr
+                            key={_rule.level}
                             className={
                                 _rule.level % 2 === 1
                                     ? "bg-[#DEEAF6]"
@@ -150,13 +151,20 @@ function ModalInfoRate(props: ModalProps) {
                 </thead>
                 <tbody>
                     {/* {data.map((_d, index) => (
-                        <tr className={index % 2 === 1 ? 'bg-[#D9E2F3]' : 'border-solid border-y-[1px] border-[#8EAADB]'}>
-                                <td className="p-2.5 font-bold">{`${_d.contribution}`}</td>
-                                <td className="p-2.5">{`${_d.rule}`}</td>
-                                <td className="p-2.5">{`${_d.personal}`}</td>
-                                <td className="p-2.5">{`${_d.business}`}</td>
-                                <td className="p-2.5">{`${_d.lawyer}`}</td>
-                            </tr>
+                        <tr
+                            key={index}
+                            className={
+                                index % 2 === 1
+                                    ? "bg-[#D9E2F3]"
+                                    : "border-solid border-y-[1px] border-[#8EAADB]"
+                            }
+                        >
+                            <td className="p-2.5 font-bold">{`${_d.contribution}`}</td>
+                            <td className="p-2.5">{`${_d.rule}`}</td>
+                            <td className="p-2.5">{`${_d.personal}`}</td>
+                            <td className="p-2.5">{`${_d.business}`}</td>
+                            <td className="p-2.5">{`${_d.lawyer}`}</td>
+                        </tr>
                     ))} */}
                 </tbody>
             </table>
