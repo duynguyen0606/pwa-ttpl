@@ -15,7 +15,6 @@ const user = {
 };
 
 function Index() {
-    
     const info = [
         {
             icons: "https://ttpl.vn/assets/images/mobile/Icon-feather-phone.png",
@@ -193,11 +192,9 @@ function Index() {
                             <span>Bật thông báo</span>
                         </div>
 
-                        <Switch
-                            defaultChecked
-                            onChange={onChange}
-                            // style={{ backgroundColor: "#DEDEDE" }}
-                        />
+                        <div className="bg-[#DEDEDE] rounded-3xl">
+                            <Switch onChange={onChange} />
+                        </div>
                     </div>
 
                     {/* change password */}
