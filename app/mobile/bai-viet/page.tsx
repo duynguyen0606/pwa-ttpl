@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from "react";
+import Link from "next/link";
 
-import Header from '@/src/components/mobile/header/Header';
-import Footer from '@/src/components/mobile/footer/Footer';
-import PostItem from './PostItem';
+import Header from "@/src/components/mobile/header/Header";
+import Footer from "@/src/components/mobile/footer/Footer";
+import PostItem from "./PostItem";
 
 function Index() {
     const data = [
@@ -64,69 +64,69 @@ function Index() {
         },
     ];
 
-  const [showIconpaq, setShowIconpaq] = useState(false);
+    const [showIconpaq, setShowIconpaq] = useState(false);
 
-  const handleClick = () => {
-    setShowIconpaq(!showIconpaq);
-  };
+    const handleClick = () => {
+        setShowIconpaq(!showIconpaq);
+    };
 
-  return (
-    <div className='bg-[#F4F5F8]'>
-      <Header />
+    return (
+        <div className="bg-[#F4F5F8]">
+            <Header />
 
-      {/* create-post-draggable */}
-      <div
-        onClick={handleClick}
-        className=' 
+            {/* create-post-draggable */}
+            <div
+                onClick={handleClick}
+                className=" 
                     flex items-center justify-center
                     text-4xl text-white 
                     w-12 h-12 
                     rounded-full 
                     bg-[#4755D4] 
                     fixed right-0 top-[20vh]
-                '
-      >
-        <div>+</div>
-      </div>
+                "
+            >
+                <div>+</div>
+            </div>
 
-      {/* btn add and q&a */}
-      {showIconpaq && (
-        <div id='icon-paq' className='fixed top-[17vh] right-[60px]'>
-          <div
-            className='
+            {/* btn add and q&a */}
+            {showIconpaq && (
+                <div id="icon-paq" className="fixed top-[17vh] right-[60px]">
+                    <div
+                        className="
                             mb-5
                             w-10 h-10
                             rounded-full
                             flex items-center justify-center
                             bg-[--primary-color]
-                        '
-          >
-            <img src='https://ttpl.vn/assets/images/icon/pencil.png' />
-          </div>
-          <div
-            className='
+                        "
+                    >
+                        <img src="https://ttpl.vn/assets/images/icon/pencil.png" />
+                    </div>
+                    <div
+                        className="
                             w-10 h-10
                             rounded-full
                             flex items-center justify-center
                             bg-[--primary-color]
-                        '
-          >
-            <Link href='/mobile/cau-hoi'>
-              <img src='https://ttpl.vn/assets/images/icon/zoom-question.png' />
-            </Link>
-          </div>
-        </div>
-      )}
+                        "
+                    >
+                        <Link href="/mobile/cau-hoi">
+                            <img src="https://ttpl.vn/assets/images/icon/zoom-question.png" />
+                        </Link>
+                    </div>
+                </div>
+            )}
 
-      {/* list post */}
-      <div className='pt-[62px]'>
-        {data.map((_data) => (
-          <PostItem key={_data.id} data={_data} />
-        ))}
-      </div>
-      <Footer />
-    </div>
-  );
+            {/* list post */}
+            <div className="pt-[62px]">
+                {data.map((_data) => (
+                    <PostItem key={_data.id} data={_data} />
+                ))}
+            </div>
+            <Footer />
+        </div>
+    );
 }
 
 export default Index;
