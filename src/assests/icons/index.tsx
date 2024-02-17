@@ -1,4 +1,8 @@
-export const LikeIcon = ({ width = "1.8rem", height = "1.8rem", color = "" }) => (
+export const LikeIcon = ({
+    width = "1.8rem",
+    height = "1.8rem",
+    color = "",
+}) => (
     <svg
         width={width}
         height={height}
@@ -16,7 +20,11 @@ export const LikeIcon = ({ width = "1.8rem", height = "1.8rem", color = "" }) =>
     </svg>
 );
 
-export const DislikeIcon = ({ width = "1.8rem", height = "1.8rem", color = "" }) => (
+export const DislikeIcon = ({
+    width = "1.8rem",
+    height = "1.8rem",
+    color = "",
+}) => (
     <svg
         width={width}
         height={height}
@@ -62,6 +70,31 @@ export const BackIcon = ({ width = "1.7rem", height = "1rem", color = "" }) => (
         <path
             d="M5.26167 8.5625L1.45215 4.8125L5.26167 1.0625"
             stroke={color}
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        ></path>
+    </svg>
+);
+
+export const BellIcon = ({ width = "2.4rem", height = "2.4rem" }) => (
+    <svg
+        width={width}
+        height={height}
+        viewBox="0 0 24 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M10 5.63477C10 5.10433 10.2107 4.59562 10.5858 4.22055C10.9609 3.84548 11.4696 3.63477 12 3.63477C12.5304 3.63477 13.0391 3.84548 13.4142 4.22055C13.7893 4.59562 14 5.10433 14 5.63477C15.1484 6.17779 16.1274 7.02309 16.8321 8.08007C17.5367 9.13704 17.9404 10.3658 18 11.6348V14.6348C18.0753 15.2565 18.2954 15.8518 18.6428 16.3729C18.9902 16.894 19.4551 17.3262 20 17.6348H4C4.54494 17.3262 5.00981 16.894 5.35719 16.3729C5.70457 15.8518 5.92474 15.2565 6 14.6348V11.6348C6.05956 10.3658 6.4633 9.13704 7.16795 8.08007C7.8726 7.02309 8.85159 6.17779 10 5.63477"
+            stroke="#262C41"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        ></path>
+        <path
+            d="M9 17.6348V18.6348C9 19.4304 9.31607 20.1935 9.87868 20.7561C10.4413 21.3187 11.2044 21.6348 12 21.6348C12.7956 21.6348 13.5587 21.3187 14.1213 20.7561C14.6839 20.1935 15 19.4304 15 18.6348V17.6348"
+            stroke="#262C41"
             stroke-width="1.5"
             stroke-linecap="round"
             stroke-linejoin="round"
