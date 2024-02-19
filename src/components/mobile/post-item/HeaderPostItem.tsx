@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
-function HeaderPostItem({ data } : {data: any}) {
+function HeaderPostItem({ data }: { data: any }) {
+    const [follow, setFollow] = useState(false);
+
     return (
         <header className="flex justify-between mb-2">
             <div className="flex">
@@ -22,7 +27,14 @@ function HeaderPostItem({ data } : {data: any}) {
                 </div>
             </div>
             <div className="flex items-center justify-center ">
-                <div className="rounded py-[6px] px-[10px] text-xs font-medium text-[#262C41] bg-[#F4F5F8]">
+                <div
+                    className="rounded py-[6px] px-[10px] text-xs font-medium"
+                    onClick={() => setFollow(!follow)}
+                    style={{
+                        color: follow ? "#FFF" : "#262C41",
+                        backgroundColor: follow ? "#F58533" : "#F4F5F8",
+                    }}
+                >
                     Theo dõi
                 </div>
             </div>
