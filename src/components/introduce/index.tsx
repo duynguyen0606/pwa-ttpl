@@ -12,6 +12,7 @@ import './style.scss';
 import ModalProfile from './ModalProfile';
 import ModalMarketing from './ModalMarketing';
 import { useRouter } from 'next/navigation';
+import { useMediaQuery } from 'react-responsive';
 
 const navArr = [
   {
@@ -131,6 +132,10 @@ function IntroducePage() {
   const [isFixed, setIsFixed] = useState(false);
   const [showModalProfile, setShowModalProfile] = useState(false);
   const [showModalMarketing, setShowModalMarketing] = useState(false);
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
   // const [selectedKeys, setSelectedKeys] = useState(navArr.filter(item => item.key === ))
 
   const handleScroll = () => {
@@ -152,12 +157,16 @@ function IntroducePage() {
     }
   }, []);
 
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <Layout id='introduce-page'>
       <div
         id='introduce-banner'
         className='relative'
-        style={{ paddingTop: '67.5%' }}
+        style={{ paddingTop: `${isMobileClient ? '120%' : '67.5%'}` }}
       >
         <Header
           style={{
@@ -199,7 +208,11 @@ function IntroducePage() {
           </ConfigProvider>
         </Header>
         <div className='banner-content'>
-          <div className='text-4xl uppercase mb-2'>
+          <div
+            className={`${
+              !isMobileClient ? 'text-4xl' : 'text-2xl'
+            } uppercase mb-2`}
+          >
             Hệ thống thủ tục pháp luật
           </div>
           <ul>
@@ -232,7 +245,12 @@ function IntroducePage() {
           className='absolute'
         />
       </div>
-      <Content style={{ maxWidth: 1200, margin: '100px 100px 0 100px' }}>
+      <Content
+        style={{
+          maxWidth: 1200,
+          margin: isMobileClient ? '20px 20px 0 20px' : '100px 100px 0 100px',
+        }}
+      >
         <Procedure
           id='thu-tuc-phap-luat'
           title='Thủ tục pháp luật'
@@ -250,7 +268,12 @@ function IntroducePage() {
         />
       </Content>
       <BannerConnect />
-      <Content style={{ maxWidth: 1200, margin: '100px 100px 0 100px' }}>
+      <Content
+        style={{
+          maxWidth: 1200,
+          margin: isMobileClient ? '20px 20px 0 20px' : '100px 100px 0 100px',
+        }}
+      >
         <BannerContact
           id='lien-he'
           title='Liên hệ'

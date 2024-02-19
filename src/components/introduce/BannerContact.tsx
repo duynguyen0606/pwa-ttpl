@@ -1,5 +1,7 @@
 import { Button } from 'antd';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 type BannerContactType = {
   direction: 'text-left' | 'text-right';
@@ -18,10 +20,19 @@ function BannerContact({
   image,
   id,
 }: BannerContactType) {
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   if (direction === 'text-left') {
     return (
       <div id={id} className='flex items-center mb-20'>
-        <div className='flex-1 mr-40'>
+        <div className={`flex-1 ${isMobileClient ? 'mr-5' : 'mr-40'}`}>
           <div className='text-xl font-semibold'>{title}</div>
           <div className='py-4'>{description}</div>
           <Button
@@ -45,7 +56,7 @@ function BannerContact({
         <div className='flex-1'>
           <Image src={image} alt='banner' width={801} height={602} />
         </div>
-        <div className='flex-1 ml-40'>
+        <div className={`flex-1 ${isMobileClient ? 'ml-5' : 'ml-40'}`}>
           <div className='text-xl font-semibold'>{title}</div>
           <div className='py-4'>{description}</div>
           <Button

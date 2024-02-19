@@ -8,6 +8,7 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { ModalLogin } from '../../modal';
+import ModalSearch from '../../modal/ModalSearch';
 const { Header } = Layout;
 
 const navbarArr = [
@@ -41,6 +42,7 @@ function HeaderCom() {
   const router = useRouter();
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [isMobileClient, setIsMobileClient] = useState(false);
+  const [openModalSearch, setOpenModalSearch] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
@@ -173,6 +175,7 @@ function HeaderCom() {
                   height={50}
                 />
               }
+              onClick={() => setOpenModalSearch(true)}
             />
             <Button
               onClick={() => setOpenModalLogin(true)}
@@ -193,6 +196,10 @@ function HeaderCom() {
         open={openModalLogin}
         onCancel={() => setOpenModalLogin(false)}
         onOk={() => setOpenModalLogin(false)}
+      />
+      <ModalSearch
+        open={openModalSearch}
+        onCancel={() => setOpenModalSearch(false)}
       />
     </Header>
   );

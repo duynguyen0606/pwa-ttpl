@@ -1,7 +1,18 @@
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 function BannerConnect() {
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <div
       id='tai-ung-dung'
@@ -36,14 +47,16 @@ function BannerConnect() {
           </div>
         </div>
       </div>
-      <div className='flex-1 relative' style={{ paddingTop: '37.5%' }}>
-        <ImageLegacy
-          src='/images/introduce/phones-connect.png'
-          alt='phones'
-          layout='fill'
-          className='absolute'
-        />
-      </div>
+      {!isMobileClient && (
+        <div className='flex-1 relative' style={{ paddingTop: '37.5%' }}>
+          <ImageLegacy
+            src='/images/introduce/phones-connect.png'
+            alt='phones'
+            layout='fill'
+            className='absolute'
+          />
+        </div>
+      )}
     </div>
   );
 }

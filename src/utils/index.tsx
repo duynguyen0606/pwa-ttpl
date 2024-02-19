@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Image from 'next/image';
 import { NextRequest, NextResponse, userAgent } from 'next/server';
 
@@ -40,4 +41,38 @@ export const converDateToDays = ({ date }: { date: string }) => {
   let days = Math.floor(diffInDays);
 
   return days;
+};
+
+// Hàm gửi dữ liệu dạng form-data với token
+export const sendPostFormDataWithToken = async (
+  url: string,
+  data: { [key: string]: string | Blob },
+  token: string
+) => {
+  // Tạo đối tượng FormData
+  const formData = new FormData();
+
+  // Thêm các trường vào FormData
+  Object.keys(data).forEach((key) => {
+    formData.append(key, data[key]);
+  });
+
+  try {
+    // Thực hiện gọi API
+    const response = await axios.post(url, formData, {
+      headers: {
+        // Thiết lập Content-Type
+        'Content-Type': 'multipart/form-data',
+        // Thêm Authorization header với token
+        Authorization: `${token}`,
+      },
+    });
+
+    // Xử lý kết quả trả về
+    return response;
+  } catch (error) {
+    // Xử lý lỗi nếu có
+    console.error('Error during API call:', error);
+    throw error;
+  }
 };

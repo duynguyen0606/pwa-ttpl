@@ -15,6 +15,7 @@ import ProcedureModel from '@/src/models/Procedure';
 import { Col, Row } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const navbarArr = [
   { name: 'Thủ tục', tabActive: 1 },
@@ -25,6 +26,10 @@ function Index() {
   const [tabActive, setTabActive] = useState(1);
   const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   const [listProcedure, setListProcedure] = useState<Array<ProcedureModel>>([]);
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
 
   useEffect(() => {
     (async () => {
@@ -44,10 +49,14 @@ function Index() {
     })();
   }, []);
 
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <Row gutter={16}>
-      <Col span={16}>
-        <div className='rounded-lg overflow-hidden bg-white fixed-height'>
+      <Col span={isMobileClient ? 24 : 16}>
+        <div className='rounded-lg overflow-hidden bg-white fixed-height mx-4'>
           <div className='grid grid-cols-2'>
             {navbarArr.map((item) => (
               <nav
@@ -72,23 +81,25 @@ function Index() {
           )}
         </div>
       </Col>
-      <Col span={8}>
-        <Sider
-          width={'100%'}
-          style={{
-            backgroundColor: '#fff',
-          }}
-          className='h-full px-4 py-2 rounded-lg fixed-height'
-        >
-          <div className='font-medium text-lg'>
-            Bài viết được xem nhiều nhất
-          </div>
-          {listArticle.length > 0 &&
-            listArticle?.map((item) => (
-              <Article article={item} key={item.id} />
-            ))}
-        </Sider>
-      </Col>
+      {!isMobileClient && (
+        <Col span={8}>
+          <Sider
+            width={'100%'}
+            style={{
+              backgroundColor: '#fff',
+            }}
+            className='h-full px-4 py-2 rounded-lg fixed-height'
+          >
+            <div className='font-medium text-lg'>
+              Bài viết được xem nhiều nhất
+            </div>
+            {listArticle.length > 0 &&
+              listArticle?.map((item) => (
+                <Article article={item} key={item.id} />
+              ))}
+          </Sider>
+        </Col>
+      )}
     </Row>
   );
 }
