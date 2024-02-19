@@ -1,4 +1,6 @@
 import { apiLogin } from '@/src/api/auth';
+import { authLogin } from '@/src/redux/feature/authSlice';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import { Button, Form, Input, Modal, ModalProps } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 
@@ -10,26 +12,18 @@ type FormSubmitValueType = {
 function ModalLogin(props: ModalProps) {
   const { open, onOk, onCancel } = props;
   const [form] = useForm();
+  const dispatch = useAppDispatch();
   const handleSubmitForm = async (values: FormSubmitValueType) => {
-    const response = await apiLogin(values);
-    console.log(response);
+    dispatch(authLogin(values));
   };
 
-  const handleFetchData = async () => {
-    const url = 'https://thutucphapluat.com/api/Category_controller/read';
-    const response = await fetch(
-      'https://thutucphapluat.com/api/Category_controller/read'
-    );
-    console.log(response.json());
-  };
+  const { user } = useAppSelector((state) => state.authState);
+  console.log(user);
 
   return (
     <Modal open={open} onOk={onOk} onCancel={onCancel} footer={null}>
       <div className='p-4'>
-        <div
-          onClick={handleFetchData}
-          className='font-semibold text-2xl uppercase py-4 text-center'
-        >
+        <div className='font-semibold text-2xl uppercase py-4 text-center'>
           Đăng nhập
         </div>
         <Form
