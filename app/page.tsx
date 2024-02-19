@@ -3,6 +3,7 @@
 import { apiGetListMostViewArticle, apiGetListPost } from '@/src/api/home-page';
 import { Article, Category, Post } from '@/src/components/common';
 import AlertMobile from '@/src/components/common/AlertMobile';
+import CustomEditor from '@/src/components/common/customer-editor';
 import HomePageDesktop from '@/src/components/common/home-page';
 import DefaultLayout from '@/src/components/layout';
 import HomePageMobile from '@/src/components/mobile/home-page';

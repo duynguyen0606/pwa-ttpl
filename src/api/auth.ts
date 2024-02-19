@@ -1,10 +1,7 @@
 import axios from 'axios';
 const apiUrl = process.env.URL_API;
 
-export const apiLogin = async (args: {
-  email: string;
-  password: string;
-}): Promise<any> => {
+export const apiLogin = async (args: { email: string; password: string }) => {
   const form = new FormData();
   form.append('email', args.email);
   form.append('password', args.password);

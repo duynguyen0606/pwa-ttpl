@@ -1,8 +1,18 @@
 import { apiLogin } from '@/src/api/auth';
-import { authLogin } from '@/src/redux/feature/authSlice';
+import { authLogin, setOpenModalLogin } from '@/src/redux/feature/authSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { Button, Form, Input, Modal, ModalProps } from 'antd';
+import {
+  App,
+  Button,
+  Form,
+  Input,
+  Modal,
+  ModalProps,
+  message,
+  notification,
+} from 'antd';
 import { useForm } from 'antd/es/form/Form';
+import { useEffect } from 'react';
 
 type FormSubmitValueType = {
   email: string;
@@ -10,18 +20,35 @@ type FormSubmitValueType = {
 };
 
 function ModalLogin(props: ModalProps) {
-  const { open, onOk, onCancel } = props;
+  const { onOk, onCancel } = props;
   const [form] = useForm();
   const dispatch = useAppDispatch();
+  const { loading, user, openModalLogin, loginCode } = useAppSelector(
+    (state) => state.authState
+  );
+
   const handleSubmitForm = async (values: FormSubmitValueType) => {
-    dispatch(authLogin(values));
+    // dispatch(authLogin(values));
+    const dataRes = await apiLogin(values);
+
+    if (dataRes.status) {
+      message.success('Bạn đã đăng nhập thành công!');
+      dispatch(setOpenModalLogin(false));
+    } else {
+      message.error('Bạn đã nhập sai tài khoản hoặc mật khẩu!');
+    }
   };
 
-  const { user } = useAppSelector((state) => state.authState);
-  console.log(user);
+  // useEffect(() => {
+  //   if (loginCode == 1 && user) {
+  //     message.success('Bạn đã đăng nhập thành công!');
+  //     dispatch(setOpenModalLogin(false));
+  //   } else if (loginCode == 0) {
+  //   }
+  // }, [user]);
 
   return (
-    <Modal open={open} onOk={onOk} onCancel={onCancel} footer={null}>
+    <Modal open={openModalLogin} onOk={onOk} onCancel={onCancel} footer={null}>
       <div className='p-4'>
         <div className='font-semibold text-2xl uppercase py-4 text-center'>
           Đăng nhập
@@ -58,6 +85,7 @@ function ModalLogin(props: ModalProps) {
               }}
               htmlType='submit'
               size='large'
+              loading={loading}
             >
               Đăng nhập
             </Button>

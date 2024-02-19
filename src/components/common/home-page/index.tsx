@@ -5,13 +5,17 @@ import { Article, Category, Post } from '@/src/components/common';
 import AlertMobile from '@/src/components/common/AlertMobile';
 import DefaultLayout from '@/src/components/layout';
 import ArticleModel from '@/src/models/Article';
-import { Divider, List, Skeleton } from 'antd';
+import { Button, Divider, List, Skeleton } from 'antd';
 // import DefaultLayout from '@/src/components/layout';
 import Sider from 'antd/es/layout/Sider';
 import { NextRequest, NextResponse } from 'next/server';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useMediaQuery } from 'react-responsive';
+import UserProfile from './UserProfile';
+import { useAppSelector } from '@/src/redux/hooks';
+import CustomEditor from '../customer-editor';
+import ModalPost from '../../modal/ModalPost';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
@@ -20,6 +24,8 @@ export default function HomePage() {
   const [page, setPage] = useState(1);
   const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
   const [isMobileClient, setIsMobileClient] = useState(false);
+  const [openModalPost, setOpenModalPost] = useState(false);
+  const { user } = useAppSelector((state) => state.authState);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
@@ -68,8 +74,20 @@ export default function HomePage() {
 
   return (
     <DefaultLayout>
-      {!isMobileClient && <Category />}
+      <div>
+        {!isMobileClient && (
+          <>
+            {user && <UserProfile />}
+            <Category />
+          </>
+        )}
+      </div>
       <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
+        {
+          <div>
+            <Button onClick={() => setOpenModalPost(true)}>showModal</Button>
+          </div>
+        }
         <div
           id='scrollableDiv'
           style={{
@@ -107,6 +125,12 @@ export default function HomePage() {
           {listArticle.length > 0 &&
             listArticle.map((item) => <Article article={item} key={item.id} />)}
         </Sider>
+      )}
+      {!isMobileClient && (
+        <ModalPost
+          open={openModalPost}
+          onCancel={() => setOpenModalPost(false)}
+        />
       )}
     </DefaultLayout>
   );

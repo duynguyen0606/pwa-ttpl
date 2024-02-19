@@ -1,6 +1,14 @@
 'use client';
 
-import { Button, ConfigProvider, Drawer, Layout, Tabs } from 'antd';
+import {
+  App,
+  Button,
+  ConfigProvider,
+  Drawer,
+  Layout,
+  Tabs,
+  message,
+} from 'antd';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import './style.scss';
@@ -9,6 +17,8 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { ModalLogin } from '../../modal';
 import ModalSearch from '../../modal/ModalSearch';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 const { Header } = Layout;
 
 const navbarArr = [
@@ -40,9 +50,13 @@ function HeaderCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [tabActive, setTabActive] = useState('');
   const router = useRouter();
-  const [openModalLogin, setOpenModalLogin] = useState(false);
+  const dispatch = useAppDispatch();
   const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalSearch, setOpenModalSearch] = useState(false);
+  // const { message } = App.useApp();
+  const { loading, user, loginCode } = useAppSelector(
+    (state) => state.authState
+  );
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
@@ -165,6 +179,20 @@ function HeaderCom() {
             </ConfigProvider>
           </div>
           <div className='flex gap-4 items-center'>
+            {user && (
+              <Button
+                type='link'
+                icon={
+                  <Image
+                    src='/images/icons/notification.png'
+                    alt='notification'
+                    width={50}
+                    height={50}
+                  />
+                }
+              />
+            )}
+
             <Button
               type='link'
               icon={
@@ -178,7 +206,7 @@ function HeaderCom() {
               onClick={() => setOpenModalSearch(true)}
             />
             <Button
-              onClick={() => setOpenModalLogin(true)}
+              onClick={() => dispatch(setOpenModalLogin(true))}
               type='link'
               icon={
                 <Image
@@ -193,9 +221,8 @@ function HeaderCom() {
         </>
       )}
       <ModalLogin
-        open={openModalLogin}
-        onCancel={() => setOpenModalLogin(false)}
-        onOk={() => setOpenModalLogin(false)}
+        onCancel={() => dispatch(setOpenModalLogin(false))}
+        onOk={() => dispatch(setOpenModalLogin(false))}
       />
       <ModalSearch
         open={openModalSearch}
