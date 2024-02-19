@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 function Footer() {
-    const [login, setLogin] = useState(true);
+    const [login, setLogin] = useState(false);
     return (
         <div
             className="
