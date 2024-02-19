@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categoriesReducer from './feature/categoriesSlice';
+import authReducer from './feature/authSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       categoriesState: categoriesReducer,
+      authState: authReducer,
     },
   });
 };
