@@ -8,7 +8,7 @@ function UserPost({ onOpenModal }: { onOpenModal: () => void }) {
     <div className='bg-white rounded-lg p-4'>
       <div className='flex items-center gap-2'>
         <div className='w-10'>
-          <Avatar shape='circle' size='large' src={user.image} />
+          <Avatar shape='circle' size='large' src={user?.image} />
         </div>
         <Input
           size='large'
@@ -17,7 +17,7 @@ function UserPost({ onOpenModal }: { onOpenModal: () => void }) {
         />
       </div>
       <div className='flex justify-center gap-2 py-4 '>
-        <div className='p-2 rounded-full bg-orange-200'>
+        <div className='p-2 rounded-full bg-orange-100'>
           <Image
             src='/images/icons/orange-document.png'
             alt='document'
@@ -25,7 +25,7 @@ function UserPost({ onOpenModal }: { onOpenModal: () => void }) {
             height={25}
           />
         </div>
-        <div className='p-2 rounded-full bg-orange-200'>
+        <div className='p-2 rounded-full bg-orange-100'>
           <Image
             src='/images/icons/orange-video.png'
             alt='video'

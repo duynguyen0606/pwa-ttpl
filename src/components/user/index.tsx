@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { Content } from 'antd/es/layout/layout';
 import ModalProtectAccount from '../modal/ModalProtectAccount';
 import ModalUpdateInfor from '../modal/ModalUpdateInfor';
+import { useAppSelector } from '@/src/redux/hooks';
 
 interface NavItem {
   name: string;
@@ -30,6 +31,7 @@ function UserProfile() {
   const [keyActive, setKeyActive] = useState(1);
   const [openModalProtect, setOpenModalProtect] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const { user } = useAppSelector((state) => state.authState);
   return (
     <div>
       <div className='bg-white rounded-b-lg'>
@@ -41,7 +43,18 @@ function UserProfile() {
           />
         </div>
         <div className='p-6 pb-2 relative'>
-          <div className='flex flex-col items-center pb-4'>
+          <div
+            style={{ width: 150 }}
+            className='absolute rounded-full overflow-hidden bottom-full right-1/2 translate-y-1/4 translate-x-1/2 border-4 border-white'
+          >
+            <ImageLegacy
+              src={user?.image}
+              layout='responsive'
+              width={150}
+              height={150}
+            />
+          </div>
+          <div className='flex flex-col items-center pb-4 pt-4'>
             <div className='font-semibold text-2xl pb-4'>duynguyen</div>
             <div className='flex gap-2 items-center justify-center'>
               <div>Điểm thưởng: 200</div>

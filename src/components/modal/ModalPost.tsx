@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Input,
   Modal,
   ModalProps,
@@ -11,6 +12,7 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import type { UploadFile, UploadProps } from 'antd';
+import { useAppSelector } from '@/src/redux/hooks';
 
 // type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
@@ -25,6 +27,7 @@ import type { UploadFile, UploadProps } from 'antd';
 function ModalPost(props: ModalProps) {
   const { open, onCancel, onOk } = props;
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const { user } = useAppSelector((state) => state.authState);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -57,8 +60,8 @@ function ModalPost(props: ModalProps) {
   return (
     <Modal title='Đăng bài viết' open={open} onCancel={onCancel}>
       <div className='flex justify-between my-4'>
-        <div className='flex gap-1'>
-          <div>image</div>
+        <div className='flex gap-1 items-center gap-2'>
+          <Avatar size='large' src={user?.image} />
           <div>duynguyen</div>
         </div>
         <div className='flex gap-2'>

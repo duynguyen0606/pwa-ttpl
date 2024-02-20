@@ -1,7 +1,11 @@
 import { Button, Col, Input, Row, Typography } from 'antd';
 import Image from 'next/image';
+import UserPost from '../common/home-page/UserPost';
+import { useState } from 'react';
+import ModalPost from '../modal/ModalPost';
 
 function ProfilePost() {
+  const [openModalPost, setOpenModalPost] = useState(false);
   return (
     <Row gutter={16}>
       <Col span={8}>
@@ -39,12 +43,16 @@ function ProfilePost() {
       </Col>
       <Col span={16}>
         <div className='mb-4 p-4 bg-white'>
-          <Button>Show Modal</Button>
+          <UserPost onOpenModal={() => true} />
         </div>
         <div className='p-4 bg-white rounded-lg'>
           Chưa có bài viết để hiển thị
         </div>
       </Col>
+      <ModalPost
+        open={openModalPost}
+        onCancel={() => setOpenModalPost(false)}
+      />
     </Row>
   );
 }

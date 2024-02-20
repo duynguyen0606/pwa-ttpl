@@ -3,15 +3,19 @@
 @import '~tailwindcss/utilities';
 @import '../styles/mixins.scss';
 
-// @layer base {
-//   button,
-//   .button,
-//   input[type='button'],
-//   input[type='reset'],
-//   input[type='submit'] {
-//     @apply bg-blue-600;
-//   }
-// }
+@mixin blueButton {
+  background-color: #4299e1; // Replace with your desired color
+}
+
+@layer base {
+  button,
+  .button,
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'] {
+    @include blueButton;
+  }
+}
 
 :root {
   --primary-color: #f58533;
