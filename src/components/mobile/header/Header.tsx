@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { BellIcon } from "@/src/assests/icons";
-import Sidebar from "./Sidebar";
+import SidebarDrawer from "../drawers/SidebarDrawer";
 
-function Header({ title, login }: { title?: string; login?: true }) {
-    const [show, setShow] = useState(false);
+function Header({ title, login }: { title?: string; login?: boolean }) {
+    const [showSidebar, setShowSidebar] = useState(false);
 
     return (
         <div
@@ -36,11 +36,16 @@ function Header({ title, login }: { title?: string; login?: true }) {
             ) : (
                 <>
                     {/* Tab bar */}
-                    <div className="absolute left-4">
-                        <Link href="mobile/sidebar">
-                            <img src="https://ttpl.vn/assets/images/icon/menu.png" />
-                        </Link>
+                    <div
+                        className="absolute left-4"
+                        onClick={() => setShowSidebar(true)}
+                    >
+                        <img src="https://ttpl.vn/assets/images/icon/menu.png" />
                     </div>
+                    <SidebarDrawer
+                        open={showSidebar}
+                        onClose={() => setShowSidebar(false)}
+                    />
 
                     {/* Title */}
                     <span className="flex text-xl font-bold w-fit">
@@ -48,17 +53,17 @@ function Header({ title, login }: { title?: string; login?: true }) {
                     </span>
 
                     {/* Search */}
-                    <div className="absolute right-12 w-5 h-4">
-                        <img src="https://ttpl.vn/files/icon/icon-feather-search.png" />
+                    <div className="absolute right-12">
+                        <img
+                            src="https://ttpl.vn/files/icon/icon-feather-search.png"
+                            className="w-5 h-4"
+                        />
                     </div>
 
                     {/* Notification */}
                     <Link href="/mobile/thong-bao" className="absolute right-4">
                         <BellIcon width="1.6rem" height="1.6rem" />
                     </Link>
-
-                    {/* Show side bar */}
-                    {show && <Sidebar />}
                 </>
             )}
         </div>

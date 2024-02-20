@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-function Footer() {
-    const [login, setLogin] = useState(false);
+function Footer({ login }: { login?: boolean }) {
     return (
         <div
             className="

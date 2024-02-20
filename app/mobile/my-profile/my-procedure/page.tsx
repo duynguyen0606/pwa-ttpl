@@ -1,6 +1,7 @@
 import { memo } from "react";
 import Link from "next/link";
 import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
+import BlogItem from "@/src/components/mobile/blog/BlogItem";
 
 const data = [
     {
@@ -38,7 +39,12 @@ function Index() {
                         </div>
 
                         {/* first blog in list */}
-                        <div></div>
+                        <div>
+                            <BlogItem
+                                organ="Cục Lãnh sự - Bộ Ngoại giao"
+                                field="Xuất nhập khẩu"
+                            />
+                        </div>
                     </>
                 ))}
             </div>
