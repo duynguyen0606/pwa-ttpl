@@ -25,9 +25,17 @@ function UserProfile() {
   return (
     <div className='bg-white mb-4 rounded-lg p-4'>
       <div className='text-center'>
-        <div>image</div>
-        <div className='font-semibold'>Duy nguyen</div>
-        <div>duynguyen@gmail.com</div>
+        <div className='text-center'>
+          <Image
+            className='rounded-full mx-auto'
+            src={user.image}
+            alt='avatar'
+            width={80}
+            height={80}
+          />
+        </div>
+        <div className='font-semibold'>{user.full_name}</div>
+        <div>{user.email}</div>
         <div className='flex items-center justify-between my-4'>
           <div>
             <div>0</div>
