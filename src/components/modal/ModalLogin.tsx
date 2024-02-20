@@ -1,5 +1,10 @@
 import { apiLogin } from '@/src/api/auth';
-import { authLogin, setOpenModalLogin } from '@/src/redux/feature/authSlice';
+import {
+  authLogin,
+  setAuthLoading,
+  setDataUser,
+  setOpenModalLogin,
+} from '@/src/redux/feature/authSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import {
   App,
@@ -32,6 +37,7 @@ function ModalLogin(props: ModalProps) {
     const dataRes = await apiLogin(values);
 
     if (dataRes.status) {
+      dispatch(setDataUser(dataRes?.data_user));
       message.success('Bạn đã đăng nhập thành công!');
       dispatch(setOpenModalLogin(false));
     } else {

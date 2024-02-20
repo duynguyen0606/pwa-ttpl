@@ -74,7 +74,13 @@ export default function HomePage() {
 
   return (
     <DefaultLayout>
-      <div>
+      <div
+        style={{
+          overflow: 'auto',
+          height: '80vh',
+          minWidth: 300,
+        }}
+      >
         {!isMobileClient && (
           <>
             {user && <UserProfile />}
@@ -83,11 +89,11 @@ export default function HomePage() {
         )}
       </div>
       <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
-        {
+        {user && (
           <div>
             <Button onClick={() => setOpenModalPost(true)}>showModal</Button>
           </div>
-        }
+        )}
         <div
           id='scrollableDiv'
           style={{

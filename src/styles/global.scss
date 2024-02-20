@@ -3,6 +3,16 @@
 @import '~tailwindcss/utilities';
 @import '../styles/mixins.scss';
 
+// @layer base {
+//   button,
+//   .button,
+//   input[type='button'],
+//   input[type='reset'],
+//   input[type='submit'] {
+//     @apply bg-blue-600;
+//   }
+// }
+
 :root {
   --primary-color: #f58533;
   --description-color: #979797;
@@ -21,4 +31,11 @@ body {
     height: 80vh !important;
     overflow: auto;
   }
+
+  // .button,
+  // input[type='button'],
+  // input[type='reset'],
+  // input[type='submit'] {
+  //   background-color: rgb(37 99 235) !important;
+  // }
 }

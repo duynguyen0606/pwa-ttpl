@@ -26,7 +26,7 @@ function DefaultLayout(props: PropsWithChildren) {
           style={{
             marginTop: 80,
             height: 'calc(100vh - 80px)',
-            overflow: 'hidden',
+            // overflow: 'hidden',
           }}
         >
           <Layout className={`${!isMobileClient && 'p-6'}`}>{children}</Layout>

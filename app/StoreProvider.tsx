@@ -2,6 +2,7 @@
 import { AppStore, makeStore } from '@/src/redux/store';
 import { useRef } from 'react';
 import { Provider } from 'react-redux';
+import { StyleProvider } from '@ant-design/cssinjs';
 
 export default function StoreProvider({
   children,
@@ -14,5 +15,9 @@ export default function StoreProvider({
     storeRef.current = makeStore();
   }
 
-  return <Provider store={storeRef.current}>{children}</Provider>;
+  return (
+    <Provider store={storeRef.current}>
+      <StyleProvider hashPriority='high'>{children}</StyleProvider>
+    </Provider>
+  );
 }
