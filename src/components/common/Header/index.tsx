@@ -2,10 +2,12 @@
 
 import {
   App,
+  Avatar,
   Button,
   ConfigProvider,
   Drawer,
   Layout,
+  Popover,
   Tabs,
   message,
 } from 'antd';
@@ -53,6 +55,7 @@ function HeaderCom() {
   const dispatch = useAppDispatch();
   const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalSearch, setOpenModalSearch] = useState(false);
+  const [openPopoverUser, setOpenPopoverUser] = useState(false);
   // const { message } = App.useApp();
   const { loading, user, loginCode } = useAppSelector(
     (state) => state.authState
@@ -192,7 +195,6 @@ function HeaderCom() {
                 }
               />
             )}
-
             <Button
               type='link'
               icon={
@@ -205,18 +207,74 @@ function HeaderCom() {
               }
               onClick={() => setOpenModalSearch(true)}
             />
-            <Button
-              onClick={() => dispatch(setOpenModalLogin(true))}
-              type='link'
-              icon={
-                <Image
-                  src='/images/icons/account.png'
-                  alt='account'
-                  width={50}
-                  height={50}
+            {user ? (
+              <Popover
+                content={
+                  <div>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                      <Image
+                        src='/images/icons/white-account.png'
+                        alt='profile'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Hồ sơ của tôi</span>
+                    </div>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                      <Image
+                        src='https://ttpl.vn/assets/images/icon/exclusively.png'
+                        alt='for you'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Dành riêng cho bạn</span>
+                    </div>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                      <Image
+                        src='/images/icons/home.png'
+                        alt='dashboard'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Dashboard</span>
+                    </div>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                      <Image
+                        src='/images/icons/logout.png'
+                        alt='logut'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Đăng xuất</span>
+                    </div>
+                  </div>
+                }
+                trigger='click'
+                open={openPopoverUser}
+                onOpenChange={(newOpen) => setOpenPopoverUser(newOpen)}
+                placement='bottomLeft'
+              >
+                <Avatar
+                  onClick={() => setOpenPopoverUser(true)}
+                  shape='circle'
+                  size='large'
+                  src={user.image}
                 />
-              }
-            />
+              </Popover>
+            ) : (
+              <Button
+                onClick={() => dispatch(setOpenModalLogin(true))}
+                type='link'
+                icon={
+                  <Image
+                    src='/images/icons/account.png'
+                    alt='account'
+                    width={50}
+                    height={50}
+                  />
+                }
+              />
+            )}
           </div>
         </>
       )}

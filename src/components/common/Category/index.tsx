@@ -87,9 +87,6 @@ function Category() {
       width={300}
       style={{
         backgroundColor: '#fff',
-        position: 'sticky',
-        overflow: 'auto',
-        height: '80vh',
       }}
       className='px-4 py-2 rounded-lg'
     >

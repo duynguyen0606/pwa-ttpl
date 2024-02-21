@@ -39,6 +39,12 @@ const authSlice = createSlice({
     setOpenModalLogin: (state, action: PayloadAction<boolean>) => {
       state.openModalLogin = action.payload;
     },
+    setDataUser: (state, action: PayloadAction<any>) => {
+      state.user = action.payload;
+    },
+    setAuthLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -55,5 +61,6 @@ const authSlice = createSlice({
 
 const authReducer = authSlice.reducer;
 
-export const { setOpenModalLogin } = authSlice.actions;
+export const { setOpenModalLogin, setDataUser, setAuthLoading } =
+  authSlice.actions;
 export default authReducer;

@@ -16,6 +16,7 @@ import UserProfile from './UserProfile';
 import { useAppSelector } from '@/src/redux/hooks';
 import CustomEditor from '../customer-editor';
 import ModalPost from '../../modal/ModalPost';
+import UserPost from './UserPost';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
@@ -74,7 +75,13 @@ export default function HomePage() {
 
   return (
     <DefaultLayout>
-      <div>
+      <div
+        style={{
+          overflow: 'auto',
+          height: '80vh',
+          minWidth: 300,
+        }}
+      >
         {!isMobileClient && (
           <>
             {user && <UserProfile />}
@@ -83,11 +90,7 @@ export default function HomePage() {
         )}
       </div>
       <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
-        {
-          <div>
-            <Button onClick={() => setOpenModalPost(true)}>showModal</Button>
-          </div>
-        }
+        {user && <UserPost onOpenModal={() => setOpenModalPost(true)} />}
         <div
           id='scrollableDiv'
           style={{
