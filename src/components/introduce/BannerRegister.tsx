@@ -80,14 +80,7 @@ function BannerRegister() {
                   </Col>
                 </Row>
                 <Form.Item>
-                  <Button
-                    style={{
-                      color: '#fff',
-                      backgroundColor: 'var(--primary-color)',
-                      border: 'unset',
-                    }}
-                    htmlType='submit'
-                  >
+                  <Button className='button-primary' htmlType='submit'>
                     Đăng ký ngay
                   </Button>
                 </Form.Item>

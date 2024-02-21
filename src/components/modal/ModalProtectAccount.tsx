@@ -26,10 +26,7 @@ function ModalProtectAccount(props: ModalProps) {
           <Input placeholder='Nhập số điện thoại' />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <Button
-            size='large'
-            style={{ backgroundColor: 'var(--primary-color)', color: '#fff' }}
-          >
+          <Button size='large' className='button-primary'>
             Gửi yêu cầu
           </Button>
         </div>

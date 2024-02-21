@@ -395,14 +395,7 @@ function ModalProfile(props: ModalProps) {
               để ra mắt với Quý khách hàng phần mềm THỦ TỤC PHÁP LUẬT
             </p>
             <br />
-            <Button
-              style={{
-                backgroundColor: 'var(--primary-color)',
-                color: '#fff',
-                border: 'unset',
-              }}
-              className='rounded-full'
-            >
+            <Button className='rounded-full button-primary'>
               Trải nghiệm ngay
             </Button>
           </div>

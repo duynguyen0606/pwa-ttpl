@@ -67,11 +67,7 @@ function UserProfile() {
             </div>
             <div className='absolute right-6 top-6'>
               <Button
-                style={{
-                  backgroundColor: 'var(--primary-color)',
-                  color: '#fff',
-                  border: 'unset',
-                }}
+                className='button-primary'
                 onClick={() => setOpenModalProtect(true)}
               >
                 Bảo mật tài khoản

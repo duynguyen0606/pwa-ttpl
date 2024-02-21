@@ -9,9 +9,10 @@ import { Article } from '@/src/components/common';
 import {
   TableProcedure,
   TableProcedureAgent,
-} from '@/src/components/procedure';
+} from '@/src/components/procedure-agent';
 import ArticleModel from '@/src/models/Article';
 import ProcedureModel from '@/src/models/Procedure';
+import { useAppSelector } from '@/src/redux/hooks';
 import { Col, Row } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { useEffect, useState } from 'react';
@@ -24,21 +25,13 @@ const navbarArr = [
 
 function Index() {
   const [tabActive, setTabActive] = useState(1);
-  const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
+  // const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   const [listProcedure, setListProcedure] = useState<Array<ProcedureModel>>([]);
   const [isMobileClient, setIsMobileClient] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
-
-  useEffect(() => {
-    (async () => {
-      const dataRes = await apiGetListMostViewArticle();
-      if (dataRes.status) {
-        setListArticle(dataRes.data);
-      }
-    })();
-  }, []);
+  const { listArticle } = useAppSelector((state) => state.postState);
 
   useEffect(() => {
     (async () => {

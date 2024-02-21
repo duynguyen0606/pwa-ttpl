@@ -93,12 +93,7 @@ function RankPost() {
         ))}
       <div className='text-center'>
         <Button
-          style={{
-            color: '#fff',
-            backgroundColor: 'var(--primary-color)',
-            border: 'unset',
-            textAlign: 'center',
-          }}
+          className='button-primary'
           size='large'
           onClick={() => setCurrentPage((prev) => prev + 1)}
         >

@@ -35,15 +35,7 @@ function BannerContact({
         <div className={`flex-1 ${isMobileClient ? 'mr-5' : 'mr-40'}`}>
           <div className='text-xl font-semibold'>{title}</div>
           <div className='py-4'>{description}</div>
-          <Button
-            style={{
-              color: '#fff',
-              backgroundColor: 'var(--primary-color)',
-              border: 'unset',
-            }}
-          >
-            {btnText}
-          </Button>
+          <Button className='button-primary'>{btnText}</Button>
         </div>
         <div className='flex-1'>
           <Image src={image} alt='banner' width={801} height={602} />
@@ -59,15 +51,7 @@ function BannerContact({
         <div className={`flex-1 ${isMobileClient ? 'ml-5' : 'ml-40'}`}>
           <div className='text-xl font-semibold'>{title}</div>
           <div className='py-4'>{description}</div>
-          <Button
-            style={{
-              color: '#fff',
-              backgroundColor: 'var(--primary-color)',
-              border: 'unset',
-            }}
-          >
-            {btnText}
-          </Button>
+          <Button className='button-primary'>{btnText}</Button>
         </div>
       </div>
     );

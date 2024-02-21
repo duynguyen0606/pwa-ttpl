@@ -15,9 +15,5 @@ export default function StoreProvider({
     storeRef.current = makeStore();
   }
 
-  return (
-    <Provider store={storeRef.current}>
-      <StyleProvider hashPriority='high'>{children}</StyleProvider>
-    </Provider>
-  );
+  return <Provider store={storeRef.current}>{children}</Provider>;
 }

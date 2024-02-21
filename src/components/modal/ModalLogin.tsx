@@ -83,10 +83,8 @@ function ModalLogin(props: ModalProps) {
           </div>
           <Form.Item>
             <Button
+              className='button-primary'
               style={{
-                backgroundColor: 'var(--primary-color)',
-                color: '#fff',
-                border: 'none',
                 width: '100%',
               }}
               htmlType='submit'
