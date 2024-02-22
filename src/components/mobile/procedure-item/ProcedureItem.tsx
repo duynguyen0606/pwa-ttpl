@@ -1,12 +1,16 @@
-type BlogItem = {
-    organ: string;
-    field: string;
-};
+import Link from "next/link";
+import ProcedureModel from "@/src/models/Procedure";
 
-function BlogItem(props: BlogItem) {
+function ProcedureItem({ procedure }: { procedure: ProcedureModel }) {
     return (
         <div className="mt-4 rounded-2xl  bg-[#F4F5F8]">
-            <header className="py-4 pl-4 bg-[#FCFCFE]">
+            <header
+                className="
+                    py-4 pl-4 
+                    rounded-t-2xl 
+                    bg-[#FCFCFE]
+                "
+            >
                 <div className="flex mb-4">
                     <div
                         className="
@@ -19,7 +23,7 @@ function BlogItem(props: BlogItem) {
                             line-clamp-2
                         "
                     >
-                        {props.organ}
+                        {procedure.co_quan_thuc_hien}
                     </div>
                     <div
                         className="
@@ -31,17 +35,19 @@ function BlogItem(props: BlogItem) {
                             line-clamp-2
                         "
                     >
-                        {props.field}
+                        {procedure.area_name}
                     </div>
                 </div>
                 <div className="text-base font-bold text-[#515666]">
-                    Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ,
-                    tài liệu tại các cơ quan ở trong nước
+                    {procedure.title}
                 </div>
             </header>
             <footer className="flex p-4 justify-between items-center">
                 <div className="text-xs text-[#515666]">
-                    Cập nhật: 2023-11-20 08:52:14
+                    Cập nhật:{" "}
+                    {procedure.updated_at
+                        ? procedure.updated_at
+                        : procedure.created_at}
                 </div>
                 <div
                     className="
@@ -52,11 +58,11 @@ function BlogItem(props: BlogItem) {
                         rounded
                     "
                 >
-                    <a href="#">Xem chi tiết</a>
+                    <Link href="#">Xem chi tiết</Link>
                 </div>
             </footer>
         </div>
     );
 }
 
-export default BlogItem;
+export default ProcedureItem;

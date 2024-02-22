@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 import Header from '@/src/components/mobile/header/Header';
 import Slider from '@/src/components/mobile/slider/Slider';
-import Blog from '@/src/components/mobile/blog/Blog';
 import Footer from '@/src/components/mobile/footer/Footer';
 
 function HomePageMobile() {
@@ -40,7 +39,6 @@ function HomePageMobile() {
               Xem tất cả
             </button>
           </div>
-          <Blog />
         </div>
 
         <a href='tel: 0888888888' className='fixed bottom-16 left-4 z-[2] '>

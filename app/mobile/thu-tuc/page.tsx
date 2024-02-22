@@ -1,35 +1,37 @@
-import Link from "next/link";
-import Blog from "@/src/components/mobile/blog/Blog";
+"use client";
+
+import { useState, useEffect } from "react";
+
+import { apiGetListProcedure } from "@/src/api/procedure";
+import ProcedureItem from "@/src/components/mobile/procedure-item/ProcedureItem";
+import ProcedureModel from "@/src/models/Procedure";
+
+import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
 import Footer from "@/src/components/mobile/footer/Footer";
 
 function Index() {
-    return (
-        <div>
-            {/* Header */}
-            <div
-                className="
-                    p-4 
-                    flex items-center 
-                    text-xl font-bold text-[#262C41]
-                    border-b-[1px] border-solid border-[#F1F1F1]
-                "
-            >
-                <Link href="/mobile">
-                    <img
-                        className="mr-2"
-                        src="https://ttpl.vn/assets/images/mobile/type-back.png"
-                    />
-                </Link>
-                Danh sách thủ tục
-            </div>
+    const [listArticle, setListArticle] = useState<Array<ProcedureModel>>([]);
 
+    useEffect(() => {
+        (async () => {
+            const dataRes = await apiGetListProcedure();
+            if (dataRes.status) {
+                setListArticle(dataRes.data);
+            }
+        })();
+    }, []);
+
+    return (
+        <CanBackLayout back="/mobile" title="Danh sách thủ tục">
             {/* List procedure */}
             <div className="m-4 pb-28">
-                <Blog />
+                {listArticle.map((article) => (
+                    <ProcedureItem key={article.id} procedure={article} />
+                ))}
             </div>
 
             <Footer />
-        </div>
+        </CanBackLayout>
     );
 }
 

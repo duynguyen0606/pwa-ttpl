@@ -1,7 +1,7 @@
 import { memo } from "react";
 import Link from "next/link";
 import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
-import BlogItem from "@/src/components/mobile/blog/BlogItem";
+import BlogItem from "@/src/components/mobile/procedure-item/ProcedureItem";
 
 const data = [
     {

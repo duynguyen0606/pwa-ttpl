@@ -1,7 +1,9 @@
 import Link from "next/link";
-import ArticleModel from "@/src/models/Article";
+
 import FooterPost from "@/src/components/mobile/post-item/FooterPost";
 import HeaderPost from "@/src/components/mobile/post-item/HeaderPost";
+
+import ArticleModel from "@/src/models/Article";
 
 function Post({ post }: { post: ArticleModel }) {
     return (
@@ -13,11 +15,7 @@ function Post({ post }: { post: ArticleModel }) {
                     <img
                         className="w-full"
                         loading="lazy"
-                        src={
-                            post.images
-                                ? post.images
-                                : "https://lh3.googleusercontent.com/d/1Rjt7q0xvL0JFWcoTql-stBdJSAJnguVU=s1000?authuser=0"
-                        }
+                        src={post.images}
                         alt="Ảnh bài viết"
                     />
                 </div>

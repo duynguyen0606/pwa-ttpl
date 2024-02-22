@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button, Form, Input, message } from "antd";
 
-import { authLogin } from "@/src/redux/feature/authSlice";
+import { apiLogin } from "@/src/api/auth";
+import { setDataUser } from "@/src/redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { ModalForgotPassword } from "@/src/components/modal";
-import { Button, Form, Input } from "antd";
 
 type FormSubmitValueType = {
     email: string;
@@ -14,34 +16,27 @@ type FormSubmitValueType = {
 };
 
 function Index() {
-    const [error, setError] = useState(false);
+    const router = useRouter();
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [register, setRegister] = useState(false);
 
     const dispatch = useAppDispatch();
-
-    /* HTML Form
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
-
-        const data: FormSubmitValueType = {
-            email,
-            password,
-        };
-
-        await dispatch(authLogin(data));
-    };
-    */
-
+    const { loading, user, loginCode } = useAppSelector(
+        (state) => state.authState
+    );
     const [form] = Form.useForm();
     const handleSubmitForm = async (values: FormSubmitValueType) => {
-        dispatch(authLogin(values));
-    };
+        const dataRes = await apiLogin(values);
+        if (dataRes.status) {
+            dispatch(setDataUser(dataRes?.data_user));
 
-    const { user } = useAppSelector((state) => state.authState);
-    console.log(user);
+            message.success("Bạn đã đăng nhập thành công!");
+
+            router.push("/mobile");
+        } else {
+            message.error("Bạn đã nhập sai tài khoản hoặc mật khẩu!");
+        }
+    };
 
     return (
         <div className="relative">
@@ -56,87 +51,14 @@ function Index() {
 
             <div className="f-1 p-[15px]">
                 {/* form login */}
-                {/* <form onSubmit={handleSubmit}>
-                    <h2 className="text-3xl text-[#262C41] font-semibold my-5">
-                        Đăng nhập
-                    </h2>
-                    <div className="mb-1 text-[#f00]">
-                        {error
-                            ? "Tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại"
-                            : " "}
-                    </div>
-                    <div className="flex flex-col mb-4 relative">
-                        <label
-                            className="text-xs text-[#686E7E] mb-1 "
-                            htmlFor="email"
-                        >
-                            Email/Số điện thoại
-                        </label>
-                        <input
-                            className="text-sm h-[48px] w-full rounded-lg px-2 bg-[#F4F5F8]"
-                            type="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            onMouseDown={() => setError(false)}
-                            placeholder="Email"
-                        />
-                    </div>
-                    <div className="flex flex-col mb-1 relative">
-                        <label
-                            className="text-xs text-[#686E7E] mb-1 "
-                            htmlFor="password"
-                        >
-                            Mật khẩu
-                        </label>
-                        <input
-                            className="text-sm h-[48px] w-full rounded-lg px-2 bg-[#F4F5F8]"
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            onMouseDown={() => setError(false)}
-                            placeholder="Mật khẩu"
-                        />
-                        <img
-                            className="absolute right-5 bottom-3.5 hide-pass"
-                            src="https://ttpl.vn/assets/images/icon/Eye.png"
-                        />
-                    </div>
-                    <div className="text-end text-sm text-[#4755D4] pt-1">
-                        <span onClick={() => setShowForgotPassword(true)}>
-                            Quên mật khẩu ?
-                        </span>
-                    </div>
-                    <button
-                        className="
-                            flex items-center justify-center
-                            w-full h-12 
-                            text-sm text-white  
-                            bg-[#4755D4] 
-                            rounded-[20px] 
-                            mt-5 mb-2 
-                        "
-                        type="submit"
-                    >
-                        Đăng nhập
-                    </button>
-                </form> */}
-
                 <Form
                     onFinish={(values) => handleSubmitForm(values)}
                     form={form}
                 >
+                    {/* Title form */}
                     <h2 className="text-3xl text-[#262C41] font-semibold my-5">
                         Đăng nhập
                     </h2>
-
-                    {/* Error message */}
-                    {/* <div className="mb-1 text-[#f00]">
-                        {error
-                            ? "Tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại"
-                            : " "}
-                    </div> */}
 
                     <Form.Item
                         name="email"
@@ -180,6 +102,7 @@ function Index() {
                                 margin: "20px 0px 12px",
                                 borderRadius: "18px",
                             }}
+                            loading={loading}
                         >
                             Đăng nhập
                         </Button>

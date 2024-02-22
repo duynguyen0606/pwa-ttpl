@@ -1,16 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/src/redux/hooks";
+
+import { apiGetListProcedure } from "@/src/api/procedure";
+
 import Header from "@/src/components/mobile/header/Header";
 import Slider from "@/src/components/mobile/slider/Slider";
-import Blog from "@/src/components/mobile/blog/Blog";
 import Footer from "@/src/components/mobile/footer/Footer";
 
+import ProcedureModel from "@/src/models/Procedure";
+import ProcedureItem from "@/src/components/mobile/procedure-item/ProcedureItem";
+import Link from "next/link";
+
 function Index() {
-    const { user } = useAppSelector((state) => state.authState);
-    const router = useRouter();
-    const data = [
+    const dataSlider = [
         {
             id: 0,
             img: "https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp",
@@ -24,7 +28,18 @@ function Index() {
             img: "https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp",
         },
     ];
-    
+
+    const [listArticle, setListArticle] = useState<Array<ProcedureModel>>([]);
+
+    useEffect(() => {
+        (async () => {
+            const dataRes = await apiGetListProcedure();
+            if (dataRes.status) {
+                setListArticle(dataRes.data);
+            }
+        })();
+    }, []);
+
     return (
         <>
             <Header />
@@ -44,7 +59,7 @@ function Index() {
                     />
                 </div>
 
-                <Slider data={data} />
+                <Slider data={dataSlider} />
 
                 {/* Thủ tục mới nhất */}
                 <div className="p-2 mt-2">
@@ -57,7 +72,7 @@ function Index() {
                     >
                         Thủ tục mới nhất
                     </div>
-                    <Slider data={data} />
+                    <Slider data={dataSlider} />
                 </div>
 
                 {/* Danh sách thủ tục */}
@@ -69,17 +84,20 @@ function Index() {
                         "
                     >
                         Danh sách thủ tục
-                        <div
+                        <Link
+                            href='mobile/thu-tuc'
                             className="text-sm text-[--primary-color]"
-                            onClick={() => router.push("/mobile/thu-tuc")}
                         >
                             Xem tất cả
-                        </div>
+                        </Link>
                     </div>
-                    <Blog />
+
+                    {listArticle.map((article) => (
+                        <ProcedureItem key={article.id} procedure={article} />
+                    ))}
                 </div>
 
-                <a
+                <Link
                     href="tel: 0888888888"
                     className="fixed bottom-16 left-4 z-[2] "
                 >
@@ -99,7 +117,7 @@ function Index() {
                         />
                         <span className="text-white text-xs">0888888888</span>
                     </div>
-                </a>
+                </Link>
             </div>
 
             <Footer />

@@ -1,12 +1,26 @@
 "use client";
+import { useState } from "react";
 
-import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
 import ArticleModel from "@/src/models/Article";
+import CommentModel from "@/src/models/Comment";
+
+import { apiGetListCommentByPostId } from "@/src/api/home-page";
+import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
+import CommentCom from "../../common/comment";
 
 function FooterPostItem({ post }: { post: ArticleModel }) {
+    const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
+    const handleFetchComment = async (id: string) => {
+        const dataRes = await apiGetListCommentByPostId({ postId: id });
+        if (dataRes.status && dataRes.data.length > 0) {
+            setDataComment(dataRes.data);
+        }
+    };
+
     return (
         <footer>
-            <div className="top-footer flex items-center justify-between py-1 text-xs text-[#B5B9C7]">
+            {/* status of post */}
+            <div className="flex items-center justify-between py-1 text-xs text-[#B5B9C7]">
                 <div className="show-like text-sm flex flex-row">
                     {post.total_like ? (
                         <div className="flex items-center">
@@ -33,6 +47,8 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                     ) : null}
                 </div>
             </div>
+
+            {/* buttons */}
             <div
                 className="
                     bottom-footer
@@ -51,7 +67,10 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                     <DislikeIcon width="18px" height="18px" color="#898A8D" />
                     <span className="ml-2">Dislike</span>
                 </div>
-                <div className="flex flex-row items-center">
+                <div
+                    className="flex flex-row items-center"
+                    // onClick={() => handleFetchComment(post.id)}
+                >
                     <img
                         className=""
                         src="https://ttpl.vn/assets/images/icon/Comment.png"
@@ -68,6 +87,9 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                     <span className="ml-2">Share</span>
                 </div>
             </div>
+
+            {/* Comment */}
+            {dataComment.length > 0 && <CommentCom commentList={dataComment} />}
         </footer>
     );
 }
