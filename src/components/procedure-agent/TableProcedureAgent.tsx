@@ -75,11 +75,16 @@ function TableProcedureAgent() {
   const handleFetchDataDetailAgent = async (id: string) => {
     const dataRes = await apiGetListChildrentAgentByProcedureAgentId(id);
 
-    console.log(dataRes);
     if (dataRes.status && dataRes.data) {
       setDataChildAgent(dataRes.data.result);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      setDataListAgent([]);
+    };
+  }, [typeAgent]);
 
   return (
     <div id='table-procedure-agent' className='p-4'>

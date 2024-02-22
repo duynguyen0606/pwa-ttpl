@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import ProcedureSlugContent from './ProcedureSlugContent';
 import ProcedureSlugComment from './ProcedureSlutComment';
+import { useAppSelector } from '@/src/redux/hooks';
+import ProcedureSlugAction from './ProcedureSlugAction';
+import ProcedureSlugDiagram from './ProcedureSlugDiagram';
 
 const dataNavs = [
   {
@@ -27,14 +30,17 @@ const dataNavs = [
 
 function ProcedureSlug({ data }: { data: any }) {
   const [tabActive, setTabActive] = useState(1);
+  const { user } = useAppSelector((state) => state.authState);
   const renderView = () => {
     switch (tabActive) {
       case 1:
         return <ProcedureSlugContent data={data} />;
       case 2:
-        return 'xxx';
+        return user ? <ProcedureSlugAction /> : <div>Bạn chưa đăng nhập!</div>;
+      case 3:
+        return user ? <ProcedureSlugDiagram /> : <div>Bạn chưa đăng nhập!</div>;
       case 4:
-        return <ProcedureSlugComment />;
+        return user ? <ProcedureSlugComment /> : <div>Bạn chưa đăng nhập!</div>;
       default:
         return <ProcedureSlugContent data={data} />;
     }
@@ -67,22 +73,25 @@ function ProcedureSlug({ data }: { data: any }) {
           style={{ fontSize: 18, fontWeight: 600 }}
         />
       </ConfigProvider>
-      <div className='m-4'>
-        <Button
-          size='large'
-          icon={
-            <Image
-              src='/images/icons/download.png'
-              alt='download'
-              width={20}
-              height={20}
-            />
-          }
-          className='flex items-center button-primary'
-        >
-          Lưu thủ tục
-        </Button>
-      </div>
+      {user && (
+        <div className='m-4'>
+          <Button
+            size='large'
+            icon={
+              <Image
+                src='/images/icons/download.png'
+                alt='download'
+                width={20}
+                height={20}
+              />
+            }
+            className='flex items-center button-primary'
+          >
+            Lưu thủ tục
+          </Button>
+        </div>
+      )}
+
       <div className='p-4'>{renderView()}</div>
     </div>
   );

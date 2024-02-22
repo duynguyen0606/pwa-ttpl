@@ -20,7 +20,7 @@ import { useMediaQuery } from 'react-responsive';
 import { ModalLogin } from '../../modal';
 import ModalSearch from '../../modal/ModalSearch';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
+import { authLogout, setOpenModalLogin } from '@/src/redux/feature/authSlice';
 const { Header } = Layout;
 
 const navbarArr = [
@@ -57,7 +57,7 @@ function HeaderCom() {
   const [openModalSearch, setOpenModalSearch] = useState(false);
   const [openPopoverUser, setOpenPopoverUser] = useState(false);
   // const { message } = App.useApp();
-  const { loading, user, loginCode } = useAppSelector(
+  const { loading, user, loginCode, token } = useAppSelector(
     (state) => state.authState
   );
   const isMobileUI = useMediaQuery({
@@ -238,7 +238,23 @@ function HeaderCom() {
                       />
                       <span>Dashboard</span>
                     </div>
-                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                    <div
+                      // onClick={() =>
+                      // dispatch(
+                      //   authLogout({
+                      //     url: 'https://thutucphapluat.com/api/login/logout',
+                      //     token: token,
+                      //   })
+                      // )
+                      // sendPostWithToken(
+                      //   {
+                      //         url: 'https://thutucphapluat.com/api/login/logout',
+                      //         token: token,
+                      //       }
+                      // })
+                      // }
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'
+                    >
                       <Image
                         src='/images/icons/logout.png'
                         alt='logut'

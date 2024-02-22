@@ -9,6 +9,8 @@ class PostModel {
   title: string;
   description: string;
   post_id: string;
+  $images_user: string;
+  images: string;
 
   constructor(args: any) {
     this.id_post = args.id_post ?? '';
@@ -21,6 +23,8 @@ class PostModel {
     this.description = args.description ?? '';
     this.post_id = args.post_id ?? '';
     this.view = args.view ?? '';
+    this.$images_user = args.$images_user ?? '';
+    this.images = args.images ?? '';
   }
 }
 

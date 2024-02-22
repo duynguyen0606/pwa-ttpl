@@ -75,3 +75,9 @@ export const apiGetListProcedureRelative = async (
   const { data } = await axios.get(url);
   return data ?? {};
 };
+
+export const apiGetListProcedureComment = async (id: string) => {
+  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${id}&limit=1000&page=1`;
+  const { data } = await axios.get(url);
+  return data ?? {};
+};

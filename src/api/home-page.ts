@@ -34,6 +34,7 @@ export const apiGetListPost = async ({
 }): Promise<{ status: boolean; page: number; data: Array<ArticleModel> }> => {
   const url = `https://thutucphapluat.com/api/posts_controller/list?page=${page}`;
   const { data } = await axios.get(url);
+  console.log(data);
   return data ?? {};
 };
 

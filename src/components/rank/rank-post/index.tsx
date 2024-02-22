@@ -37,7 +37,7 @@ function RankPost() {
                 <div className='flex gap-2'>
                   <div className='w-10'>
                     <Image
-                      src='https://ttpl.vn/files/profile_images/_file60efb3760fc90-avatar.png'
+                      src={item.$images_user}
                       alt='avatar'
                       width={40}
                       height={40}
@@ -66,7 +66,7 @@ function RankPost() {
                 </div>
                 <div style={{ width: 148 }}>
                   <Image
-                    src='https://ttpl.vn/files/timeline_files/timeline_post_file61f345e84affa-1w--3-.jpg.webp'
+                    src={item.images}
                     alt='image'
                     width={148}
                     height={148}

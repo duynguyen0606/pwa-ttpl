@@ -76,3 +76,32 @@ export const sendPostFormDataWithToken = async (
     throw error;
   }
 };
+
+export const sendPostWithToken = async (args: {
+  url: string;
+  data?: { [key: string]: string | Blob };
+  token: string;
+}) => {
+  const { url, data, token } = args;
+  try {
+    // Thực hiện gọi API
+    console.log(args);
+    const response = await axios.post(url, data, {
+      headers: {
+        // Thiết lập Content-Type
+        'Content-Type': 'application/json',
+        // Thêm Authorization header với token
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log('response', response);
+
+    // Xử lý kết quả trả về
+    return response.data;
+  } catch (error) {
+    // Xử lý lỗi nếu có
+    console.error('Error during API call:', error);
+    throw error;
+  }
+};
