@@ -1,8 +1,10 @@
 'use client';
 
 import UserProfile from '@/src/components/user';
+import { usePageAuth } from '@/src/utils/hook';
 
 function Index() {
+  usePageAuth();
   return <UserProfile />;
 }
 

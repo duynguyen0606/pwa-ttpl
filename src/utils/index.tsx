@@ -98,7 +98,35 @@ export const sendPostWithToken = async (args: {
     console.log('response', response);
 
     // Xử lý kết quả trả về
-    return response.data;
+    return response;
+  } catch (error) {
+    // Xử lý lỗi nếu có
+    console.error('Error during API call:', error);
+    throw error;
+  }
+};
+
+export const getWithToken = async ({
+  url,
+  token,
+}: {
+  url: string;
+  token: string;
+}) => {
+  try {
+    // Thực hiện gọi API
+    console.log(token);
+    const response = await axios.get(url, {
+      headers: {
+        // Thiết lập Content-Type
+        'Content-Type': 'application/json',
+        // Thêm Authorization header với token
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Xử lý kết quả trả về
+    return response;
   } catch (error) {
     // Xử lý lỗi nếu có
     console.error('Error during API call:', error);

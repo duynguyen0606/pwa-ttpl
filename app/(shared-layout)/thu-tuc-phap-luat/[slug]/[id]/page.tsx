@@ -9,17 +9,13 @@ import ProcedureSlug from '@/src/components/procedure-slug';
 import { useAppSelector } from '@/src/redux/hooks';
 import { Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
-
-const navbarArr = [
-  { name: 'Thủ tục', tabActive: 1 },
-  { name: 'Cơ quan thực hiện', tabActive: 2 },
-];
-
+import { navbarArr } from '../page';
+import { useRouter } from 'next/navigation';
 function Index({ params }: { params: { id: string } }) {
-  const [tabActive, setTabActive] = useState(1);
   const [dataContent, setDataContent] = useState();
   const [dataRelative, setDataRelative] = useState<Array<any>>();
   const { listArticle } = useAppSelector((state) => state.postState);
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -45,11 +41,10 @@ function Index({ params }: { params: { id: string } }) {
               <nav
                 key={item.name}
                 className='flex justify-center text-xl font-semibold p-4'
-                onClick={() => setTabActive(item.tabActive)}
+                onClick={() => router.push(`/thu-tuc-phap-luat/${item.slug}`)}
                 style={{
-                  color: tabActive === item.tabActive ? '#fff' : '#444',
-                  backgroundColor:
-                    tabActive === item.tabActive ? '#4262AE' : '#fff',
+                  color: 'thu-tuc' === item.slug ? '#fff' : '#444',
+                  backgroundColor: 'thu-tuc' === item.slug ? '#4262AE' : '#fff',
                   borderBottom: '1px solid #d8d8d8',
                 }}
               >

@@ -30,7 +30,7 @@ const navbarArr = [
   },
   {
     name: 'Thủ tục pháp luật',
-    link: '/thu-tuc',
+    link: '/thu-tuc-phap-lua/thu-tuc',
   },
   {
     name: 'Hướng dẫn sử dụng',
@@ -75,7 +75,7 @@ function HeaderCom() {
   return (
     <Header
       id='header'
-      className={`flex bg-white w-full items-center justify-between px-9 h-15 sm:h-20 fixed t-0 z-50`}
+      className={`flex bg-white w-full items-center justify-between px-9 h-15 sm:h-20 fixed t-0 z-50 cursor-pointer`}
     >
       {isMobileClient ? (
         <>
@@ -144,7 +144,7 @@ function HeaderCom() {
         </>
       ) : (
         <>
-          <div>
+          <div onClick={() => router.push('/')}>
             <Image
               priority
               src='/images/logo.png'
@@ -211,7 +211,10 @@ function HeaderCom() {
               <Popover
                 content={
                   <div>
-                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                    <div
+                      onClick={() => router.push('/user')}
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'
+                    >
                       <Image
                         src='/images/icons/white-account.png'
                         alt='profile'
@@ -220,7 +223,7 @@ function HeaderCom() {
                       />
                       <span>Hồ sơ của tôi</span>
                     </div>
-                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'>
                       <Image
                         src='https://ttpl.vn/assets/images/icon/exclusively.png'
                         alt='for you'
@@ -229,7 +232,7 @@ function HeaderCom() {
                       />
                       <span>Dành riêng cho bạn</span>
                     </div>
-                    <div className='flex gap-2 items-center p-2 border-b border-slate-200'>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'>
                       <Image
                         src='/images/icons/home.png'
                         alt='dashboard'
@@ -253,7 +256,7 @@ function HeaderCom() {
                       //       }
                       // })
                       // }
-                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer cursor-pointer'
                     >
                       <Image
                         src='/images/icons/logout.png'

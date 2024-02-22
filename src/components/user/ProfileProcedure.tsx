@@ -1,6 +1,9 @@
+import { apiGetUserWatchedProcedure } from '@/src/api/user';
+import { useAppSelector } from '@/src/redux/hooks';
 import { ConfigProvider, Menu } from 'antd';
 import Table, { ColumnsType } from 'antd/es/table';
 import Link from 'next/link';
+import { useState } from 'react';
 const dataNavs = [
   {
     label: 'Thủ tục đã xem',
@@ -51,6 +54,18 @@ const columns: ColumnsType<DataType> = [
 ];
 
 function ProfileProcedure() {
+  const [dataProcedure, setDataProcedure] = useState<Array<any>>();
+  const { token } = useAppSelector((state) => state.authState);
+
+  const handleSelectItem = async (key: number) => {
+    if (key == 1) {
+      const dataRes = await apiGetUserWatchedProcedure({
+        url: 'https://thutucphapluat.com/api/Help_articles_controller/list_my_procedure?limit=10&page=1',
+        token: token,
+      });
+      console.log(dataRes);
+    }
+  };
   return (
     <div>
       <ConfigProvider
@@ -68,13 +83,14 @@ function ProfileProcedure() {
         <Menu
           style={{ justifyContent: 'center', fontSize: 18 }}
           mode='horizontal'
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['1']}
           items={dataNavs.map((item) => {
             return {
               key: item.key,
               label: item.label,
             };
           })}
+          onSelect={async ({ item, key }) => handleSelectItem(Number(key))}
         />
       </ConfigProvider>
       {/* <Table

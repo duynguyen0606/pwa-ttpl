@@ -6,7 +6,10 @@ import ProcedureModel from '@/src/models/Procedure';
 
 interface DataType {
   key: string;
-  name: string;
+  item: {
+    title: string;
+    id: string;
+  };
   agent: string;
   result: string;
 }
@@ -14,12 +17,12 @@ interface DataType {
 const columns: ColumnsType<DataType> = [
   {
     title: 'Tên',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'item',
+    key: 'item',
     width: '40%',
-    render: (text) => (
+    render: (item) => (
       <div className='max-w-60 text-sky-500'>
-        <Link href='/'>{text}</Link>
+        <Link href={`/thu-tuc-phap-luat/thu-tuc/${item.id}`}>{item.title}</Link>
       </div>
     ),
   },
@@ -40,10 +43,14 @@ const columns: ColumnsType<DataType> = [
 
 function TableProcedure(props: { data: Array<ProcedureModel> }) {
   const { data: listProcedure } = props;
+  console.log(listProcedure);
   const listData: DataType[] = listProcedure.map((item) => {
     return {
       key: item.id,
-      name: item.title,
+      item: {
+        title: item.title,
+        id: item.id,
+      },
       agent: item.co_quan_thuc_hien,
       result: item.result,
     };
