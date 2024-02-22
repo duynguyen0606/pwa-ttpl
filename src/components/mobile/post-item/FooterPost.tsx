@@ -1,43 +1,54 @@
 "use client";
+import { useState } from "react";
 
+import ArticleModel from "@/src/models/Article";
+import CommentModel from "@/src/models/Comment";
+
+import { apiGetListCommentByPostId } from "@/src/api/home-page";
 import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
+import CommentCom from "../../common/comment";
 
-function FooterPostItem({ data }: { data: any }) {
+function FooterPostItem({ post }: { post: ArticleModel }) {
+    const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
+    const handleFetchComment = async (id: string) => {
+        const dataRes = await apiGetListCommentByPostId({ postId: id });
+        if (dataRes.status && dataRes.data.length > 0) {
+            setDataComment(dataRes.data);
+        }
+    };
+
     return (
         <footer>
-            <div className="top-footer flex items-center justify-between py-1 text-xs text-[#B5B9C7]">
+            {/* status of post */}
+            <div className="flex items-center justify-between py-1 text-xs text-[#B5B9C7]">
                 <div className="show-like text-sm flex flex-row">
-                    {data.like ? (
+                    {post.total_like ? (
                         <div className="flex items-center">
                             <img
                                 src="https://ttpl.vn/assets/images/icon/icon-like-blue.png"
                                 className="w-4 h-4"
                             />
-                            <span className="ml-1">{`${data.like}`}</span>
+                            <span className="ml-1">{post.total_like}</span>
                         </div>
                     ) : null}
                 </div>
                 <div className="comment-shared flex flex-row items-center font-medium">
-                    {/* comment */}
-                    {data.comment ? (
-                        <div className="comment">
-                            {`${data.comment} bình luận`}
-                        </div>
-                    ) : null}
+                    {/* seen */}
+                    {post.view ? <div>{post.view} lượt xem</div> : null}
 
                     {/* dot */}
-                    {data.comment && data.share ? (
+                    {post.view && post.total_comment ? (
                         <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full"></div>
                     ) : null}
 
-                    {/* share */}
-                    {data.share ? (
-                        <div className="shared">
-                            {`${data.share} lượt chia sẻ`}
-                        </div>
+                    {/* comment */}
+                    {post.total_comment ? (
+                        <div>{post.total_comment} bình luận</div>
                     ) : null}
                 </div>
             </div>
+
+            {/* buttons */}
             <div
                 className="
                     bottom-footer
@@ -56,7 +67,10 @@ function FooterPostItem({ data }: { data: any }) {
                     <DislikeIcon width="18px" height="18px" color="#898A8D" />
                     <span className="ml-2">Dislike</span>
                 </div>
-                <div className="flex flex-row items-center">
+                <div
+                    className="flex flex-row items-center"
+                    // onClick={() => handleFetchComment(post.id)}
+                >
                     <img
                         className=""
                         src="https://ttpl.vn/assets/images/icon/Comment.png"
@@ -73,6 +87,9 @@ function FooterPostItem({ data }: { data: any }) {
                     <span className="ml-2">Share</span>
                 </div>
             </div>
+
+            {/* Comment */}
+            {dataComment.length > 0 && <CommentCom commentList={dataComment} />}
         </footer>
     );
 }

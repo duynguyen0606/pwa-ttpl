@@ -1,87 +1,116 @@
 "use client";
 
-import { ModalForgotPassword } from "@/src/components/modal";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button, Form, Input, message } from "antd";
+
+import { apiLogin } from "@/src/api/auth";
+import { setDataUser } from "@/src/redux/feature/authSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { ModalForgotPassword } from "@/src/components/modal";
+
+type FormSubmitValueType = {
+    email: string;
+    password: string;
+};
 
 function Index() {
     const router = useRouter();
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [register, setRegister] = useState(false);
 
+    const dispatch = useAppDispatch();
+    const { loading, user, loginCode } = useAppSelector(
+        (state) => state.authState
+    );
+    const [form] = Form.useForm();
+    const handleSubmitForm = async (values: FormSubmitValueType) => {
+        const dataRes = await apiLogin(values);
+        if (dataRes.status) {
+            dispatch(setDataUser(dataRes?.data_user));
+
+            message.success("Bạn đã đăng nhập thành công!");
+
+            router.push("/mobile");
+        } else {
+            message.error("Bạn đã nhập sai tài khoản hoặc mật khẩu!");
+        }
+    };
+
     return (
         <div className="relative">
             <div className=" pt-3 pl-[11px] pl-0 pb-2">
-                <button
-                    className="w-7 h-7 rounded-full  bg-[#f6f6fd]"
-                    onClick={() => router.push("/mobile")}
-                >
+                <Link href="/mobile">
                     <img
+                        className="w-[26px] h-[27px] bg-[#EDEEFA] rounded-full"
                         src="https://ttpl.vn/assets/images/mobile/type-back-login.png"
-                        alt=""
                     />
-                </button>
+                </Link>
             </div>
 
             <div className="f-1 p-[15px]">
                 {/* form login */}
-                <form>
-                    <h2 className="text-3xl text-[#262C41] font-semibold mb-5">
+                <Form
+                    onFinish={(values) => handleSubmitForm(values)}
+                    form={form}
+                >
+                    {/* Title form */}
+                    <h2 className="text-3xl text-[#262C41] font-semibold my-5">
                         Đăng nhập
                     </h2>
-                    <div className="flex flex-col mb-4 relative">
-                        <label
-                            className="text-[10px] text-[#686E7E] mb-1 "
-                            htmlFor="email"
-                        >
-                            Email/Số điện thoại
-                        </label>
-                        <input
-                            className="text-xs h-10 w-full rounded-lg px-2  bg-[#F4F5F8]"
-                            type="email"
-                            name="email"
+
+                    <Form.Item
+                        name="email"
+                        label="Email/Số điện thoại"
+                        style={{ marginBottom: 12 }}
+                    >
+                        <Input
+                            size="large"
                             placeholder="Email"
+                            style={{ height: 48 }}
                         />
-                    </div>
-                    <div className="flex flex-col mb-1 relative">
-                        <label
-                            className="text-[10px] text-[#686E7E] mb-1 "
-                            htmlFor="password"
-                        >
-                            Mật khẩu
-                        </label>
-                        <input
-                            className="text-xs h-10 w-full rounded-lg px-2  bg-[#F4F5F8]"
-                            type="password"
-                            name="password"
+                    </Form.Item>
+
+                    <Form.Item
+                        name="password"
+                        label="Mật khẩu"
+                        style={{ marginBottom: 0 }}
+                    >
+                        <Input.Password
+                            size="large"
                             placeholder="Mật khẩu"
+                            style={{ height: 48 }}
                         />
-                        <img
-                            className="absolute right-5 bottom-[10px] hide-pass"
-                            src="https://ttpl.vn/assets/images/icon/Eye.png"
-                        ></img>
-                    </div>
-                    <div className="text-end text-xs text-[#4755D4] pt-1">
+                    </Form.Item>
+
+                    <div className="text-end text-sm text-[#4755D4] pt-1">
                         <span onClick={() => setShowForgotPassword(true)}>
                             Quên mật khẩu ?
                         </span>
                     </div>
-                    <div
-                        className="
-                            flex items-center justify-center
-                            w-full h-12 
-                            text-sm text-white  
-                            bg-[#4755D4] 
-                            rounded-[20px] 
-                            mt-5 mb-2 
-                        "
-                    >
-                        <button>Đăng nhập</button>
-                    </div>
-                </form>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            htmlType="submit"
+                            style={{
+                                width: "100%",
+                                height: 54,
+                                color: "#FFF",
+                                backgroundColor: "#4755D4",
+                                margin: "20px 0px 12px",
+                                borderRadius: "18px",
+                            }}
+                            loading={loading}
+                        >
+                            Đăng nhập
+                        </Button>
+                    </Form.Item>
+                </Form>
 
                 {/* Not account */}
-                <div className="text-[10px] text-center">
+                <div className="text-xs text-center">
                     Bạn chưa có tài khoản?
                     <span className="font-bold text-[#4755D4] mx-1">
                         {" "}
@@ -101,7 +130,7 @@ function Index() {
                             px-3 py-6 
                         "
                     >
-                        <span className="text-xs mb-3">
+                        <span className="text-sm mb-3">
                             Hoặc đăng nhập bằng mạng xã hội
                         </span>
                         <div className="flex w-full justify-center">

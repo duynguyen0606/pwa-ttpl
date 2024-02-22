@@ -1,6 +1,12 @@
-import Link from "next/link";
+"use client";
 
-function HeaderPostItem({ data } : {data: any}) {
+import Link from "next/link";
+import { useState } from "react";
+import ArticleModel from "@/src/models/Article";
+
+function HeaderPostItem({ post }: { post: ArticleModel }) {
+    const [follow, setFollow] = useState(false);
+
     return (
         <header className="flex justify-between mb-2">
             <div className="flex">
@@ -14,15 +20,20 @@ function HeaderPostItem({ data } : {data: any}) {
                         href="/mobile/trang-ca-nhan"
                         className="text-sm font-bold text-[#262C41]"
                     >
-                        {`${data.user}`}
+                        {post.created_by_full_name}
                     </Link>
-                    <p className="text-xs text-[#B5B9C7]">
-                        {`${data.publishAt} ngày trước`}
-                    </p>
+                    <p className="text-xs text-[#B5B9C7]">{`12 ngày trước`}</p>
                 </div>
             </div>
             <div className="flex items-center justify-center ">
-                <div className="rounded py-[6px] px-[10px] text-xs font-medium text-[#262C41] bg-[#F4F5F8]">
+                <div
+                    className="rounded py-[6px] px-[10px] text-xs font-medium"
+                    onClick={() => setFollow(!follow)}
+                    style={{
+                        color: follow ? "#FFF" : "#262C41",
+                        backgroundColor: follow ? "#F58533" : "#F4F5F8",
+                    }}
+                >
                     Theo dõi
                 </div>
             </div>
