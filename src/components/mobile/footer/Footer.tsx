@@ -2,8 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useAppSelector } from "@/src/redux/hooks";
+import { ModalDialog } from "../../modal";
 
-function Footer({ login }: { login?: boolean }) {
+function Footer() {
+    const { user } = useAppSelector((state) => state.authState);
+    const [openDialog, setOpenDialog] = useState(false);
+
     return (
         <div
             className="
@@ -30,9 +35,12 @@ function Footer({ login }: { login?: boolean }) {
             >
                 {/* left icon HOME */}
                 <div className="flex items-center">
-                    <Link href="#" className="mx-4">
+                    <div
+                        className="mx-4"
+                        onClick={user ? () => setOpenDialog(true) : undefined}
+                    >
                         <img src="https://ttpl.vn/assets/images/icon/briefcase.png" />
-                    </Link>
+                    </div>
 
                     <Link href="/mobile/bai-viet" className="mx-4">
                         <img src="https://ttpl.vn/assets/images/icon/file-text.png" />
@@ -45,11 +53,11 @@ function Footer({ login }: { login?: boolean }) {
                         <img src="https://ttpl.vn/assets/images/icon/message-circle-2.png" />
                     </Link>
 
-                    {login ? (
+                    {user ? (
                         <Link href="/mobile/my-profile" className="mx-4">
                             <img
                                 className="w-7 h-7"
-                                src="https://ttpl.vn/assets/images/logo/logo-legalzone.png"
+                                src={user.image}
                                 alt="logo-legalzone"
                             />
                         </Link>
@@ -63,6 +71,12 @@ function Footer({ login }: { login?: boolean }) {
                     )}
                 </div>
             </div>
+
+            {/* Dialog modal */}
+            <ModalDialog
+                open={openDialog}
+                onClose={() => setOpenDialog(false)}
+            />
         </div>
     );
 }

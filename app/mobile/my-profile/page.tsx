@@ -5,17 +5,13 @@ import { Switch } from "antd";
 
 import { BackIcon } from "@/src/assests/icons";
 import Footer from "@/src/components/mobile/footer/Footer";
+import { useAppSelector } from "@/src/redux/hooks";
 
-const user = {
-    name: "Đức Thành",
-    email: "ducthanh@gmail.com",
-    type: "Free",
-    phone: "0906785637",
-    address: "Số 2, ngách 141/35/28, Nham Dư, Lĩnh Nam, Hoàng Mai, Hà Nội",
-};
 
 function Index() {
-    const info = [
+    const { user } = useAppSelector((state) => state.authState);
+
+    const infoList = [
         {
             icons: "https://ttpl.vn/assets/images/mobile/Icon-feather-phone.png",
             value: user.phone,
@@ -65,7 +61,7 @@ function Index() {
                 </div>
 
                 {/* name */}
-                <div className="text-xl font-bold mb-1">{user.name}</div>
+                <div className="text-xl font-bold mb-1">{user.full_name}</div>
 
                 {/* email */}
                 <div className="text-sm mb-4">{user.email}</div>
@@ -118,9 +114,9 @@ function Index() {
                     </Link>
                 </div>
 
-                {/* info */}
+                {/* infomations account */}
                 <div className="border-b-[1px] border-solid border-[#EDEBF3]">
-                    {info.map((item, index) => (
+                    {infoList.map((item, index) => (
                         <div
                             key={index}
                             className="

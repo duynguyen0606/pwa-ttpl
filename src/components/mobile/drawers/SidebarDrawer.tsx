@@ -5,8 +5,7 @@ import { useState } from "react";
 import { Drawer, DrawerProps } from "antd";
 
 import ContactDrawer from "./ContactDrawer";
-import ModalReview from "@/src/components/modal/ModalReview";
-import ModalFeedback from "@/src/components/modal/ModalFeedback";
+import { ModalFeedback, ModalReview } from "../../modal";
 
 function SidebarDrawer(props: DrawerProps) {
     const { open, onClose } = props;
@@ -23,7 +22,7 @@ function SidebarDrawer(props: DrawerProps) {
             bodyStyle={{ padding: 0 }}
             headerStyle={{ backgroundColor: "#4755D4" }}
             closeIcon={
-                <button className="text-2xl text-white font-semibold">x</button>
+                <button className="text-2xl text-white font-semibold bg-transparent">x</button>
             }
         >
             <div className=" relative">

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+import ArticleModel from "@/src/models/Article";
 
-function HeaderPostItem({ data }: { data: any }) {
+function HeaderPostItem({ post }: { post: ArticleModel }) {
     const [follow, setFollow] = useState(false);
 
     return (
@@ -19,11 +20,9 @@ function HeaderPostItem({ data }: { data: any }) {
                         href="/mobile/trang-ca-nhan"
                         className="text-sm font-bold text-[#262C41]"
                     >
-                        {`${data.user}`}
+                        {post.created_by_full_name}
                     </Link>
-                    <p className="text-xs text-[#B5B9C7]">
-                        {`${data.publishAt} ngày trước`}
-                    </p>
+                    <p className="text-xs text-[#B5B9C7]">{`12 ngày trước`}</p>
                 </div>
             </div>
             <div className="flex items-center justify-center ">

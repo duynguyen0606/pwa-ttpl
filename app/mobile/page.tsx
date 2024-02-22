@@ -1,12 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/src/redux/hooks";
 import Header from "@/src/components/mobile/header/Header";
 import Slider from "@/src/components/mobile/slider/Slider";
 import Blog from "@/src/components/mobile/blog/Blog";
 import Footer from "@/src/components/mobile/footer/Footer";
 
 function Index() {
+    const { user } = useAppSelector((state) => state.authState);
     const router = useRouter();
     const data = [
         {
@@ -23,11 +25,9 @@ function Index() {
         },
     ];
     
-    const login = true;
-    
     return (
         <>
-            <Header login={login} />
+            <Header />
 
             {/* Content legalzone */}
             <div className="m-4 mt-0 pt-[100px]">
@@ -69,12 +69,12 @@ function Index() {
                         "
                     >
                         Danh sách thủ tục
-                        <button
+                        <div
                             className="text-sm text-[--primary-color]"
                             onClick={() => router.push("/mobile/thu-tuc")}
                         >
                             Xem tất cả
-                        </button>
+                        </div>
                     </div>
                     <Blog />
                 </div>
@@ -102,7 +102,7 @@ function Index() {
                 </a>
             </div>
 
-            <Footer login={login} />
+            <Footer />
         </>
     );
 }

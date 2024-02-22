@@ -1,40 +1,35 @@
 "use client";
 
 import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
+import ArticleModel from "@/src/models/Article";
 
-function FooterPostItem({ data }: { data: any }) {
+function FooterPostItem({ post }: { post: ArticleModel }) {
     return (
         <footer>
             <div className="top-footer flex items-center justify-between py-1 text-xs text-[#B5B9C7]">
                 <div className="show-like text-sm flex flex-row">
-                    {data.like ? (
+                    {post.total_like ? (
                         <div className="flex items-center">
                             <img
                                 src="https://ttpl.vn/assets/images/icon/icon-like-blue.png"
                                 className="w-4 h-4"
                             />
-                            <span className="ml-1">{`${data.like}`}</span>
+                            <span className="ml-1">{post.total_like}</span>
                         </div>
                     ) : null}
                 </div>
                 <div className="comment-shared flex flex-row items-center font-medium">
                     {/* seen */}
-                    {data.seen ? (
-                        <div className="seen">
-                            {`${data.seen} lượt xem`}
-                        </div>
-                    ) : null}
+                    {post.view ? <div>{post.view} lượt xem</div> : null}
 
                     {/* dot */}
-                    {data.seen && data.comment ? (
+                    {post.view && post.total_comment ? (
                         <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full"></div>
                     ) : null}
 
                     {/* comment */}
-                    {data.comment ? (
-                        <div className="shared">
-                            {`${data.comment} bình luận`}
-                        </div>
+                    {post.total_comment ? (
+                        <div>{post.total_comment} bình luận</div>
                     ) : null}
                 </div>
             </div>

@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useAppSelector } from "@/src/redux/hooks";
 import { BellIcon } from "@/src/assests/icons";
 import SidebarDrawer from "../drawers/SidebarDrawer";
 
-function Header({ title, login }: { title?: string; login?: boolean }) {
+function Header({ title }: { title?: string }) {
+    const { user } = useAppSelector((state) => state.authState);
     const [showSidebar, setShowSidebar] = useState(false);
 
     return (
@@ -18,7 +20,7 @@ function Header({ title, login }: { title?: string; login?: boolean }) {
                 bg-white z-50
                 "
         >
-            {!login ? (
+            {!user ? (
                 <>
                     <div className="w-10 h-10 flex items-center left-1 absolute">
                         <Link href="/mobile">

@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import { BackIcon } from "@/src/assests/icons";
-import FooterPostItem from "@/src/components/mobile/post-item/FooterPostItem";
+import FooterPostItem from "@/src/components/mobile/post-item/FooterPost";
 import "./detailPostItem.scss";
-import HeaderPostItem from "@/src/components/mobile/post-item/HeaderPostItem";
+import HeaderPostItem from "@/src/components/mobile/post-item/HeaderPost";
 
 function Index() {
     const [isBlack, setIsBlack] = useState(false);
