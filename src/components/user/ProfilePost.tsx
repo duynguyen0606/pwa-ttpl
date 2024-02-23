@@ -43,7 +43,7 @@ function ProfilePost() {
       </Col>
       <Col span={16}>
         <div className='mb-4 p-4 bg-white'>
-          <UserPost onOpenModal={() => true} />
+          <UserPost onOpenModal={() => setOpenModalPost(true)} />
         </div>
         <div className='p-4 bg-white rounded-lg'>
           Chưa có bài viết để hiển thị

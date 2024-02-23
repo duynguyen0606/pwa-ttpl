@@ -11,10 +11,15 @@ import { Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import { navbarArr } from '../page';
 import { useRouter } from 'next/navigation';
+import { useMediaQuery } from 'react-responsive';
 function Index({ params }: { params: { id: string } }) {
   const [dataContent, setDataContent] = useState();
   const [dataRelative, setDataRelative] = useState<Array<any>>();
   const { listArticle } = useAppSelector((state) => state.postState);
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
   const router = useRouter();
 
   useEffect(() => {
@@ -32,9 +37,13 @@ function Index({ params }: { params: { id: string } }) {
     })();
   }, [params.id]);
 
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
   return (
     <Row gutter={6}>
-      <Col span={16}>
+      <Col span={!isMobileClient ? 16 : 24}>
         <div className='rounded-lg overflow-hidden bg-white fixed-height mx-4'>
           <div className='grid grid-cols-2'>
             {navbarArr.map((item) => (
@@ -55,24 +64,26 @@ function Index({ params }: { params: { id: string } }) {
           <ProcedureSlug data={dataContent} />
         </div>
       </Col>
-      <Col span={8}>
-        <div className='fixed-height'>
-          <div className='bg-white p-4 rounded-lg mb-4'>
-            <h2 className='font-semibold text-lg'>Thủ tục cùng lĩnh vực</h2>
-            {dataRelative &&
-              dataRelative?.map((item) => (
-                <Article key={item.id} article={item} />
-              ))}
+      {!isMobileClient && (
+        <Col span={8}>
+          <div className='fixed-height'>
+            <div className='bg-white p-4 rounded-lg mb-4'>
+              <h2 className='font-semibold text-lg'>Thủ tục cùng lĩnh vực</h2>
+              {dataRelative &&
+                dataRelative?.map((item) => (
+                  <Article key={item.id} article={item} />
+                ))}
+            </div>
+            <div className='bg-white p-4 rounded-lg'>
+              <h2 className='font-semibold text-lg'>Bài viết mới nhất</h2>
+              {listArticle &&
+                listArticle?.map((item) => (
+                  <Article key={item.id} article={item} />
+                ))}
+            </div>
           </div>
-          <div className='bg-white p-4 rounded-lg'>
-            <h2 className='font-semibold text-lg'>Bài viết mới nhất</h2>
-            {listArticle &&
-              listArticle?.map((item) => (
-                <Article key={item.id} article={item} />
-              ))}
-          </div>
-        </div>
-      </Col>
+        </Col>
+      )}
     </Row>
   );
 }

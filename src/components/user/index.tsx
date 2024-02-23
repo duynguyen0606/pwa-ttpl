@@ -32,6 +32,8 @@ function UserProfile() {
   const [openModalProtect, setOpenModalProtect] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const { user } = useAppSelector((state) => state.authState);
+
+  console.log(user);
   return (
     <div>
       <div className='bg-white rounded-b-lg'>

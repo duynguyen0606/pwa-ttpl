@@ -85,7 +85,6 @@ export const sendPostWithToken = async (args: {
   const { url, data, token } = args;
   try {
     // Thực hiện gọi API
-    console.log(args);
     const response = await axios.post(url, data, {
       headers: {
         // Thiết lập Content-Type

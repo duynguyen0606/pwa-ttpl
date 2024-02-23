@@ -30,7 +30,7 @@ const navbarArr = [
   },
   {
     name: 'Thủ tục pháp luật',
-    link: '/thu-tuc-phap-lua/thu-tuc',
+    link: '/thu-tuc-phap-luat/thu-tuc',
   },
   {
     name: 'Hướng dẫn sử dụng',
@@ -242,13 +242,19 @@ function HeaderCom() {
                       <span>Dashboard</span>
                     </div>
                     <div
-                      // onClick={() =>
-                      // dispatch(
-                      //   authLogout({
-                      //     url: 'https://thutucphapluat.com/api/login/logout',
-                      //     token: token,
-                      //   })
-                      // )
+                      onClick={async () =>
+                        //   dispatch(
+                        //     authLogout({
+                        //       url: 'https://thutucphapluat.com/api/login/logout',
+                        //       token:
+                        //         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUxNjUiLCJlbWFpbCI6ImR1eW5ndXllbkBnbWFpbC5jb20iLCJ0aW1lX2xvZ2luIjoxNzA4NjcxODI2fQ.yz93s-wzeUU7cQzAEMWILSzl6JOo3FX9v2PJ_qepBRY',
+                        //     })
+                        //   )
+                        // }
+                        fetch(
+                          'https://thutucphapluat.com/signin/autoLogin/?team_id=85&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUxNjUiLCJlbWFpbCI6ImR1eW5ndXllbkBnbWFpbC5jb20iLCJ0aW1lX2xvZ2luIjoxNzA4Njc0MDMyfQ.HhdsZAZTS8oFsJ5D5fVNCmb0Ur1BQVSJo1u1xdQslFg'
+                        ).then((response) => console.log(response))
+                      }
                       // sendPostWithToken(
                       //   {
                       //         url: 'https://thutucphapluat.com/api/login/logout',
@@ -277,7 +283,7 @@ function HeaderCom() {
                   onClick={() => setOpenPopoverUser(true)}
                   shape='circle'
                   size='large'
-                  src={user.image}
+                  src={user?.image}
                 />
               </Popover>
             ) : (
