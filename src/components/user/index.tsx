@@ -21,7 +21,7 @@ interface NavItem {
 const mapObjNav: { [key: number]: NavItem } = {
   1: { name: 'Bài viết', key: 1, dataContent: <ProfilePost /> },
   2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-  3: { name: 'Thủ tục', key: 3, dataContent: <ProfileProcedure /> },
+  3: { name: 'Thủ tục của tôi', key: 3, dataContent: <ProfileProcedure /> },
   4: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
   5: { name: 'Hỏi đáp pháp luật', key: 5, dataContent: <ProfileProcedure /> },
   6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
@@ -67,11 +67,7 @@ function UserProfile() {
             </div>
             <div className='absolute right-6 top-6'>
               <Button
-                style={{
-                  backgroundColor: 'var(--primary-color)',
-                  color: '#fff',
-                  border: 'unset',
-                }}
+                className='button-primary'
                 onClick={() => setOpenModalProtect(true)}
               >
                 Bảo mật tài khoản

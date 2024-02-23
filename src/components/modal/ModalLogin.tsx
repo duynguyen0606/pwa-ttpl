@@ -4,6 +4,7 @@ import {
   setAuthLoading,
   setDataUser,
   setOpenModalLogin,
+  setToken,
 } from '@/src/redux/feature/authSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import {
@@ -17,7 +18,6 @@ import {
   notification,
 } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { useEffect } from 'react';
 
 type FormSubmitValueType = {
   email: string;
@@ -38,6 +38,7 @@ function ModalLogin(props: ModalProps) {
 
     if (dataRes.status) {
       dispatch(setDataUser(dataRes?.data_user));
+      dispatch(setToken(dataRes?.jwt_token));
       message.success('Bạn đã đăng nhập thành công!');
       dispatch(setOpenModalLogin(false));
     } else {
@@ -83,10 +84,8 @@ function ModalLogin(props: ModalProps) {
           </div>
           <Form.Item>
             <Button
+              className='button-primary'
               style={{
-                backgroundColor: 'var(--primary-color)',
-                color: '#fff',
-                border: 'none',
                 width: '100%',
               }}
               htmlType='submit'

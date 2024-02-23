@@ -1,9 +1,14 @@
-import { apiLogin } from '@/src/api/auth';
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { apiLogin, apiLogout } from '@/src/api/auth';
+import {
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+  isAnyOf,
+} from '@reduxjs/toolkit';
 
 export type AuthState = {
   user: any;
-  token: string | null;
+  token: string;
   loading: boolean;
   openModalLogin: boolean;
   loginCode: number | null; // 0 - failed, 1 - success
@@ -24,9 +29,16 @@ export const authLogin = createAsyncThunk(
   }
 );
 
+export const authLogout = createAsyncThunk(
+  'auth/logout',
+  async (args: { token: string; data?: any; url: string }) => {
+    await apiLogout(args);
+  }
+);
+
 const initialState: AuthState = {
   user: null,
-  token: null,
+  token: '',
   loading: false,
   loginCode: null,
   openModalLogin: false,
@@ -45,6 +57,9 @@ const authSlice = createSlice({
     setAuthLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -52,8 +67,15 @@ const authSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.loading = true;
         state.user = action.payload?.data_user;
-        state.loading = false;
         state.loginCode = action.payload.loginCode;
+        state.token = action.payload.jwt_token;
+        state.loading = false;
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(authLogout.fulfilled, authLogout.rejected),
+      (state) => {
+        (state.loading = false), (state.user = null);
       }
     );
   },
@@ -61,6 +83,6 @@ const authSlice = createSlice({
 
 const authReducer = authSlice.reducer;
 
-export const { setOpenModalLogin, setDataUser, setAuthLoading } =
+export const { setOpenModalLogin, setDataUser, setAuthLoading, setToken } =
   authSlice.actions;
 export default authReducer;

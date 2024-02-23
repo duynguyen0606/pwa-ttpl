@@ -48,7 +48,7 @@ function TableProcedureAgent() {
         <div className='flex justify-between'>
           <div style={{ width: '70%' }}>{object.name}</div>
           <Button
-            style={{ backgroundColor: 'var(--primary-color)', color: '#fff' }}
+            className='button-primary'
             onClick={() => {
               setShowDetail(true);
               handleFetchDataDetailAgent(object.id);
@@ -61,16 +61,6 @@ function TableProcedureAgent() {
       ),
     },
   ];
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
-
-  const onShowSizeChange: PaginationProps['onShowSizeChange'] = (
-    current,
-    pageSize
-  ) => {
-    console.log(current, pageSize);
-  };
 
   useEffect(() => {
     (async () => {
@@ -89,6 +79,12 @@ function TableProcedureAgent() {
       setDataChildAgent(dataRes.data.result);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      setDataListAgent([]);
+    };
+  }, [typeAgent]);
 
   return (
     <div id='table-procedure-agent' className='p-4'>
@@ -113,7 +109,10 @@ function TableProcedureAgent() {
               key: item.type,
             };
           })}
-          onTabClick={(type) => setTypeAgent(type)}
+          onTabClick={(type) => {
+            setTypeAgent(type);
+            setShowDetail(false);
+          }}
         />
       </ConfigProvider>
       <div className='float-right pb-4'>

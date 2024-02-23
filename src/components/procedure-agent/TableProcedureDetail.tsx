@@ -26,8 +26,11 @@ function TableProcedureDetail({
   onClickBack: () => void;
   name: string;
 }) {
-  const [dataLevel2, setDataLevel2] =
-    useState<DetailProcedureLevel2Model | null>(null);
+  const [showDetailLevel2, setShowDetailLevel2] = useState(false);
+  const [dataLevel2, setDataLevel2] = useState<{
+    dataDetail: any;
+    staffOrgan: any;
+  } | null>(null);
   const columns: ColumnsType<DataType> = [
     {
       title: 'Tên cơ quan',
@@ -35,7 +38,10 @@ function TableProcedureDetail({
       key: 'data',
       render: (item) => (
         <div
-          onClick={() => handleFetchDetailProcedureLevel2(item.id)}
+          onClick={() => {
+            setShowDetailLevel2(true);
+            handleFetchDetailProcedureLevel2(item.id);
+          }}
           className='flex justify-between'
         >
           <div>{item.name}</div>
@@ -45,13 +51,14 @@ function TableProcedureDetail({
   ];
 
   const handleFetchDetailProcedureLevel2 = async (id: string) => {
-    const dataRes = await apiGetListDetailProcedureLevel2(id);
+    const dataRes = await apiGetListDetailProcedureLevel2('395');
     if (dataRes.status && dataRes.data) {
-      setDataLevel2(dataRes.data);
+      setDataLevel2({
+        dataDetail: dataRes.data,
+        staffOrgan: dataRes.staff_organ,
+      });
     }
   };
-
-  console.log(dataLevel2);
 
   return (
     <>
@@ -73,8 +80,8 @@ function TableProcedureDetail({
       >
         {name}
       </Button>
-      {dataLevel2 ? (
-        <TableProcedureDetailLevel2 />
+      {showDetailLevel2 ? (
+        <TableProcedureDetailLevel2 data={dataLevel2} />
       ) : (
         <Table
           bordered

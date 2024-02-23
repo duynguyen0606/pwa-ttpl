@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { sendPostWithToken } from '../utils';
 const apiUrl = process.env.URL_API;
 
 export const apiLogin = async (args: { email: string; password: string }) => {
@@ -8,4 +9,21 @@ export const apiLogin = async (args: { email: string; password: string }) => {
   const url = `${'https://thutucphapluat.com/api'}/login/login_check`;
   const { data } = await axios.post(url, form);
   return data ?? {};
+};
+
+export const apiLogout = (args: {
+  url?: string;
+  token: string;
+  data?: any;
+}) => {
+  const {
+    url = `https://thutucphapluat.com/api/login/logout`,
+    token,
+    data,
+  } = args;
+  return sendPostWithToken({
+    url,
+    token,
+    data,
+  });
 };

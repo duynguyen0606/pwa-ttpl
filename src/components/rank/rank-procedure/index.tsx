@@ -44,12 +44,7 @@ function RankProcedure() {
         ))}
       <div className='text-center'>
         <Button
-          style={{
-            color: '#fff',
-            backgroundColor: 'var(--primary-color)',
-            border: 'unset',
-            textAlign: 'center',
-          }}
+          className='button-primary'
           size='large'
           onClick={() => setPage((prev) => prev + 1)}
         >

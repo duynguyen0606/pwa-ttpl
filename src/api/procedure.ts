@@ -42,10 +42,42 @@ export const apiGetListDetailProcedureLevel2 = async (
   id: string
 ): Promise<{
   status: boolean;
-  data: DetailProcedureLevel2Model;
-  url: string;
+  data: any;
+  staff_organ: Array<any>;
 }> => {
-  const url = `https://thutucphapluat.com/api/Posts_controller/co_quan_detail?ag_agency_id=${id}`;
+  const url = `https://thutucphapluat.com/api/Posts_controller/co_cau_to_chuc_detail?organ_item_id=${id}&limit=4&page=0`;
+  const { data } = await axios.get(url);
+  return data ?? {};
+};
+
+// procedure slug
+
+export const apiGetProcedureContentDesktop = async (
+  id: string
+): Promise<{
+  status: boolean;
+  data: { actual_implementation: any; diagram: any };
+  comment: Array<any>;
+  msg: string;
+}> => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/articles_detail/${id}`;
+  const { data } = await axios.get(url);
+  return data ?? {};
+};
+
+export const apiGetListProcedureRelative = async (
+  id: string
+): Promise<{
+  status: boolean;
+  data: Array<any>;
+}> => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/help_articles?page=0&limit=10&area_id=${id}`;
+  const { data } = await axios.get(url);
+  return data ?? {};
+};
+
+export const apiGetListProcedureComment = async (id: string) => {
+  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${id}&limit=1000&page=1`;
   const { data } = await axios.get(url);
   return data ?? {};
 };

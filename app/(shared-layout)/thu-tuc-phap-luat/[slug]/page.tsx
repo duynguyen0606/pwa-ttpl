@@ -9,36 +9,32 @@ import { Article } from '@/src/components/common';
 import {
   TableProcedure,
   TableProcedureAgent,
-} from '@/src/components/procedure';
+} from '@/src/components/procedure-agent';
 import ArticleModel from '@/src/models/Article';
 import ProcedureModel from '@/src/models/Procedure';
+import { useAppSelector } from '@/src/redux/hooks';
 import { Col, Row } from 'antd';
 import Sider from 'antd/es/layout/Sider';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-const navbarArr = [
-  { name: 'Thủ tục', tabActive: 1 },
-  { name: 'Cơ quan thực hiện', tabActive: 2 },
+export const navbarArr = [
+  { name: 'Thủ tục', slug: 'thu-tuc' },
+  { name: 'Cơ quan thực hiện', slug: 'co-quan-thuc-hien' },
 ];
 
-function Index() {
-  const [tabActive, setTabActive] = useState(1);
-  const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
+function Index({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  const [tabSlug, setTabSlug] = useState(slug);
+  const router = useRouter();
+  // const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   const [listProcedure, setListProcedure] = useState<Array<ProcedureModel>>([]);
   const [isMobileClient, setIsMobileClient] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
-
-  useEffect(() => {
-    (async () => {
-      const dataRes = await apiGetListMostViewArticle();
-      if (dataRes.status) {
-        setListArticle(dataRes.data);
-      }
-    })();
-  }, []);
+  const { listArticle } = useAppSelector((state) => state.postState);
 
   useEffect(() => {
     (async () => {
@@ -62,11 +58,10 @@ function Index() {
               <nav
                 key={item.name}
                 className='flex justify-center text-xl font-semibold p-4'
-                onClick={() => setTabActive(item.tabActive)}
+                onClick={() => router.push(item.slug)}
                 style={{
-                  color: tabActive === item.tabActive ? '#fff' : '#444',
-                  backgroundColor:
-                    tabActive === item.tabActive ? '#4262AE' : '#fff',
+                  color: tabSlug === item.slug ? '#fff' : '#444',
+                  backgroundColor: tabSlug === item.slug ? '#4262AE' : '#fff',
                   borderBottom: '1px solid #d8d8d8',
                 }}
               >
@@ -74,7 +69,7 @@ function Index() {
               </nav>
             ))}
           </div>
-          {tabActive === 1 ? (
+          {tabSlug === 'thu-tuc' ? (
             <TableProcedure data={listProcedure} />
           ) : (
             <TableProcedureAgent />
