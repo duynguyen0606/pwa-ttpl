@@ -10,7 +10,8 @@ import { useAppSelector } from "@/src/redux/hooks";
 import { apiGetListPost } from "@/src/api/home-page";
 import Header from "@/src/components/mobile/header/Header";
 import Footer from "@/src/components/mobile/footer/Footer";
-import Post from "./Post";
+import Post from "@/src/components/mobile/post-item/Post";
+import ModalPost from "@/src/components/modal/ModalPost";
 
 function Index() {
     const { user } = useAppSelector((state) => state.authState);

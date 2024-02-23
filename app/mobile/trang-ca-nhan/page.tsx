@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Input } from "antd";
 
 import { ModalInfoRate } from "@/src/components/modal";
-import "./style.scss";
 
 function Index() {
     const tabs = [
@@ -212,12 +211,11 @@ function Index() {
                     <div className="mt-1 flex items-center justify-center text-[#4061AB]">
                         <span>Điểm thưởng:</span>
                         <span className="text-sm font-bold mx-1">200</span>
-                        <button onClick={() => setShowInfoRate(true)}>
-                            <img
-                                className=""
-                                src="https://ttpl.vn/assets/images/myprofile/Info-Circle.png"
-                                alt=""
-                            />
+                        <button
+                            className="bg-white"
+                            onClick={() => setShowInfoRate(true)}
+                        >
+                            <img src="https://ttpl.vn/assets/images/myprofile/Info-Circle.png" />
                         </button>
                     </div>
                 </div>

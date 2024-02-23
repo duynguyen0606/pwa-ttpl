@@ -38,7 +38,7 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
 
                     {/* dot */}
                     {post.view && post.total_comment ? (
-                        <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full"></div>
+                        <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full" />
                     ) : null}
 
                     {/* comment */}
