@@ -48,6 +48,7 @@ export default function HomePage() {
   useEffect(() => {
     (async () => {
       const dataRes = await apiGetListPost({ page: 1 });
+      console.log(dataRes);
       if (dataRes.status) {
         setListPost(dataRes.data);
       }

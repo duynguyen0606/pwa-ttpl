@@ -28,14 +28,14 @@ function UserProfile() {
         <div className='text-center'>
           <Image
             className='rounded-full mx-auto'
-            src={user.image}
+            src={user?.image}
             alt='avatar'
             width={80}
             height={80}
           />
         </div>
-        <div className='font-semibold'>{user.full_name}</div>
-        <div>{user.email}</div>
+        <div className='font-semibold'>{user?.full_name}</div>
+        <div>{user?.email}</div>
         <div className='flex items-center justify-between my-4'>
           <div>
             <div>0</div>

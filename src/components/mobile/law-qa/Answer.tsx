@@ -16,7 +16,7 @@ function Answer({ user, content }: { user: any; content: any }) {
               />
               <div className='ml-3'>
                 <a href='' className='text-[#444] font-bold'>
-                  {user.name}
+                  {user?.name}
                 </a>
                 <p className='text-xs text-[#979797]'>52 ngày trước</p>
               </div>

@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/src/redux/hooks';
 import { Col, Form, Input, Modal, ModalProps, Row, Typography } from 'antd';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
@@ -16,6 +17,7 @@ type FieldType = {
 
 function ModalUpdateInfor(props: ModalProps) {
   const { open, onOk, onCancel } = props;
+  const { user } = useAppSelector((state) => state.authState);
   return (
     <Modal
       open={open}
@@ -71,13 +73,13 @@ function ModalUpdateInfor(props: ModalProps) {
           <Col span={12}>
             <div className='bg-slate-200 p-4 mb-4 rounded-lg'>
               <Form.Item<FieldType> label='Họ và tên' name='username'>
-                <Input />
+                <Input defaultValue={user?.full_name} />
               </Form.Item>
               <Form.Item<FieldType> label='Ngày sinh' name='birthday'>
                 <Input />
               </Form.Item>
               <Form.Item<FieldType> label='Email' name='email'>
-                <Input />
+                <Input defaultValue={user?.email} />
               </Form.Item>
             </div>
           </Col>
