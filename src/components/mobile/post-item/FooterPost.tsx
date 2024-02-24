@@ -34,17 +34,22 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 </div>
                 <div className="comment-shared flex flex-row items-center font-medium">
                     {/* seen */}
-                    {post.view ? <div>{post.view} lượt xem</div> : null}
+                    {post.view 
+                        ? <div>{post.view} lượt xem</div> 
+                        : null
+                    }
 
                     {/* dot */}
-                    {post.view && post.total_comment ? (
-                        <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full" />
-                    ) : null}
+                    {post.view && post.total_comment 
+                        ? <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full" />
+                        : null
+                    }
 
                     {/* comment */}
-                    {post.total_comment ? (
-                        <div>{post.total_comment} bình luận</div>
-                    ) : null}
+                    {post.total_comment 
+                        ? <div>{post.total_comment} bình luận</div>
+                        : null
+                    }
                 </div>
             </div>
 

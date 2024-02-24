@@ -10,7 +10,7 @@ import { useAppSelector } from "@/src/redux/hooks";
 import { apiGetListPost } from "@/src/api/home-page";
 import Header from "@/src/components/mobile/header/Header";
 import Footer from "@/src/components/mobile/footer/Footer";
-import Post from "@/src/components/mobile/post-item/Post";
+import PostItem from "@/src/components/mobile/post-item/PostItem";
 import ModalPost from "@/src/components/modal/ModalPost";
 
 function Index() {
@@ -109,7 +109,7 @@ function Index() {
             >
                 <div className="pt-[62px]">
                     {listPost.map((post) => (
-                        <Post key={post.id} post={post} />
+                        <PostItem key={post.id} post={post} />
                     ))}
                 </div>
             </InfiniteScroll>
