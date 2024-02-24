@@ -23,7 +23,7 @@ function ProcedureItem({ procedure }: { procedure: ProcedureModel }) {
                             line-clamp-2
                         "
                     >
-                        {procedure.co_quan_thuc_hien}
+                        {procedure?.co_quan_thuc_hien}
                     </div>
                     <div
                         className="
@@ -35,19 +35,19 @@ function ProcedureItem({ procedure }: { procedure: ProcedureModel }) {
                             line-clamp-2
                         "
                     >
-                        {procedure.area_name}
+                        {procedure?.area_name}
                     </div>
                 </div>
                 <div className="text-base font-bold text-[#515666]">
-                    {procedure.title}
+                    {procedure?.title}
                 </div>
             </header>
             <footer className="flex p-4 justify-between items-center">
                 <div className="text-xs text-[#515666]">
                     Cập nhật:{" "}
-                    {procedure.updated_at
-                        ? procedure.updated_at
-                        : procedure.created_at}
+                    {procedure?.updated_at
+                        ? procedure?.updated_at
+                        : procedure?.created_at}
                 </div>
                 <div
                     className="
@@ -58,7 +58,9 @@ function ProcedureItem({ procedure }: { procedure: ProcedureModel }) {
                         rounded
                     "
                 >
-                    <Link href="#">Xem chi tiết</Link>
+                    <Link href={`/mobile/thu-tuc/${procedure?.url_key}`}>
+                        Xem chi tiết
+                    </Link>
                 </div>
             </footer>
         </div>
