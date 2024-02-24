@@ -6,17 +6,22 @@ import { Input } from "antd";
 
 import { ModalInfoRate } from "@/src/components/modal";
 
-function Index() {
-    const tabs = [
-        { name: "Bài viết", tabActive: 1 },
-        { name: "Video", tabActive: 2 },
-        { name: "Theo dõi", tabActive: 3 },
-    ];
+const tabs = [
+    { name: "Bài viết", tabActive: 1 },
+    { name: "Video", tabActive: 2 },
+    { name: "Theo dõi", tabActive: 3 },
+];
 
-    const followTabs = [
-        { name: "Người theo dõi", childTabActive: 1 },
-        { name: "Đang theo dõi", childTabActive: 2 },
-    ];
+const followTabs = [
+    { name: "Người theo dõi", childTabActive: 1 },
+    { name: "Đang theo dõi", childTabActive: 2 },
+];
+
+function Index({ params }: { params: { slug: string } }) {
+    // Lấy ID user
+    const { slug } = params;
+    console.log(slug);
+    
 
     const [showInfoRate, setShowInfoRate] = useState(false);
     const [activeTab, setActiveTab] = useState(1);

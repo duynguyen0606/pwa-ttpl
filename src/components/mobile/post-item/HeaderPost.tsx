@@ -19,7 +19,7 @@ function HeaderPostItem({ post }: { post: ArticleModel }) {
                 />
                 <div className="flex flex-col ml-2 justify-center">
                     <Link
-                        href="/mobile/trang-ca-nhan"
+                        href={`/mobile/trang-ca-nhan/${post.created_by}`}
                         className="text-sm font-bold text-[#262C41]"
                     >
                         {post.created_by_full_name}
