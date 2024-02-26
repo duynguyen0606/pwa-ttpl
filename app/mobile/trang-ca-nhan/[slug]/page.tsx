@@ -1,10 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { Divider, Input, Skeleton } from "antd";
 import Image from "next/image";
-import { Input } from "antd";
-
 import { ModalInfoRate } from "@/src/components/modal";
+import PostItem from "@/src/components/mobile/post-item/PostItem";
+import ArticleModel from "@/src/models/Article";
+// import { apiGetPostByUser } from "@/src/api/user";
 
 const tabs = [
     { name: "Bài viết", tabActive: 1 },
@@ -20,8 +23,21 @@ const followTabs = [
 function Index({ params }: { params: { slug: string } }) {
     // Lấy ID user
     const { slug } = params;
-    console.log(slug);
-    
+
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+
+    // useEffect(() => {
+    //     (async () => {
+    //         const dataRes = await apiGetPostByUser({ page: 1, userID: slug });
+    //         console.log(dataRes);
+
+    //         if (dataRes.status) {
+    //             setListPost(dataRes.data);
+    //         }
+    //     })();
+    // }, []);
 
     const [showInfoRate, setShowInfoRate] = useState(false);
     const [activeTab, setActiveTab] = useState(1);
@@ -122,7 +138,15 @@ function Index({ params }: { params: { slug: string } }) {
                     </div>
 
                     {/* Post container */}
-                    <div className="bg-white py-2 px-[10px]"></div>
+                    <div className="py-2 bg-[#F4F5F8]">
+                        {listPost.length > 0 ? (
+                            listPost.map((post) => (
+                                <PostItem key={post.id} post={post} />
+                            ))
+                        ) : (
+                            <h2>Chưa có bài viết để hiển thị</h2>
+                        )}
+                    </div>
                 </div>
             );
         } else if (activeTab === 2) {
@@ -169,7 +193,7 @@ function Index({ params }: { params: { slug: string } }) {
                 </div>
             );
         }
-    }, [activeTab, childTab]);
+    }, [listPost, activeTab, childTab]);
 
     return (
         <div className="flex-1 px-3 flex w-full h-[100vh] flex-col bg-[#F7F7F7]">
