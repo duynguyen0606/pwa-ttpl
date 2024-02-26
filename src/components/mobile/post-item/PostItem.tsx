@@ -5,7 +5,7 @@ import HeaderPost from "./HeaderPost";
 
 import ArticleModel from "@/src/models/Article";
 
-function Post({ post }: { post: ArticleModel }) {
+function PostItem({ post }: { post: ArticleModel }) {
     return (
         <div className="px-4 pt-4 mb-2 bg-white ">
             <HeaderPost post={post} />
@@ -38,4 +38,4 @@ function Post({ post }: { post: ArticleModel }) {
     );
 }
 
-export default Post;
+export default PostItem;

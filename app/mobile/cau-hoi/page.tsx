@@ -7,8 +7,7 @@ import type { CollapseProps } from "antd";
 import { Button, Form, Select, Input, Collapse } from "antd";
 
 import ImageLegacy from "next/legacy/image";
-import Answer from "@/src/components/mobile/law-qa/Answer";
-import Question from "@/src/components/mobile/law-qa/Question";
+import {Answer, Question} from "@/src/components/mobile/law-qa";
 
 enum TypeQA {
     QA_FAQ = 1,
@@ -481,18 +480,20 @@ function Index() {
                                     Bạn vui lòng nâng cấp tài khoản để sử dụng
                                     tính năng này!
                                 </p>
-                                <Button
-                                    className="m-4 font-semibold"
-                                    style={{
-                                        height: "48px",
-                                        borderRadius: "24px",
-                                        color: "#fff",
-                                        backgroundColor: "#4755D4",
-                                    }}
-                                    size="large"
-                                >
-                                    Nâng cấp tài khoản
-                                </Button>
+                               <Link href='/mobile/premium'>
+                                    <Button
+                                        className="m-4 font-semibold"
+                                        style={{
+                                            height: "48px",
+                                            borderRadius: "24px",
+                                            color: "#fff",
+                                            backgroundColor: "#4755D4",
+                                        }}
+                                        size="large"
+                                    >
+                                        Nâng cấp tài khoản
+                                    </Button>
+                               </Link>
                             </div>
                         </div>
                     );
