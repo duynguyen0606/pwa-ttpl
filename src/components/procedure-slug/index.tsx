@@ -85,7 +85,7 @@ function ProcedureSlug({ data }: { data: any }) {
                 height={20}
               />
             }
-            className='flex items-center button-primary'
+            className='button-flex button-primary'
           >
             Lưu thủ tục
           </Button>

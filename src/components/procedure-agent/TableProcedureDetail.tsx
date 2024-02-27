@@ -63,7 +63,7 @@ function TableProcedureDetail({
   return (
     <>
       <Button
-        className='flex items-center'
+        className='button-flex'
         type='text'
         onClick={() => {
           onClickBack();

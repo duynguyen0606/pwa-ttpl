@@ -88,7 +88,7 @@ function CommentItem({
           </div>
           {data.total_comment_child > 0 && (
             <Button
-              className='flex items-center'
+              className='button-flex'
               type='link'
               style={{ padding: 'unset' }}
               icon={

@@ -104,7 +104,7 @@ function Index({ params }: { params: { slug: string } }) {
               </div>
               <div className='post-actions flex justify-between items-center'>
                 <Button
-                  className='flex item-center'
+                  className='button-flex'
                   icon={
                     <Image
                       src='/images/icons/like.png'
@@ -117,7 +117,7 @@ function Index({ params }: { params: { slug: string } }) {
                   Like
                 </Button>
                 <Button
-                  className='flex item-center'
+                  className='button-flex'
                   icon={
                     <Image
                       src='/images/icons/dislike.png'
@@ -130,7 +130,7 @@ function Index({ params }: { params: { slug: string } }) {
                   Dislike
                 </Button>
                 <Button
-                  className='flex item-center'
+                  className='button-flex'
                   icon={
                     <Image
                       src='/images/icons/comment.png'
@@ -143,7 +143,7 @@ function Index({ params }: { params: { slug: string } }) {
                   Comment
                 </Button>
                 <Button
-                  className='flex item-center'
+                  className='button-flex'
                   icon={
                     <Image
                       src='/images/icons/share.png'
