@@ -73,9 +73,9 @@ function HeaderCom() {
   }, [isMobileUI]);
 
   return (
-    <Header
+    <header
       id='header'
-      className={`flex bg-white w-full items-center justify-between px-9 h-15 sm:h-20 fixed t-0 z-50 cursor-pointer`}
+      className={`flex w-full items-center justify-between px-9 sm:h-20 h-14 fixed t-0 z-50 cursor-pointer bg-white`}
     >
       {isMobileClient ? (
         <>
@@ -84,8 +84,8 @@ function HeaderCom() {
               priority
               src='/images/logo.png'
               alt='logo'
-              width={50}
-              height={50}
+              width={40}
+              height={40}
             />
           </div>
           <div className='flex gap-4 items-center'>
@@ -101,7 +101,88 @@ function HeaderCom() {
                 />
               }
             />
-            <Button
+            {user ? (
+              <Popover
+                content={
+                  <div>
+                    <div
+                      onClick={() => router.push('/user')}
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'
+                    >
+                      <Image
+                        src='/images/icons/white-account.png'
+                        alt='profile'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Hồ sơ của tôi</span>
+                    </div>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'>
+                      <Image
+                        src='https://ttpl.vn/assets/images/icon/exclusively.png'
+                        alt='for you'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Dành riêng cho bạn</span>
+                    </div>
+                    <div className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'>
+                      <Image
+                        src='/images/icons/home.png'
+                        alt='dashboard'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Dashboard</span>
+                    </div>
+                    <div
+                      onClick={async () =>
+                        dispatch(
+                          authLogout({
+                            url: 'https://thutucphapluat.com/api/login/logout',
+                            token,
+                          })
+                        )
+                      }
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer cursor-pointer'
+                    >
+                      <Image
+                        src='/images/icons/logout.png'
+                        alt='logut'
+                        width={20}
+                        height={20}
+                      />
+                      <span>Đăng xuất</span>
+                    </div>
+                  </div>
+                }
+                trigger='click'
+                open={openPopoverUser}
+                onOpenChange={(newOpen) => setOpenPopoverUser(newOpen)}
+                placement='bottomLeft'
+              >
+                <Avatar
+                  onClick={() => setOpenPopoverUser(true)}
+                  shape='circle'
+                  size='large'
+                  src={user?.image}
+                />
+              </Popover>
+            ) : (
+              <Button
+                onClick={() => dispatch(setOpenModalLogin(true))}
+                type='link'
+                icon={
+                  <Image
+                    src='/images/icons/account.png'
+                    alt='account'
+                    width={50}
+                    height={50}
+                  />
+                }
+              />
+            )}
+            {/* <Button
               type='link'
               className='flex items-center'
               icon={
@@ -112,7 +193,7 @@ function HeaderCom() {
                   height={50}
                 />
               }
-            />
+            /> */}
             <Button
               type='link'
               className='flex items-center'
@@ -242,18 +323,18 @@ function HeaderCom() {
                       <span>Dashboard</span>
                     </div>
                     <div
-                      onClick={async () =>
-                        //   dispatch(
-                        //     authLogout({
-                        //       url: 'https://thutucphapluat.com/api/login/logout',
-                        //       token:
-                        //         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUxNjUiLCJlbWFpbCI6ImR1eW5ndXllbkBnbWFpbC5jb20iLCJ0aW1lX2xvZ2luIjoxNzA4NjcxODI2fQ.yz93s-wzeUU7cQzAEMWILSzl6JOo3FX9v2PJ_qepBRY',
-                        //     })
-                        //   )
-                        // }
-                        fetch(
-                          'https://thutucphapluat.com/signin/autoLogin/?team_id=85&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUxNjUiLCJlbWFpbCI6ImR1eW5ndXllbkBnbWFpbC5jb20iLCJ0aW1lX2xvZ2luIjoxNzA4Njc0MDMyfQ.HhdsZAZTS8oFsJ5D5fVNCmb0Ur1BQVSJo1u1xdQslFg'
-                        ).then((response) => console.log(response))
+                      onClick={
+                        async () =>
+                          dispatch(
+                            authLogout({
+                              url: 'https://thutucphapluat.com/api/login/logout',
+                              token,
+                            })
+                          )
+
+                        // fetch(
+                        //   'https://thutucphapluat.com/signin/autoLogin/?team_id=85&access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUxNjUiLCJlbWFpbCI6ImR1eW5ndXllbkBnbWFpbC5jb20iLCJ0aW1lX2xvZ2luIjoxNzA4Njc0MDMyfQ.HhdsZAZTS8oFsJ5D5fVNCmb0Ur1BQVSJo1u1xdQslFg'
+                        // ).then((response) => console.log(response))
                       }
                       // sendPostWithToken(
                       //   {
@@ -311,7 +392,7 @@ function HeaderCom() {
         open={openModalSearch}
         onCancel={() => setOpenModalSearch(false)}
       />
-    </Header>
+    </header>
   );
 }
 

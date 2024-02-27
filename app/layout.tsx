@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import StoreProvider from './StoreProvider';
 import { useAppDispatch } from '@/src/redux/hooks';
 import LayoutState from '@/src/components/layout/LayoutState';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,7 +26,9 @@ export default function RootLayout({
     <StoreProvider>
       <html lang='en'>
         <body className={inter.className}>
-          <LayoutState>{children}</LayoutState>
+          <AntdRegistry>
+            <LayoutState>{children}</LayoutState>
+          </AntdRegistry>
         </body>
       </html>
     </StoreProvider>
