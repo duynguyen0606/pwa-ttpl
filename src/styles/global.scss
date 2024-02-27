@@ -30,15 +30,14 @@ html {
 body {
   color: rgb(var(--foreground-rgb));
   font-size: 12px;
+}
+.fixed-height {
+  height: 80vh !important;
+  overflow: auto;
+}
 
-  .fixed-height {
-    height: 80vh !important;
-    overflow: auto;
-  }
-
-  .button-primary {
-    background-color: var(--primary-color) !important;
-    color: #fff !important;
-    border: unset !important;
-  }
+.button-primary {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  border: unset !important;
 }

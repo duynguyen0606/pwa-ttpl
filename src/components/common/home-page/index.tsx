@@ -76,43 +76,45 @@ export default function HomePage() {
 
   return (
     <DefaultLayout>
-      <div
-        style={{
-          overflow: 'auto',
-          height: '80vh',
-          minWidth: 300,
-        }}
-      >
-        {!isMobileClient && (
-          <>
-            {user && <UserProfile />}
-            <Category />
-          </>
-        )}
-      </div>
-      <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
-        {user && <UserPost onOpenModal={() => setOpenModalPost(true)} />}
+      {!isMobileClient && (
         <div
-          id='scrollableDiv'
           style={{
             overflow: 'auto',
+            height: '80vh',
+            minWidth: 300,
           }}
         >
-          <InfiniteScroll
-            dataLength={listPost.length}
-            next={loadMoreData}
-            hasMore={listPost.length !== 15000}
-            loader={<Skeleton style={{ width: '100%', height: 100 }} active />}
-            endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
-            scrollableTarget='scrollableDiv'
-          >
-            <div>
-              {listPost.map((item) => (
-                <Post post={item} key={item.id} />
-              ))}
-            </div>
-          </InfiniteScroll>
+          {user && <UserProfile />}
+          <Category />
         </div>
+      )}
+      <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
+        {user && <UserPost onOpenModal={() => setOpenModalPost(true)} />}
+        {listPost.length > 0 && (
+          <div
+            id='scrollableDiv'
+            style={{
+              overflow: 'auto',
+            }}
+          >
+            <InfiniteScroll
+              dataLength={listPost.length}
+              next={loadMoreData}
+              hasMore={listPost.length !== 15000}
+              loader={
+                <Skeleton style={{ width: '100%', height: 100 }} active />
+              }
+              endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+              scrollableTarget='scrollableDiv'
+            >
+              <div>
+                {listPost.map((item) => (
+                  <Post post={item} key={item?.id} />
+                ))}
+              </div>
+            </InfiniteScroll>
+          </div>
+        )}
       </div>
       {!isMobileClient && (
         <Sider
