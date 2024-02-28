@@ -4,7 +4,7 @@ import { Button, ConfigProvider, Menu } from 'antd';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import ProcedureSlugContent from './ProcedureSlugContent';
-import ProcedureSlugComment from './ProcedureSlutComment';
+import ProcedureSlugComment from './ProcedureSlugComment';
 import { useAppSelector } from '@/src/redux/hooks';
 import ProcedureSlugAction from './ProcedureSlugAction';
 import ProcedureSlugDiagram from './ProcedureSlugDiagram';
@@ -36,11 +36,19 @@ function ProcedureSlug({ data }: { data: any }) {
       case 1:
         return <ProcedureSlugContent data={data} />;
       case 2:
-        return user ? <ProcedureSlugAction /> : <div>Bạn chưa đăng nhập!</div>;
+        return user ? (
+          <ProcedureSlugAction id={'5165'} />
+        ) : (
+          <div>Bạn chưa đăng nhập!</div>
+        );
       case 3:
         return user ? <ProcedureSlugDiagram /> : <div>Bạn chưa đăng nhập!</div>;
       case 4:
-        return user ? <ProcedureSlugComment /> : <div>Bạn chưa đăng nhập!</div>;
+        return user ? (
+          <ProcedureSlugComment id={'7720'} />
+        ) : (
+          <div>Bạn chưa đăng nhập!</div>
+        );
       default:
         return <ProcedureSlugContent data={data} />;
     }

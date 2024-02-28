@@ -6,7 +6,32 @@ import { io } from 'socket.io-client';
 
 export const socketGrab = io(`http://localhost:3001/grab`, {
   path: '/socket-io',
+  autoConnect: false,
 });
+
+// pickUpLocation ={   formatted_address:
+//   'Vinhomes Times City, Vĩnh Tuy, Hai Bà Trưng, Hà Nội, Việt Nam',
+// id: 1708678390679,
+// location: {
+//   latitude: 20.9945438,
+//   latitudeDelta: 0.004452590797672684,
+//   longitude: 105.8677181,
+//   longitudeDelta: 0.009148679673671722,
+// },
+// name: 'Vinhomes Times City',}
+
+// arrivedLocation ={
+//   formatted_address:
+//     '120 Phố Yên Lãng, Thịnh Quang, Đống Đa, Hanoi, Vietnam',
+//   id: 1708618673363,
+//   location: {
+//     latitude: 21.0101235,
+//     latitudeDelta: 0.004452590797672684,
+//     longitude: 105.8153503,
+//     longitudeDelta: 0.009148679673671722,
+//   },
+//   name: '120 Phố Yên Lãng',
+// },
 
 const MAX_RADIUS = 5; // 5km
 const INTERVAL = 30000; // 30 giây
@@ -32,18 +57,44 @@ function Index() {
   const [driverId, setDriverId] = useState(null);
   const [riderId, setRiderId] = useState(null);
   const handleUser = () => {
+    socketGrab.connect();
     socketGrab.emit('riderRequest', {
-      data: {
+      dataUser: {
         driver_id: '6617',
         name: 'User',
         phone_number: '0987765218',
         license_plate: '10M2 - 123.52',
         rating: '5',
       },
-      location: { lat: 21.20121741252062, lon: 105.80895570462165 },
+      pickupLocation: {
+        formatted_address:
+          'Vinhomes Times City, Vĩnh Tuy, Hai Bà Trưng, Hà Nội, Việt Nam',
+        id: 1708678390679,
+        location: {
+          latitude: 20.9945438,
+          latitudeDelta: 0.004452590797672684,
+          longitude: 105.8677181,
+          longitudeDelta: 0.009148679673671722,
+        },
+        name: 'Vinhomes Times City',
+      },
+      arrivedLocation: {
+        formatted_address:
+          '120 Phố Yên Lãng, Thịnh Quang, Đống Đa, Hanoi, Vietnam',
+        id: 1708618673363,
+        location: {
+          latitude: 21.0101235,
+          latitudeDelta: 0.004452590797672684,
+          longitude: 105.8153503,
+          longitudeDelta: 0.009148679673671722,
+        },
+        name: '120 Phố Yên Lãng',
+      },
     });
   };
+  // 20.98971015762548, 105.87304615414742
   const handleDriver = () => {
+    socketGrab.connect();
     socketGrab.emit('driverLocation', {
       data: {
         driver_id: '6617',
@@ -52,7 +103,7 @@ function Index() {
         license_plate: '10M2 - 123.52',
         rating: '5',
       },
-      location: { lat: 21.193908324002063, lon: 105.81256463938357 },
+      location: { lat: 20.98971015762548, lon: 105.87304615414742 },
     });
   };
 
@@ -86,6 +137,24 @@ function Index() {
     }
   };
 
+  const handleDriverArrivedPickupLocation = () => {
+    if (riderId && driverId) {
+      socketGrab.emit('driverArrivedPickupLocation', { riderId, driverId });
+    }
+  };
+
+  const handleUserCancel = () => {
+    socketGrab.disconnect();
+  };
+
+  // useEffect(() => {
+  //   (() => {
+  //     fetch('https://server-chat.nhvngroup.com/api/auth/xxx').then((data2) =>
+  //       console.log(Promise.resolve(data2.json()))
+  //     );
+  //   })();
+  // }, []);
+
   useEffect(() => {
     socketGrab.on('driverFound', (data) => console.log(data));
     return () => {
@@ -95,6 +164,7 @@ function Index() {
 
   useEffect(() => {
     socketGrab.on('rideRequest', (data) => {
+      console.log('Đã tìm thấy tài xế');
       setDriverId(data?.driverSocketId);
       setRiderId(data?.riderId);
     });
@@ -135,8 +205,12 @@ function Index() {
     socketGrab.on('driverStartDelivery', () => {
       alert('Tài xế bắt đầu giao hàng');
     });
+    socketGrab.on('driverArrivedPickupLocation', () => {
+      alert('Tài xế đã đến điểm đón');
+    });
     return () => {
       socketGrab.off('driverStartDelivery');
+      socketGrab.off('driverArrivedPickupLocation');
     };
   }, []);
 
@@ -148,6 +222,10 @@ function Index() {
       <Button onClick={handleCancel}>Tài xế huỷ </Button>
       <Button onClick={handleCompleted}>Giao hàng thành công </Button>
       <Button onClick={handleStartDelivery}>Tài xế bắt đầu di chuyển</Button>
+      <Button onClick={handleDriverArrivedPickupLocation}>
+        Tài xế đã đến điểm đón
+      </Button>
+      <Button onClick={handleUserCancel}>User huỷ chuyến hoặc huỷ quét</Button>
     </div>
   );
 }

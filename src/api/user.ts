@@ -22,12 +22,9 @@ export const apiGetUserWatchedProcedure = async ({
     'https://thutucphapluat.com/api/Help_articles_controller/list_my_procedure?limit=10&page=1',
     {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
         // Thêm token vào header
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUxNjUiLCJlbWFpbCI6ImR1eW5ndXllbkBnbWFpbC5jb20iLCJ0aW1lX2xvZ2luIjoxNzA4NjYxMzI0fQ.mlY8i3D315BvaIdAoekchdgMujvPsGVirepwhtWkPt0`,
+        Authorization: `Bearer ${token}`,
       },
     }
   )
