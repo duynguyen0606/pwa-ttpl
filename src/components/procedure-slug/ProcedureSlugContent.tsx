@@ -144,7 +144,7 @@ function ProcedureSlugContent({ data }: { data: any }) {
                                     <div className="font-semibold min-w-40">
                                         Thành phần hồ sơ
                                     </div>
-                                    <span
+                                    <div
                                         dangerouslySetInnerHTML={{
                                             __html: data.profile_composition,
                                         }}
@@ -276,7 +276,7 @@ function ProcedureSlugContent({ data }: { data: any }) {
                                     <div className="font-semibold min-w-40">
                                         Căn cứ pháp lý
                                     </div>
-                                    <div
+                                    <span
                                         dangerouslySetInnerHTML={{
                                             __html: data.legal_grounds,
                                         }}
