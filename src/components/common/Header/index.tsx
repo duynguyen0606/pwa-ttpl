@@ -91,7 +91,7 @@ function HeaderCom() {
           <div className='flex gap-4 items-center'>
             <Button
               type='link'
-              className='flex items-center'
+              className='button-flex'
               icon={
                 <Image
                   src='/images/icons/search.png'
@@ -184,7 +184,7 @@ function HeaderCom() {
             )}
             {/* <Button
               type='link'
-              className='flex items-center'
+              className='button-flex'
               icon={
                 <Image
                   src='/images/icons/account.png'
@@ -196,7 +196,7 @@ function HeaderCom() {
             /> */}
             <Button
               type='link'
-              className='flex items-center'
+              className='button-flex'
               icon={
                 <Image
                   src='/images/icons/menu.png'

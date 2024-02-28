@@ -1,3 +1,4 @@
+import { getWithToken } from './../utils/index';
 import axios from 'axios';
 import ProcedureModel from '../models/Procedure';
 import DetailProcedureLevel2Model from '../models/DetailProcedureLevel2';
@@ -76,8 +77,26 @@ export const apiGetListProcedureRelative = async (
   return data ?? {};
 };
 
-export const apiGetListProcedureComment = async (id: string) => {
-  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${id}&limit=1000&page=1`;
-  const { data } = await axios.get(url);
+// export const apiGetListProcedureComment = async (id: string) => {
+//   const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${id}&limit=1000&page=1`;
+//   const { data } = await axios.get(url);
+//   return data ?? {};
+// };
+
+// Thực tế thực hiện
+export const apiGetListActualImplementation = (id: string, token: string) => {
+  const url = `https://thutucphapluat.com/api/Actual_Implementation_controller/list_actual_implementation_by_agency_id?ag_agency_id&help_articles_id=${id}`;
+  const data = getWithToken({ url, token });
   return data ?? {};
 };
+
+// bình luận
+export const apiGetListProcedureComment = (id: string, token: string) => {
+  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${id}&limit=1000&page=1`;
+  const data = getWithToken({ url, token });
+
+  return data ?? {};
+};
+
+// User
+

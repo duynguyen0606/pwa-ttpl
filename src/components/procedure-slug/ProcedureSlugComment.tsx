@@ -1,8 +1,25 @@
+import {
+  apiGetListActualImplementation,
+  apiGetListProcedureComment,
+} from '@/src/api/procedure';
 import { useAppSelector } from '@/src/redux/hooks';
 import { Avatar, Button, Input } from 'antd';
+import { useEffect, useState } from 'react';
 
-function ProcedureSlugComment() {
-  const { user } = useAppSelector((state) => state.authState);
+function ProcedureSlugComment({ id }: { id?: string }) {
+  const { user, token } = useAppSelector((state) => state.authState);
+  const [data, setData] = useState();
+  useEffect(() => {
+    if (user && id) {
+      (async () => {
+        const dataRes = await apiGetListProcedureComment(id, token);
+        if (dataRes.status) {
+          setData(dataRes.data);
+        }
+      })();
+    }
+  }, [user, id]);
+
   return (
     <div>
       <div className='flex gap-2 w-full'>
