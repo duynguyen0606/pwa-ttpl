@@ -19,6 +19,8 @@ export const apiGetFAQ = async ({
 
 export const apiGetListArea = async (): Promise<{
     status: boolean,
+    data: Array<any>,
+    msg: string,
 }> => {
     const url = `https://thutucphapluat.com/api/Administrative_field_controller/list_area`
     const { data } = await axios.get(url)
@@ -28,6 +30,8 @@ export const apiGetListArea = async (): Promise<{
 
 export const apiGetListField = async (): Promise<{
     status: boolean,
+    data: Array<any>,
+    msg: string,
 }> => {
     const url = `https://thutucphapluat.com/api/Administrative_field_controller/read`
     const { data } = await axios.get(url)

@@ -1,4 +1,4 @@
-function Answer({ user, content }: { user: any; content: any }) {
+function Answer({ user, content }: { user?: any; content: any }) {
   return (
     <div className='border-t-[1px] border-dashed border-[#E5E5E5] mt-3 pt-4'>
       {content && (
