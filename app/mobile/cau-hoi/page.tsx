@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { CollapseProps } from "antd";
-import { Button, Form, Select, Input, Collapse } from "antd";
+import { Button, Form, Select, Input, Collapse, Pagination } from "antd";
 
 import ImageLegacy from "next/legacy/image";
 import {Answer, Question} from "@/src/components/mobile/law-qa";
+import { apiGetFAQ } from "@/src/api/question";
 
 enum TypeQA {
     QA_FAQ = 1,
@@ -284,8 +285,17 @@ function Index() {
         },
     ]);
     const [activeQuesListChildTab, setActiveQuesListChildTab] = useState(0);
-    const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] =
-        useState(0);
+    const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] = useState(0);
+
+    const [listFAQ, setListFAQ] = useState([])
+    const [pageFAQ, setPageFAQ] = useState(1)
+    // useEffect(() => {
+    //     (async () => {
+    //         const dataRes = await apiGetFAQ({page: pageFAQ})
+    //         console.log(dataRes);
+            
+    //     })()
+    // }, [])
 
     const handleChangeNav = (tabActive: number) => {
         setActiveNav(tabActive);
@@ -335,14 +345,25 @@ function Index() {
             switch (activeQuesListChildTab) {
                 case TypeQA.QA_FAQ:
                     return (
-                        <Collapse
-                            // className={`bg-[#f1f5ff]`}
-                            collapsible="icon"
-                            ghost
-                            items={items_FAQ}
-                            expandIconPosition="end"
-                            expandIcon={({ isActive }) => renderIcon(isActive)}
-                        />
+                        <>
+                            <Collapse
+                                // className={`bg-[#f1f5ff]`}
+                                collapsible="icon"
+                                ghost
+                                items={items_FAQ}
+                                expandIconPosition="end"
+                                expandIcon={({ isActive }) => renderIcon(isActive)}
+                            />
+                            <div className="flex items-center justify-center">
+                                <Pagination 
+                                    size='small'
+                                    onChange={(pageFAQ) => setPageFAQ(pageFAQ)}
+                                    current={pageFAQ}
+                                    total={50}
+                                    showSizeChanger={false}
+                                />
+                            </div>
+                        </>
                     );
                 case TypeQA.QA_USER:
                     return (
@@ -499,7 +520,7 @@ function Index() {
                     );
             }
         }
-    }, [activeNav, activeQuesListChildTab, activeQuesToLawyerChildTab]);
+    }, [activeNav, activeQuesListChildTab, activeQuesToLawyerChildTab, pageFAQ]);
 
     return (
         <div>

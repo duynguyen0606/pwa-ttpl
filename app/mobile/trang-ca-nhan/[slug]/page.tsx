@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ModalInfoRate } from "@/src/components/modal";
 import PostItem from "@/src/components/mobile/post-item/PostItem";
 import ArticleModel from "@/src/models/Article";
-// import { apiGetPostByUser } from "@/src/api/user";
+import { apiGetPostByUser } from "@/src/api/user";
 
 const tabs = [
     { name: "Bài viết", tabActive: 1 },
@@ -27,17 +27,24 @@ function Index({ params }: { params: { slug: string } }) {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+    const [listVideo, setListVideo] = useState<Array<any>>([]);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const dataRes = await apiGetPostByUser({ page: 1, userID: slug });
-    //         console.log(dataRes);
+    useEffect(() => {
+        (async () => {
+            const dataRes = await apiGetPostByUser({
+                page: page,
+                userID: slug,
+            });
 
-    //         if (dataRes.status) {
-    //             setListPost(dataRes.data);
-    //         }
-    //     })();
-    // }, []);
+            if (dataRes.status) {
+                if (listPost.length > 0) {
+                    setListPost((prev) => [...prev, ...dataRes.data]);
+                } else {
+                    setListPost(dataRes.data);
+                }
+            }
+        })();
+    }, [page]);
 
     const [showInfoRate, setShowInfoRate] = useState(false);
     const [activeTab, setActiveTab] = useState(1);
@@ -140,9 +147,27 @@ function Index({ params }: { params: { slug: string } }) {
                     {/* Post container */}
                     <div className="py-2 bg-[#F4F5F8]">
                         {listPost.length > 0 ? (
-                            listPost.map((post) => (
-                                <PostItem key={post.id} post={post} />
-                            ))
+                            <>
+                                {listPost.map((post) => (
+                                    <PostItem key={post.id} post={post} />
+                                ))}
+
+                                <div className="flex items-center justify-center py-5">
+                                    <button
+                                        className="
+                                            py-2 px-3
+                                            text-[var(--primary-color)] 
+                                            font-bold 
+                                            bg-[#FFF0E6] 
+                                        "
+                                        onClick={() =>
+                                            setPage((prev) => prev + 1)
+                                        }
+                                    >
+                                        Xem thêm
+                                    </button>
+                                </div>
+                            </>
                         ) : (
                             <h2>Chưa có bài viết để hiển thị</h2>
                         )}
@@ -152,7 +177,15 @@ function Index({ params }: { params: { slug: string } }) {
         } else if (activeTab === 2) {
             return (
                 <div className="flex bg-white rounded-lg">
-                    <h2 className="p-4">Chưa có video để hiển thị</h2>
+                        {listVideo.length> 0 ? (
+                            <>
+                                {listVideo.map((video) => (
+                                    console.log(video)
+                                ))}
+                            </>
+                        ) :(
+                            <h2 className="p-4"> Chưa có video để hiển thị</h2>
+                        )}
                 </div>
             );
         } else if (activeTab === 3) {

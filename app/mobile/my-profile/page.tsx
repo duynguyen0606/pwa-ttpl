@@ -2,13 +2,18 @@
 
 import Link from "next/link";
 import { Switch } from "antd";
+import { useRouter } from "next/navigation";
+
+import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
+import { authLogout } from "@/src/redux/feature/authSlice";
 
 import { BackIcon } from "@/src/assests/icons";
 import Footer from "@/src/components/mobile/footer/Footer";
-import { useAppSelector } from "@/src/redux/hooks";
 
 function Index() {
-    const { user } = useAppSelector((state) => state.authState);
+    const router = useRouter()
+    const { user, token } = useAppSelector((state) => state.authState);
+    const dispatch = useAppDispatch();
 
     const infoList = [
         {
@@ -28,6 +33,17 @@ function Index() {
     const onChange = (checked: boolean) => {
         console.log(`switch to ${checked}`);
     };
+
+    const handleLogout = async () => {
+        dispatch(
+            authLogout({
+                url: "https://thutucphapluat.com/api/login/logout",
+                token,
+            })
+        );
+        
+        router.push('/mobile')
+    }
 
     return (
         <>
@@ -228,7 +244,8 @@ function Index() {
                             text-base text-[#4755D4] font-medium
                             bg-[#4755D4] bg-opacity-10
                             rounded-3xl
-                        "
+                            "
+                            onClick={handleLogout}
                         >
                             Đăng xuất
                         </button>

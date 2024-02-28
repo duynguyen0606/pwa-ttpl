@@ -49,15 +49,28 @@ export const apiGetUserWatchedProcedure = async ({
     });
 };
 
-// export const apiGetPostByUser = async ({
-//   page = 1,
-//   userID,
-// }: {
-//   page: number, 
-//   userID: string
-// }): Promise<{ status: boolean; page: number; userID: string; data: Array<ArticleModel> }> => {
-//   const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&created_by=${userID}`;
-//   const { data } = await axios.get(url);
-//   console.log(data);
-//   return data ?? {};
-// };
+export const apiGetPostByUser = async ({
+  page = 1,
+  userID,
+}: {
+  page: number, 
+  userID: string
+}): Promise<{ status: boolean; page: number; userID: string; data: Array<ArticleModel> }> => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&created_by=${userID}`;
+  const { data } = await axios.get(url);
+  console.log(data);
+  return data ?? {};
+};
+
+export const apiGetVideoByUser = async ({
+    page = 1,
+    userID,
+  }: {
+    page: number, 
+    userID: string
+  }): Promise<{ status: boolean; page: number; userID: string; data: Array<ArticleModel> }> => {
+    const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&type_post=video&created_by=${userID}`;
+    const { data } = await axios.get(url);
+    console.log(data);
+    return data ?? {};
+  };
