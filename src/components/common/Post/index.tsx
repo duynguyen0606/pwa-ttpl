@@ -3,17 +3,32 @@ import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
 import './style.scss';
 import ArticleModel from '@/src/models/Article';
-import { apiGetListCommentByPostId } from '@/src/api/home-page';
+import { apiFollowUser, apiGetListCommentByPostId } from '@/src/api/home-page';
 import { useState } from 'react';
 import CommentCom from '../comment';
 import CommentModel from '@/src/models/Comment';
+import { useAppSelector } from '@/src/redux/hooks';
+import CreateComment from '../comment/CreateComment';
+import CommentItem from '../comment/CommentItem';
 
 function Post({ post }: { post: ArticleModel }) {
   const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
+  const { token } = useAppSelector((state) => state.authState);
   const handleFetchComment = async (id: string) => {
     const dataRes = await apiGetListCommentByPostId({ postId: id });
     if (dataRes.status && dataRes.data.length > 0) {
       setDataComment(dataRes.data);
+    }
+  };
+
+  const handleFollow = async (id: string) => {
+    if (id && token) {
+      const dataRes = await apiFollowUser({
+        id,
+        token,
+      });
+
+      console.log(dataRes);
     }
   };
 
@@ -41,7 +56,13 @@ function Post({ post }: { post: ArticleModel }) {
                 <p className='text-neutral-300'>12 ngày trước</p>
               </div>
             </div>
-            {!post.is_follow && <Button>Theo dõi</Button>}
+            {post.is_follow ? (
+              <Button className='button-primary'>Bỏ theo dõi</Button>
+            ) : (
+              <Button onClick={() => handleFollow(post.created_by.toString())}>
+                Theo dõi
+              </Button>
+            )}
           </div>
           <ImageLegacy
             src={post?.images}
@@ -114,7 +135,14 @@ function Post({ post }: { post: ArticleModel }) {
             </Button>
           </div>
 
-          {dataComment.length > 0 && <CommentCom commentList={dataComment} />}
+          {dataComment.length > 0 && (
+            <div className='py-4 w-full'>
+              <CreateComment />
+              {dataComment.map((item) => (
+                <CommentItem data={item} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </>

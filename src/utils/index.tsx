@@ -44,12 +44,13 @@ export const converDateToDays = ({ date }: { date: string }) => {
 };
 
 // Hàm gửi dữ liệu dạng form-data với token
-export const sendPostFormDataWithToken = async (
-  url: string,
-  data: { [key: string]: string | Blob },
-  token: string
-) => {
+export const sendPostFormDataWithToken = async (args: {
+  url: string;
+  data: { [key: string]: string | Blob };
+  token: string;
+}) => {
   // Tạo đối tượng FormData
+  const { url, data, token } = args;
   const formData = new FormData();
 
   // Thêm các trường vào FormData
@@ -64,12 +65,12 @@ export const sendPostFormDataWithToken = async (
         // Thiết lập Content-Type
         'Content-Type': 'multipart/form-data',
         // Thêm Authorization header với token
-        Authorization: `${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
     // Xử lý kết quả trả về
-    return response;
+    return response.data;
   } catch (error) {
     // Xử lý lỗi nếu có
     console.error('Error during API call:', error);

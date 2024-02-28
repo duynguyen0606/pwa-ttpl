@@ -2,6 +2,7 @@ import axios from 'axios';
 import Category from '../models/Category';
 import ArticleModel from '../models/Article';
 import CommentModel from '../models/Comment';
+import { sendPostFormDataWithToken, sendPostWithToken } from '../utils';
 
 export const apiGetListCategory = async (args: {
   page: number;
@@ -68,4 +69,13 @@ export const apiGetListChildCommentByParentCommentId = async ({
   const url = `https://thutucphapluat.com/api/Posts_controller/list_child_comment?page=1&id_comment=${postId}`;
   const { data } = await axios.get(url);
   return data ?? {};
+};
+
+export const apiFollowUser = (args: { id: string; token: string }) => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/follow`;
+  return sendPostFormDataWithToken({
+    token: args.token,
+    url,
+    data: { id_customer: args.id },
+  });
 };
