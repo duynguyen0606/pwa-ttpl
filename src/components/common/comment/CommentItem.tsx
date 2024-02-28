@@ -5,6 +5,7 @@ import { Avatar, Button } from 'antd';
 import Image from 'next/image';
 import { useState } from 'react';
 import CreateComment from './CreateComment';
+import { Image as ImageAntd } from 'antd';
 
 function CommentItem({
   data,
@@ -52,6 +53,13 @@ function CommentItem({
             đã comment {converDateToDays({ date: data.created_at })} ngày trước
           </p>
           <div className='pt-2'>{data.title}</div>
+          {data.files.length > 0 && (
+            <div className='flex gap-2'>
+              {data?.files.map((item: any, id: any) => (
+                <ImageAntd key={id} src={item.files} />
+              ))}
+            </div>
+          )}
           <div className='pt-2'>
             <span>{data.total_like}</span>
             <Button

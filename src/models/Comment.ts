@@ -10,6 +10,7 @@ class CommentModel {
   created_at: string;
   like: number;
   level: number;
+  files: any;
 
   constructor(args: any) {
     this.id = args.id ?? '';
@@ -23,6 +24,7 @@ class CommentModel {
     this.created_at = args.created_at ?? '';
     this.like = args.like ?? null;
     this.level = args.level ?? null;
+    this.files = args.files ?? null;
   }
 }
 

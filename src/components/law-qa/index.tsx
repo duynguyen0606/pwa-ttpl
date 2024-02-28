@@ -24,6 +24,7 @@ const navbarArr = [
   { name: 'Danh sách câu hỏi', tabActive: 1 },
   { name: 'Đặt câu hỏi với luật sư', tabActive: 2 },
 ];
+
 const items: CollapseProps['items'] = [
   {
     key: '1',
@@ -236,7 +237,6 @@ const items: CollapseProps['items'] = [
     ),
   },
 ];
-
 function LawQuestion() {
   const [form] = Form.useForm();
   const [tabActive, setTabActive] = useState(1);

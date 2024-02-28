@@ -4,6 +4,11 @@ import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
+// export const socketGrab = io(`https://server-chat.nhvngroup.com/grab`, {
+//   path: '/socket-io',
+//   autoConnect: false,
+// });
+
 export const socketGrab = io(`http://localhost:3001/grab`, {
   path: '/socket-io',
   autoConnect: false,
@@ -57,7 +62,6 @@ function Index() {
   const [driverId, setDriverId] = useState(null);
   const [riderId, setRiderId] = useState(null);
   const handleUser = () => {
-    socketGrab.connect();
     socketGrab.emit('riderRequest', {
       dataUser: {
         driver_id: '6617',
@@ -68,15 +72,15 @@ function Index() {
       },
       pickupLocation: {
         formatted_address:
-          'Vinhomes Times City, Vĩnh Tuy, Hai Bà Trưng, Hà Nội, Việt Nam',
+          '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
         id: 1708678390679,
         location: {
-          latitude: 20.9945438,
+          latitude: 20.983715,
           latitudeDelta: 0.004452590797672684,
-          longitude: 105.8677181,
+          longitude: 105.888896,
           longitudeDelta: 0.009148679673671722,
         },
-        name: 'Vinhomes Times City',
+        name: '141 P. Nam Dư',
       },
       arrivedLocation: {
         formatted_address:
@@ -93,8 +97,16 @@ function Index() {
     });
   };
   // 20.98971015762548, 105.87304615414742
-  const handleDriver = () => {
+
+  const handleTurnOn = () => {
     socketGrab.connect();
+  };
+
+  const hanldeTurnOff = () => {
+    socketGrab.disconnect();
+  };
+
+  const handleDriver = () => {
     socketGrab.emit('driverLocation', {
       data: {
         driver_id: '6617',
@@ -103,7 +115,18 @@ function Index() {
         license_plate: '10M2 - 123.52',
         rating: '5',
       },
-      location: { lat: 20.98971015762548, lon: 105.87304615414742 },
+      pickupLocation: {
+        formatted_address:
+          '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
+        id: 1708678390679,
+        location: {
+          lat: 20.983715,
+          latitudeDelta: 0.004452590797672684,
+          lon: 105.888896,
+          longitudeDelta: 0.009148679673671722,
+        },
+        name: '141 P. Nam Dư',
+      },
     });
   };
 
@@ -178,13 +201,13 @@ function Index() {
     socketGrab.on('rideAccepted', (data) =>
       console.log('tài xế chấp nhận', data)
     );
-    socketGrab.on('rideCancelled', () => {
+    socketGrab.on('driverCancel', () => {
       alert('Tài xế đã huỷ chuyến');
     });
 
     return () => {
       socketGrab.off('rideAccepted');
-      socketGrab.off('rideCancelled');
+      socketGrab.off('driverCancel');
     };
   }, []);
 
@@ -226,6 +249,8 @@ function Index() {
         Tài xế đã đến điểm đón
       </Button>
       <Button onClick={handleUserCancel}>User huỷ chuyến hoặc huỷ quét</Button>
+      <Button onClick={handleTurnOn}>Bật app</Button>
+      <Button onClick={hanldeTurnOff}>Tắt app</Button>
     </div>
   );
 }

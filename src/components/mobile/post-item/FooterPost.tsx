@@ -7,6 +7,8 @@ import CommentModel from "@/src/models/Comment";
 import { apiGetListCommentByPostId } from "@/src/api/home-page";
 import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
 import CommentCom from "../../common/comment";
+import CreateComment from "../../common/comment/CreateComment";
+import CommentItem from "../../common/comment/CommentItem";
 
 function FooterPostItem({ post }: { post: ArticleModel }) {
     const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
@@ -34,22 +36,17 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 </div>
                 <div className="comment-shared flex flex-row items-center font-medium">
                     {/* seen */}
-                    {post.view 
-                        ? <div>{post.view} lượt xem</div> 
-                        : null
-                    }
+                    {post.view ? <div>{post.view} lượt xem</div> : null}
 
                     {/* dot */}
-                    {post.view && post.total_comment 
-                        ? <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full" />
-                        : null
-                    }
+                    {post.view && post.total_comment ? (
+                        <div className="w-1 h-1 mx-1 bg-[#A1A5AC] rounded-full"></div>
+                    ) : null}
 
                     {/* comment */}
-                    {post.total_comment 
-                        ? <div>{post.total_comment} bình luận</div>
-                        : null
-                    }
+                    {post.total_comment ? (
+                        <div>{post.total_comment} bình luận</div>
+                    ) : null}
                 </div>
             </div>
 
@@ -94,7 +91,14 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
             </div>
 
             {/* Comment */}
-            {dataComment.length > 0 && <CommentCom commentList={dataComment} />}
+            {dataComment.length > 0 && (
+                <div className="py-4 w-full">
+                    <CreateComment />
+                    {dataComment.map((item) => (
+                        <CommentItem data={item} />
+                    ))}
+                </div>
+            )}
         </footer>
     );
 }

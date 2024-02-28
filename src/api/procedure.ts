@@ -1,4 +1,8 @@
-import { getWithToken } from './../utils/index';
+import {
+  getWithToken,
+  sendPostFormDataWithToken,
+  sendPostWithToken,
+} from './../utils/index';
 import axios from 'axios';
 import ProcedureModel from '../models/Procedure';
 import DetailProcedureLevel2Model from '../models/DetailProcedureLevel2';
@@ -98,5 +102,19 @@ export const apiGetListProcedureComment = (id: string, token: string) => {
   return data ?? {};
 };
 
-// User
+export const apiProcedureComment = (args: {
+  token: string;
+  comment: string;
+  files: string;
+  id_help_articles: string;
+}) => {
+  const { token, comment, files, id_help_articles } = args;
+  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/add_procedural_comment`;
+  const data = sendPostFormDataWithToken({
+    url,
+    token,
+    data: { type: 'comment', comment, files, id_help_articles },
+  });
 
+  return data ?? {};
+};

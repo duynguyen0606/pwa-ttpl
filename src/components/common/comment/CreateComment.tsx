@@ -1,17 +1,16 @@
-import { Input } from 'antd';
-import Image from 'next/image';
+import { useAppSelector } from '@/src/redux/hooks';
+import { Avatar, Input } from 'antd';
 
 function CreateComment() {
+  const { user } = useAppSelector((state) => state.authState);
   return (
     <div id='create-comment' className='flex gap-4 mb-4'>
-      <div className='w-8'>
-        <Image
-          src='https://ttpl.vn/assets/images/logo/logo-legalzone.png'
-          alt='avatar'
-          width={30}
-          height={30}
-        />
-      </div>
+      {user && (
+        <div className='w-8'>
+          <Avatar src={user.image} alt='avatar' />
+        </div>
+      )}
+
       <div className='flex-1'>
         <Input placeholder='Nhập bình luận của bạn' />
       </div>
