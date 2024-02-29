@@ -33,7 +33,7 @@ function Index() {
 
     useEffect(() => {
         (async () => {
-            const dataRes = await apiGetListProcedure();
+            const dataRes = await apiGetListProcedure({ page: 1 });
             if (dataRes.status) {
                 setListArticle(dataRes.data);
             }
@@ -85,7 +85,7 @@ function Index() {
                     >
                         Danh sách thủ tục
                         <Link
-                            href='mobile/thu-tuc'
+                            href="mobile/thu-tuc"
                             className="text-sm text-[--primary-color]"
                         >
                             Xem tất cả
