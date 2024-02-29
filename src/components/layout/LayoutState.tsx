@@ -2,6 +2,7 @@
 
 import { PropsWithChildren, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import Link from "next/link";
 import { getListArticle } from "@/src/redux/feature/postSlice";
 import { useAppDispatch } from "@/src/redux/hooks";
 
@@ -21,14 +22,10 @@ function LayoutState(props: PropsWithChildren) {
     <div>
       {children}
 
-      {
-        !isMobileUI &&
-        <>
+      {!isMobileUI && (
+        <div>
           {/* phone */}
-          <a
-            href="tel:0888889366"
-            className="fixed left-8 bottom-10"
-          >
+          <Link href="tel:0888889366" className="fixed left-8 bottom-10">
             <div
               className="
               flex items-center justify-center 
@@ -39,13 +36,16 @@ function LayoutState(props: PropsWithChildren) {
                 borderRadius: "5.5rem",
               }}
             >
-              <img src="https://ttpl.vn/assets/images/icon/phone.png" width='35' />
+              <img
+                src="/images/introduce/phone.png"
+                width="35"
+              />
               <span className="text-white ml-2">0888889366</span>
             </div>
-          </a>
+          </Link>
 
           {/* dmca */}
-          <a
+          <Link
             href="https://www.dmca.com/Protection/Status.aspx?ID=7dd76e90-0606-47eb-af77-697796ce89a5&refurl=https://ttpl.vn/"
             className="fixed bottom-0 right-0"
           >
@@ -55,9 +55,9 @@ function LayoutState(props: PropsWithChildren) {
               width="121"
               height="24"
             />
-          </a>
-        </>
-      }
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
