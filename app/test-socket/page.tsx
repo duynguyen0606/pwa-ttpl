@@ -120,9 +120,9 @@ function Index() {
           '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
         id: 1708678390679,
         location: {
-          lat: 20.983715,
+          latitude: 20.983715,
           latitudeDelta: 0.004452590797672684,
-          lon: 105.888896,
+          longitude: 105.888896,
           longitudeDelta: 0.009148679673671722,
         },
         name: '141 P. Nam Dư',
@@ -239,7 +239,7 @@ function Index() {
 
   return (
     <div>
-      <Button onClick={handleUser}>User bắn </Button>
+      {/* <Button onClick={handleUser}>User bắn </Button> */}
       <Button onClick={handleDriver}>Tài xế bắn </Button>
       <Button onClick={handleAccept}>Tài xế chấp nhận</Button>
       <Button onClick={handleCancel}>Tài xế huỷ </Button>
@@ -248,7 +248,7 @@ function Index() {
       <Button onClick={handleDriverArrivedPickupLocation}>
         Tài xế đã đến điểm đón
       </Button>
-      <Button onClick={handleUserCancel}>User huỷ chuyến hoặc huỷ quét</Button>
+      {/* <Button onClick={handleUserCancel}>User huỷ chuyến hoặc huỷ quét</Button> */}
       <Button onClick={handleTurnOn}>Bật app</Button>
       <Button onClick={hanldeTurnOff}>Tắt app</Button>
     </div>
