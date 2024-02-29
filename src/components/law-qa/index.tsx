@@ -12,6 +12,7 @@ import {
 import './style.scss';
 import { Header } from '../common';
 import { useMemo, useState } from 'react';
+import ContentFAQ from '@/app/mobile/cau-hoi/ContentFAQ';
 
 enum TypeQA {
   QA_FAQ = 1,
@@ -308,13 +309,16 @@ function LawQuestion() {
       switch (childTabActive) {
         case TypeQA.QA_FAQ:
           return (
-            <Collapse
-              bordered={false}
-              expandIcon={({ isActive }) => renderIcon(isActive)}
-              expandIconPosition='end'
-              items={items}
-              onChange={onChange}
-            />
+            <div className='p-[20px]'>
+              {/* <Collapse
+                bordered={false}
+                expandIcon={({ isActive }) => renderIcon(isActive)}
+                expandIconPosition='end'
+                items={items}
+                onChange={onChange}
+              /> */}
+              <ContentFAQ />
+            </div>
           );
         case TypeQA.QA_USER:
           return (
@@ -489,7 +493,7 @@ function LawQuestion() {
             </nav>
           ))}
         </div>
-        <div className='flex'>
+        <div className='flex px-4'>
           {childTabs.map((item) => (
             <nav
               key={item.name}

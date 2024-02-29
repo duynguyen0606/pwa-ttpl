@@ -3,12 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import type { CollapseProps } from "antd";
-import { Button, Form, Select, Input, Collapse, Pagination } from "antd";
+import { Button, Form, Select, Input } from "antd";
 
 import ImageLegacy from "next/legacy/image";
-import { Answer, Question } from "@/src/components/mobile/law-qa";
-import { apiGetFAQ } from "@/src/api/question";
 import ContentFAQ from "./ContentFAQ";
 import ContenUserQ from "./ContentUserQ";
 
@@ -22,7 +19,6 @@ const navbarArr = [
     { name: "Danh sách câu hỏi", tabActive: 1 },
     { name: "Đặt câu hỏi với luật sư", tabActive: 2 },
 ];
-
 
 function Index() {
     const [form] = Form.useForm();
@@ -41,8 +37,6 @@ function Index() {
     const [activeQuesListChildTab, setActiveQuesListChildTab] = useState(0);
     const [activeQuesToLawyerChildTab, setActiveQuesToLawyerChildTab] =
         useState(0);
-
-    const [pageFAQ, setPageFAQ] = useState(1);
 
     const handleChangeNav = (tabActive: number) => {
         setActiveNav(tabActive);
@@ -72,29 +66,13 @@ function Index() {
         }
     };
 
-
     const renderContent = useMemo(() => {
         if (activeNav === 1) {
             switch (activeQuesListChildTab) {
                 case TypeQA.QA_FAQ:
-                    return (
-                        <>
-                            <ContentFAQ page={pageFAQ} />
-                            <div className="flex items-center justify-center">
-                                <Pagination
-                                    size="small"
-                                    onChange={(page) => setPageFAQ(page)}
-                                    current={pageFAQ}
-                                    total={50}
-                                    showSizeChanger={false}
-                                />
-                            </div>
-                        </>
-                    );
+                    return <ContentFAQ />;
                 case TypeQA.QA_USER:
-                    return (
-                        <ContenUserQ page={1} />
-                    );
+                    return <ContenUserQ page={1} />;
             }
         } else if (activeNav === 2) {
             switch (activeQuesToLawyerChildTab) {
@@ -177,20 +155,24 @@ function Index() {
                                 <Form.Item className="pt-10">
                                     <div className="flex items-center flex-col gap-4">
                                         <Button
-                                            className="w-full text-white bg-[#4755D4]"
                                             style={{
                                                 height: "54px",
+                                                width: "100%",
                                                 borderRadius: "30px",
+                                                color: "white",
+                                                backgroundColor: "#4755D4",
                                             }}
                                             size="large"
                                         >
                                             Gửi câu hỏi
                                         </Button>
                                         <Button
-                                            className="w-full text-white bg-[#4755D4]"
                                             style={{
                                                 height: "54px",
+                                                width: "100%",
                                                 borderRadius: "30px",
+                                                color: "white",
+                                                backgroundColor: "#4755D4",
                                             }}
                                             size="large"
                                         >
@@ -222,12 +204,13 @@ function Index() {
                                 </p>
                                 <Link href="/mobile/premium">
                                     <Button
-                                        className="m-4 font-semibold"
                                         style={{
                                             height: "48px",
                                             borderRadius: "24px",
                                             color: "#fff",
                                             backgroundColor: "#4755D4",
+                                            margin: 4,
+                                            fontWeight: '600',
                                         }}
                                         size="large"
                                     >
@@ -243,7 +226,6 @@ function Index() {
         activeNav,
         activeQuesListChildTab,
         activeQuesToLawyerChildTab,
-        pageFAQ,
     ]);
 
     return (
