@@ -1,35 +1,21 @@
-import { useEffect, useState, memo, useMemo } from "react";
-import { Collapse, CollapseProps } from "antd";
+import { useState, useMemo } from "react";
+import { Collapse, Pagination } from "antd";
 
 import { apiGetFAQ } from "@/src/api/question";
 import { Question, Answer } from "@/src/components/mobile/law-qa";
 
-function ContentFAQ({ page }: { page: number }) {
-    const items_FAQ: CollapseProps["items"] = [];
+function ContentFAQ() {
+    const [pageFAQ, setPageFAQ] = useState(1);
     const [listFAQ, setListFAQ] = useState<Array<any>>([]);
 
     useMemo(() => {
         (async () => {
-            const dataRes = await apiGetFAQ({ page: 1 });
+            const dataRes = await apiGetFAQ({ page: pageFAQ });
             if (dataRes.status) {
                 setListFAQ(dataRes.data);
             }
         })();
-    }, [page]);
-
-    listFAQ.map((faq) => {
-        items_FAQ.push({
-            key: faq?.id,
-            label: (
-                <Question
-                    title={faq?.title}
-                    description={faq?.question}
-                    type={faq?.type_faq_title}
-                />
-            ),
-            children: <Answer content={faq?.answer} />,
-        });
-    });
+    }, [pageFAQ]);
 
     const renderIcon = (isActive?: boolean) => {
         return (
@@ -47,14 +33,40 @@ function ContentFAQ({ page }: { page: number }) {
     };
 
     return (
-        <Collapse
-            // className={`bg-[#f1f5ff]`}
-            collapsible="icon"
-            ghost
-            items={items_FAQ}
-            expandIconPosition="end"
-            expandIcon={({ isActive }) => renderIcon(isActive)}
-        />
+        <>
+            <Collapse
+                // className={`bg-[#f1f5ff]`}
+                collapsible="icon"
+                ghost
+                items={listFAQ.map((faq) => {
+                    return {
+                        key: faq?.id,
+                        label: (
+                            <Question
+                                title={faq?.title}
+                                description={faq?.question}
+                                type={faq?.type_faq_title}
+                            />
+                        ),
+                        children: <Answer content={faq?.answer} />,
+                    };
+                })}
+                expandIconPosition="end"
+                expandIcon={({ isActive }) => renderIcon(isActive)}
+            />
+
+            <div className="flex items-center justify-center">
+                <Pagination
+                    size="small"
+                    onChange={(page) => {
+                        setPageFAQ(page);
+                    }}
+                    current={pageFAQ}
+                    total={150}
+                    showSizeChanger={false}
+                />
+            </div>
+        </>
     );
 }
 
