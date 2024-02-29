@@ -13,23 +13,30 @@ import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useMediaQuery } from 'react-responsive';
 import UserProfile from './UserProfile';
-import { useAppSelector } from '@/src/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import CustomEditor from '../customer-editor';
 import ModalPost from '../../modal/ModalPost';
 import UserPost from './UserPost';
+import { setListPost } from '@/src/redux/feature/postSlice';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
-  const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+  // const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
   const [page, setPage] = useState(1);
   const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
   const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalPost, setOpenModalPost] = useState(false);
+  const [userFollow, setUserFollow] = useState<{
+    id: number;
+    action: 'string';
+  }>();
   const { user } = useAppSelector((state) => state.authState);
+  const { listPost } = useAppSelector((state) => state.postState);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setOpenDrawerAlert(isMobileUI);
@@ -50,7 +57,7 @@ export default function HomePage() {
       const dataRes = await apiGetListPost({ page: 1 });
       console.log(dataRes);
       if (dataRes.status) {
-        setListPost(dataRes.data);
+        dispatch(setListPost(dataRes.data));
       }
     })();
   }, []);
@@ -67,7 +74,7 @@ export default function HomePage() {
     setLoading(true);
     const res = await apiGetListPost({ page: page + 1 });
     if (res.status) {
-      setListPost((prev) => [...prev, ...res.data]);
+      dispatch(setListPost([...listPost, ...res.data]));
       setLoading(false);
     } else {
       setLoading(false);

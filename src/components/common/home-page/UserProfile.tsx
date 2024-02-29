@@ -52,8 +52,8 @@ function UserProfile() {
         </div>
         <div className='flex items-center justify-between my-4'>
           <div>Người theo dõi của tôi</div>
-          <Button type='text' className='flex items-center'>
-            Xem tất cả{' '}
+          <Button type='text' className='button-flex'>
+            <span>Xem tất cả </span>
             <Image
               src='/images/icons/right.png'
               alt='right-icon'

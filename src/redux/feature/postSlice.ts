@@ -4,10 +4,12 @@ import {
 } from '@/src/api/home-page';
 import ArticleModel from '@/src/models/Article';
 import Category from '@/src/models/Category';
+import PostModel from '@/src/models/Post';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export type CategoryState = {
   listArticle: Array<ArticleModel | any>;
+  listPost: Array<ArticleModel>;
 };
 
 export const getListArticle = createAsyncThunk(
@@ -22,12 +24,17 @@ export const getListArticle = createAsyncThunk(
 
 const initialState: CategoryState = {
   listArticle: [],
+  listPost: [],
 };
 
 const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    setListPost: (state, action) => {
+      state.listPost = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getListArticle.fulfilled,
@@ -40,5 +47,5 @@ const postSlice = createSlice({
 
 const postReducer = postSlice.reducer;
 
-export const {} = postSlice.actions;
+export const { setListPost } = postSlice.actions;
 export default postReducer;
