@@ -1,9 +1,8 @@
 import { Button, Form, Input, Modal, ModalProps } from "antd";
-import { useForm } from "antd/es/form/Form";
 
 function ModalForgotPassword(props: ModalProps) {
     const { open, onCancel } = props;
-    const [form] = useForm();
+    const [form] = Form.useForm();
 
     return (
         <Modal

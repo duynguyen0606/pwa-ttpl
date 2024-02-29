@@ -1,23 +1,50 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { Divider, Input, Skeleton } from "antd";
 import Image from "next/image";
-import { Input } from "antd";
-
 import { ModalInfoRate } from "@/src/components/modal";
-import "./style.scss";
+import PostItem from "@/src/components/mobile/post-item/PostItem";
+import ArticleModel from "@/src/models/Article";
+import { apiGetPostByUser } from "@/src/api/user";
 
-function Index() {
-    const tabs = [
-        { name: "Bài viết", tabActive: 1 },
-        { name: "Video", tabActive: 2 },
-        { name: "Theo dõi", tabActive: 3 },
-    ];
+const tabs = [
+    { name: "Bài viết", tabActive: 1 },
+    { name: "Video", tabActive: 2 },
+    { name: "Theo dõi", tabActive: 3 },
+];
 
-    const followTabs = [
-        { name: "Người theo dõi", childTabActive: 1 },
-        { name: "Đang theo dõi", childTabActive: 2 },
-    ];
+const followTabs = [
+    { name: "Người theo dõi", childTabActive: 1 },
+    { name: "Đang theo dõi", childTabActive: 2 },
+];
+
+function Index({ params }: { params: { slug: string } }) {
+    // Lấy ID user
+    const { slug } = params;
+
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+    const [listVideo, setListVideo] = useState<Array<any>>([]);
+
+    useEffect(() => {
+        (async () => {
+            const dataRes = await apiGetPostByUser({
+                page: page,
+                userID: slug,
+            });
+
+            if (dataRes.status) {
+                if (listPost.length > 0) {
+                    setListPost((prev) => [...prev, ...dataRes.data]);
+                } else {
+                    setListPost(dataRes.data);
+                }
+            }
+        })();
+    }, [page]);
 
     const [showInfoRate, setShowInfoRate] = useState(false);
     const [activeTab, setActiveTab] = useState(1);
@@ -118,13 +145,47 @@ function Index() {
                     </div>
 
                     {/* Post container */}
-                    <div className="bg-white py-2 px-[10px]"></div>
+                    <div className="py-2 bg-[#F4F5F8]">
+                        {listPost.length > 0 ? (
+                            <>
+                                {listPost.map((post) => (
+                                    <PostItem key={post.id} post={post} />
+                                ))}
+
+                                <div className="flex items-center justify-center py-5">
+                                    <button
+                                        className="
+                                            py-2 px-3
+                                            text-[var(--primary-color)] 
+                                            font-bold 
+                                            bg-[#FFF0E6] 
+                                        "
+                                        onClick={() =>
+                                            setPage((prev) => prev + 1)
+                                        }
+                                    >
+                                        Xem thêm
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <h2>Chưa có bài viết để hiển thị</h2>
+                        )}
+                    </div>
                 </div>
             );
         } else if (activeTab === 2) {
             return (
                 <div className="flex bg-white rounded-lg">
-                    <h2 className="p-4">Chưa có video để hiển thị</h2>
+                        {listVideo.length> 0 ? (
+                            <>
+                                {listVideo.map((video) => (
+                                    console.log(video)
+                                ))}
+                            </>
+                        ) :(
+                            <h2 className="p-4"> Chưa có video để hiển thị</h2>
+                        )}
                 </div>
             );
         } else if (activeTab === 3) {
@@ -165,7 +226,7 @@ function Index() {
                 </div>
             );
         }
-    }, [activeTab, childTab]);
+    }, [listPost, activeTab, childTab]);
 
     return (
         <div className="flex-1 px-3 flex w-full h-[100vh] flex-col bg-[#F7F7F7]">
@@ -212,12 +273,11 @@ function Index() {
                     <div className="mt-1 flex items-center justify-center text-[#4061AB]">
                         <span>Điểm thưởng:</span>
                         <span className="text-sm font-bold mx-1">200</span>
-                        <button onClick={() => setShowInfoRate(true)}>
-                            <img
-                                className=""
-                                src="https://ttpl.vn/assets/images/myprofile/Info-Circle.png"
-                                alt=""
-                            />
+                        <button
+                            className="bg-white"
+                            onClick={() => setShowInfoRate(true)}
+                        >
+                            <img src="https://ttpl.vn/assets/images/myprofile/Info-Circle.png" />
                         </button>
                     </div>
                 </div>

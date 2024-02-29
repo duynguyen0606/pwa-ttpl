@@ -7,12 +7,12 @@ import axios from 'axios';
 import ProcedureModel from '../models/Procedure';
 import DetailProcedureLevel2Model from '../models/DetailProcedureLevel2';
 
-export const apiGetListProcedure = async (): Promise<{
+export const apiGetListProcedure = async ({page} : {page: number}): Promise<{
   status: boolean;
   data: Array<ProcedureModel>;
   url: string;
 }> => {
-  const url = `https://thutucphapluat.com/api/Posts_controller/help_articles?page=0&limit=${10}`;
+  const url = `https://thutucphapluat.com/api/Posts_controller/help_articles?page=${page}&limit=${10}`;
   const { data } = await axios.get(url);
   return data ?? {};
 };

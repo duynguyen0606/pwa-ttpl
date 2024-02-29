@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getWithToken } from '../utils';
+import ArticleModel from '../models/Article';
 
 export const apiGetUserWatchedProcedure = async ({
   url = 'https://thutucphapluat.com/api/Help_articles_controller/list_my_procedure?limit=10&page=1',
@@ -44,3 +45,29 @@ export const apiGetUserWatchedProcedure = async ({
       // Hiển thị một thông báo lỗi cho người dùng hoặc thử lại yêu cầu
     });
 };
+
+export const apiGetPostByUser = async ({
+  page = 1,
+  userID,
+}: {
+  page: number, 
+  userID: string
+}): Promise<{ status: boolean; page: number; userID: string; data: Array<ArticleModel> }> => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&created_by=${userID}`;
+  const { data } = await axios.get(url);
+  console.log(data);
+  return data ?? {};
+};
+
+export const apiGetVideoByUser = async ({
+    page = 1,
+    userID,
+  }: {
+    page: number, 
+    userID: string
+  }): Promise<{ status: boolean; page: number; userID: string; data: Array<ArticleModel> }> => {
+    const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&type_post=video&created_by=${userID}`;
+    const { data } = await axios.get(url);
+    console.log(data);
+    return data ?? {};
+  };

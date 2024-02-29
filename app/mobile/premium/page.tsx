@@ -450,7 +450,7 @@ function Index() {
     }, [activeTab]);
 
     return (
-        <CanBackLayout back="/mobile" title="Các gói dịch vụ">
+        <CanBackLayout back="/mobile/my-profile" title="Các gói dịch vụ">
             <div className="px-3">
                 {/* nav tabs */}
                 <div className="flex justify-center items-center text-sm">

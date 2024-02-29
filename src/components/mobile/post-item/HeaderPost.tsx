@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+
+import { converDateToDays } from "@/src/utils";
 import ArticleModel from "@/src/models/Article";
 
 function HeaderPostItem({ post }: { post: ArticleModel }) {
@@ -17,12 +19,14 @@ function HeaderPostItem({ post }: { post: ArticleModel }) {
                 />
                 <div className="flex flex-col ml-2 justify-center">
                     <Link
-                        href="/mobile/trang-ca-nhan"
+                        href={`/mobile/trang-ca-nhan/${post.created_by}`}
                         className="text-sm font-bold text-[#262C41]"
                     >
                         {post.created_by_full_name}
                     </Link>
-                    <p className="text-xs text-[#B5B9C7]">{`12 ngày trước`}</p>
+                    <p className="text-xs text-[#B5B9C7]">
+                        {converDateToDays({ date: post.created_at })} ngày trước
+                    </p>
                 </div>
             </div>
             <div className="flex items-center justify-center ">

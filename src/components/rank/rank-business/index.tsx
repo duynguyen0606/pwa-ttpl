@@ -1,5 +1,5 @@
 import { apiGetListRankBussiness, apiGetListRankCompany } from '@/src/api/rank';
-import BussinessModel from '@/src/models/business';
+import BussinessModel from '@/src/models/Business';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 

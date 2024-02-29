@@ -4,10 +4,10 @@ function Question({
   title,
   description,
 }: {
-  user: any;
+  user?: any;
   type: any;
   title: string;
-  description: any;
+  description: string;
 }) {
   return (
     <div>
@@ -16,7 +16,7 @@ function Question({
           <img
             className='w-9 h-9 rounded-full object-cover'
             src={
-              user.img ||
+              user?.img ||
               'https://ttpl.vn/assets/images/logo/logo-legalzone.png'
             }
             alt='avatar user'
