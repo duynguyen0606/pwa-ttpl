@@ -38,7 +38,7 @@ function Index({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     (async () => {
-      const dataRes = await apiGetListProcedure();
+      const dataRes = await apiGetListProcedure({ page: 1 });
       if (dataRes.status && dataRes.data) {
         setListProcedure(dataRes.data);
       }
