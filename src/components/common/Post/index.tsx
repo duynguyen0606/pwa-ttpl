@@ -7,19 +7,25 @@ import { apiFollowUser, apiGetListCommentByPostId } from '@/src/api/home-page';
 import { useState } from 'react';
 import CommentCom from '../comment';
 import CommentModel from '@/src/models/Comment';
-import { useAppSelector } from '@/src/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import CreateComment from '../comment/CreateComment';
 import CommentItem from '../comment/CommentItem';
+import { setListPost } from '@/src/redux/feature/postSlice';
+import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 
 function Post({ post }: { post: ArticleModel }) {
   const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
   const { token } = useAppSelector((state) => state.authState);
+  const { listPost } = useAppSelector((state) => state.postState);
+  const dispatch = useAppDispatch();
   const handleFetchComment = async (id: string) => {
     const dataRes = await apiGetListCommentByPostId({ postId: id });
     if (dataRes.status && dataRes.data.length > 0) {
       setDataComment(dataRes.data);
     }
   };
+
+  console.log(listPost);
 
   const handleFollow = async (id: string) => {
     if (id && token) {
@@ -28,7 +34,23 @@ function Post({ post }: { post: ArticleModel }) {
         token,
       });
 
-      console.log(dataRes);
+      if (dataRes.status) {
+        dispatch(
+          setListPost(
+            listPost.map((item) => {
+              if (item.created_by.toString() == id) {
+                return {
+                  ...item,
+                  is_follow: dataRes.action,
+                };
+              }
+              return item;
+            })
+          )
+        );
+      }
+    } else {
+      dispatch(setOpenModalLogin(true));
     }
   };
 
@@ -56,13 +78,13 @@ function Post({ post }: { post: ArticleModel }) {
                 <p className='text-neutral-300'>12 ngày trước</p>
               </div>
             </div>
-            {post.is_follow ? (
-              <Button className='button-primary'>Bỏ theo dõi</Button>
-            ) : (
-              <Button onClick={() => handleFollow(post.created_by.toString())}>
-                Theo dõi
-              </Button>
-            )}
+
+            <Button
+              onClick={() => handleFollow(post.created_by.toString())}
+              className={post.is_follow ? 'button-primary' : ''}
+            >
+              {post.is_follow ? 'Bỏ theo dõi' : 'Theo dõi'}
+            </Button>
           </div>
           <ImageLegacy
             src={post?.images}
