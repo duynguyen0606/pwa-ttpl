@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import categoriesReducer from './feature/categoriesSlice';
 import authReducer from './feature/authSlice';
 import postReducer from './feature/postSlice';
+import userReducer from './feature/userSlice';
 
 export const makeStore = () => {
   return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
       categoriesState: categoriesReducer,
       authState: authReducer,
       postState: postReducer,
+      userState: userReducer,
     },
   });
 };

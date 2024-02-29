@@ -21,6 +21,7 @@ import { ModalLogin } from '../../modal';
 import ModalSearch from '../../modal/ModalSearch';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import { authLogout, setOpenModalLogin } from '@/src/redux/feature/authSlice';
+import Notification from '../Notification';
 const { Header } = Layout;
 
 const navbarArr = [
@@ -264,17 +265,17 @@ function HeaderCom() {
           </div>
           <div className='flex gap-4 items-center'>
             {user && (
-              <Button
-                type='link'
-                icon={
-                  <Image
-                    src='/images/icons/notification.png'
-                    alt='notification'
-                    width={50}
-                    height={50}
-                  />
-                }
-              />
+              // <Button
+              //   type='link'
+              //   icon={
+              //     <Image
+              //       src='/images/icons/notification.png'
+              //       alt='notification'
+              //       width={50}
+              //       height={50}
+              //     />
+              //   }
+              <Notification />
             )}
             <Button
               type='link'

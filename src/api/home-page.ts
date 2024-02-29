@@ -2,7 +2,11 @@ import axios from 'axios';
 import Category from '../models/Category';
 import ArticleModel from '../models/Article';
 import CommentModel from '../models/Comment';
-import { sendPostFormDataWithToken, sendPostWithToken } from '../utils';
+import {
+  getWithToken,
+  sendPostFormDataWithToken,
+  sendPostWithToken,
+} from '../utils';
 
 export const apiGetListCategory = async (args: {
   page: number;
@@ -77,5 +81,13 @@ export const apiFollowUser = (args: { id: string; token: string }) => {
     token: args.token,
     url,
     data: { id_customer: args.id },
+  });
+};
+
+export const apiGetListNotification = (args: { token: string }) => {
+  const url = `https://thutucphapluat.com/api/Notifications_controller/list_notification?limit=10&page=0`;
+  return getWithToken({
+    url,
+    token: args.token,
   });
 };

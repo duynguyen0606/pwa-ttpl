@@ -1,15 +1,18 @@
-"use client";
+'use client';
 
-import { PropsWithChildren, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
-import Link from "next/link";
-import { getListArticle } from "@/src/redux/feature/postSlice";
-import { useAppDispatch } from "@/src/redux/hooks";
+import { PropsWithChildren, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import Link from 'next/link';
+import { getListArticle } from '@/src/redux/feature/postSlice';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import { getListNotification } from '@/src/redux/feature/userSlice';
 
 function LayoutState(props: PropsWithChildren) {
   const isMobileUI = useMediaQuery({
-    query: "(max-width: 600px)",
+    query: '(max-width: 600px)',
   });
+
+  const { token } = useAppSelector((state) => state.authState);
 
   const { children } = props;
   const dispatch = useAppDispatch();
@@ -18,6 +21,12 @@ function LayoutState(props: PropsWithChildren) {
     dispatch(getListArticle());
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      dispatch(getListNotification({ token }));
+    }
+  }, [token]);
+
   return (
     <div>
       {children}
@@ -25,35 +34,32 @@ function LayoutState(props: PropsWithChildren) {
       {!isMobileUI && (
         <div>
           {/* phone */}
-          <Link href="tel:0888889366" className="fixed left-8 bottom-10">
+          <Link href='tel:0888889366' className='fixed left-8 bottom-10'>
             <div
-              className="
+              className='
               flex items-center justify-center 
               h-[60px] w-[164px]
               bg-[var(--primary-color)]
-            "
+            '
               style={{
-                borderRadius: "5.5rem",
+                borderRadius: '5.5rem',
               }}
             >
-              <img
-                src="/images/introduce/phone.png"
-                width="35"
-              />
-              <span className="text-white ml-2">0888889366</span>
+              <img src='/images/introduce/phone.png' width='35' />
+              <span className='text-white ml-2'>0888889366</span>
             </div>
           </Link>
 
           {/* dmca */}
           <Link
-            href="https://www.dmca.com/Protection/Status.aspx?ID=7dd76e90-0606-47eb-af77-697796ce89a5&refurl=https://ttpl.vn/"
-            className="fixed bottom-0 right-0"
+            href='https://www.dmca.com/Protection/Status.aspx?ID=7dd76e90-0606-47eb-af77-697796ce89a5&refurl=https://ttpl.vn/'
+            className='fixed bottom-0 right-0'
           >
             <img
-              src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=7dd76e90-0606-47eb-af77-697796ce89a5"
-              alt="DMCA.com Protection Status"
-              width="121"
-              height="24"
+              src='https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=7dd76e90-0606-47eb-af77-697796ce89a5'
+              alt='DMCA.com Protection Status'
+              width='121'
+              height='24'
             />
           </Link>
         </div>
