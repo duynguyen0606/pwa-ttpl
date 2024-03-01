@@ -88,6 +88,7 @@ function ProcedureSlugComment({ id }: { id?: string }) {
         setFileListLink('');
         setFileList([]);
         setShowUpload(false);
+        setData((prev) => [dataRes.data[0], ...prev]);
       }
     }
   };
