@@ -29,6 +29,15 @@ export const apiGetMyFollowerByType = ({
   return getWithToken({ url, token });
 };
 
+export const apiGetUserById = async ({ id }: { id: string }) => {
+  const url = `https://thutucphapluat.com/api/login/get_user_by_id/${id}`;
+  const { data } = await axios.get(url);
+  return data ?? {};
+};
+
+////////////////////////////////////////////////////////////////
+// -------------------------------Other User--------------------------------
+
 export const apiGetPostOfOtherUser = async ({
   page = 1,
   userID,
@@ -63,4 +72,26 @@ export const apiGetVideoOfOtherUser = async ({
   const { data } = await axios.get(url);
   console.log(data);
   return data ?? {};
+};
+
+export const apiGetOtherFollowerByType = async ({
+  type,
+  token,
+}: {
+  type: 'follower' | 'watching';
+  token?: string;
+}) => {
+  const url = `https://thutucphapluat.com/api/Login/list_follow_user?limit=10&page=0&type=${type}&user_id=1`;
+  return getWithToken({ url, token });
+};
+
+export const apiGetOtherListPost = ({
+  token,
+  id,
+}: {
+  token: string;
+  id: string;
+}) => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=1&created_by=${id}`;
+  return getWithToken({ url, token });
 };

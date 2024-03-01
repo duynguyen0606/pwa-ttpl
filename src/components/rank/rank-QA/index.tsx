@@ -39,8 +39,7 @@ function RankQA() {
             <div>
               <h3 className='font-semibold'>{item.full_name_question}</h3>
               <p style={{ color: 'var(--description-color)' }}>
-                {converDateToDays({ date: item.created_at_question })}&nbsp;
-                ngày trước
+                {converDateToDays({ date: item.created_at_question })}
               </p>
             </div>
           </div>
@@ -67,8 +66,7 @@ function RankQA() {
             <div>
               <h3 className='font-semibold'>{item.full_name_answer}</h3>
               <p style={{ color: 'var(--description-color)' }}>
-                {converDateToDays({ date: item.created_at_question })}&nbsp;
-                ngày trước
+                {converDateToDays({ date: item.created_at_question })}
               </p>
             </div>
           </div>
