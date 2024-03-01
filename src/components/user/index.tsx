@@ -57,7 +57,7 @@ function UserProfile() {
             />
           </div>
           <div className='flex flex-col items-center pb-4 pt-4'>
-            <div className='font-semibold text-2xl pb-4'>duynguyen</div>
+            <div className='font-semibold text-2xl pb-4'>{user?.full_name}</div>
             <div className='flex gap-2 items-center justify-center'>
               <div>Điểm thưởng: 200</div>
               <Image
