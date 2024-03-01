@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, ModalProps } from "antd";
+import { Button, Form, Input, Modal, ModalProps } from "antd";
 import {
     LawyerIcon,
     EnterpriseIcon,
@@ -7,23 +7,10 @@ import {
     StateCadresIcon,
 } from "@/src/components/common/icons";
 
-function NextStepRegister(props: ModalProps) {
-    const {open, onCancel} = props
-    return ( 
-        <Modal
-            open={open}
-            onCancel={onCancel}
-        >
-            Next Step
-        </Modal>
-    );
-}
-
 function ModalRegister(props: ModalProps) {
     const { open, onCancel } = props;
     const [roleActive, setRoleActive] = useState(0);
-    const [next, setNext] = useState(false)
-
+    const [next, setNext] = useState(false);
 
     const role_options = [
         {
@@ -78,8 +65,8 @@ function ModalRegister(props: ModalProps) {
                 {/* Header */}
                 <button onClick={onCancel}>
                     <img
-                        className="w-[26px] h-[27px] bg-[#EDEEFA] rounded-full"
-                        src="https://ttpl.vn/assets/images/mobile/type-back-login.png"
+                        className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
+                        src="/images/icons/left-arrow.png"
                     />
                 </button>
 
@@ -157,13 +144,7 @@ function ModalRegister(props: ModalProps) {
                     </div>
 
                     {/* Note */}
-                    <div className="text-center text-[#A1A5AC] mb-4">
-                        Với việc tiếp tục, bạn đã đồng ý với các{" "}
-                        <span className="text-[#4755D4]">
-                            Chính sách bảo mật
-                        </span>{" "}
-                        của chúng tôi
-                    </div>
+                    <Note />
 
                     {/* Have account */}
                     <div className="text-base mb-4">
@@ -178,6 +159,150 @@ function ModalRegister(props: ModalProps) {
 
             <NextStepRegister open={next} onCancel={() => setNext(false)} />
         </Modal>
+    );
+}
+
+function NextStepRegister(props: ModalProps) {
+    const { open, onCancel } = props;
+    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
+
+    return (
+        <Modal
+            open={open}
+            onCancel={onCancel}
+            closeIcon={null}
+            footer={null}
+            centered
+        >
+            <div>
+                {/* Close button */}
+                <button onClick={onCancel}>
+                    <img
+                        className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
+                        src="/images/icons/left-arrow.png"
+                    />
+                </button>
+
+                {/* Content */}
+                <div className="flex flex-col items-center justify-center">
+                    {/* Title */}
+                    <div className="py-2 text-center">
+                        <div className="mb-4 text-base font-semibold uppercase">
+                            Đăng ký
+                        </div>
+                    </div>
+
+                    {/* Icon */}
+                    <div className="relative"></div>
+
+                    {/* Number */}
+                    <div className="text-lg font-semibold mt-7 mb-8">
+                        2. Đăng ký
+                    </div>
+
+                    <Form
+                        className="w-full"
+                        form={form}
+                        onFinish={(values) => console.log(values)}
+                    >
+                        <Form.Item name="Name">
+                            <Input size="large" placeholder="Họ và tên" />
+                        </Form.Item>
+
+                        <Form.Item name="Email">
+                            <Input size="large" placeholder="Email" />
+                        </Form.Item>
+
+                        <Form.Item name="Phone">
+                            <Input
+                                size="large"
+                                type="number"
+                                placeholder="Số điện thoại"
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="Password">
+                            <Input.Password
+                                size="large"
+                                placeholder="Nhập mật khẩu"
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="ConfirmPassword">
+                            <Input.Password
+                                size="large"
+                                placeholder="Nhập lại mật khẩu"
+                            />
+                        </Form.Item>
+
+                        <div className="flex justify-between">
+                            <button
+                                style={{
+                                    width: "160px",
+                                    height: "54px",
+                                    fontSize: 18,
+                                    fontWeight: "600",
+                                    borderRadius: "40px",
+                                    color: "#4A433F",
+                                    backgroundColor: "#F2F2F2",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    margin: "8 0 8",
+                                }}
+                                onClick={onCancel}
+                            >
+                                Quay lại
+                            </button>
+
+                            <Form.Item>
+                                <Button
+                                    size="large"
+                                    htmlType="submit"
+                                    loading={loading}
+                                    style={{
+                                        width: "160px",
+                                        height: "54px",
+                                        fontSize: 18,
+                                        fontWeight: "600",
+                                        borderRadius: "40px",
+                                        color: "white",
+                                        backgroundColor: "#4755D4",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    Đăng ký
+                                </Button>
+                            </Form.Item>
+                        </div>
+                    </Form>
+
+                    <Note />
+
+                    {/* Have account */}
+                    <div className="text-base mb-4">
+                        Bạn đã có tài khoản?
+                        <span className="text-[#4755D4]" onClick={onCancel}>
+                            {" "}
+                            Đăng nhập
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </Modal>
+    );
+}
+
+function Note() {
+    return (
+        <div className="text-center text-[#A1A5AC] mb-4">
+            Với việc tiếp tục, bạn đã đồng ý với các{" "}
+            <span className="text-[#4755D4]">Chính sách bảo mật</span> của chúng
+            tôi
+        </div>
     );
 }
 
