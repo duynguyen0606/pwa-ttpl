@@ -27,10 +27,6 @@ export default function HomePage() {
   const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
   const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalPost, setOpenModalPost] = useState(false);
-  const [userFollow, setUserFollow] = useState<{
-    id: number;
-    action: 'string';
-  }>();
   const { user } = useAppSelector((state) => state.authState);
   const { listPost } = useAppSelector((state) => state.postState);
   const isMobileUI = useMediaQuery({
@@ -54,12 +50,15 @@ export default function HomePage() {
 
   useEffect(() => {
     (async () => {
-      const dataRes = await apiGetListPost({ page: 1 });
+      const dataRes = await apiGetListPost({ page });
       console.log(dataRes);
       if (dataRes.status) {
         dispatch(setListPost(dataRes.data));
       }
     })();
+    return () => {
+      dispatch(setListPost([]));
+    };
   }, []);
 
   useEffect(() => {
@@ -72,13 +71,11 @@ export default function HomePage() {
       return;
     }
     setLoading(true);
-    const res = await apiGetListPost({ page: page + 1 });
+    const res = await apiGetListPost({ page });
     if (res.status) {
       dispatch(setListPost([...listPost, ...res.data]));
-      setLoading(false);
-    } else {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
@@ -107,7 +104,7 @@ export default function HomePage() {
             <InfiniteScroll
               dataLength={listPost.length}
               next={loadMoreData}
-              hasMore={listPost.length !== 15000}
+              hasMore={true}
               loader={
                 <Skeleton style={{ width: '100%', height: 100 }} active />
               }

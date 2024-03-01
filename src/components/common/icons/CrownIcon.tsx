@@ -27,4 +27,6 @@ function CrownIcon(props: { width: string; height: string; bgColor: string }) {
   );
 }
 
+// typeUserRegister == 1 ?<svg bgColor={typeUserRegister == 1 : 'red' : 'gray'} ></svg>
+// // item1: <svg></svg>
 export default CrownIcon;

@@ -1,21 +1,24 @@
-import { apiGetUserWatchedProcedure } from '@/src/api/user';
+import { apiGetUserProcedureByType } from '@/src/api/user';
 import { useAppSelector } from '@/src/redux/hooks';
 import { ConfigProvider, Menu } from 'antd';
 import Table, { ColumnsType } from 'antd/es/table';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const dataNavs = [
   {
     label: 'Thủ tục đã xem',
     key: 1,
+    type: '',
   },
   {
     label: 'Thủ tục đã lưu',
     key: 2,
+    type: 'save',
   },
   {
     label: 'Thủ tục đã sửa',
     key: 3,
+    type: 'edit',
   },
 ];
 
@@ -28,9 +31,9 @@ interface DataType {
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Tên',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Thủ tục',
+    dataIndex: 'title',
+    key: 'title',
     width: '40%',
     render: (text) => (
       <div className='max-w-60 text-sky-500'>
@@ -40,8 +43,8 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: 'Cơ quan thực hiện',
-    dataIndex: 'agent',
-    key: 'agent',
+    dataIndex: 'co_quan_thuc_hien',
+    key: 'co_quan_thuc_hien',
     width: '30%',
     // render: (text) => <a>{text}</a>,
   },
@@ -57,15 +60,20 @@ function ProfileProcedure() {
   const [dataProcedure, setDataProcedure] = useState<Array<any>>();
   const { token } = useAppSelector((state) => state.authState);
 
-  const handleSelectItem = async (key: number) => {
-    if (key == 1) {
-      const dataRes = await apiGetUserWatchedProcedure({
-        url: 'https://thutucphapluat.com/api/Help_articles_controller/list_my_procedure?limit=10&page=1',
+  const handleSelectItem = async (type: string) => {
+    console.log(type);
+    setDataProcedure([]);
+    if (token) {
+      const dataRes = await apiGetUserProcedureByType({
+        type,
         token: token,
       });
-      console.log(dataRes);
+      if (dataRes.status) {
+        setDataProcedure(dataRes.data);
+      }
     }
   };
+
   return (
     <div>
       <ConfigProvider
@@ -86,19 +94,21 @@ function ProfileProcedure() {
           defaultSelectedKeys={['1']}
           items={dataNavs.map((item) => {
             return {
-              key: item.key,
+              key: item.type,
               label: item.label,
             };
           })}
-          onSelect={async ({ item, key }) => handleSelectItem(Number(key))}
+          onSelect={async ({ item, key: type }) => handleSelectItem(type)}
         />
       </ConfigProvider>
-      {/* <Table
-        bordered
-        columns={columns}
-        dataSource={listData}
-        pagination={{ position: ['bottomCenter'] }}
-      /> */}
+      <div className='p-10 bg-white'>
+        <Table
+          bordered
+          columns={columns}
+          dataSource={dataProcedure}
+          pagination={{ position: ['bottomCenter'] }}
+        />
+      </div>
     </div>
   );
 }

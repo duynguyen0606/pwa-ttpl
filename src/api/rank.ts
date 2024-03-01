@@ -5,7 +5,7 @@ import PostModel from '../models/Post';
 import RankProcedureModel from '../models/RankProcedure';
 import RankAnswer from '../models/RankAnswer';
 import User from '../models/User';
-import BussinessModel from '../models/Business';
+import BussinessModel from '../models/business';
 
 export const apiGetListRankPost = async ({
   page = 0,

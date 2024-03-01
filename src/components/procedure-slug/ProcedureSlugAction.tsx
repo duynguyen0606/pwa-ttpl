@@ -10,7 +10,10 @@ function ProcedureSlugAction({ id }: { id?: string }) {
     if (user && id) {
       (async () => {
         console.log('xxx');
-        const dataRes = await apiGetListActualImplementation(id, token);
+        const dataRes = await apiGetListActualImplementation(
+          id.toString(),
+          token
+        );
         if (dataRes.status) {
           console.log(data);
           setData(dataRes.data);

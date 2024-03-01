@@ -61,7 +61,7 @@ function Index({ params }: { params: { id: string } }) {
               </nav>
             ))}
           </div>
-          <ProcedureSlug data={dataContent} />
+          <ProcedureSlug procedureId={params.id} data={dataContent} />
         </div>
       </Col>
       {!isMobileClient && (

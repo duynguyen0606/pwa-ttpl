@@ -5,7 +5,12 @@ import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { getListArticle } from '@/src/redux/feature/postSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { getListNotification } from '@/src/redux/feature/userSlice';
+import {
+  getListFollower,
+  getListMyPost,
+  getListNotification,
+  getListWatching,
+} from '@/src/redux/feature/userSlice';
 
 function LayoutState(props: PropsWithChildren) {
   const isMobileUI = useMediaQuery({
@@ -24,6 +29,9 @@ function LayoutState(props: PropsWithChildren) {
   useEffect(() => {
     if (token) {
       dispatch(getListNotification({ token }));
+      dispatch(getListMyPost({ token }));
+      dispatch(getListFollower({ token }));
+      dispatch(getListWatching({ token }));
     }
   }, [token]);
 
