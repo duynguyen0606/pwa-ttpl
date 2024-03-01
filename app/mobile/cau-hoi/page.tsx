@@ -234,7 +234,7 @@ function Index() {
             <a href="tel: 0888888888" className="fixed bottom-16 left-4 z-[2] ">
                 <div className="flex w-28 h-9 bg-[--primary-color] rounded-3xl items-center justify-left pl-2">
                     <img
-                        src="https://ttpl.vn/assets/images/icon/phone.png"
+                        src="/images/introduce/phone.png"
                         alt="phone"
                         className="w-5 h-4 pr-1"
                     />

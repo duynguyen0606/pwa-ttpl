@@ -5,7 +5,6 @@ import ArticleModel from "@/src/models/Article";
 import CommentModel from "@/src/models/Comment";
 
 import { apiGetListCommentByPostId } from "@/src/api/home-page";
-import { DislikeIcon, LikeIcon, LikedIcon } from "@/src/assests/icons";
 import CommentCom from "../../common/comment";
 import CreateComment from "../../common/comment/CreateComment";
 import CommentItem from "../../common/comment/CommentItem";
@@ -27,8 +26,8 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                     {post.total_like ? (
                         <div className="flex items-center">
                             <img
-                                src="https://ttpl.vn/assets/images/icon/icon-like-blue.png"
-                                className="w-4 h-4"
+                                src="/images/icons/like-circle.png"
+                                className="w-5 h-5"
                             />
                             <span className="ml-1">{post.total_like}</span>
                         </div>
@@ -62,11 +61,11 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 "
             >
                 <div className="flex flex-row items-center">
-                    <LikeIcon width="18px" height="18px" color="#898A8D" />
+                    <img src="/images/icons/like.png" width={18} height={18} />
                     <span className="ml-2">Like</span>
                 </div>
                 <div className="flex flex-row items-center">
-                    <DislikeIcon width="18px" height="18px" color="#898A8D" />
+                    <img src="/images/icons/dislike.png" width={18} height={18} />
                     <span className="ml-2">Dislike</span>
                 </div>
                 <div
@@ -74,17 +73,17 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                     // onClick={() => handleFetchComment(post.id)}
                 >
                     <img
-                        className=""
-                        src="https://ttpl.vn/assets/images/icon/Comment.png"
-                        alt="comment"
+                        src="/images/icons/comment.png"
+                        width={18}
+                        height={18}
                     />
                     <span className="ml-2">Comment</span>
                 </div>
                 <div className="flex flex-row items-center">
                     <img
-                        className=""
-                        src="https://ttpl.vn/assets/images/icon/Share.png"
-                        alt="share"
+                        src="/images/icons/share.png"
+                        width={16}
+                        height={16}
                     />
                     <span className="ml-2">Share</span>
                 </div>

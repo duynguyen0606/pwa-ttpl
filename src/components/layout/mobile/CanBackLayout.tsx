@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { BackIcon } from "@/src/assests/icons";
 
 function CanBackLayout({
     back,
@@ -21,7 +20,7 @@ function CanBackLayout({
                 "
             >
                 <Link href={back} className="flex items-center">
-                    <BackIcon color="black" width="18px" height="18px" />
+                    <img src="/images/icons/left-arrow.png" width='18px' height='18px'/>
                 </Link>
                 <span className="ml-4">{title}</span>
             </div>

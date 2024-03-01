@@ -42,7 +42,11 @@ function Header({ title }: { title?: string }) {
                         className="absolute left-4"
                         onClick={() => setShowSidebar(true)}
                     >
-                        <img src="https://ttpl.vn/assets/images/icon/menu.png" />
+                        <img
+                            src="/images/icons/menu.png"
+                            width={22}
+                            height={22}
+                        />
                     </div>
                     <SidebarDrawer
                         open={showSidebar}
@@ -57,14 +61,15 @@ function Header({ title }: { title?: string }) {
                     {/* Search */}
                     <div className="absolute right-12">
                         <img
-                            src="https://ttpl.vn/files/icon/icon-feather-search.png"
-                            className="w-5 h-4"
+                            src="/images/icons/Search.png"
+                            className="w-6 h-5"
                         />
                     </div>
 
                     {/* Notification */}
                     <Link href="/mobile/thong-bao" className="absolute right-4">
-                        <BellIcon width="1.6rem" height="1.6rem" />
+                        {/* <BellIcon width="1.6rem" height="1.6rem" /> */}
+                        <img src="/images/icons/notification.png" width={22} height={22} />
                     </Link>
                 </>
             )}
