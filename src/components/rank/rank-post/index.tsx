@@ -50,7 +50,6 @@ function RankPost() {
                       {converDateToDays({
                         date: item.created_at,
                       })}
-                      &nbsp;ngày trước
                     </div>
                   </div>
                 </div>

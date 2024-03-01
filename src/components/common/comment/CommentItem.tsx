@@ -50,7 +50,7 @@ function CommentItem({
         <div className='flex-1'>
           <h2>{data.created_by_full_name}</h2>
           <p style={{ color: 'var(--description-color)' }}>
-            đã comment {converDateToDays({ date: data.created_at })} ngày trước
+            {converDateToDays({ date: data.created_at })}
           </p>
           <div className='pt-2'>{data.title}</div>
           {data.files.length > 0 && (

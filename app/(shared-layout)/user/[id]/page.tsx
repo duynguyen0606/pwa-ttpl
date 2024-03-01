@@ -1,16 +1,18 @@
+'use client';
+
 import { Button } from 'antd';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
-import ProfilePost from './ProfilePost';
-import ProfileVideo from './ProfileVideo';
-import ProfileProcedure from './ProfileProcedure';
-import ProfileFollow from './ProfileFollow';
-import ProfilePremium from './ProfilePremium';
-import { useMemo, useState } from 'react';
-import { Content } from 'antd/es/layout/layout';
-import ModalProtectAccount from '../modal/ModalProtectAccount';
-import ModalUpdateInfor from '../modal/ModalUpdateInfor';
+// import ProfilePost from './ProfilePost';
+// import ProfileVideo from './ProfileVideo';
+// import ProfileProcedure from './ProfileProcedure';
+// import ProfileFollow from './ProfileFollow';
+// import ProfilePremium from './ProfilePremium';
+import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '@/src/redux/hooks';
+import ProfilePost from '@/src/components/user/ProfilePost';
+import ProfileVideo from '@/src/components/user/ProfileVideo';
+import ProfileFollow from '@/src/components/user/ProfileFollow';
 
 interface NavItem {
   name: string;
@@ -21,20 +23,18 @@ interface NavItem {
 // const mapObjNav: { [key: number]: NavItem } = {
 //   1: { name: 'Bài viết', key: 1, dataContent: <ProfilePost /> },
 //   2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-//   3: { name: 'Thủ tục của tôi', key: 3, dataContent: <ProfileProcedure /> },
-//   4: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
-//   5: { name: 'Hỏi đáp pháp luật', key: 5, dataContent: <ProfileProcedure /> },
-//   6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
+//   3: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
 // };
 
-function UserProfile() {
+function Index({ params }: { params: { id: string } }) {
   const [keyActive, setKeyActive] = useState(1);
-  const [openModalProtect, setOpenModalProtect] = useState(false);
-  const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [userInfor, setUserInfor] = useState(null);
   const { user } = useAppSelector((state) => state.authState);
-  const { listMyPost, listFollower, listWatching } = useAppSelector(
-    (state) => state.userState
-  );
+  const [listPost, setListPost] = useState([]);
+  const [listWatching, setListWatching] = useState([]);
+  const [listFollower, setListFollower] = useState([]);
+
+  useEffect(() => {}, [params.id]);
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
     return {
@@ -43,23 +43,17 @@ function UserProfile() {
         key: 1,
         dataContent: (
           <ProfilePost
-            listPost={listMyPost}
+            listPost={listPost}
             listFollower={listFollower}
             listWatching={listWatching}
           />
         ),
       },
       2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-      3: { name: 'Thủ tục của tôi', key: 3, dataContent: <ProfileProcedure /> },
-      4: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
-      5: {
-        name: 'Hỏi đáp pháp luật',
-        key: 5,
-        dataContent: <ProfileProcedure />,
-      },
-      6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
+      3: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
     };
-  }, []);
+  }, [listPost, listFollower, listWatching]);
+
   return (
     <div>
       <div className='bg-white rounded-b-lg'>
@@ -96,24 +90,10 @@ function UserProfile() {
             <div className='absolute right-6 top-6'>
               <Button
                 className='button-primary'
-                onClick={() => setOpenModalProtect(true)}
+                // onClick={() => setOpenModalProtect(true)}
               >
-                Bảo mật tài khoản
+                Nhắn tin
               </Button>
-              <div className='flex justify-end mt-2'>
-                <Button
-                  type='text'
-                  icon={
-                    <Image
-                      src='/images/icons/pencil.png'
-                      alt='pencil'
-                      width={30}
-                      height={30}
-                    />
-                  }
-                  onClick={() => setOpenModalUpdate(true)}
-                />
-              </div>
             </div>
           </div>
           <div className='flex gap-4 justify-center border-t border-gray-200 py-2'>
@@ -132,14 +112,6 @@ function UserProfile() {
               </Button>
             ))}
           </div>
-          <ModalProtectAccount
-            open={openModalProtect}
-            onCancel={() => setOpenModalProtect(false)}
-          />
-          <ModalUpdateInfor
-            open={openModalUpdate}
-            onCancel={() => setOpenModalUpdate(false)}
-          />
         </div>
       </div>
       <div className='my-4'>{mapObjNav[keyActive].dataContent}</div>
@@ -147,4 +119,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default Index;

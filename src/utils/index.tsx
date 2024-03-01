@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { NextRequest, NextResponse, userAgent } from 'next/server';
+import moment from 'moment';
 
 export const renderCollapseIcon = (isActive?: boolean) => {
   return (
@@ -28,19 +29,21 @@ export function middleware(request: NextRequest) {
 
 export const converDateToDays = ({ date }: { date: string }) => {
   // Tạo một đối tượng Date cho ngày cần chuyển đổi
-  const pastDate = new Date(date).getTime();
+  // const pastDate = new Date(date).getTime();
 
-  // Tạo một đối tượng Date cho ngày hôm nay
-  const currentDate = new Date().getTime();
-  let diffInMilliseconds = currentDate - pastDate;
+  // // Tạo một đối tượng Date cho ngày hôm nay
+  // const currentDate = new Date().getTime();
+  // let diffInMilliseconds = currentDate - pastDate;
 
-  // Chuyển đổi số mili giây thành số ngày
-  let diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
+  // // Chuyển đổi số mili giây thành số ngày
+  // let diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
 
-  // Làm tròn số ngày xuống số nguyên gần nhất
-  let days = Math.floor(diffInDays);
+  // console.log(date);
+  // // Làm tròn số ngày xuống số nguyên gần nhất
+  // let days = Math.floor(diffInDays);
 
-  return days;
+  return date;
+  // return moment(date).fromNow();
 };
 
 // Hàm gửi dữ liệu dạng form-data với token

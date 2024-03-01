@@ -29,6 +29,12 @@ export const apiGetMyFollowerByType = ({
   return getWithToken({ url, token });
 };
 
+export const apiGetUserById = async ({ id }: { id: number }) => {
+  const url = `https://thutucphapluat.com/api/Users_controller/get_user_by_id/${id}`;
+  const { data } = await axios.get(url);
+  return data ?? {};
+};
+
 export const apiGetPostOfOtherUser = async ({
   page = 1,
   userID,

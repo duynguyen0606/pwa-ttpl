@@ -8,11 +8,19 @@ import { Post } from '../common';
 import PostModel from '@/src/models/Post';
 import ArticleModel from '@/src/models/Article';
 
-function ProfilePost() {
+function ProfilePost({
+  listPost,
+  listFollower,
+  listWatching,
+}: {
+  listPost: Array<ArticleModel>;
+  listFollower: Array<any>;
+  listWatching: Array<any>;
+}) {
   const [openModalPost, setOpenModalPost] = useState(false);
-  const { listMyPost, listFollower, listWatching } = useAppSelector(
-    (state) => state.userState
-  );
+  // const { listMyPost, listFollower, listWatching } = useAppSelector(
+  //   (state) => state.userState
+  // );
   return (
     <Row gutter={16}>
       <Col span={8}>
@@ -83,8 +91,8 @@ function ProfilePost() {
           <UserPost onOpenModal={() => setOpenModalPost(true)} />
         </div>
         <div className='p-4 rounded-lg'>
-          {listMyPost?.length > 0 &&
-            listMyPost.map((item) => (
+          {listPost?.length > 0 &&
+            listPost.map((item) => (
               <Post post={new ArticleModel(item)} key={item.title} />
             ))}
         </div>
