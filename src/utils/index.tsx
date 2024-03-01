@@ -111,7 +111,7 @@ export const getWithToken = async ({
   token,
 }: {
   url: string;
-  token: string;
+  token?: string;
 }) => {
   try {
     // Thực hiện gọi API

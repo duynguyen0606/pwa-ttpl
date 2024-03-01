@@ -25,8 +25,6 @@ function Post({ post }: { post: ArticleModel }) {
     }
   };
 
-  console.log(listPost);
-
   const handleFollow = async (id: string) => {
     if (id && token) {
       const dataRes = await apiFollowUser({
@@ -75,7 +73,7 @@ function Post({ post }: { post: ArticleModel }) {
               </div>
               <div>
                 <h4>{post.created_by_full_name}</h4>
-                <p className='text-neutral-300'>12 ngày trước</p>
+                <p className='text-neutral-300'>{post.created_at}</p>
               </div>
             </div>
 

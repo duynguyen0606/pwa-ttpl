@@ -12,10 +12,12 @@ function ProfilePost({
   listPost,
   listFollower,
   listWatching,
+  showPost = true,
 }: {
   listPost: Array<ArticleModel>;
   listFollower: Array<any>;
   listWatching: Array<any>;
+  showPost?: boolean;
 }) {
   const [openModalPost, setOpenModalPost] = useState(false);
   // const { listMyPost, listFollower, listWatching } = useAppSelector(
@@ -52,10 +54,10 @@ function ProfilePost({
                 {listFollower.map((item) => (
                   <div className='flex items-center justify-between py-2 w-full'>
                     <div className='flex items-center gap-2'>
-                      <Avatar src={item?.avatar_user_answer} size='large' />
-                      <div>{item?.name_user_answer}</div>
+                      <Avatar src={item?.avatar_user_follow} size='large' />
+                      <div>{item?.name_user_follow}</div>
                     </div>
-                    <Button disabled>Đang theo dõi</Button>
+                    <Button disabled>Người theo dõi</Button>
                   </div>
                 ))}
               </div>
@@ -75,8 +77,8 @@ function ProfilePost({
                 {listWatching.map((item) => (
                   <div className='flex items-center justify-between py-2 w-full'>
                     <div className='flex items-center gap-2'>
-                      <Avatar src={item?.avatar_user_answer} size='large' />
-                      <div>{item?.name_user_answer}</div>
+                      <Avatar src={item?.avatar_user_watching} size='large' />
+                      <div>{item?.name_user_watching}</div>
                     </div>
                     <Button disabled>Đang theo dõi</Button>
                   </div>
@@ -87,9 +89,11 @@ function ProfilePost({
         </div>
       </Col>
       <Col span={16}>
-        <div className='mb-4 p-4 bg-white rounded-lg'>
-          <UserPost onOpenModal={() => setOpenModalPost(true)} />
-        </div>
+        {showPost && (
+          <div className='mb-4 p-4 bg-white rounded-lg'>
+            <UserPost onOpenModal={() => setOpenModalPost(true)} />
+          </div>
+        )}
         <div className='p-4 rounded-lg'>
           {listPost?.length > 0 &&
             listPost.map((item) => (

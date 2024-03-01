@@ -13,6 +13,12 @@ import { useAppSelector } from '@/src/redux/hooks';
 import ProfilePost from '@/src/components/user/ProfilePost';
 import ProfileVideo from '@/src/components/user/ProfileVideo';
 import ProfileFollow from '@/src/components/user/ProfileFollow';
+import {
+  apiGetOtherFollowerByType,
+  apiGetOtherListPost,
+  apiGetUserById,
+} from '@/src/api/user';
+import User from '@/src/models/User';
 
 interface NavItem {
   name: string;
@@ -28,21 +34,53 @@ interface NavItem {
 
 function Index({ params }: { params: { id: string } }) {
   const [keyActive, setKeyActive] = useState(1);
-  const [userInfor, setUserInfor] = useState(null);
-  const { user } = useAppSelector((state) => state.authState);
+  const [userInfor, setUserInfor] = useState<any>();
+  const { user, token } = useAppSelector((state) => state.authState);
   const [listPost, setListPost] = useState([]);
   const [listWatching, setListWatching] = useState([]);
   const [listFollower, setListFollower] = useState([]);
 
-  useEffect(() => {}, [params.id]);
+  useEffect(() => {
+    if (params.id) {
+      (async () => {
+        const dataFollower = await apiGetOtherFollowerByType({
+          type: 'follower',
+          token,
+        });
+        if (dataFollower.status) {
+          setListFollower(dataFollower.data);
+        }
+        const dataWatching = await apiGetOtherFollowerByType({
+          type: 'watching',
+          token,
+        });
+        if (dataWatching.status) {
+          setListWatching(dataWatching.data);
+        }
+        const dataPost = await apiGetOtherListPost({
+          token,
+          id: params.id,
+        });
+        if (dataPost.status) {
+          setListPost(dataPost.data);
+        }
+        const dataUser = await apiGetUserById({ id: params.id });
+        if (dataUser.status) {
+          setUserInfor(dataUser.data);
+        }
+      })();
+    }
+  }, [params.id, token]);
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
+    console.log('xxx');
     return {
       1: {
         name: 'Bài viết',
         key: 1,
         dataContent: (
           <ProfilePost
+            showPost={false}
             listPost={listPost}
             listFollower={listFollower}
             listWatching={listWatching}
@@ -52,14 +90,16 @@ function Index({ params }: { params: { id: string } }) {
       2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
       3: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
     };
-  }, [listPost, listFollower, listWatching]);
+  }, [listPost, listFollower, listWatching, params.id, user]);
+
+  console.log(userInfor);
 
   return (
     <div>
       <div className='bg-white rounded-b-lg'>
         <div className='relative' style={{ paddingTop: '37.5%' }}>
           <ImageLegacy
-            src='https://ttpl.vn/assets/images/myprofile/anh-bia.png'
+            src={userInfor?.banner}
             layout='fill'
             className='absolute'
           />
@@ -70,16 +110,18 @@ function Index({ params }: { params: { id: string } }) {
             className='absolute rounded-full overflow-hidden bottom-full right-1/2 translate-y-1/4 translate-x-1/2 border-4 border-white'
           >
             <ImageLegacy
-              src={user?.image}
+              src={userInfor?.image}
               layout='responsive'
               width={150}
               height={150}
             />
           </div>
           <div className='flex flex-col items-center pb-4 pt-4'>
-            <div className='font-semibold text-2xl pb-4'>{user?.full_name}</div>
+            <div className='font-semibold text-2xl pb-4'>
+              {userInfor?.full_name}
+            </div>
             <div className='flex gap-2 items-center justify-center'>
-              <div>Điểm thưởng: 200</div>
+              <div>Điểm thưởng: {userInfor?.point}</div>
               <Image
                 src='/images/icons/info.png'
                 alt='info'
