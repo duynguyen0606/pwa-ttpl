@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAppSelector } from "@/src/redux/hooks";
-import { BellIcon } from "@/src/assests/icons";
 import SidebarDrawer from "../drawers/SidebarDrawer";
 
 function Header({ title }: { title?: string }) {
@@ -68,7 +67,6 @@ function Header({ title }: { title?: string }) {
 
                     {/* Notification */}
                     <Link href="/mobile/thong-bao" className="absolute right-4">
-                        {/* <BellIcon width="1.6rem" height="1.6rem" /> */}
                         <img src="/images/icons/notification.png" width={22} height={22} />
                     </Link>
                 </>
