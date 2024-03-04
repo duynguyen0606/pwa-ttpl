@@ -174,7 +174,7 @@ function Note({ color: primaryColor }: { color: string }) {
     );
 }
 
-function ChooseTypeEnterprise({color: primaryColor}: {color: string}) {
+function ChooseTypeEnterprise({ color: primaryColor }: { color: string }) {
     const [typeActive, setTypeActive] = useState(0);
     const typeEnterprise = useMemo(() => {
         return [
@@ -199,7 +199,7 @@ function ChooseTypeEnterprise({color: primaryColor}: {color: string}) {
                 name: "Doanh nghiệp",
             },
         ];
-    }, [])
+    }, []);
 
     return (
         <div className="w-full grid grid-cols-2 grid-rows-2">

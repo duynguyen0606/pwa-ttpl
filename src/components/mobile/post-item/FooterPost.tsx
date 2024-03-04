@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+import Image from "next/image";
 
 import ArticleModel from "@/src/models/Article";
 import CommentModel from "@/src/models/Comment";
@@ -8,7 +10,6 @@ import { apiGetListCommentByPostId } from "@/src/api/home-page";
 import CommentCom from "../../common/comment";
 import CreateComment from "../../common/comment/CreateComment";
 import CommentItem from "../../common/comment/CommentItem";
-import Image from "next/image";
 
 function FooterPostItem({ post }: { post: ArticleModel }) {
     const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
@@ -28,10 +29,10 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                         <div className="flex items-center">
                             <Image
                                 src="/images/icons/like-circle.png"
-                                className="w-5 h-5"
                                 alt=""
                                 width={20}
                                 height={20}
+                                className="w-5 h-5"
                             />
                             <span className="ml-1">{post.total_like}</span>
                         </div>
@@ -65,11 +66,21 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 "
             >
                 <div className="flex flex-row items-center">
-                    <Image src="/images/icons/like.png" alt="" width={18} height={18} />
+                    <Image
+                        src="/images/icons/like.png"
+                        alt=""
+                        width={18}
+                        height={18}
+                    />
                     <span className="ml-2">Like</span>
                 </div>
                 <div className="flex flex-row items-center">
-                    <Image src="/images/icons/dislike.png" alt="" width={18} height={18} />
+                    <Image
+                        src="/images/icons/dislike.png"
+                        alt=""
+                        width={18}
+                        height={18}
+                    />
                     <span className="ml-2">Dislike</span>
                 </div>
                 <div
@@ -100,7 +111,7 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 <div className="py-4 w-full">
                     <CreateComment />
                     {dataComment.map((item) => (
-                        <CommentItem data={item} />
+                        <CommentItem key={item.created_at} data={item} />
                     ))}
                 </div>
             )}

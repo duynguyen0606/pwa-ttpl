@@ -51,8 +51,11 @@ function ProfilePost({
             </div>
             {listFollower?.length ? (
               <div>
-                {listFollower.map((item) => (
-                  <div className='flex items-center justify-between py-2 w-full'>
+                {listFollower.map((item, id) => (
+                  <div
+                    key={id}
+                    className='flex items-center justify-between py-2 w-full'
+                  >
                     <div className='flex items-center gap-2'>
                       <Avatar src={item?.avatar_user_follow} size='large' />
                       <div>{item?.name_user_follow}</div>
@@ -78,8 +81,11 @@ function ProfilePost({
             </div>
             {listWatching?.length && (
               <div>
-                {listWatching.map((item) => (
-                  <div className='flex items-center justify-between py-2 w-full'>
+                {listWatching.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className='flex items-center justify-between py-2 w-full'
+                  >
                     <div className='flex items-center gap-2'>
                       <Avatar src={item?.avatar_user_watching} size='large' />
                       <div>{item?.name_user_watching}</div>

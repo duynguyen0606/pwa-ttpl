@@ -10,5 +10,5 @@ export const usePageAuth = () => {
     if (!user) {
       router.push('/');
     }
-  }, []);
+  }, [router, user]);
 };

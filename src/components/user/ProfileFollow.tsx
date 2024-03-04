@@ -54,7 +54,10 @@ function ProfileFollow({
             <div className='grid grid-cols-2 gap-4 border '>
               {listFollower.length &&
                 listFollower?.map((item) => (
-                  <div className='flex items-center justify-between p-2 rounded-lg border border-gray-300'>
+                  <div
+                    key={item.avatar_user_answer}
+                    className='flex items-center justify-between p-2 rounded-lg border border-gray-300'
+                  >
                     <div className='flex items-center gap-2'>
                       <Avatar src={item?.avatar_user_answer} size='large' />
                       <div>{item?.name_user_answer}</div>
@@ -72,7 +75,10 @@ function ProfileFollow({
               {listWatching.length && listWatching?.length && (
                 <div className='grid grid-cols-2 gap-4'>
                   {listWatching.map((item) => (
-                    <div className='flex items-center justify-between p-2 rounded-lg border border-gray-300'>
+                    <div
+                      key={item.name_user_watching}
+                      className='flex items-center justify-between p-2 rounded-lg border border-gray-300'
+                    >
                       <div className='flex items-center gap-2'>
                         <Avatar src={item?.avatar_user_watching} size='large' />
                         <div>{item?.name_user_watching}</div>

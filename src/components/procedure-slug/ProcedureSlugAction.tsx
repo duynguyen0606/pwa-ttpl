@@ -20,7 +20,7 @@ function ProcedureSlugAction({ id }: { id?: string }) {
         }
       })();
     }
-  }, [user, id, token]);
+  }, [user, id, token, data]);
   return (
     <div>
       {data ? <div>Thực tế thực hiện</div> : <div>Không có dữ liệu</div>}

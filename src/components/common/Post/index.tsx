@@ -159,7 +159,7 @@ function Post({ post }: { post: ArticleModel }) {
             <div className='py-4 w-full'>
               <CreateComment />
               {dataComment.map((item) => (
-                <CommentItem data={item} />
+                <CommentItem key={item.created_at} data={item} />
               ))}
             </div>
           )}

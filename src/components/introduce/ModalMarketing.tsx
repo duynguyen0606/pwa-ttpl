@@ -14,7 +14,7 @@ function ModalMarketing(props: ModalProps) {
     >
       <div>
         {Array.from(Array(15).keys()).map((item) => (
-          <div className='relative'>
+          <div key={item} className='relative'>
             <Image
               src={
                 item + 1 < 10

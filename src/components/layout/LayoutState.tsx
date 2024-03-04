@@ -39,13 +39,13 @@ function LayoutState(props: PropsWithChildren) {
       dispatch(getListFollower({ token }));
       dispatch(getListWatching({ token }));
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   return (
     <div>
       {children}
 
-      {!isMobileClient && (
+      {!isMobileUI && (
         <div>
           {/* phone */}
           <Link href='tel:0888889366' className='fixed left-8 bottom-10'>

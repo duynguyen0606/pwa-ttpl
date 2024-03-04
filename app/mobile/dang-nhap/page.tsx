@@ -148,7 +148,7 @@ function Index() {
                             Hoặc đăng nhập bằng mạng xã hội
                         </span>
                         <div className="flex w-full justify-center">
-                            <a
+                            <Link
                                 href="#"
                                 className="justify-center mx-2 w-11 h-11 flex items-center bg-[#F6F6FD] rounded-full"
                             >
@@ -158,8 +158,8 @@ function Index() {
                                     width={14}
                                     height={25}
                                 />
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="#"
                                 className="justify-center mx-2 w-11 h-11 flex items-center bg-[#F6F6FD] rounded-full"
                             >
@@ -169,7 +169,7 @@ function Index() {
                                     width={25}
                                     height={25}
                                 />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

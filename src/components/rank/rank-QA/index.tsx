@@ -20,7 +20,7 @@ function RankQA() {
         }
       }
     })();
-  }, [page]);
+  }, [page, listQA.length]);
 
   const items: CollapseProps['items'] = listQA.map((item, id) => {
     return {

@@ -26,7 +26,7 @@ function RankStaff(props: { type?: number }) {
         }
       }
     })();
-  }, [page]);
+  }, [page, listRankLawyer.length]);
 
   return (
     <>
@@ -127,7 +127,7 @@ function RankStaff(props: { type?: number }) {
             </div>
             <div className='pt-6'>
               {listRankLawyer.slice(3).map((item, id) => (
-                <div className='flex items-center gap-4 mb-4'>
+                <div key={id} className='flex items-center gap-4 mb-4'>
                   <div className='font-semibold text-xl w-10'>#{id + 4}</div>
                   <div
                     className='flex items-center gap-2 rounded-full flex-1 px-4 py-2'
