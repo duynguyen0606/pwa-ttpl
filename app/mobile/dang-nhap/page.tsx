@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import { Button, Form, Input, message } from "antd";
 
 import { apiLogin } from "@/src/api/auth";
-import { setDataUser } from "@/src/redux/feature/authSlice";
+import {
+    setDataUser,
+    setOpenModalForgotPassword,
+    setOpenModalRegister,
+} from "@/src/redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { ModalForgotPassword, ModalRegister } from "@/src/components/modal";
 
@@ -17,13 +21,12 @@ type FormSubmitValueType = {
 
 function Index() {
     const router = useRouter();
-    const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const [showRegister, setShowRegister] = useState(false);
 
     const dispatch = useAppDispatch();
     const { loading, user, loginCode } = useAppSelector(
         (state) => state.authState
     );
+
     const [form] = Form.useForm();
     const handleSubmitForm = async (values: FormSubmitValueType) => {
         const dataRes = await apiLogin(values);
@@ -85,7 +88,11 @@ function Index() {
                     </Form.Item>
 
                     <div className="text-end text-sm text-[#4755D4] pt-1">
-                        <span onClick={() => setShowForgotPassword(true)}>
+                        <span
+                            onClick={() =>
+                                dispatch(setOpenModalForgotPassword(true))
+                            }
+                        >
                             Quên mật khẩu ?
                         </span>
                     </div>
@@ -114,7 +121,7 @@ function Index() {
                     Bạn chưa có tài khoản?
                     <span
                         className="font-bold text-[#4755D4] mx-1"
-                        onClick={() => setShowRegister(true)}
+                        onClick={() => dispatch(setOpenModalRegister(true))}
                     >
                         {" "}
                         Đăng ký
@@ -162,14 +169,14 @@ function Index() {
 
             {/* Forgot password modal */}
             <ModalForgotPassword
-                open={showForgotPassword}
-                onCancel={() => setShowForgotPassword(false)}
+                onCancel={() => dispatch(setOpenModalForgotPassword(false))}
+                onOk={() => dispatch(setOpenModalForgotPassword(false))}
             />
 
             {/* Register modal */}
             <ModalRegister
-                open={showRegister}
-                onCancel={() => setShowRegister(false)}
+                onCancel={() => dispatch(setOpenModalRegister(false))}
+                onOk={() => dispatch(setOpenModalRegister(false))}
             />
         </div>
     );

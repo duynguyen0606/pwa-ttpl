@@ -1,23 +1,60 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Button, Form, Input, Modal, ModalProps } from "antd";
 
+import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
+import { setOpenModalForgotPassword } from "@/src/redux/feature/authSlice";
+
 function ModalForgotPassword(props: ModalProps) {
-    const { open, onCancel } = props;
     const [form] = Form.useForm();
+    const [primaryColor, setPrimaryColor] = useState("--primary-color");
+    const dispatch = useAppDispatch();
+    const isMobileUI = useMediaQuery({
+        query: "(max-width: 600px)",
+    });
+
+    const { openModalForgotPassword } = useAppSelector(
+        (state) => state.authState
+    );
+
+    useEffect(() => {
+        setPrimaryColor(
+            isMobileUI ? "var(--secondary-color)" : "var(--primary-color)"
+        );
+    }, [isMobileUI]);
 
     return (
         <Modal
-            open={open}
-            onCancel={onCancel}
+            open={openModalForgotPassword}
+            onCancel={() => dispatch(setOpenModalForgotPassword(false))}
             footer={null}
-            // closeIcon={
-            //     <button className='w-7 h-7 rounded-full bg-[#f6f6fd]'>
-            //         <img src="https://ttpl.vn/assets/images/mobile/type-back-login.png" alt="" />
-            //     </button>
-            // }
+            closeIcon={isMobileUI ? null : undefined}
+            width={isMobileUI ? undefined : "460px"}
         >
             <div>
+                {/* Close button */}
+                {isMobileUI && (
+                    /* Close button */
+                    <button
+                        onClick={() =>
+                            dispatch(setOpenModalForgotPassword(false))
+                        }
+                    >
+                        <img
+                            className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
+                            src="/images/icons/left-arrow.png"
+                        />
+                    </button>
+                )}
                 <div className="flex flex-col items-center justify-center pb-2 pt-5">
-                    <h3 className="text-base font-bold uppercase pb-1">
+                    <h3
+                        className={`font-semibold uppercase
+                        ${
+                            isMobileUI ? "text-base pb-1" : "text-2xl py-[14px]"
+                        }`}
+                    >
                         Quên mật khẩu
                     </h3>
                     <h4 className="py-1 text-xs">
@@ -29,8 +66,10 @@ function ModalForgotPassword(props: ModalProps) {
                     <Form.Item name="email">
                         <Input
                             style={{
-                                backgroundColor: "#F4F5F8",
-                                border: "none",
+                                backgroundColor: isMobileUI
+                                    ? "#F4F5F8"
+                                    : "#FFF",
+                                border: isMobileUI ? "none" : undefined,
                             }}
                             size="large"
                             placeholder="Email"
@@ -40,11 +79,11 @@ function ModalForgotPassword(props: ModalProps) {
                     <Form.Item>
                         <Button
                             style={{
-                                backgroundColor: "#4755D4",
-                                color: "#fff",
+                                backgroundColor: primaryColor,
+                                color: "#FFF",
                                 border: "none",
                                 width: "100%",
-                                borderRadius: "20px",
+                                borderRadius: isMobileUI ? "20px" : "4px",
                                 fontWeight: 600,
                             }}
                             htmlType="submit"
