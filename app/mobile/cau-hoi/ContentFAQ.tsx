@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useMemo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Collapse, Pagination } from 'antd';
@@ -29,9 +30,11 @@ function ContentFAQ() {
         className={`mt-20 rounded-full w-7 h-7 p-1 overflow-hidden 
                 ${isMobileUI ? 'bg-[#4755D4]' : 'bg-[var(--primary-color)]'}`}
       >
-        <img
+        <Image
           src={!!isActive ? '/images/icons/up.png' : '/images/icons/down.png'}
           alt='expand icon'
+          width={24}
+          height={24}
         />
       </div>
     );

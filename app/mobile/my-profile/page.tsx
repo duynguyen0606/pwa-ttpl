@@ -11,7 +11,7 @@ import { authLogout } from "@/src/redux/feature/authSlice";
 import Footer from "@/src/components/mobile/footer/Footer";
 
 function Index() {
-    const router = useRouter()
+    const router = useRouter();
     const { user, token } = useAppSelector((state) => state.authState);
     const dispatch = useAppDispatch();
 
@@ -41,9 +41,9 @@ function Index() {
                 token,
             })
         );
-        
-        router.push('/mobile')
-    }
+
+        router.push("/mobile");
+    };
 
     return (
         <>
@@ -62,7 +62,12 @@ function Index() {
                     >
                         {/* back btn */}
                         <Link href="/mobile" className="absolute top-5 left-5">
-                            <Image src='/images/icons/white-left-arrow.png' alt="mui ten" width={25} height={25}/>
+                            <Image
+                                src="/images/icons/white-left-arrow.png"
+                                alt="mui ten"
+                                width={25}
+                                height={25}
+                            />
                         </Link>
 
                         {/* avatar-user */}
@@ -73,9 +78,16 @@ function Index() {
                                 mb-4
                             "
                         >
-                            <img
-                                src= {user?.image ? user.image : "https://ttpl.vn/assets/images/logo/logo-legalzone.png"}
+                            <Image
+                                src={
+                                    user?.image
+                                        ? user.image
+                                        : "https://ttpl.vn/assets/images/logo/logo-legalzone.png"
+                                }
                                 className="w-full h-full"
+                                alt=""
+                                width={71}
+                                height={71}
                             />
                         </div>
 
@@ -128,9 +140,12 @@ function Index() {
                             "
                             >
                                 Sửa
-                                <img
+                                <Image
                                     className="ml-1"
                                     src="https://ttpl.vn/assets/images/mobile/Icon-awesome-pen.png"
+                                    alt="pencil"
+                                    width={12}
+                                    height={12}
                                 />
                             </Link>
                         </div>
@@ -146,7 +161,12 @@ function Index() {
                                     mb-5
                                 "
                                 >
-                                    <img className="" src={item.icons} />
+                                    <Image
+                                        src={item.icons}
+                                        alt=""
+                                        width={19}
+                                        height={19}
+                                    />
                                     <span className="ml-3">{item.value}</span>
                                 </div>
                             ))}
@@ -163,9 +183,12 @@ function Index() {
                             "
                             >
                                 <div className="flex items-center">
-                                    <img
+                                    <Image
                                         className="mr-3"
                                         src="https://ttpl.vn/assets/images/mobile/Icon-feather-clock.png"
+                                        alt=""
+                                        width={18}
+                                        height={17}
                                     />
                                     <span>Thời hạn sử dụng gói dịch vụ</span>
                                 </div>
@@ -182,14 +205,22 @@ function Index() {
                             "
                             >
                                 <div className="flex items-center">
-                                    <img
+                                    <Image
                                         className="mr-3"
                                         src="https://ttpl.vn/assets/images/mobile/regulation.png"
+                                        alt=""
+                                        width={18}
+                                        height={18}
                                     />
                                     <span>Thủ tục của tôi</span>
                                 </div>
                                 <div>
-                                    <img src="https://ttpl.vn/assets/images/mobile/carret-right.png" />
+                                    <Image
+                                        src="/images/icons/right.png"
+                                        alt=""
+                                        width={16}
+                                        height={16}
+                                    />
                                 </div>
                             </Link>
 
@@ -202,9 +233,12 @@ function Index() {
                             "
                             >
                                 <div className="flex items-center">
-                                    <img
+                                    <Image
                                         className="mr-3"
-                                        src="https://ttpl.vn/assets/images/mobile/Icon-feather-bell.png"
+                                        src="/images/icons/notification.png"
+                                        alt="thong bao"
+                                        width={18}
+                                        height={18}
                                     />
                                     <span>Bật thông báo</span>
                                 </div>
@@ -223,14 +257,22 @@ function Index() {
                             "
                             >
                                 <div className="flex items-center">
-                                    <img
+                                    <Image
                                         className="mr-3"
                                         src="https://ttpl.vn/assets/images/mobile/Icon-feather-key.png"
-                                    />
+                                        alt=""
+                                        width={18}
+                                        height={18}
+                                    />  
                                     <span>Đổi mật khẩu</span>
                                 </div>
                                 <div>
-                                    <img src="https://ttpl.vn/assets/images/mobile/carret-right.png" />
+                                    <Image
+                                        src="/images/icons/right.png"
+                                        alt=""
+                                        width={16}
+                                        height={16}
+                                    />
                                 </div>
                             </Link>
                         </div>

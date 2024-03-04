@@ -231,12 +231,14 @@ function Index() {
     return (
         <div>
             {/* Contact */}
-            <a href="tel: 0888888888" className="fixed bottom-16 left-4 z-[2] ">
+            <a href="tel: 0888888888" className="fixed bottom-6 left-4 z-[2] ">
                 <div className="flex w-28 h-9 bg-[--primary-color] rounded-3xl items-center justify-left pl-2">
-                    <img
+                    <Image
                         src="/images/introduce/phone.png"
                         alt="phone"
-                        className="w-5 h-4 pr-1"
+                        className="pr-1"
+                        width={20}
+                        height={16}
                     />
                     <span className="text-white text-xs">0888888888</span>
                 </div>
@@ -252,9 +254,12 @@ function Index() {
                 "
             >
                 <Link href="/mobile">
-                    <img
+                    <Image
                         className="mr-2"
-                        src="https://ttpl.vn/assets/images/mobile/type-back.png"
+                        src="/images/icons/left-arrow.png"
+                        alt=""
+                        width={20}
+                        height={20}
                     />
                 </Link>
                 Hỏi đáp pháp luật

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CollapseProps, Collapse } from "antd";
 import { Question, Answer } from "@/src/components/mobile/law-qa";
 
@@ -141,13 +142,15 @@ function ContenUserQ({page}: {page: number}) {
     const renderIcon = (isActive?: boolean) => {
         return (
             <div className="mt-20 rounded-full w-7 h-7 p-1 overflow-hidden bg-[#4755D4]">
-                <img
+                <Image
                     src={
                         !!isActive
                             ? "/images/icons/up.png"
                             : "/images/icons/down.png"
                     }
                     alt="expand icon"
+                    width={24}
+                    height={24}
                 />
             </div>
         );

@@ -11,6 +11,7 @@ import {
   getListNotification,
   getListWatching,
 } from '@/src/redux/feature/userSlice';
+import Image from 'next/image';
 
 function LayoutState(props: PropsWithChildren) {
   const isMobileUI = useMediaQuery({
@@ -58,7 +59,7 @@ function LayoutState(props: PropsWithChildren) {
                 borderRadius: '5.5rem',
               }}
             >
-              <img src='/images/introduce/phone.png' width='35' />
+              <Image src='/images/introduce/phone.png' alt='' width={35} height={35} />
               <span className='text-white ml-2'>0888889366</span>
             </div>
           </Link>
@@ -68,7 +69,7 @@ function LayoutState(props: PropsWithChildren) {
             href='https://www.dmca.com/Protection/Status.aspx?ID=7dd76e90-0606-47eb-af77-697796ce89a5&refurl=https://ttpl.vn/'
             className='fixed bottom-0 right-0'
           >
-            <img
+            <Image
               src='https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=7dd76e90-0606-47eb-af77-697796ce89a5'
               alt='DMCA.com Protection Status'
               width='121'

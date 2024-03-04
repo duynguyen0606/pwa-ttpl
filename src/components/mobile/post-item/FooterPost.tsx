@@ -8,6 +8,7 @@ import { apiGetListCommentByPostId } from "@/src/api/home-page";
 import CommentCom from "../../common/comment";
 import CreateComment from "../../common/comment/CreateComment";
 import CommentItem from "../../common/comment/CommentItem";
+import Image from "next/image";
 
 function FooterPostItem({ post }: { post: ArticleModel }) {
     const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
@@ -25,9 +26,12 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 <div className="show-like text-sm flex flex-row">
                     {post.total_like ? (
                         <div className="flex items-center">
-                            <img
+                            <Image
                                 src="/images/icons/like-circle.png"
                                 className="w-5 h-5"
+                                alt=""
+                                width={20}
+                                height={20}
                             />
                             <span className="ml-1">{post.total_like}</span>
                         </div>
@@ -61,27 +65,29 @@ function FooterPostItem({ post }: { post: ArticleModel }) {
                 "
             >
                 <div className="flex flex-row items-center">
-                    <img src="/images/icons/like.png" width={18} height={18} />
+                    <Image src="/images/icons/like.png" alt="" width={18} height={18} />
                     <span className="ml-2">Like</span>
                 </div>
                 <div className="flex flex-row items-center">
-                    <img src="/images/icons/dislike.png" width={18} height={18} />
+                    <Image src="/images/icons/dislike.png" alt="" width={18} height={18} />
                     <span className="ml-2">Dislike</span>
                 </div>
                 <div
                     className="flex flex-row items-center"
                     // onClick={() => handleFetchComment(post.id)}
                 >
-                    <img
+                    <Image
                         src="/images/icons/comment.png"
+                        alt=""
                         width={18}
                         height={18}
                     />
                     <span className="ml-2">Comment</span>
                 </div>
                 <div className="flex flex-row items-center">
-                    <img
+                    <Image
                         src="/images/icons/share.png"
+                        alt=""
                         width={16}
                         height={16}
                     />

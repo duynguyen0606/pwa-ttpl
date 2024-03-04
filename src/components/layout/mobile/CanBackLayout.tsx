@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 function CanBackLayout({
@@ -20,7 +21,7 @@ function CanBackLayout({
                 "
             >
                 <Link href={back} className="flex items-center">
-                    <img src="/images/icons/left-arrow.png" width='18px' height='18px'/>
+                    <Image src="/images/icons/left-arrow.png" alt="" width={18} height={18}/>
                 </Link>
                 <span className="ml-4">{title}</span>
             </div>

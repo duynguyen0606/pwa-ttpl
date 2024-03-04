@@ -6,6 +6,7 @@ import { Button, Form, Input, Modal, ModalProps } from "antd";
 
 import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import { setOpenModalForgotPassword } from "@/src/redux/feature/authSlice";
+import Image from "next/image";
 
 function ModalForgotPassword(props: ModalProps) {
     const [form] = Form.useForm();
@@ -42,9 +43,12 @@ function ModalForgotPassword(props: ModalProps) {
                             dispatch(setOpenModalForgotPassword(false))
                         }
                     >
-                        <img
+                        <Image
                             className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
                             src="/images/icons/left-arrow.png"
+                            alt=''
+                            width={26}
+                            height={26}
                         />
                     </button>
                 )}

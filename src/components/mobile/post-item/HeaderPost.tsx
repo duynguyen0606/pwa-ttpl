@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import { converDateToDays } from '@/src/utils';
 import ArticleModel from '@/src/models/Article';
+import Image from 'next/image';
 
 function HeaderPostItem({ post }: { post: ArticleModel }) {
   const [follow, setFollow] = useState(false);
@@ -12,10 +13,12 @@ function HeaderPostItem({ post }: { post: ArticleModel }) {
   return (
     <header className='flex justify-between mb-2'>
       <div className='flex'>
-        <img
+        <Image
           src='https://ttpl.vn/assets/images/logo/logo-legalzone.png'
           className='w-10 h-10 object-cover rounded-full'
           alt='avatar'
+          width={40}
+          height={40}
         />
         <div className='flex flex-col ml-2 justify-center'>
           <Link

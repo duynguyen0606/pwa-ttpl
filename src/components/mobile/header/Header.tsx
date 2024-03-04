@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useAppSelector } from "@/src/redux/hooks";
 import SidebarDrawer from "../drawers/SidebarDrawer";
@@ -23,9 +24,11 @@ function Header({ title }: { title?: string }) {
                 <>
                     <div className="w-10 h-10 flex items-center left-1 absolute">
                         <Link href="/mobile">
-                            <img
+                            <Image
                                 src="https://ttpl.vn/assets/images/logo/logo-legalzone.png"
                                 alt="logo-legalzone"
+                                width={40}
+                                height={40}
                             />
                         </Link>
                     </div>
@@ -41,8 +44,9 @@ function Header({ title }: { title?: string }) {
                         className="absolute left-4"
                         onClick={() => setShowSidebar(true)}
                     >
-                        <img
+                        <Image
                             src="/images/icons/menu.png"
+                            alt=""
                             width={22}
                             height={22}
                         />
@@ -59,15 +63,22 @@ function Header({ title }: { title?: string }) {
 
                     {/* Search */}
                     <div className="absolute right-12">
-                        <img
+                        <Image
                             src="/images/icons/Search.png"
-                            className="w-6 h-5"
+                            alt=""
+                            width={24}
+                            height={20}
                         />
                     </div>
 
                     {/* Notification */}
                     <Link href="/mobile/thong-bao" className="absolute right-4">
-                        <img src="/images/icons/notification.png" width={22} height={22} />
+                        <Image
+                            src="/images/icons/notification.png"
+                            alt=""
+                            width={22}
+                            height={22}
+                        />
                     </Link>
                 </>
             )}

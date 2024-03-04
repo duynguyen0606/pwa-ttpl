@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function Question({
   user,
   type,
@@ -13,13 +15,15 @@ function Question({
     <div>
       {user && (
         <div className='flex items-center flex-wrap mb-3'>
-          <img
+          <Image
             className='w-9 h-9 rounded-full object-cover'
             src={
               user?.img ||
               'https://ttpl.vn/assets/images/logo/logo-legalzone.png'
             }
             alt='avatar user'
+            width={36}
+            height={36}
           />
           <div className='ml-3'>
             <a href='' className='text-[#444] font-bold'>

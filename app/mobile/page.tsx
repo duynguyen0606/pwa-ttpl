@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import Link from "next/link";
+import Image from "next/image";
+
 import { apiGetListProcedure } from "@/src/api/procedure";
 
 import Header from "@/src/components/mobile/header/Header";
@@ -11,7 +14,6 @@ import Footer from "@/src/components/mobile/footer/Footer";
 
 import ProcedureModel from "@/src/models/Procedure";
 import ProcedureItem from "@/src/components/mobile/procedure-item/ProcedureItem";
-import Link from "next/link";
 
 function Index() {
     const dataSlider = [
@@ -48,9 +50,12 @@ function Index() {
             <div className="m-4 mt-0 pt-[100px]">
                 {/* Search component */}
                 <div className="flex relative w-full h-10 mb-4">
-                    <img
+                    <Image
+                        className="absolute left-4 top-3"
                         src="/images/icons/Search.png"
-                        className="absolute w-5 h-4 left-4 top-3"
+                        alt=""
+                        width={20}
+                        height={16}
                     />
                     <input
                         placeholder="Tìm kiếm"
@@ -110,10 +115,12 @@ function Index() {
                             rounded-3xl  
                         "
                     >
-                        <img
+                        <Image
                             src="/images/introduce/phone.png"
                             alt="phone"
-                            className="w-5 h-4 pr-1"
+                            className="pr-1"
+                            width={20}
+                            height={16}
                         />
                         <span className="text-white text-xs">0888888888</span>
                     </div>

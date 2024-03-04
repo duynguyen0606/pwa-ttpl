@@ -230,10 +230,12 @@ function Index({ params }: { params: { slug: string } }) {
             <div className="bg-white">
                 {/* background */}
                 <div className="relative text-center">
-                    <img
+                    <Image
                         className="w-full object-cover max-h-[340px]"
                         src="https://ttpl.vn/assets/images/myprofile/anh-bia.png"
                         alt="anh bia"
+                        width={360}
+                        height={131}
                     />
 
                     {/* avatar */}
@@ -248,10 +250,12 @@ function Index({ params }: { params: { slug: string } }) {
                         "
                         style={{ bottom: "-1.2rem" }}
                     >
-                        <img
+                        <Image
                             className="w-20 h-20"
                             src="https://ttpl.vn/assets/images/logo/logo-legalzone.png"
                             alt="avatar"
+                            width={80}
+                            height={80}
                         />
                     </div>
                 </div>
@@ -273,8 +277,9 @@ function Index({ params }: { params: { slug: string } }) {
                             className="bg-white"
                             onClick={() => setShowInfoRate(true)}
                         >
-                            <img
+                            <Image
                                 src="/images/icons/info.png"
+                                alt=""
                                 width={21}
                                 height={21}
                             />

@@ -1,13 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+
 import { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+
 import { Skeleton, Divider } from 'antd';
 
 import ArticleModel from '@/src/models/Article';
 import { useAppSelector } from '@/src/redux/hooks';
 import { apiGetListPost } from '@/src/api/home-page';
+
 import Header from '@/src/components/mobile/header/Header';
 import Footer from '@/src/components/mobile/footer/Footer';
 import PostItem from '@/src/components/mobile/post-item/PostItem';
@@ -79,7 +83,7 @@ function Index() {
                             bg-[--primary-color]
                         '
           >
-            <img src='https://ttpl.vn/assets/images/icon/pencil.png' />
+            <Image src='https://ttpl.vn/assets/images/icon/pencil.png' alt='' width={24} height={24} />
           </div>
           <div
             className='
@@ -90,7 +94,7 @@ function Index() {
                         '
           >
             <Link href='/mobile/cau-hoi'>
-              <img src='https://ttpl.vn/assets/images/icon/zoom-question.png' />
+              <Image src='https://ttpl.vn/assets/images/icon/zoom-question.png' alt='' width={24} height={24} />
             </Link>
           </div>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type SliderObj = {
@@ -33,7 +34,7 @@ function Slider(props: SliderProps) {
             >
                 {props.data.map((_d) => (
                     <div className="inline-block w-full rounded-lg" key={_d.id}>
-                        <img src={_d.img} alt="" className="mr-2" />
+                        <Image src={_d.img} alt="" className="mr-2" width={358} height={190} />
                     </div>
                 ))}
             </div>

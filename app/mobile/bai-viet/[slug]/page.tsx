@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { apiGetDetailPost } from "@/src/api/post";
 import { apiGetListMostViewArticle } from "@/src/api/home-page";
@@ -11,7 +12,6 @@ import { Article } from "@/src/components/common";
 import FooterPostItem from "@/src/components/mobile/post-item/FooterPost";
 import HeaderPostItem from "@/src/components/mobile/post-item/HeaderPost";
 import "./detailPost.scss";
-import Image from "next/image";
 
 function Index({ params }: { params: { slug: string } }) {
     const { slug } = params;
@@ -64,10 +64,13 @@ function Index({ params }: { params: { slug: string } }) {
                     {/* timeline & image */}
                     <div className="mb-4" style={{ margin: "0 -16px" }}>
                         <Link href={post.images}>
-                            <img
+                            <Image
                                 loading="lazy"
                                 className="w-full object-contain"
                                 src={post.images}
+                                alt="anh bai viet"
+                                width={390}
+                                height={326}
                             />
                         </Link>
                     </div>

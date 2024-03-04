@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function Answer({ user, content }: { user?: any; content: any }) {
   return (
     <div className='border-t-[1px] border-dashed border-[#E5E5E5] mt-3 pt-4'>
@@ -5,7 +7,7 @@ function Answer({ user, content }: { user?: any; content: any }) {
         <>
           {user ? (
             <div className='flex items-center flex-wrap mb-3'>
-              <img
+              <Image
                 className='w-9 h-9 rounded-full object-cover'
                 src={
                   user.img
@@ -13,6 +15,8 @@ function Answer({ user, content }: { user?: any; content: any }) {
                     : 'https://ttpl.vn/assets/images/logo/logo-legalzone.png'
                 }
                 alt='avatar user'
+                width={36}
+                height={36}
               />
               <div className='ml-3'>
                 <a href='' className='text-[#444] font-bold'>

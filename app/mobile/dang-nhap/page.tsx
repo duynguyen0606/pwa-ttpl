@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+
 import { Button, Form, Input, message } from "antd";
 
 import { apiLogin } from "@/src/api/auth";
@@ -45,10 +46,12 @@ function Index() {
         <div className="relative">
             <div className=" pt-3 pl-[11px] pl-0 pb-2">
                 <Link href="/mobile">
-                    <img
+                    <Image
                         className="p-0.5 bg-[#EDEEFA] rounded-full"
                         src="/images/icons/left-arrow.png"
+                        alt=""
                         width={26}
+                        height={26}
                     />
                 </Link>
             </div>
@@ -149,18 +152,22 @@ function Index() {
                                 href="#"
                                 className="justify-center mx-2 w-11 h-11 flex items-center bg-[#F6F6FD] rounded-full"
                             >
-                                <img
+                                <Image
                                     src="https://ttpl.vn/assets/images/mobile/icon-facebook.png"
                                     alt=""
+                                    width={14}
+                                    height={25}
                                 />
                             </a>
                             <a
                                 href="#"
                                 className="justify-center mx-2 w-11 h-11 flex items-center bg-[#F6F6FD] rounded-full"
                             >
-                                <img
+                                <Image
                                     src="https://ttpl.vn/assets/images/mobile/icons-google.png"
                                     alt=""
+                                    width={25}
+                                    height={25}
                                 />
                             </a>
                         </div>

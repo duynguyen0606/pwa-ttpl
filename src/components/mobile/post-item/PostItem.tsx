@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import FooterPost from "./FooterPost";
 import HeaderPost from "./HeaderPost";
@@ -12,11 +13,13 @@ function PostItem({ post }: { post: ArticleModel }) {
 
             <div>
                 <div className="overflow-hidden">
-                    <img
+                    <Image
                         className="w-full"
                         loading="lazy"
                         src={post.images}
                         alt="Ảnh bài viết"
+                        width={360}
+                        height={300}
                     />
                 </div>
                 <div className="mt-2">

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Button, Form, Input, Modal, ModalProps } from "antd";
+import Image from "next/image";
 
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import {
@@ -33,9 +34,12 @@ function NextStepRegister({
         <div>
             {/* Close button */}
             <button onClick={onClickBack}>
-                <img
+                <Image
                     className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
                     src="/images/icons/left-arrow.png"
+                    alt=""
+                    width={26}
+                    height={27}
                 />
             </button>
 
@@ -328,9 +332,12 @@ function ModalRegister(props: ModalProps) {
                                 dispatch(setOpenModalRegister(false))
                             }
                         >
-                            <img
+                            <Image
                                 className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
                                 src="/images/icons/left-arrow.png"
+                                alt=""
+                                width={26}
+                                height={27}
                             />
                         </button>
                     )}
