@@ -51,7 +51,16 @@ function UserProfile() {
       },
       2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
       3: { name: 'Thủ tục của tôi', key: 3, dataContent: <ProfileProcedure /> },
-      4: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
+      4: {
+        name: 'Theo dõi',
+        key: 4,
+        dataContent: (
+          <ProfileFollow
+            listFollower={listFollower}
+            listWatching={listWatching}
+          />
+        ),
+      },
       5: {
         name: 'Hỏi đáp pháp luật',
         key: 5,
@@ -59,7 +68,7 @@ function UserProfile() {
       },
       6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
     };
-  }, []);
+  }, [listFollower, listWatching, listMyPost]);
   return (
     <div>
       <div className='bg-white rounded-b-lg'>
@@ -142,7 +151,7 @@ function UserProfile() {
           />
         </div>
       </div>
-      <div className='my-4'>{mapObjNav[keyActive].dataContent}</div>
+      <div className='my-4'>{mapObjNav[keyActive]?.dataContent}</div>
     </div>
   );
 }

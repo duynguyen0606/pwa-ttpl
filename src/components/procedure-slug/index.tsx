@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, ConfigProvider, Menu } from 'antd';
+import { Button, ConfigProvider, Menu, notification } from 'antd';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import ProcedureSlugContent from './ProcedureSlugContent';
@@ -9,6 +9,7 @@ import { useAppSelector } from '@/src/redux/hooks';
 import ProcedureSlugAction from './ProcedureSlugAction';
 import ProcedureSlugDiagram from './ProcedureSlugDiagram';
 import { useMediaQuery } from 'react-responsive';
+import { apiSaveProcedure } from '@/src/api/procedure';
 
 const dataNavs = [
   {
@@ -37,10 +38,17 @@ function ProcedureSlug({
   procedureId: string;
 }) {
   const [tabActive, setTabActive] = useState(1);
-  const { user } = useAppSelector((state) => state.authState);
+  const { user, token } = useAppSelector((state) => state.authState);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotification = () => {
+    api.success({
+      message: 'Lưu thủ tục thành công',
+    });
+  };
 
   const renderView = () => {
     switch (tabActive) {
@@ -65,8 +73,21 @@ function ProcedureSlug({
     }
   };
 
+  const handleSaveProcedure = async () => {
+    if (procedureId && token) {
+      const dataRes = await apiSaveProcedure({
+        token,
+        id_help_articles: procedureId,
+      });
+      if (dataRes.status) {
+        openNotification();
+      }
+    }
+  };
+
   return (
     <div>
+      {contextHolder}
       <ConfigProvider
         theme={{
           token: {
@@ -97,6 +118,7 @@ function ProcedureSlug({
       {user && (
         <div className='m-4'>
           <Button
+            onClick={handleSaveProcedure}
             size='large'
             icon={
               <Image

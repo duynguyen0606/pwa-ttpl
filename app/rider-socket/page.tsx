@@ -17,14 +17,14 @@ export const socketGrab = io(`http://localhost:3001/grab`, {
 const MAX_RADIUS = 5; // 5km
 const INTERVAL = 30000; // 30 giây
 enum DriverStatus {
-  REJECT_REQUEST = -1,
-  AVAILABLE = 0,
-  ACCEPT_REQUEST = 1,
-  ARRIVING_PICKUP_POINT = 2,
-  ARRIVED_PICKUP_POINT = 3,
-  START_TRANSPORTING = 4,
-  TRANSPORTING = 5,
-  COMPLETED_TRANSPORTING = 6,
+  REJECT_REQUEST = -1, // Tài xế từ chối
+  AVAILABLE = 0, // Tài xế bật app và đang đợi quốc
+  ACCEPT_REQUEST = 1, // Tài xế chấp nhận yêu cầu
+  ARRIVING_PICKUP_POINT = 2, // Tài xế đang đến điểm đón
+  ARRIVED_PICKUP_POINT = 3, // Tài xế đã đến điểm đón
+  START_TRANSPORTING = 4, // Tài xế bắt đầu vận chuyển
+  TRANSPORTING = 5, // Tài xế đang vận chuyển
+  COMPLETED_TRANSPORTING = 6, // Tài xế hoàn thành chuyến đi
 }
 
 enum RiderStatus {
@@ -121,14 +121,6 @@ function Index() {
   return (
     <div>
       <Button onClick={handleUser}>User bắn </Button>
-      {/* <Button onClick={handleDriver}>Tài xế bắn </Button>
-      <Button onClick={handleAccept}>Tài xế chấp nhận</Button>
-      <Button onClick={handleCancel}>Tài xế huỷ </Button>
-      <Button onClick={handleCompleted}>Giao hàng thành công </Button>
-      <Button onClick={handleStartDelivery}>Tài xế bắt đầu di chuyển</Button>
-      <Button onClick={handleDriverArrivedPickupLocation}>
-        Tài xế đã đến điểm đón
-      </Button> */}
       <Button onClick={handleUserCancel}>User huỷ chuyến</Button>
       <Button onClick={handleTurnOn}>Bật app</Button>
       <Button onClick={hanldeTurnOff}>Tắt app</Button>

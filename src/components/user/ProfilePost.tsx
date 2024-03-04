@@ -46,7 +46,7 @@ function ProfilePost({
         <div className='mb-4 p-4 bg-white rounded-lg'>
           <div>
             <div className='flex items-center justify-between'>
-              <span className='font-semibold text-lg'>Đang theo dõi</span>
+              <span className='font-semibold text-lg'>Người theo dõi</span>
               <Button type='text'>Xem tất cả</Button>
             </div>
             {listFollower?.length ? (
@@ -57,7 +57,11 @@ function ProfilePost({
                       <Avatar src={item?.avatar_user_follow} size='large' />
                       <div>{item?.name_user_follow}</div>
                     </div>
-                    <Button disabled>Người theo dõi</Button>
+                    {item?.is_follow ? (
+                      <Button>Đang theo dõi</Button>
+                    ) : (
+                      <Button>Theo dõi</Button>
+                    )}
                   </div>
                 ))}
               </div>
@@ -80,7 +84,11 @@ function ProfilePost({
                       <Avatar src={item?.avatar_user_watching} size='large' />
                       <div>{item?.name_user_watching}</div>
                     </div>
-                    <Button disabled>Đang theo dõi</Button>
+                    {item?.is_follow ? (
+                      <Button>Đang theo dõi</Button>
+                    ) : (
+                      <Button>Theo dõi</Button>
+                    )}
                   </div>
                 ))}
               </div>
