@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Button, Form, Input, Modal, ModalProps } from "antd";
+import { useRef, useState } from "react";
+import { Button, Form, Input, Modal, ModalProps, Typography } from "antd";
 import {
     LawyerIcon,
     EnterpriseIcon,
@@ -90,7 +90,7 @@ function ModalRegister(props: ModalProps) {
                     {/* Roles-register */}
                     <div className="w-full grid grid-cols-2 grid-rows-2">
                         {role_options.map((role) => (
-                            <div className="mr-2 mb-2">
+                            <div className="mr-2 mb-2" key={role.id}>
                                 <input
                                     id={role.tag}
                                     type="radio"
@@ -157,12 +157,24 @@ function ModalRegister(props: ModalProps) {
                 </div>
             </div>
 
-            <NextStepRegister open={next} onCancel={() => setNext(false)} />
+            <NextStepRegister
+                props={{
+                    open: next,
+                    onCancel: () => setNext(false),
+                }}
+                role={role_options[roleActive - 1]?.tag}
+            />
         </Modal>
     );
 }
 
-function NextStepRegister(props: ModalProps) {
+function NextStepRegister({
+    props,
+    role,
+}: {
+    props: ModalProps;
+    role: string;
+}) {
     const { open, onCancel } = props;
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -206,6 +218,12 @@ function NextStepRegister(props: ModalProps) {
                         form={form}
                         onFinish={(values) => console.log(values)}
                     >
+                        <Form.Item name="Role">
+                            <Typography>
+                                {role}
+                            </Typography>
+                        </Form.Item>
+
                         <Form.Item name="Name">
                             <Input size="large" placeholder="Họ và tên" />
                         </Form.Item>
