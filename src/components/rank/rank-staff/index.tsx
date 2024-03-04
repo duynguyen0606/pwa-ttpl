@@ -165,7 +165,10 @@ function RankStaff(props: { type?: number }) {
                             />
                           )}
                         </div>
-                        <div>Điểm thưởng: {item.point}</div>
+                        <div>
+                          Điểm thưởng:
+                          <span className='font-semibold'>{item.point}</span>
+                        </div>
                       </div>
                     </div>
                   </div>

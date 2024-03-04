@@ -73,7 +73,6 @@ function Index({ params }: { params: { id: string } }) {
   }, [params.id, token]);
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
-    console.log('xxx');
     return {
       1: {
         name: 'Bài viết',
@@ -121,7 +120,10 @@ function Index({ params }: { params: { id: string } }) {
               {userInfor?.full_name}
             </div>
             <div className='flex gap-2 items-center justify-center'>
-              <div>Điểm thưởng: {userInfor?.point}</div>
+              <div>
+                Điểm thưởng:
+                <span className='font-semibold'>{userInfor?.point}</span>
+              </div>
               <Image
                 src='/images/icons/info.png'
                 alt='info'
