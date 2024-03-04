@@ -10,8 +10,8 @@ import { Article } from "@/src/components/common";
 
 import FooterPostItem from "@/src/components/mobile/post-item/FooterPost";
 import HeaderPostItem from "@/src/components/mobile/post-item/HeaderPost";
-import { BackIcon } from "@/src/assests/icons";
 import "./detailPost.scss";
+import Image from "next/image";
 
 function Index({ params }: { params: { slug: string } }) {
     const { slug } = params;
@@ -52,8 +52,11 @@ function Index({ params }: { params: { slug: string } }) {
                 <div className="flex-1 px-4">
                     <div className="fixed top-3">
                         <Link href="/mobile/bai-viet">
-                            <BackIcon
-                                color={`${blackArrow ? "black" : "white"}`}
+                            <Image
+                                src={`/images/icons/${blackArrow ? "" : "white-"}left-arrow.png`}
+                                alt=""
+                                width={24}
+                                height={24}
                             />
                         </Link>
                     </div>

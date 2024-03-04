@@ -46,8 +46,9 @@ function Index() {
             <div className=" pt-3 pl-[11px] pl-0 pb-2">
                 <Link href="/mobile">
                     <img
-                        className="w-[26px] h-[27px] bg-[#EDEEFA] rounded-full"
-                        src="https://ttpl.vn/assets/images/mobile/type-back-login.png"
+                        className="p-0.5 bg-[#EDEEFA] rounded-full"
+                        src="/images/icons/left-arrow.png"
+                        width={26}
                     />
                 </Link>
             </div>

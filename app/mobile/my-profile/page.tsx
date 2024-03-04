@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Switch } from "antd";
 import { useRouter } from "next/navigation";
 
 import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import { authLogout } from "@/src/redux/feature/authSlice";
 
-import { BackIcon } from "@/src/assests/icons";
 import Footer from "@/src/components/mobile/footer/Footer";
 
 function Index() {
@@ -62,19 +62,19 @@ function Index() {
                     >
                         {/* back btn */}
                         <Link href="/mobile" className="absolute top-5 left-5">
-                            <BackIcon color="white" />
+                            <Image src='/images/icons/white-left-arrow.png' alt="mui ten" width={25} height={25}/>
                         </Link>
 
                         {/* avatar-user */}
                         <div
                             className="
-                            w-[71px] h-[71px] 
-                            rounded-full
-                            mb-4
-                        "
+                                w-[71px] h-[71px] 
+                                rounded-full
+                                mb-4
+                            "
                         >
                             <img
-                                src="https://ttpl.vn/assets/images/logo/logo-legalzone.png"
+                                src= {user?.image ? user.image : "https://ttpl.vn/assets/images/logo/logo-legalzone.png"}
                                 className="w-full h-full"
                             />
                         </div>

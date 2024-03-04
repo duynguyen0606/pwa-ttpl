@@ -1,6 +1,6 @@
-import { BackIcon } from "@/src/assests/icons";
-import { Drawer, DrawerProps } from "antd";
 import Link from "next/link";
+import Image from "next/image";
+import { Drawer, DrawerProps } from "antd";
 
 function ContactDrawer(props: DrawerProps) {
     const { open, onClose } = props;
@@ -9,13 +9,20 @@ function ContactDrawer(props: DrawerProps) {
         <Drawer
             open={open}
             onClose={onClose}
-            closeIcon={<BackIcon color="black" width="18px" height="18px" />}
+            closeIcon={
+                <Image
+                    src="/images/icons/left-arrow.png"
+                    alt=""
+                    width={18}
+                    height={18}
+                />
+            }
             title="Liên hệ"
             width="100%"
             placement="left"
         >
             <div className="text-[#262C41]">
-                <div className="text-[20px] font-bold mb-3">
+                <div className="text-[20px] font-semibold mb-3">
                     Thông tin liên hệ
                 </div>
 
@@ -89,10 +96,12 @@ function ContactDrawer(props: DrawerProps) {
                             rounded-3xl  
                         "
                 >
-                    <img
+                    <Image
                         src="/images/introduce/phone.png"
                         alt="phone"
-                        className="w-5 h-4 pr-1"
+                        width={20}
+                        height={16}
+                        className="pr-1"
                     />
                     <span className="text-white text-xs">0888888888</span>
                 </div>
