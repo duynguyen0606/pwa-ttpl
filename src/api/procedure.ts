@@ -7,7 +7,11 @@ import axios from 'axios';
 import ProcedureModel from '../models/Procedure';
 import DetailProcedureLevel2Model from '../models/DetailProcedureLevel2';
 
-export const apiGetListProcedure = async ({ page } : { page: number }): Promise<{
+export const apiGetListProcedure = async ({
+  page,
+}: {
+  page: number;
+}): Promise<{
   status: boolean;
   data: Array<ProcedureModel>;
   url: string;
@@ -57,6 +61,21 @@ export const apiGetListDetailProcedureLevel2 = async (
 
 // procedure slug
 
+export const apiSaveProcedure = (args: {
+  token: string;
+  id_help_articles: string;
+}) => {
+  const { token, id_help_articles } = args;
+  const url = `https://thutucphapluat.com/api/Help_articles_controller/save_procedure`;
+  const data = sendPostFormDataWithToken({
+    url,
+    token,
+    data: { help_articles_id: id_help_articles },
+  });
+
+  return data ?? {};
+};
+
 export const apiGetProcedureContentDesktop = async (
   id: string
 ): Promise<{
@@ -80,12 +99,6 @@ export const apiGetListProcedureRelative = async (
   const { data } = await axios.get(url);
   return data ?? {};
 };
-
-// export const apiGetListProcedureComment = async (id: string) => {
-//   const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${id}&limit=1000&page=1`;
-//   const { data } = await axios.get(url);
-//   return data ?? {};
-// };
 
 // Thực tế thực hiện
 export const apiGetListActualImplementation = (id: string, token: string) => {

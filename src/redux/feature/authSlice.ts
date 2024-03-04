@@ -11,6 +11,7 @@ export type AuthState = {
   token: string;
   loading: boolean;
   openModalLogin: boolean;
+  openModalRegister: boolean;
   loginCode: number | null; // 0 - failed, 1 - success
 };
 
@@ -42,6 +43,7 @@ const initialState: AuthState = {
   loading: false,
   loginCode: null,
   openModalLogin: false,
+  openModalRegister: false,
 };
 
 const authSlice = createSlice({
@@ -50,6 +52,9 @@ const authSlice = createSlice({
   reducers: {
     setOpenModalLogin: (state, action: PayloadAction<boolean>) => {
       state.openModalLogin = action.payload;
+    },
+    setOpenModalRegister: (state, action: PayloadAction<boolean>) => {
+      state.openModalRegister = action.payload;
     },
     setDataUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
@@ -83,6 +88,11 @@ const authSlice = createSlice({
 
 const authReducer = authSlice.reducer;
 
-export const { setOpenModalLogin, setDataUser, setAuthLoading, setToken } =
-  authSlice.actions;
+export const {
+  setOpenModalLogin,
+  setDataUser,
+  setAuthLoading,
+  setToken,
+  setOpenModalRegister,
+} = authSlice.actions;
 export default authReducer;

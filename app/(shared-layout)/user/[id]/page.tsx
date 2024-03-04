@@ -73,7 +73,6 @@ function Index({ params }: { params: { id: string } }) {
   }, [params.id, token]);
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
-    console.log('xxx');
     return {
       1: {
         name: 'Bài viết',
@@ -88,11 +87,18 @@ function Index({ params }: { params: { id: string } }) {
         ),
       },
       2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-      3: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
+      3: {
+        name: 'Theo dõi',
+        key: 4,
+        dataContent: (
+          <ProfileFollow
+            listFollower={listFollower}
+            listWatching={listWatching}
+          />
+        ),
+      },
     };
   }, [listPost, listFollower, listWatching, params.id, user]);
-
-  console.log(userInfor);
 
   return (
     <div>
@@ -121,7 +127,15 @@ function Index({ params }: { params: { id: string } }) {
               {userInfor?.full_name}
             </div>
             <div className='flex gap-2 items-center justify-center'>
-              <div>Điểm thưởng: {userInfor?.point}</div>
+              <div>
+                Điểm thưởng:
+                <span
+                  className='font-semibold'
+                  style={{ color: 'var(--primary-color)' }}
+                >
+                  {userInfor?.point}
+                </span>
+              </div>
               <Image
                 src='/images/icons/info.png'
                 alt='info'
@@ -156,7 +170,7 @@ function Index({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-      <div className='my-4'>{mapObjNav[keyActive].dataContent}</div>
+      <div className='my-4'>{mapObjNav[keyActive]?.dataContent}</div>
     </div>
   );
 }

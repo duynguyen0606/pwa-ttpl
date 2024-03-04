@@ -17,10 +17,14 @@ import './style.scss';
 // import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { ModalLogin } from '../../modal';
+import { ModalLogin, ModalRegister } from '../../modal';
 import ModalSearch from '../../modal/ModalSearch';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { authLogout, setOpenModalLogin } from '@/src/redux/feature/authSlice';
+import {
+  authLogout,
+  setOpenModalLogin,
+  setOpenModalRegister,
+} from '@/src/redux/feature/authSlice';
 import Notification from '../Notification';
 const { Header } = Layout;
 
@@ -388,6 +392,10 @@ function HeaderCom() {
       <ModalLogin
         onCancel={() => dispatch(setOpenModalLogin(false))}
         onOk={() => dispatch(setOpenModalLogin(false))}
+      />
+      <ModalRegister
+        onCancel={() => dispatch(setOpenModalRegister(false))}
+        onOk={() => dispatch(setOpenModalRegister(false))}
       />
       <ModalSearch
         open={openModalSearch}

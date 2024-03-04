@@ -4,6 +4,7 @@ import {
   setAuthLoading,
   setDataUser,
   setOpenModalLogin,
+  setOpenModalRegister,
   setToken,
 } from '@/src/redux/feature/authSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
@@ -100,6 +101,10 @@ function ModalLogin(props: ModalProps) {
                 size='large'
                 style={{ color: 'var(--primary-color)' }}
                 type='link'
+                onClick={() => {
+                  dispatch(setOpenModalLogin(false));
+                  dispatch(setOpenModalRegister(true));
+                }}
               >
                 Đăng ký
               </Button>
