@@ -8,7 +8,7 @@ import { Button, Form, Input, message } from "antd";
 import { apiLogin } from "@/src/api/auth";
 import { setDataUser } from "@/src/redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { ModalForgotPassword } from "@/src/components/modal";
+import { ModalForgotPassword, ModalRegister } from "@/src/components/modal";
 
 type FormSubmitValueType = {
     email: string;
@@ -18,7 +18,7 @@ type FormSubmitValueType = {
 function Index() {
     const router = useRouter();
     const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const [register, setRegister] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
     const dispatch = useAppDispatch();
     const { loading, user, loginCode } = useAppSelector(
@@ -112,7 +112,10 @@ function Index() {
                 {/* Not account */}
                 <div className="text-xs text-center">
                     Bạn chưa có tài khoản?
-                    <span className="font-bold text-[#4755D4] mx-1">
+                    <span
+                        className="font-bold text-[#4755D4] mx-1"
+                        onClick={() => setShowRegister(true)}
+                    >
                         {" "}
                         Đăng ký
                     </span>
@@ -161,6 +164,12 @@ function Index() {
             <ModalForgotPassword
                 open={showForgotPassword}
                 onCancel={() => setShowForgotPassword(false)}
+            />
+
+            {/* Register modal */}
+            <ModalRegister
+                open={showRegister}
+                onCancel={() => setShowRegister(false)}
             />
         </div>
     );

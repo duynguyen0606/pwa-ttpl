@@ -49,8 +49,8 @@ function Index() {
                 {/* Search component */}
                 <div className="flex relative w-full h-10 mb-4">
                     <img
-                        src="https://ttpl.vn/assets/images/header/Search.png"
-                        className="absolute w-4 h-4 left-4 top-3"
+                        src="/images/icons/Search.png"
+                        className="absolute w-5 h-4 left-4 top-3"
                     />
                     <input
                         placeholder="Tìm kiếm"
@@ -111,7 +111,7 @@ function Index() {
                         "
                     >
                         <img
-                            src="https://ttpl.vn/assets/images/icon/phone.png"
+                            src="/images/introduce/phone.png"
                             alt="phone"
                             className="w-5 h-4 pr-1"
                         />

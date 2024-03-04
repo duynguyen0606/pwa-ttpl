@@ -90,7 +90,7 @@ function ContactDrawer(props: DrawerProps) {
                         "
                 >
                     <img
-                        src="https://ttpl.vn/assets/images/icon/phone.png"
+                        src="/images/introduce/phone.png"
                         alt="phone"
                         className="w-5 h-4 pr-1"
                     />
