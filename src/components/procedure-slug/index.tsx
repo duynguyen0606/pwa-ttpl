@@ -2,7 +2,7 @@
 
 import { Button, ConfigProvider, Menu, notification } from 'antd';
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ProcedureSlugContent from './ProcedureSlugContent';
 import ProcedureSlugComment from './ProcedureSlugComment';
 import { useAppSelector } from '@/src/redux/hooks';
@@ -42,6 +42,11 @@ function ProcedureSlug({
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+  const [isMobileClient, setIsMobileClient] = useState(false);
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
@@ -91,11 +96,11 @@ function ProcedureSlug({
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: !isMobileUI ? 'var(--primary-color)' : '#F58533',
+            colorPrimary: !isMobileClient ? 'var(--primary-color)' : '#F58533',
           },
           components: {
             Menu: {
-              horizontalItemSelectedColor: !isMobileUI
+              horizontalItemSelectedColor: !isMobileClient
                 ? 'var(--primary-color)'
                 : '#F58533',
             },
@@ -103,7 +108,7 @@ function ProcedureSlug({
         }}
       >
         <Menu
-          mode={isMobileUI ? 'vertical' : 'horizontal'}
+          mode={isMobileClient ? 'vertical' : 'horizontal'}
           defaultSelectedKeys={[`${tabActive}`]}
           items={dataNavs.map((item) => {
             return {

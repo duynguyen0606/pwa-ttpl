@@ -43,7 +43,6 @@ const columns: ColumnsType<DataType> = [
 
 function TableProcedure(props: { data: Array<ProcedureModel> }) {
   const { data: listProcedure } = props;
-  console.log(listProcedure);
   const listData: DataType[] = listProcedure.map((item) => {
     return {
       key: item.id,

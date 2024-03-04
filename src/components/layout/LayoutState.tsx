@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { getListArticle } from '@/src/redux/feature/postSlice';
@@ -18,6 +18,7 @@ function LayoutState(props: PropsWithChildren) {
   });
 
   const { token } = useAppSelector((state) => state.authState);
+  const [isMobileClient, setIsMobileClient] = useState(false);
 
   const { children } = props;
   const dispatch = useAppDispatch();
@@ -25,6 +26,10 @@ function LayoutState(props: PropsWithChildren) {
   useEffect(() => {
     dispatch(getListArticle());
   }, []);
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
 
   useEffect(() => {
     if (token) {
@@ -39,7 +44,7 @@ function LayoutState(props: PropsWithChildren) {
     <div>
       {children}
 
-      {!isMobileUI && (
+      {!isMobileClient && (
         <div>
           {/* phone */}
           <Link href='tel:0888889366' className='fixed left-8 bottom-10'>

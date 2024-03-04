@@ -205,7 +205,7 @@ function ModalRegister(props: ModalProps) {
     setPrimaryColor(
       isMobileUI ? 'var(--secondary-color)' : 'var(--primary-color)'
     );
-  }, []);
+  }, [isMobileUI]);
 
   return (
     <Modal
