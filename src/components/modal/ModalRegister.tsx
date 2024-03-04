@@ -1,17 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { Button, Form, Input, Modal, ModalProps } from 'antd';
+
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import {
+  setOpenModalLogin,
+  setOpenModalRegister,
+} from '@/src/redux/feature/authSlice';
+
 import {
   LawyerIcon,
   EnterpriseIcon,
   PersonalIcon,
   StateCadresIcon,
 } from '@/src/components/common/icons';
-import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import {
-  setOpenModalLogin,
-  setOpenModalRegister,
-} from '@/src/redux/feature/authSlice';
-import { useMediaQuery } from 'react-responsive';
 
 function NextStepRegister({
   onClickBack,
@@ -23,6 +25,9 @@ function NextStepRegister({
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
 
   return (
     <div>
@@ -37,6 +42,15 @@ function NextStepRegister({
       {/* Content */}
       <div className='flex flex-col items-center justify-center'>
         {/* Title */}
+        <div className='py-2 text-center'>
+          <div
+            className={`mb-4 ${
+              isMobileUI ? 'text-base' : 'text-3xl'
+            } font-semibold uppercase`}
+          >
+            Đăng ký
+          </div>
+        </div>
 
         {/* Icon */}
         <div className='relative'></div>
@@ -118,9 +132,8 @@ function NextStepRegister({
         {/* Have account */}
         <div className='text-base mb-4'>
           Bạn đã có tài khoản?
-          <Button
-            // className='text-[${primaryColor}]'
-            // type='te'
+          <span
+            className={`text-[${primaryColor}] cursor-pointer`}
             onClick={() => {
               dispatch(setOpenModalLogin(true));
               dispatch(setOpenModalRegister(false));
@@ -128,7 +141,7 @@ function NextStepRegister({
           >
             {' '}
             Đăng nhập
-          </Button>
+          </span>
         </div>
       </div>
     </div>
@@ -145,16 +158,85 @@ function Note({ color: primaryColor }: { color: string }) {
   );
 }
 
+function ChooseTypeEnterprise({ color: primaryColor }: { color: string }) {
+  const [typeActive, setTypeActive] = useState(0);
+  const typeEnterprise = useMemo(() => {
+    return [
+      {
+        id: 1,
+        tag: 'company-lawyer',
+        icon: (
+          <LawyerIcon
+            color={typeActive === 1 ? `${primaryColor}` : '#8A8A8A'}
+          />
+        ),
+        name: 'Công ty luật',
+      },
+      {
+        id: 2,
+        tag: 'enterprise',
+        icon: (
+          <EnterpriseIcon
+            color={typeActive === 2 ? `${primaryColor}` : '#8A8A8A'}
+          />
+        ),
+        name: 'Doanh nghiệp',
+      },
+    ];
+  }, []);
+
+  return (
+    <div className='w-full grid grid-cols-2 grid-rows-2'>
+      {typeEnterprise.map((type) => (
+        <div className='mr-2 mb-2' key={type.id}>
+          <input
+            id={type.tag}
+            type='radio'
+            style={{ display: 'none' }}
+            onClick={() => setTypeActive(type.id)}
+          />
+          <label
+            htmlFor={type.tag}
+            className='
+                                        h-full width-full 
+                                        rounded 
+                                        flex flex-col 
+                                        items-center justify-center 
+                                        text-center
+                                        py-4
+                                        border-[1px] border-solid 
+                                        '
+            style={{
+              borderColor:
+                typeActive === type.id ? `${primaryColor}` : '#E5E5E5',
+            }}
+          >
+            {type.icon}
+            <span
+              className='mt-4 text-base font-semibold'
+              style={{
+                color: typeActive === type.id ? `${primaryColor}` : '#8A8A8A',
+              }}
+            >
+              {type.name}
+            </span>
+          </label>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ModalRegister(props: ModalProps) {
   const [roleActive, setRoleActive] = useState(0);
   const [next, setNext] = useState(false);
   const { openModalRegister } = useAppSelector((state) => state.authState);
   const [primaryColor, setPrimaryColor] = useState('--primary-color');
 
+  const dispatch = useAppDispatch();
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
-  const dispatch = useAppDispatch();
 
   const role_options = useMemo(() => {
     return [
@@ -212,7 +294,7 @@ function ModalRegister(props: ModalProps) {
       open={openModalRegister}
       onCancel={() => dispatch(setOpenModalRegister(false))}
       footer={null}
-      //   closeIcon={null}
+      closeIcon={isMobileUI ? null : undefined}
       centered
     >
       {next ? (
@@ -222,8 +304,28 @@ function ModalRegister(props: ModalProps) {
         />
       ) : (
         <div>
+          {isMobileUI && (
+            /* Close button */
+            <button onClick={() => dispatch(setOpenModalRegister(false))}>
+              <img
+                className='w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full'
+                src='/images/icons/left-arrow.png'
+              />
+            </button>
+          )}
+
           {/* Content */}
           <div className='flex flex-col justify-center items-center text-[#444]'>
+            {/* Title */}
+            <div className='py-2 text-center'>
+              <div
+                className={`mb-4 font-semibold uppercase 
+                                ${isMobileUI ? 'text-base' : 'text-3xl'}`}
+              >
+                Đăng ký
+              </div>
+            </div>
+
             {/* Icon */}
             <div className='relative'></div>
 
@@ -235,7 +337,7 @@ function ModalRegister(props: ModalProps) {
             {/* Roles-register */}
             <div className='w-full grid grid-cols-2 grid-rows-2'>
               {role_options.map((role) => (
-                <div key={role.id} className='mr-2 mb-2'>
+                <div className='mr-2 mb-2' key={role.id}>
                   <input
                     id={role.tag}
                     type='radio'
@@ -293,7 +395,7 @@ function ModalRegister(props: ModalProps) {
             <div className='text-base mb-4'>
               Bạn đã có tài khoản?
               <span
-                className={`text-[${primaryColor}]`}
+                className={`text-[${primaryColor}] cursor-pointer`}
                 onClick={() => {
                   dispatch(setOpenModalLogin(true));
                   dispatch(setOpenModalRegister(false));
@@ -306,8 +408,6 @@ function ModalRegister(props: ModalProps) {
           </div>
         </div>
       )}
-
-      {/* <NextStepRegister /> */}
     </Modal>
   );
 }

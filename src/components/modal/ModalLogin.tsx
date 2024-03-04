@@ -5,6 +5,7 @@ import {
   setDataUser,
   setOpenModalLogin,
   setOpenModalRegister,
+  setOpenModalForgotPassword,
   setToken,
 } from '@/src/redux/feature/authSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
@@ -81,7 +82,17 @@ function ModalLogin(props: ModalProps) {
             />
           </Form.Item>
           <div className='text-right'>
-            <Button type='link'>Quên mật khẩu ?</Button>
+            <Button 
+              size='small'
+              style={{ color: '#4262AE' }}
+              type='link'
+              onClick={() => {
+                dispatch(setOpenModalLogin(false));
+                dispatch(setOpenModalForgotPassword(true));
+              }}
+            >
+              Quên mật khẩu ?
+            </Button>
           </div>
           <Form.Item>
             <Button

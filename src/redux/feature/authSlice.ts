@@ -12,6 +12,7 @@ export type AuthState = {
   loading: boolean;
   openModalLogin: boolean;
   openModalRegister: boolean;
+  openModalForgotPassword: boolean;
   loginCode: number | null; // 0 - failed, 1 - success
 };
 
@@ -44,6 +45,7 @@ const initialState: AuthState = {
   loginCode: null,
   openModalLogin: false,
   openModalRegister: false,
+  openModalForgotPassword: false,
 };
 
 const authSlice = createSlice({
@@ -55,6 +57,9 @@ const authSlice = createSlice({
     },
     setOpenModalRegister: (state, action: PayloadAction<boolean>) => {
       state.openModalRegister = action.payload;
+    },
+    setOpenModalForgotPassword: (state, action: PayloadAction<boolean>) => {
+      state.openModalForgotPassword = action.payload;
     },
     setDataUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
@@ -94,5 +99,6 @@ export const {
   setAuthLoading,
   setToken,
   setOpenModalRegister,
+  setOpenModalForgotPassword,
 } = authSlice.actions;
 export default authReducer;
