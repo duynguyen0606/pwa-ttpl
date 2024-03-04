@@ -27,7 +27,7 @@ function ProfilePremium() {
   return (
     <Row gutter={16}>
       {dataPremium.map((item) => (
-        <Col span={6}>
+        <Col key={item.name} span={6}>
           <div
             className='w-full h-60 text-white p-4 rounded-lg relative'
             style={{ background: item.bgColor }}

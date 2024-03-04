@@ -94,6 +94,9 @@ function Index() {
   const [activerDriver, setActiveDriver] = useState(false);
   const [driverId, setDriverId] = useState(null);
   const [riderId, setRiderId] = useState(null);
+  const [status, setStatus] = useState(0);
+
+  let intervalId: any;
 
   const handleTurnOn = () => {
     socketGrab.connect();
@@ -104,39 +107,77 @@ function Index() {
   };
 
   const handleDriver = () => {
-    socketGrab.emit('driverRequest', {
-      infor: {
-        driver_id: '6617',
-        name: 'Tài xế',
-        phone_number: '0987765218',
-        license_plate: '10M2 - 123.52',
-        rating: '5',
-      },
-      currentLocation: {
-        formatted_address:
-          '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
-        id: 1708678390679,
-        location: {
-          latitude: 20.983715,
-          latitudeDelta: 0.004452590797672684,
-          longitude: 105.888896,
-          longitudeDelta: 0.009148679673671722,
+    if (driverId && riderId) {
+    } else
+      socketGrab.emit('driverRequest', {
+        infor: {
+          driver_id: '6617',
+          name: 'Tài xế',
+          phone_number: '0987765218',
+          license_plate: '10M2 - 123.52',
+          rating: '5',
         },
-        name: '141 P. Nam Dư',
-      },
-      status: DriverStatus.AVAILABLE,
-    });
+        currentLocation: {
+          formatted_address:
+            '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
+          id: 1708678390679,
+          location: {
+            latitude: 20.983715,
+            latitudeDelta: 0.004452590797672684,
+            longitude: 105.888896,
+            longitudeDelta: 0.009148679673671722,
+          },
+          name: '141 P. Nam Dư',
+        },
+        status: DriverStatus.AVAILABLE,
+      });
   };
 
   const handleStatus = (status: number) => {
+    setStatus(status);
     if (driverId && riderId) {
-      socketGrab.emit('driverResponse', {
-        driverId,
-        riderId,
-        status,
-      });
+      if (
+        status === DriverStatus.ARRIVING_PICKUP_POINT ||
+        status === DriverStatus.START_TRANSPORTING
+      ) {
+        intervalId = setInterval(() => {
+          socketGrab.emit('driverResponse', {
+            driverId,
+            riderId,
+            currentLocation: {
+              formatted_address:
+                '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
+              id: 1708678390679,
+              location: {
+                latitude: 20.983715,
+                latitudeDelta: 0.004452590797672684,
+                longitude: 105.888896,
+                longitudeDelta: 0.009148679673671722,
+              },
+              name: '141 P. Nam Dư',
+            },
+            status,
+          });
+        }, 1000);
+      } else {
+        socketGrab.emit('driverResponse', {
+          driverId,
+          riderId,
+          status,
+        });
+      }
     }
   };
+
+  useEffect(() => {
+    if (
+      status === DriverStatus.COMPLETED_TRANSPORTING ||
+      status === DriverStatus.REJECT_REQUEST
+    ) {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  }, [status]);
 
   useEffect(() => {
     socketGrab.on('rideRequest', (data) => {

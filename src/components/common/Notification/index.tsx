@@ -18,7 +18,10 @@ function Notification() {
           <div>
             {listNotification.length > 0 &&
               listNotification.map((item) => (
-                <div className='flex items-start gap-2 py-2'>
+                <div
+                  key={item.avatar_create_by}
+                  className='flex items-start gap-2 py-2'
+                >
                   <Avatar src={item.avatar_create_by} size='large' />
                   <div>
                     <span className='font-semibold text-lg'>

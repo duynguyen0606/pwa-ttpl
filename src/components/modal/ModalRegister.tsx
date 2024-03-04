@@ -235,7 +235,7 @@ function ModalRegister(props: ModalProps) {
             {/* Roles-register */}
             <div className='w-full grid grid-cols-2 grid-rows-2'>
               {role_options.map((role) => (
-                <div className='mr-2 mb-2'>
+                <div key={role.id} className='mr-2 mb-2'>
                   <input
                     id={role.tag}
                     type='radio'

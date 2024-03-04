@@ -1,5 +1,5 @@
 import { apiGetListRankBussiness, apiGetListRankCompany } from '@/src/api/rank';
-import BussinessModel from '@/src/models/Business';
+import BussinessModel from '@/src/models/business';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -33,7 +33,7 @@ function RankBusiness({ type }: { type: number }) {
     <>
       {listData.length > 0 &&
         listData.map((item, id) => (
-          <div id='rank-business' className='mb-4'>
+          <div key={id} id='rank-business' className='mb-4'>
             <div className='flex bg-white items-center gap-2 p-4 rounded-lg'>
               <div className='text-xl font-semibold'>#{id + 1}</div>
               <div className='flex gap-2 items-center'>

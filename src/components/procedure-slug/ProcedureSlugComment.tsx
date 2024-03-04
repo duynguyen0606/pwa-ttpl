@@ -34,7 +34,7 @@ function ProcedureSlugComment({ id }: { id?: string }) {
   };
 
   useEffect(() => {
-    if (user && id) {
+    if (token && id) {
       (async () => {
         const dataRes = await apiGetListProcedureComment(id, token);
         if (dataRes.status) {
@@ -42,7 +42,7 @@ function ProcedureSlugComment({ id }: { id?: string }) {
         }
       })();
     }
-  }, [user, id]);
+  }, [user, id, token]);
 
   const uploadFile = async (options: any) => {
     const { onSuccess, onError, file, onProgress } = options;
@@ -141,8 +141,9 @@ function ProcedureSlugComment({ id }: { id?: string }) {
         </Form>
       </div>
       {data.length > 0 &&
-        data.map((item) => (
+        data.map((item, id) => (
           <CommentItem
+            key={id}
             data={
               new CommentModel({
                 created_by_avartar: item.avatar,

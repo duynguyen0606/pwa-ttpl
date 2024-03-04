@@ -21,13 +21,13 @@ function RankProcedure() {
         }
       }
     })();
-  }, [page]);
+  }, [page, dataProcedure.length]);
 
   return (
     <>
       {dataProcedure.length > 0 &&
         dataProcedure.map((item, id) => (
-          <div id='rank-procedure'>
+          <div key={id} id='rank-procedure'>
             <div className='flex items-center gap-4 bg-white rounded-xl p-4 mb-4'>
               <div>#{id + 1}</div>
               <div className='flex-1 dot-1 desc'>{item.title}</div>
