@@ -23,8 +23,7 @@ function PostItem({ post }: { post: ArticleModel }) {
                     />
                 </div>
                 <div className="mt-2">
-                    <Link
-                        href={`/mobile/bai-viet/${post.url_key}`}>
+                    <Link href={`/mobile/bai-viet/${post.url_key}`}>
                         <h4 className="text-sm font-bold text-[#262C41] overflow-hidden">
                             {post.title}
                         </h4>

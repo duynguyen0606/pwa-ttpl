@@ -55,7 +55,7 @@ function Index() {
                         src="/images/icons/Search.png"
                         alt=""
                         width={20}
-                        height={16}
+                        height={20}
                     />
                     <input
                         placeholder="Tìm kiếm"
@@ -120,7 +120,7 @@ function Index() {
                             alt="phone"
                             className="pr-1"
                             width={20}
-                            height={16}
+                            height={20}
                         />
                         <span className="text-white text-xs">0888888888</span>
                     </div>

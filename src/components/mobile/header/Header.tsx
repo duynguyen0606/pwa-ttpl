@@ -25,7 +25,8 @@ function Header({ title }: { title?: string }) {
                     <div className="w-10 h-10 flex items-center left-1 absolute">
                         <Link href="/mobile">
                             <Image
-                                src="https://ttpl.vn/assets/images/logo/logo-legalzone.png"
+                                className="rounded-full object-fit"
+                                src="/images/logo.png"
                                 alt="logo-legalzone"
                                 width={40}
                                 height={40}

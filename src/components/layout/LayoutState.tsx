@@ -45,35 +45,43 @@ function LayoutState(props: PropsWithChildren) {
     <div>
       {children}
 
-      {!isMobileUI && (
+      {!isMobileClient && (
         <div>
           {/* phone */}
-          <Link href='tel:0888889366' className='fixed left-8 bottom-10'>
+          <Link
+            href="tel:0888889366"
+            className="fixed left-8 bottom-10"
+          >
             <div
-              className='
+              className="
               flex items-center justify-center 
               h-[60px] w-[164px]
               bg-[var(--primary-color)]
-            '
+            "
               style={{
-                borderRadius: '5.5rem',
+                borderRadius: "5.5rem",
               }}
             >
-              <Image src='/images/introduce/phone.png' alt='' width={35} height={35} />
-              <span className='text-white ml-2'>0888889366</span>
+              <Image
+                src="/images/introduce/phone.png"
+                alt=""
+                width={35}
+                height={35}
+              />
+              <span className="text-white ml-2">0888889366</span>
             </div>
           </Link>
 
           {/* dmca */}
           <Link
-            href='https://www.dmca.com/Protection/Status.aspx?ID=7dd76e90-0606-47eb-af77-697796ce89a5&refurl=https://ttpl.vn/'
-            className='fixed bottom-0 right-0'
+            href="https://www.dmca.com/Protection/Status.aspx?ID=7dd76e90-0606-47eb-af77-697796ce89a5&refurl=https://ttpl.vn/"
+            className="fixed bottom-0 right-0"
           >
             <Image
-              src='https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=7dd76e90-0606-47eb-af77-697796ce89a5'
-              alt='DMCA.com Protection Status'
-              width='121'
-              height='24'
+              src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=7dd76e90-0606-47eb-af77-697796ce89a5"
+              alt="DMCA.com Protection Status"
+              width="121"
+              height="24"
             />
           </Link>
         </div>
