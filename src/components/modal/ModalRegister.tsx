@@ -32,29 +32,31 @@ function NextStepRegister({
 
     return (
         <div>
-            {/* Close button */}
-            <button onClick={onClickBack}>
-                <Image
-                    className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
-                    src="/images/icons/left-arrow.png"
-                    alt=""
-                    width={26}
-                    height={27}
-                />
-            </button>
+            {isMobileUI /* Close button */ && (
+                <button onClick={onClickBack}>
+                    <Image
+                        className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
+                        src="/images/icons/left-arrow.png"
+                        alt=""
+                        width={26}
+                        height={27}
+                    />
+                </button>
+            )}
 
             {/* Content */}
             <div className="flex flex-col items-center justify-center">
                 {/* Title */}
-                <div className="py-2 text-center">
-                    <div
-                        className={`mb-4 ${
-                            isMobileUI ? "text-base" : "text-3xl"
-                        } font-semibold uppercase`}
-                    >
-                        Đăng ký
+                {isMobileUI && (
+                    <div className="py-2 text-center">
+                        <div
+                            className={`mb-4  font-semibold uppercase
+                             ${isMobileUI ? "text-base" : "text-3xl"}`}
+                        >
+                            Đăng ký
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* Icon */}
                 <div className="relative"></div>
@@ -102,11 +104,11 @@ function NextStepRegister({
                     <div className="flex justify-between">
                         <button
                             style={{
-                                width: "160px",
+                                width: isMobileUI ? "160px" : "220px",
                                 height: "54px",
                                 fontSize: 18,
                                 fontWeight: "600",
-                                borderRadius: "40px",
+                                borderRadius: isMobileUI ? "40px" : "4px",
                                 color: "#4A433F",
                                 backgroundColor: "#F2F2F2",
                                 display: "flex",
@@ -125,11 +127,11 @@ function NextStepRegister({
                                 htmlType="submit"
                                 loading={loading}
                                 style={{
-                                    width: "160px",
+                                    width: isMobileUI ? "160px" : "220px",
                                     height: "54px",
                                     fontSize: 18,
                                     fontWeight: "600",
-                                    borderRadius: "40px",
+                                    borderRadius: isMobileUI ? "40px" : "4px",
                                     color: "white",
                                     backgroundColor: `${primaryColor}`,
                                     display: "flex",
@@ -168,8 +170,8 @@ function Note({ color: primaryColor }: { color: string }) {
     return (
         <div className="text-center text-[#A1A5AC] mb-4">
             Với việc tiếp tục, bạn đã đồng ý với các{" "}
-            <span className={`text-[${primaryColor}]`}>Chính sách bảo mật</span>{" "}
-            của chúng tôi
+            <span style={{ color: primaryColor }}>Chính sách bảo mật</span> của
+            chúng tôi
         </div>
     );
 }
@@ -214,14 +216,14 @@ function ChooseTypeEnterprise({ color: primaryColor }: { color: string }) {
                     <label
                         htmlFor={type.tag}
                         className="
-                                        h-full width-full 
-                                        rounded 
-                                        flex flex-col 
-                                        items-center justify-center 
-                                        text-center
-                                        py-4
-                                        border-[1px] border-solid 
-                                        "
+                            h-full width-full 
+                            rounded 
+                            flex flex-col 
+                            items-center justify-center 
+                            text-center
+                            py-4
+                            border-[1px] border-solid 
+                            "
                         style={{
                             borderColor:
                                 typeActive === type.id
@@ -252,7 +254,7 @@ function ModalRegister(props: ModalProps) {
     const [roleActive, setRoleActive] = useState(0);
     const [next, setNext] = useState(false);
     const { openModalRegister } = useAppSelector((state) => state.authState);
-    const [primaryColor, setPrimaryColor] = useState("--primary-color");
+    const [primaryColor, setPrimaryColor] = useState("var(--primary-color)");
 
     const dispatch = useAppDispatch();
     const isMobileUI = useMediaQuery({
@@ -345,14 +347,16 @@ function ModalRegister(props: ModalProps) {
                     {/* Content */}
                     <div className="flex flex-col justify-center items-center text-[#444]">
                         {/* Title */}
-                        <div className="py-2 text-center">
-                            <div
-                                className={`mb-4 font-semibold uppercase 
-                                ${isMobileUI ? "text-base" : "text-3xl"}`}
-                            >
-                                Đăng ký
+                        {isMobileUI && (
+                            <div className="py-2 text-center">
+                                <div
+                                    className={`mb-4 font-semibold uppercase 
+                                    ${isMobileUI ? "text-base" : "text-3xl"}`}
+                                >
+                                    Đăng ký
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Icon */}
                         <div className="relative"></div>
@@ -411,7 +415,10 @@ function ModalRegister(props: ModalProps) {
                         <div className="w-full">
                             <button
                                 type="submit"
-                                className={`w-full h-[54px] bg-[${primaryColor}] rounded-[20px] text-base font-medium text-white my-2`}
+                                className={`w-full h-[54px] rounded-[20px] text-base font-medium text-white my-2`}
+                                style={{
+                                    backgroundColor: `${primaryColor}`,
+                                }}
                                 onClick={() => setNext(true)}
                             >
                                 Tiếp tục
@@ -425,7 +432,10 @@ function ModalRegister(props: ModalProps) {
                         <div className="text-base mb-4">
                             Bạn đã có tài khoản?
                             <span
-                                className={`text-[${primaryColor}] cursor-pointer`}
+                                style={{
+                                    cursor: "pointer",
+                                    color: `${primaryColor}`,
+                                }}
                                 onClick={() => {
                                     dispatch(setOpenModalLogin(true));
                                     dispatch(setOpenModalRegister(false));
