@@ -50,7 +50,7 @@ function ProcedureSlugContent({ data }: { data: any }) {
       <div className='flex m-4'>
         {dataChildNavs.map((item) => (
           <div
-            className='font-semibold text-lg py-2 px-4 flex-1 text-center bg-slate-100 cursor-pointer'
+            className={`font-semibold text-${isMobileClient ? 'sm' : 'lg'} py-2 px-4 flex-1 text-center bg-slate-100 cursor-pointer`}
             style={{
               backgroundColor:
                 tabChildActive === item.key
