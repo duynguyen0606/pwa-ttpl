@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import { Divider, Input, Skeleton } from "antd";
+import { Input } from "antd";
 import Image from "next/image";
 import { ModalInfoRate } from "@/src/components/modal";
 import PostItem from "@/src/components/mobile/post-item/PostItem";
 import ArticleModel from "@/src/models/Article";
-import { apiGetPostOfOtherUser } from "@/src/api/user";
+import {
+    apiGetOtherFollowerByType,
+    apiGetPostOfOtherUser,
+    apiGetUserById,
+    apiGetVideoOfOtherUser,
+} from "@/src/api/user";
+import { useAppSelector } from "@/src/redux/hooks";
+import ProfileFollow from "@/src/components/mobile/user/ProfileFollow";
 
 const tabs = [
     { name: "Bài viết", tabActive: 1 },
@@ -21,30 +27,68 @@ const followTabs = [
 ];
 
 function Index({ params }: { params: { slug: string } }) {
-    // Lấy ID user
+    // Lấy other user id
     const { slug } = params;
+    const { user, token } = useAppSelector((state) => state.authState);
 
+    const [userInfor, setUserInfor] = useState<any>();
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
     const [listVideo, setListVideo] = useState<Array<any>>([]);
+    const [listFollower, setListFollower] = useState<Array<any>>([]);
+    const [listFollowing, setListFollowing] = useState<Array<any>>([]);
 
     useEffect(() => {
         (async () => {
-            const dataRes = await apiGetPostOfOtherUser({
+            const dataPost = await apiGetPostOfOtherUser({
                 page: page,
                 userID: slug,
             });
-
-            if (dataRes.status) {
+            if (dataPost.status) {
                 if (listPost.length > 0) {
-                    setListPost((prev) => [...prev, ...dataRes.data]);
+                    setListPost((prev) => [...prev, ...dataPost.data]);
                 } else {
-                    setListPost(dataRes.data);
+                    setListPost(dataPost.data);
                 }
             }
         })();
     }, [page]);
+
+    useEffect(() => {
+        (async () => {
+            const dataFollower = await apiGetOtherFollowerByType({
+                token,
+                type: "follower",
+                user_id: slug,
+            });
+            if (dataFollower.status) {
+                setListFollower(dataFollower.data);
+            }
+
+            const dataFollowing = await apiGetOtherFollowerByType({
+                token,
+                type: "watching",
+                user_id: slug,
+            });
+            if (dataFollowing.status) {
+                setListFollowing(dataFollowing.data);
+            }
+
+            const dataVideo = await apiGetVideoOfOtherUser({
+                page: 1,
+                userID: slug,
+            });
+            if (dataVideo.status) {
+                setListVideo(dataVideo.data);
+            }
+
+            const dataUser = await apiGetUserById({ id: slug });
+            if (dataUser.status) {
+                setUserInfor(dataUser.data);
+            }
+        })();
+    }, []);
 
     const [showInfoRate, setShowInfoRate] = useState(false);
     const [activeTab, setActiveTab] = useState(1);
@@ -87,61 +131,67 @@ function Index({ params }: { params: { slug: string } }) {
                     </div>
 
                     {/* Follower container */}
-                    <div
-                        className="
-                            flex justify-between items-center 
-                            py-3 px-2 
-                            mb-3 
-                            bg-white 
-                            rounded-lg
-                        "
-                    >
-                        <div>
-                            <div className="text-xs text-[#444] font-bold">
-                                Người theo dõi
-                            </div>
-                            <div className="text-[10px] text-[#898A8D]">
-                                0 người
-                            </div>
-                        </div>
+                    <div className="bg-white rounded-lg">
                         <div
-                            className="text-[10px] text-[#898A8D]"
-                            onClick={() => {
-                                setActiveTab(3);
-                                setChildTab(1);
-                            }}
+                            className="
+                                flex justify-between items-center 
+                                py-3 px-2 
+                            "
                         >
-                            Xem tất cả
+                            <div>
+                                <div className="text-xs text-[#444] font-bold">
+                                    Người theo dõi
+                                </div>
+                                <div className="text-[10px] text-[#898A8D]">
+                                    {listFollower.length} người
+                                </div>
+                            </div>
+                            <div
+                                className="text-[10px] text-[#898A8D]"
+                                onClick={() => {
+                                    setActiveTab(3);
+                                    setChildTab(1);
+                                }}
+                            >
+                                Xem tất cả
+                            </div>
                         </div>
+                        <ProfileFollow
+                            layout="vertical"
+                            dataList={listFollower.slice(0, 5)}
+                        />
                     </div>
 
                     {/* Following container */}
-                    <div
-                        className="
-                            flex justify-between items-center 
-                            py-3 px-2 
-                            mb-3 
-                            bg-white 
-                            rounded-lg
-                        "
-                    >
-                        <div>
-                            <div className="text-xs text-[#444] font-bold">
-                                Đang theo dõi
-                            </div>
-                            <div className="text-[10px] text-[#898A8D]">
-                                0 người
-                            </div>
-                        </div>
+                    <div className="bg-white rounded-lg">
                         <div
-                            className="text-[10px] text-[#898A8D]"
-                            onClick={() => {
-                                setActiveTab(3);
-                                setChildTab(2);
-                            }}
+                            className="
+                                flex justify-between items-center 
+                                py-3 px-2 mt-3
+                            "
                         >
-                            Xem tất cả
+                            <div>
+                                <div className="text-xs text-[#444] font-bold">
+                                    Đang theo dõi
+                                </div>
+                                <div className="text-[10px] text-[#898A8D]">
+                                    {listFollowing.length} người
+                                </div>
+                            </div>
+                            <div
+                                className="text-[10px] text-[#898A8D]"
+                                onClick={() => {
+                                    setActiveTab(3);
+                                    setChildTab(2);
+                                }}
+                            >
+                                Xem tất cả
+                            </div>
                         </div>
+                        <ProfileFollow
+                            layout="vertical"
+                            dataList={listFollowing.slice(0, 5)}
+                        />
                     </div>
 
                     {/* Post container */}
@@ -216,9 +266,13 @@ function Index({ params }: { params: { slug: string } }) {
                         ))}
                     </div>
 
-                    {childTab === 1 && <div>follower</div>}
+                    {childTab === 1 && (
+                        <ProfileFollow layout="grid" dataList={listFollower} />
+                    )}
 
-                    {childTab === 2 && <div>following</div>}
+                    {childTab === 2 && (
+                        <ProfileFollow layout="grid" dataList={listFollowing} />
+                    )}
                 </div>
             );
         }
@@ -232,7 +286,7 @@ function Index({ params }: { params: { slug: string } }) {
                 <div className="relative text-center">
                     <Image
                         className="w-full object-cover max-h-[340px]"
-                        src="https://ttpl.vn/assets/images/myprofile/anh-bia.png"
+                        src={userInfor?.banner}
                         alt="anh bia"
                         width={360}
                         height={131}
@@ -252,7 +306,7 @@ function Index({ params }: { params: { slug: string } }) {
                     >
                         <Image
                             className="w-20 h-20"
-                            src="https://ttpl.vn/assets/images/logo/logo-legalzone.png"
+                            src={userInfor?.image}
                             alt="avatar"
                             width={80}
                             height={80}
@@ -268,11 +322,13 @@ function Index({ params }: { params: { slug: string } }) {
                             text-xl font-bold text-[#444]
                         "
                     >
-                        Phạm Diễm Thư
+                        {userInfor?.full_name}
                     </span>
                     <div className="mt-1 flex items-center justify-center text-[#4061AB]">
                         <span>Điểm thưởng:</span>
-                        <span className="text-sm font-bold mx-1">200</span>
+                        <span className="text-sm font-bold mx-1">
+                            {userInfor?.point}
+                        </span>
                         <button
                             className="bg-white"
                             onClick={() => setShowInfoRate(true)}

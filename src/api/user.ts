@@ -77,11 +77,13 @@ export const apiGetVideoOfOtherUser = async ({
 export const apiGetOtherFollowerByType = async ({
   type,
   token,
+  user_id
 }: {
   type: 'follower' | 'watching';
   token?: string;
+  user_id: string;
 }) => {
-  const url = `https://thutucphapluat.com/api/Login/list_follow_user?limit=10&page=0&type=${type}&user_id=1`;
+  const url = `https://thutucphapluat.com/api/Login/list_follow_user?limit=10&page=0&type=${type}&user_id=${user_id}`;
   return getWithToken({ url, token });
 };
 

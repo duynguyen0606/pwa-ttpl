@@ -46,6 +46,7 @@ function Index({ params }: { params: { id: string } }) {
         const dataFollower = await apiGetOtherFollowerByType({
           type: 'follower',
           token,
+          user_id: params.id,
         });
         if (dataFollower.status) {
           setListFollower(dataFollower.data);
@@ -53,6 +54,7 @@ function Index({ params }: { params: { id: string } }) {
         const dataWatching = await apiGetOtherFollowerByType({
           type: 'watching',
           token,
+          user_id: params.id,
         });
         if (dataWatching.status) {
           setListWatching(dataWatching.data);
