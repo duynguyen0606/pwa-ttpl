@@ -32,31 +32,26 @@ function NextStepRegister({
 
     return (
         <div>
-            {isMobileUI /* Close button */ && (
-                <button onClick={onClickBack}>
-                    <Image
-                        className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
-                        src="/images/icons/left-arrow.png"
-                        alt=""
-                        width={26}
-                        height={27}
-                    />
-                </button>
-            )}
+            {/* Close button */}
+            <button onClick={onClickBack}>
+                <img
+                    className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
+                    src="/images/icons/left-arrow.png"
+                />
+            </button>
 
             {/* Content */}
             <div className="flex flex-col items-center justify-center">
                 {/* Title */}
-                {isMobileUI && (
-                    <div className="py-2 text-center">
-                        <div
-                            className={`mb-4  font-semibold uppercase
-                             ${isMobileUI ? "text-base" : "text-3xl"}`}
-                        >
-                            Đăng ký
-                        </div>
+                <div className="py-2 text-center">
+                    <div
+                        className={`mb-4 ${
+                            isMobileUI ? "text-base" : "text-3xl"
+                        } font-semibold uppercase`}
+                    >
+                        Đăng ký
                     </div>
-                )}
+                </div>
 
                 {/* Icon */}
                 <div className="relative"></div>
@@ -104,11 +99,11 @@ function NextStepRegister({
                     <div className="flex justify-between">
                         <button
                             style={{
-                                width: isMobileUI ? "160px" : "220px",
+                                width: "160px",
                                 height: "54px",
                                 fontSize: 18,
                                 fontWeight: "600",
-                                borderRadius: isMobileUI ? "40px" : "4px",
+                                borderRadius: "40px",
                                 color: "#4A433F",
                                 backgroundColor: "#F2F2F2",
                                 display: "flex",
@@ -127,11 +122,11 @@ function NextStepRegister({
                                 htmlType="submit"
                                 loading={loading}
                                 style={{
-                                    width: isMobileUI ? "160px" : "220px",
+                                    width: "160px",
                                     height: "54px",
                                     fontSize: 18,
                                     fontWeight: "600",
-                                    borderRadius: isMobileUI ? "40px" : "4px",
+                                    borderRadius: "40px",
                                     color: "white",
                                     backgroundColor: `${primaryColor}`,
                                     display: "flex",
@@ -151,7 +146,7 @@ function NextStepRegister({
                 <div className="text-base mb-4">
                     Bạn đã có tài khoản?
                     <span
-                        className={`text-[${primaryColor}] cursor-pointer`}
+                        style={{ color: primaryColor, cursor: "pointer" }}
                         onClick={() => {
                             dispatch(setOpenModalLogin(true));
                             dispatch(setOpenModalRegister(false));
@@ -170,8 +165,8 @@ function Note({ color: primaryColor }: { color: string }) {
     return (
         <div className="text-center text-[#A1A5AC] mb-4">
             Với việc tiếp tục, bạn đã đồng ý với các{" "}
-            <span style={{ color: primaryColor }}>Chính sách bảo mật</span> của
-            chúng tôi
+            <span className={`text-[${primaryColor}]`}>Chính sách bảo mật</span>{" "}
+            của chúng tôi
         </div>
     );
 }
@@ -216,14 +211,14 @@ function ChooseTypeEnterprise({ color: primaryColor }: { color: string }) {
                     <label
                         htmlFor={type.tag}
                         className="
-                            h-full width-full 
-                            rounded 
-                            flex flex-col 
-                            items-center justify-center 
-                            text-center
-                            py-4
-                            border-[1px] border-solid 
-                            "
+                                        h-full width-full 
+                                        rounded 
+                                        flex flex-col 
+                                        items-center justify-center 
+                                        text-center
+                                        py-4
+                                        border-[1px] border-solid 
+                                        "
                         style={{
                             borderColor:
                                 typeActive === type.id
@@ -334,12 +329,9 @@ function ModalRegister(props: ModalProps) {
                                 dispatch(setOpenModalRegister(false))
                             }
                         >
-                            <Image
+                            <img
                                 className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
                                 src="/images/icons/left-arrow.png"
-                                alt=""
-                                width={26}
-                                height={27}
                             />
                         </button>
                     )}
@@ -347,16 +339,14 @@ function ModalRegister(props: ModalProps) {
                     {/* Content */}
                     <div className="flex flex-col justify-center items-center text-[#444]">
                         {/* Title */}
-                        {isMobileUI && (
-                            <div className="py-2 text-center">
-                                <div
-                                    className={`mb-4 font-semibold uppercase 
-                                    ${isMobileUI ? "text-base" : "text-3xl"}`}
-                                >
-                                    Đăng ký
-                                </div>
+                        <div className="py-2 text-center">
+                            <div
+                                className={`mb-4 font-semibold uppercase 
+                                ${isMobileUI ? "text-base" : "text-3xl"}`}
+                            >
+                                Đăng ký
                             </div>
-                        )}
+                        </div>
 
                         {/* Icon */}
                         <div className="relative"></div>
@@ -416,9 +406,7 @@ function ModalRegister(props: ModalProps) {
                             <button
                                 type="submit"
                                 className={`w-full h-[54px] rounded-[20px] text-base font-medium text-white my-2`}
-                                style={{
-                                    backgroundColor: `${primaryColor}`,
-                                }}
+                                style={{ backgroundColor: primaryColor }}
                                 onClick={() => setNext(true)}
                             >
                                 Tiếp tục
@@ -433,8 +421,8 @@ function ModalRegister(props: ModalProps) {
                             Bạn đã có tài khoản?
                             <span
                                 style={{
+                                    color: primaryColor,
                                     cursor: "pointer",
-                                    color: `${primaryColor}`,
                                 }}
                                 onClick={() => {
                                     dispatch(setOpenModalLogin(true));

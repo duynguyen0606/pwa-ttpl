@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-export const navbarArr = [
+const navbarArr = [
   { name: 'Thủ tục', slug: 'thu-tuc' },
   { name: 'Cơ quan thực hiện', slug: 'co-quan-thuc-hien' },
 ];

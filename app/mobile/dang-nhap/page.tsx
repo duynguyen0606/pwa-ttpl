@@ -177,14 +177,14 @@ function Index() {
 
             {/* Forgot password modal */}
             <ModalForgotPassword
-                onCancel={() => dispatch(setOpenModalForgotPassword(false))}
-                onOk={() => dispatch(setOpenModalForgotPassword(false))}
+              onCancel={() => dispatch(setOpenModalForgotPassword(false))}
+              onOk={() => dispatch(setOpenModalForgotPassword(false))}
             />
 
             {/* Register modal */}
             <ModalRegister
-                onCancel={() => dispatch(setOpenModalRegister(false))}
-                onOk={() => dispatch(setOpenModalRegister(false))}
+              onCancel={() => dispatch(setOpenModalRegister(false))}
+              onOk={() => dispatch(setOpenModalRegister(false))}
             />
         </div>
     );
