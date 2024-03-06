@@ -53,8 +53,6 @@ function Post({ post }: { post: ArticleModel }) {
     }
   };
 
-  console.log('listPost', listPost);
-
   return (
     <>
       {post && (

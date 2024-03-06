@@ -16,12 +16,136 @@ import {
   StateCadresIcon,
 } from '@/src/components/common/icons';
 
+function ChooseTypeEnterprise({
+  color: primaryColor,
+  onBack,
+  onNext,
+}: {
+  color: string;
+  onBack: () => void;
+  onNext: () => void;
+}) {
+  const [typeActive, setTypeActive] = useState(0);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+  const typeEnterprise = useMemo(() => {
+    return [
+      {
+        id: 1,
+        tag: 'company-lawyer',
+        icon: (
+          <LawyerIcon
+            color={typeActive === 1 ? `${primaryColor}` : '#8A8A8A'}
+          />
+        ),
+        name: 'Công ty luật',
+      },
+      {
+        id: 2,
+        tag: 'enterprise',
+        icon: (
+          <EnterpriseIcon
+            color={typeActive === 2 ? `${primaryColor}` : '#8A8A8A'}
+          />
+        ),
+        name: 'Doanh nghiệp',
+      },
+    ];
+  }, [primaryColor, typeActive]);
+
+  return (
+    <>
+      <div className='w-full grid grid-cols-2 gap-2'>
+        {typeEnterprise.map((type) => (
+          <div className='mb-2' key={type.id}>
+            <input
+              id={type.tag}
+              type='radio'
+              style={{ display: 'none' }}
+              onClick={() => setTypeActive(type.id)}
+            />
+            <label
+              htmlFor={type.tag}
+              className='
+                                        h-full width-full 
+                                        rounded 
+                                        flex flex-col 
+                                        items-center justify-center 
+                                        text-center
+                                        py-4
+                                        border-[1px] border-solid 
+                                        '
+              style={{
+                borderColor:
+                  typeActive === type.id ? `${primaryColor}` : '#E5E5E5',
+              }}
+            >
+              {type.icon}
+              <span
+                className='mt-4 text-base font-semibold'
+                style={{
+                  color: typeActive === type.id ? `${primaryColor}` : '#8A8A8A',
+                }}
+              >
+                {type.name}
+              </span>
+            </label>
+          </div>
+        ))}
+      </div>
+      <div className='w-full flex justify-between'>
+        <button
+          style={{
+            width: isMobileUI ? '160px' : '220px',
+            height: '54px',
+            fontSize: 18,
+            fontWeight: '600',
+            borderRadius: isMobileUI ? '40px' : '4px',
+            color: '#4A433F',
+            backgroundColor: '#F2F2F2',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '8 0 8',
+          }}
+          onClick={onBack}
+        >
+          Quay lại
+        </button>
+
+        <Button
+          size='large'
+          htmlType='submit'
+          style={{
+            width: isMobileUI ? '160px' : '220px',
+            height: '54px',
+            fontSize: 18,
+            fontWeight: '600',
+            borderRadius: isMobileUI ? '40px' : '4px',
+            color: 'white',
+            backgroundColor: `${primaryColor}`,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onClick={onNext}
+        >
+          Đăng ký
+        </Button>
+      </div>
+    </>
+  );
+}
+
 function NextStepRegister({
   onClickBack,
   color: primaryColor,
+  roleActive,
 }: {
   onClickBack: () => void;
   color: string;
+  roleActive: number;
 }) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -29,6 +153,9 @@ function NextStepRegister({
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+  const [showChildEnterprise, setShowChildEnterprise] = useState(
+    roleActive == 2
+  );
 
   return (
     <div>
@@ -62,93 +189,108 @@ function NextStepRegister({
         <div className='relative'></div>
 
         {/* Number */}
-        <div className='text-lg font-semibold mt-7 mb-8'>2. Đăng ký</div>
+        <>
+          <div className='text-lg font-semibold mt-7 mb-8'>2. Đăng ký</div>
 
-        <Form
-          className='w-full'
-          form={form}
-          onFinish={(values) => console.log(values)}
-        >
-          <Form.Item name='Name'>
-            <Input size='large' placeholder='Họ và tên' />
-          </Form.Item>
-
-          <Form.Item name='Email'>
-            <Input size='large' placeholder='Email' />
-          </Form.Item>
-
-          <Form.Item name='Phone'>
-            <Input size='large' type='number' placeholder='Số điện thoại' />
-          </Form.Item>
-
-          <Form.Item name='Password'>
-            <Input.Password size='large' placeholder='Nhập mật khẩu' />
-          </Form.Item>
-
-          <Form.Item name='ConfirmPassword'>
-            <Input.Password size='large' placeholder='Nhập lại mật khẩu' />
-          </Form.Item>
-
-          <div className='flex justify-between'>
-            <button
-              style={{
-                width: isMobileUI ? '160px' : '220px',
-                height: '54px',
-                fontSize: 18,
-                fontWeight: '600',
-                borderRadius: isMobileUI ? '40px' : '4px',
-                color: '#4A433F',
-                backgroundColor: '#F2F2F2',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                margin: '8 0 8',
-              }}
-              onClick={onClickBack}
+          {showChildEnterprise ? (
+            <ChooseTypeEnterprise
+              onBack={onClickBack}
+              onNext={() => setShowChildEnterprise(false)}
+              color={primaryColor}
+            />
+          ) : (
+            <Form
+              className='w-full'
+              form={form}
+              onFinish={(values) => console.log(values)}
             >
-              Quay lại
-            </button>
+              <Form.Item name='Name'>
+                <Input size='large' placeholder='Họ và tên' />
+              </Form.Item>
 
-            <Form.Item>
-              <Button
-                size='large'
-                htmlType='submit'
-                loading={loading}
-                style={{
-                  width: isMobileUI ? '160px' : '220px',
-                  height: '54px',
-                  fontSize: 18,
-                  fontWeight: '600',
-                  borderRadius: isMobileUI ? '40px' : '4px',
-                  color: 'white',
-                  backgroundColor: `${primaryColor}`,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                Đăng ký
-              </Button>
-            </Form.Item>
+              <Form.Item name='Email'>
+                <Input size='large' placeholder='Email' />
+              </Form.Item>
+
+              <Form.Item name='Phone'>
+                <Input size='large' type='number' placeholder='Số điện thoại' />
+              </Form.Item>
+
+              <Form.Item name='Password'>
+                <Input.Password size='large' placeholder='Nhập mật khẩu' />
+              </Form.Item>
+
+              <Form.Item name='ConfirmPassword'>
+                <Input.Password size='large' placeholder='Nhập lại mật khẩu' />
+              </Form.Item>
+              <div className='flex justify-between'>
+                <button
+                  style={{
+                    width: isMobileUI ? '160px' : '220px',
+                    height: '54px',
+                    fontSize: 18,
+                    fontWeight: '600',
+                    borderRadius: isMobileUI ? '40px' : '4px',
+                    color: '#4A433F',
+                    backgroundColor: '#F2F2F2',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '8 0 8',
+                  }}
+                  onClick={() => {
+                    if (roleActive == 2) {
+                      setShowChildEnterprise(true);
+                    } else {
+                      onClickBack();
+                    }
+                  }}
+                >
+                  Quay lại
+                </button>
+
+                <Form.Item>
+                  <Button
+                    size='large'
+                    htmlType='submit'
+                    loading={loading}
+                    style={{
+                      width: isMobileUI ? '160px' : '220px',
+                      height: '54px',
+                      fontSize: 18,
+                      fontWeight: '600',
+                      borderRadius: isMobileUI ? '40px' : '4px',
+                      color: 'white',
+                      backgroundColor: `${primaryColor}`,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    Đăng ký
+                  </Button>
+                </Form.Item>
+              </div>
+            </Form>
+          )}
+
+          <Note color={primaryColor} />
+
+          {/* Have account */}
+          <div className='text-base mb-4'>
+            Bạn đã có tài khoản?
+            <span
+              style={{ color: primaryColor, cursor: 'pointer' }}
+              onClick={() => {
+                dispatch(setOpenModalLogin(true));
+                dispatch(setOpenModalRegister(false));
+              }}
+            >
+              {' '}
+              Đăng nhập
+            </span>
           </div>
-        </Form>
-
-        <Note color={primaryColor} />
-
-        {/* Have account */}
-        <div className='text-base mb-4'>
-          Bạn đã có tài khoản?
-          <span
-            style={{ color: primaryColor, cursor: 'pointer' }}
-            onClick={() => {
-              dispatch(setOpenModalLogin(true));
-              dispatch(setOpenModalRegister(false));
-            }}
-          >
-            {' '}
-            Đăng nhập
-          </span>
-        </div>
+        </>
       </div>
     </div>
   );
@@ -160,75 +302,6 @@ function Note({ color: primaryColor }: { color: string }) {
       Với việc tiếp tục, bạn đã đồng ý với các{' '}
       <span className={`text-[${primaryColor}]`}>Chính sách bảo mật</span> của
       chúng tôi
-    </div>
-  );
-}
-
-function ChooseTypeEnterprise({ color: primaryColor }: { color: string }) {
-  const [typeActive, setTypeActive] = useState(0);
-  const typeEnterprise = useMemo(() => {
-    return [
-      {
-        id: 1,
-        tag: 'company-lawyer',
-        icon: (
-          <LawyerIcon
-            color={typeActive === 1 ? `${primaryColor}` : '#8A8A8A'}
-          />
-        ),
-        name: 'Công ty luật',
-      },
-      {
-        id: 2,
-        tag: 'enterprise',
-        icon: (
-          <EnterpriseIcon
-            color={typeActive === 2 ? `${primaryColor}` : '#8A8A8A'}
-          />
-        ),
-        name: 'Doanh nghiệp',
-      },
-    ];
-  }, [primaryColor, typeActive]);
-
-  return (
-    <div className='w-full grid grid-cols-2 grid-rows-2'>
-      {typeEnterprise.map((type) => (
-        <div className='mr-2 mb-2' key={type.id}>
-          <input
-            id={type.tag}
-            type='radio'
-            style={{ display: 'none' }}
-            onClick={() => setTypeActive(type.id)}
-          />
-          <label
-            htmlFor={type.tag}
-            className='
-                                        h-full width-full 
-                                        rounded 
-                                        flex flex-col 
-                                        items-center justify-center 
-                                        text-center
-                                        py-4
-                                        border-[1px] border-solid 
-                                        '
-            style={{
-              borderColor:
-                typeActive === type.id ? `${primaryColor}` : '#E5E5E5',
-            }}
-          >
-            {type.icon}
-            <span
-              className='mt-4 text-base font-semibold'
-              style={{
-                color: typeActive === type.id ? `${primaryColor}` : '#8A8A8A',
-              }}
-            >
-              {type.name}
-            </span>
-          </label>
-        </div>
-      ))}
     </div>
   );
 }
@@ -307,6 +380,7 @@ function ModalRegister(props: ModalProps) {
         <NextStepRegister
           color={primaryColor}
           onClickBack={() => setNext(false)}
+          roleActive={roleActive}
         />
       ) : (
         <div>
