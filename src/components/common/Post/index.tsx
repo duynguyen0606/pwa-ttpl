@@ -17,6 +17,7 @@ function Post({ post }: { post: ArticleModel }) {
   const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
   const { token } = useAppSelector((state) => state.authState);
   const { listPost } = useAppSelector((state) => state.postState);
+  const [showComment, setShowComment] = useState(false);
   const dispatch = useAppDispatch();
   const handleFetchComment = async (id: string) => {
     const dataRes = await apiGetListCommentByPostId({ postId: id });
@@ -39,7 +40,7 @@ function Post({ post }: { post: ArticleModel }) {
               if (item.created_by.toString() == id) {
                 return {
                   ...item,
-                  is_follow: dataRes.action,
+                  is_follow: +dataRes.action,
                 };
               }
               return item;
@@ -51,6 +52,8 @@ function Post({ post }: { post: ArticleModel }) {
       dispatch(setOpenModalLogin(true));
     }
   };
+
+  console.log('listPost', listPost);
 
   return (
     <>
@@ -79,9 +82,9 @@ function Post({ post }: { post: ArticleModel }) {
 
             <Button
               onClick={() => handleFollow(post.created_by.toString())}
-              className={post.is_follow ? 'button-primary' : ''}
+              className={post.is_follow == 1 ? 'button-primary' : ''}
             >
-              {post.is_follow ? 'Bỏ theo dõi' : 'Theo dõi'}
+              {post.is_follow == 1 ? 'Bỏ theo dõi' : 'Theo dõi'}
             </Button>
           </div>
           <ImageLegacy
