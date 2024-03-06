@@ -49,7 +49,7 @@ function UserProfile() {
             listFollower={listFollower}
             listWatching={listWatching}
             onTransferFollower={(typeTab) => {
-              setKeyActive(3);
+              setKeyActive(4);
               setTypeFollowTab(typeTab);
             }}
           />
@@ -69,6 +69,7 @@ function UserProfile() {
             listFollower={listFollower}
             listWatching={listWatching}
             activeKey={typeFollowTab}
+            
           />
         ),
       },

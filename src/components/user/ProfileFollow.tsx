@@ -1,28 +1,76 @@
-import { useAppSelector } from '@/src/redux/hooks';
-import { Avatar, Button, ConfigProvider, Menu } from 'antd';
-import { useState } from 'react';
+import { useState } from "react";
+import { Avatar, Button, ConfigProvider, Menu } from "antd";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { apiFollowUser } from "@/src/api/home-page";
+import { setOpenModalLogin } from "@/src/redux/feature/authSlice";
 
 const dataNavs = [
-  {
-    label: 'Người theo dõi',
-    key: 'follower',
-  },
-  {
-    label: 'Đang theo dõi',
-    key: 'watching',
-  },
+    {
+        label: "Người theo dõi",
+        key: "follower",
+    },
+    {
+        label: "Đang theo dõi",
+        key: "watching",
+    },
 ];
+
 function ProfileFollow({
     listFollower,
     listWatching,
-    activeKey = 'follower',
+    activeKey = "follower",
+    onSetMapFollower,
+    onSetMapFollowing,
 }: {
     listFollower: Array<any>;
     listWatching: Array<any>;
     activeKey: string;
+    onSetMapFollower: (newListFollower: Array<any>) => void;
+    onSetMapFollowing: (newListWatching: Array<any>) => void;
 }) {
-    const [typeNav, setTypeNav] = useState(activeKey);
-  
+    const [typeNav, setTypeNav] = useState(activeKey);    
+
+    const { token } = useAppSelector((state) => state.authState);
+    const dispatch = useAppDispatch();
+
+    const handleInFollow = async (id: string) => {
+        if (id && token) {
+            const dataRes = await apiFollowUser({ id, token });
+            if (dataRes.status) {
+                console.log(dataRes);
+                onSetMapFollower(
+                    listFollower.map((item) => {
+                        if (item?.id_customer_follows == id) {
+                             item.follow = +dataRes.action;
+                        }
+                        return item;
+                    })
+                );
+            }
+        } else {
+            dispatch(setOpenModalLogin(true));
+        }
+    };
+
+    const handleInWatching = async (id: string) => {
+        if (id && token) {
+            const dataRes = await apiFollowUser({ id, token });
+            if (dataRes.status) {
+                console.log(dataRes);
+                onSetMapFollowing(
+                    listWatching.map((item) => {
+                        if (item?.id_customer.toString() == id) {
+                             item.follow = +dataRes.action;
+                        }
+                        return item;
+                    })
+                );
+            }
+        } else {
+            dispatch(setOpenModalLogin(true));
+        }
+    };
+
     return (
         <div>
             <ConfigProvider
@@ -53,7 +101,7 @@ function ProfileFollow({
             <div className="bg-white">
                 <div className="w-1/2 m-auto p-4">
                     {typeNav === "follower" ? (
-                        <div className="grid grid-cols-2 gap-4 ">
+                        <div className="grid grid-cols-2 gap-4" key={1}>
                             {listFollower.length &&
                                 listFollower?.map((item) => (
                                     <div
@@ -67,11 +115,22 @@ function ProfileFollow({
                                             />
                                             <div>{item?.name_user_follow}</div>
                                         </div>
-                                        {item?.is_follow ? (
-                                            <Button>Đang Theo dõi</Button>
-                                        ) : (
-                                            <Button>Theo dõi</Button>
-                                        )}
+                                        <Button
+                                            className={
+                                                item?.follow == 1
+                                                    ? "button-primary"
+                                                    : ""
+                                            }
+                                            onClick={() =>
+                                                handleInFollow(
+                                                    item?.id_customer_follows.toString()
+                                                )
+                                            }
+                                        >
+                                            {item?.follow == 1
+                                                ? "Bỏ theo dõi"
+                                                : "Theo dõi"}
+                                        </Button>
                                     </div>
                                 ))}
                         </div>
@@ -95,11 +154,22 @@ function ProfileFollow({
                                                     {item?.name_user_watching}
                                                 </div>
                                             </div>
-                                            {item?.is_follow ? (
-                                                <Button>Đang Theo dõi</Button>
-                                            ) : (
-                                                <Button>Theo dõi</Button>
-                                            )}
+                                            <Button
+                                                className={
+                                                    item?.follow == 1
+                                                        ? "button-primary"
+                                                        : ""
+                                                }
+                                                onClick={() =>
+                                                    handleInWatching(
+                                                        item?.id_customer.toString()
+                                                    )
+                                                }
+                                            >
+                                                {item?.follow == 1
+                                                    ? "Bỏ theo dõi"
+                                                    : "Theo dõi"}
+                                            </Button>
                                         </div>
                                     ))}
                                 </div>
