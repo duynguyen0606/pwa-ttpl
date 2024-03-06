@@ -39,6 +39,7 @@ function Index({ params }: { params: { id: string } }) {
   const [listPost, setListPost] = useState([]);
   const [listWatching, setListWatching] = useState([]);
   const [listFollower, setListFollower] = useState([]);
+  const [typeFollowTab, setTypeFollowTab] = useState('')
 
   useEffect(() => {
     if (params.id) {
@@ -85,22 +86,27 @@ function Index({ params }: { params: { id: string } }) {
             listPost={listPost}
             listFollower={listFollower}
             listWatching={listWatching}
+            onTransferFollower={(typeTab) => {
+              setKeyActive(3)
+              setTypeFollowTab(typeTab)
+            }}
           />
         ),
       },
       2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
       3: {
         name: 'Theo dõi',
-        key: 4,
+        key: 3,
         dataContent: (
           <ProfileFollow
             listFollower={listFollower}
             listWatching={listWatching}
+            activeKey={typeFollowTab}
           />
         ),
       },
     };
-  }, [listPost, listFollower, listWatching, params.id, user]);
+  }, [listPost, listFollower, listWatching, params.id, user, typeFollowTab]);
 
   return (
     <div>
