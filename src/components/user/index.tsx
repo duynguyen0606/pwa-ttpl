@@ -35,51 +35,51 @@ function UserProfile() {
   const { listMyPost, listFollower, listWatching } = useAppSelector(
     (state) => state.userState
   );
-  const [typeFollowTab, setTypeFollowTab] = useState("");
+  const [typeFollowTab, setTypeFollowTab] = useState('');
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
     return {
-        1: {
-            name: "Bài viết",
-            key: 1,
-            dataContent: (
-                <ProfilePost
-                    showPost={false}
-                    listPost={listMyPost}
-                    listFollower={listFollower}
-                    listWatching={listWatching}
-                    onTransferFollower={(typeTab) => {
-                        setKeyActive(3);
-                        setTypeFollowTab(typeTab);
-                    }}
-                />
-            ),
-        },
-        2: { name: "Video", key: 2, dataContent: <ProfileVideo /> },
-        3: {
-            name: "Thủ tục của tôi",
-            key: 3,
-            dataContent: <ProfileProcedure />,
-        },
-        4: {
-            name: "Theo dõi",
-            key: 4,
-            dataContent: (
-                <ProfileFollow
-                    listFollower={listFollower}
-                    listWatching={listWatching}
-                    activeKey={typeFollowTab}
-                />
-            ),
-        },
-        5: {
-            name: "Hỏi đáp pháp luật",
-            key: 5,
-            dataContent: <ProfileProcedure />,
-        },
-        6: { name: "Gói premium", key: 6, dataContent: <ProfilePremium /> },
+      1: {
+        name: 'Bài viết',
+        key: 1,
+        dataContent: (
+          <ProfilePost
+            showPost={false}
+            listPost={listMyPost}
+            listFollower={listFollower}
+            listWatching={listWatching}
+            onTransferFollower={(typeTab) => {
+              setKeyActive(3);
+              setTypeFollowTab(typeTab);
+            }}
+          />
+        ),
+      },
+      2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
+      3: {
+        name: 'Thủ tục của tôi',
+        key: 3,
+        dataContent: <ProfileProcedure />,
+      },
+      4: {
+        name: 'Theo dõi',
+        key: 4,
+        dataContent: (
+          <ProfileFollow
+            listFollower={listFollower}
+            listWatching={listWatching}
+            activeKey={typeFollowTab}
+          />
+        ),
+      },
+      5: {
+        name: 'Hỏi đáp pháp luật',
+        key: 5,
+        dataContent: <ProfileProcedure />,
+      },
+      6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
     };
-  }, [listFollower, listWatching, listMyPost]);
+  }, [listFollower, listWatching, listMyPost, typeFollowTab]);
   return (
     <div>
       <div className='bg-white rounded-b-lg'>
