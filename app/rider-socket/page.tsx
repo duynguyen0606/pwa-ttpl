@@ -33,6 +33,7 @@ enum RiderStatus {
 }
 
 function Index() {
+  const [driverId, setDriverId] = useState(null);
   const handleUser = () => {
     socketGrab.emit('riderRequest', {
       infor: {
@@ -80,7 +81,7 @@ function Index() {
   };
 
   const handleUserCancel = () => {
-    socketGrab.disconnect();
+    socketGrab.emit('riderResponse');
   };
 
   // phía người đặt xe
@@ -89,6 +90,7 @@ function Index() {
       console.log('Không tìm thấy tài xế');
     });
     socketGrab.on('driverFound', (data) => console.log(data));
+    socketGrab.on('driverMoving', (data) => console.log(data));
     socketGrab.on('driverResponse', (data) => {
       const { status } = data;
       if (status === DriverStatus.REJECT_REQUEST) {
@@ -114,6 +116,7 @@ function Index() {
       socketGrab.off('driverFound');
       socketGrab.off('noDriverFound');
       socketGrab.off('driverResponse');
+      socketGrab.off('driverMoving');
     };
   }, []);
 

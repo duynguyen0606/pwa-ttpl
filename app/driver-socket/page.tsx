@@ -107,65 +107,37 @@ function Index() {
   };
 
   const handleDriver = () => {
-    if (driverId && riderId) {
-    } else
-      socketGrab.emit('driverRequest', {
-        infor: {
-          driver_id: '6617',
-          name: 'Tài xế',
-          phone_number: '0987765218',
-          license_plate: '10M2 - 123.52',
-          rating: '5',
+    socketGrab.emit('driverRequest', {
+      infor: {
+        driver_id: '6617',
+        name: 'Tài xế',
+        phone_number: '0987765218',
+        license_plate: '10M2 - 123.52',
+        rating: '5',
+      },
+      currentLocation: {
+        formatted_address:
+          '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
+        id: 1708678390679,
+        location: {
+          latitude: 20.983715,
+          latitudeDelta: 0.004452590797672684,
+          longitude: 105.888896,
+          longitudeDelta: 0.009148679673671722,
         },
-        currentLocation: {
-          formatted_address:
-            '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
-          id: 1708678390679,
-          location: {
-            latitude: 20.983715,
-            latitudeDelta: 0.004452590797672684,
-            longitude: 105.888896,
-            longitudeDelta: 0.009148679673671722,
-          },
-          name: '141 P. Nam Dư',
-        },
-        status: DriverStatus.AVAILABLE,
-      });
+        name: '141 P. Nam Dư',
+      },
+    });
   };
 
   const handleStatus = (status: number) => {
     setStatus(status);
     if (driverId && riderId) {
-      if (
-        status === DriverStatus.ARRIVING_PICKUP_POINT ||
-        status === DriverStatus.START_TRANSPORTING
-      ) {
-        intervalId = setInterval(() => {
-          socketGrab.emit('driverResponse', {
-            driverId,
-            riderId,
-            currentLocation: {
-              formatted_address:
-                '141 P. Nam Dư, Lĩnh Nam, Hoàng Mai, Hà Nội, Việt Nam',
-              id: 1708678390679,
-              location: {
-                latitude: 20.983715,
-                latitudeDelta: 0.004452590797672684,
-                longitude: 105.888896,
-                longitudeDelta: 0.009148679673671722,
-              },
-              name: '141 P. Nam Dư',
-            },
-            status,
-          });
-        }, 1000);
-      } else {
-        socketGrab.emit('driverResponse', {
-          driverId,
-          riderId,
-          status,
-        });
-      }
+      socketGrab.emit('driverResponse', {
+        driverId,
+        riderId,
+        status,
+      });
     }
   };
 
@@ -185,9 +157,13 @@ function Index() {
       setDriverId(data?.driverSocketId);
       setRiderId(data?.riderId);
     });
+    socketGrab.on('riderResponse', () => {
+      console.log('Người đặt xe huỷ chuyến');
+    });
     // socketGrab.on('')
     return () => {
       socketGrab.off('rideRequest');
+      socketGrab.off('riderResponse');
     };
   }, []);
 
