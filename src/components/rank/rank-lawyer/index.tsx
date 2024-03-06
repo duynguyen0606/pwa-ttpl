@@ -28,7 +28,7 @@ function RankLawyer(props: { type?: number }) {
         }
       })();
     }
-  }, [page, type, listRankLawyer.length]);
+  }, [page, type]);
 
   return (
     <>

@@ -185,9 +185,13 @@ function Index() {
       setDriverId(data?.driverSocketId);
       setRiderId(data?.riderId);
     });
+    socketGrab.on('riderResponse', (data) => {
+      console.log('user huỷ chuyến', data);
+    });
     // socketGrab.on('')
     return () => {
       socketGrab.off('rideRequest');
+      socketGrab.off('riderResponse');
     };
   }, []);
 

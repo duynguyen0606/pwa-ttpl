@@ -21,7 +21,7 @@ function RankProcedure() {
         }
       }
     })();
-  }, [page, dataProcedure.length]);
+  }, [page]);
 
   return (
     <>
