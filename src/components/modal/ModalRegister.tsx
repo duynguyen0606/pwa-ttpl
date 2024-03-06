@@ -32,13 +32,18 @@ function NextStepRegister({
 
     return (
         <div>
-            {/* Close button */}
-            <button onClick={onClickBack}>
-                <img
-                    className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
-                    src="/images/icons/left-arrow.png"
-                />
-            </button>
+            {isMobileUI && (
+                /* Close button */
+                <button onClick={onClickBack}>
+                    <Image
+                        className="p-1 bg-[#EDEEFA] rounded-full"
+                        src="/images/icons/left-arrow.png"
+                        alt=""
+                        width={27}
+                        height={27}
+                    />
+                </button>
+            )}
 
             {/* Content */}
             <div className="flex flex-col items-center justify-center">
@@ -99,11 +104,11 @@ function NextStepRegister({
                     <div className="flex justify-between">
                         <button
                             style={{
-                                width: "160px",
+                                width: isMobileUI ? "160px" : "220px",
                                 height: "54px",
                                 fontSize: 18,
                                 fontWeight: "600",
-                                borderRadius: "40px",
+                                borderRadius: isMobileUI ? "40px" : "4px",
                                 color: "#4A433F",
                                 backgroundColor: "#F2F2F2",
                                 display: "flex",
@@ -122,11 +127,11 @@ function NextStepRegister({
                                 htmlType="submit"
                                 loading={loading}
                                 style={{
-                                    width: "160px",
+                                    width: isMobileUI ? "160px" : "220px",
                                     height: "54px",
                                     fontSize: 18,
                                     fontWeight: "600",
-                                    borderRadius: "40px",
+                                    borderRadius: isMobileUI ? "40px" : "4px",
                                     color: "white",
                                     backgroundColor: `${primaryColor}`,
                                     display: "flex",
@@ -329,9 +334,12 @@ function ModalRegister(props: ModalProps) {
                                 dispatch(setOpenModalRegister(false))
                             }
                         >
-                            <img
-                                className="w-[26px] h-[27px] px-1 bg-[#EDEEFA] rounded-full"
+                            <Image
+                                className="w-[26px] h-[27px] p-1 bg-[#EDEEFA] rounded-full"
                                 src="/images/icons/left-arrow.png"
+                                alt=""
+                                width={27}
+                                height={27}
                             />
                         </button>
                     )}
