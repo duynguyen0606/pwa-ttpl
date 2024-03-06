@@ -31,9 +31,15 @@ function Index({ params }: { params: { slug: string } }) {
     const { slug } = params;
     const { user, token } = useAppSelector((state) => state.authState);
 
+    const [showInfoRate, setShowInfoRate] = useState(false);
+    const [activeTab, setActiveTab] = useState(1);
+    const [childTab, setChildTab] = useState(1);
+
+    // data 
     const [userInfor, setUserInfor] = useState<any>();
     const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
+    const [pagePost, setPagePost] = useState(1);
+    const [pageVideo, setPageVideo] = useState(1);
     const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
     const [listVideo, setListVideo] = useState<Array<any>>([]);
     const [listFollower, setListFollower] = useState<Array<any>>([]);
@@ -42,7 +48,7 @@ function Index({ params }: { params: { slug: string } }) {
     useEffect(() => {
         (async () => {
             const dataPost = await apiGetPostOfOtherUser({
-                page: page,
+                page: pagePost,
                 userID: slug,
             });
             if (dataPost.status) {
@@ -53,7 +59,7 @@ function Index({ params }: { params: { slug: string } }) {
                 }
             }
         })();
-    }, [page]);
+    }, [pagePost]);
 
     useEffect(() => {
         (async () => {
@@ -66,17 +72,8 @@ function Index({ params }: { params: { slug: string } }) {
                 setListFollower(dataFollower.data);
             }
 
-            const dataFollowing = await apiGetOtherFollowerByType({
-                token,
-                type: "watching",
-                user_id: slug,
-            });
-            if (dataFollowing.status) {
-                setListFollowing(dataFollowing.data);
-            }
-
             const dataVideo = await apiGetVideoOfOtherUser({
-                page: 1,
+                page: pageVideo,
                 userID: slug,
             });
             if (dataVideo.status) {
@@ -90,9 +87,18 @@ function Index({ params }: { params: { slug: string } }) {
         })();
     }, []);
 
-    const [showInfoRate, setShowInfoRate] = useState(false);
-    const [activeTab, setActiveTab] = useState(1);
-    const [childTab, setChildTab] = useState(1);
+    useEffect(() => {
+        (async () => {
+            const dataFollowing = await apiGetOtherFollowerByType({
+                token,
+                type: "watching",
+                user_id: slug,
+            });
+            if (dataFollowing.status) {
+                setListFollowing(dataFollowing.data);
+            }
+        })()
+    }, [])
 
     const renderContent = useMemo(() => {
         if (activeTab === 1) {
@@ -211,7 +217,7 @@ function Index({ params }: { params: { slug: string } }) {
                                             bg-[#FFF0E6] 
                                         "
                                         onClick={() =>
-                                            setPage((prev) => prev + 1)
+                                            setPagePost((prev) => prev + 1)
                                         }
                                     >
                                         Xem thêm
