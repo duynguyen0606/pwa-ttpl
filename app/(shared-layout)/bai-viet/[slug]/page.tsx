@@ -52,8 +52,8 @@ function Index({ params }: { params: { slug: string } }) {
         </div> */}
             <div className='overflow-auto fixed-height'>
               <Carousel autoplay>
-                {dataDetail.list_file.map((item) => (
-                  <div>
+                {dataDetail.list_file.map((item, idx) => (
+                  <div key={idx}>
                     <ImageLegacy
                       src={item.name}
                       alt='thumbnail'

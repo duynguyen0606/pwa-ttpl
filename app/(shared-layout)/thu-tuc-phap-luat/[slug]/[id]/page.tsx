@@ -9,9 +9,12 @@ import ProcedureSlug from '@/src/components/procedure-slug';
 import { useAppSelector } from '@/src/redux/hooks';
 import { Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
-import { navbarArr } from '../page';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
+const navbarArr = [
+  { name: 'Thủ tục', slug: 'thu-tuc' },
+  { name: 'Cơ quan thực hiện', slug: 'co-quan-thuc-hien' },
+];
 function Index({ params }: { params: { id: string } }) {
   const [dataContent, setDataContent] = useState();
   const [dataRelative, setDataRelative] = useState<Array<any>>();

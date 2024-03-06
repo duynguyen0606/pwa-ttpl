@@ -9,7 +9,7 @@ import { io } from 'socket.io-client';
 //   autoConnect: false,
 // });
 
-export const socketGrab = io(`http://localhost:3001/grab`, {
+const socketGrab = io(`http://localhost:3001/grab`, {
   path: '/socket-io',
   autoConnect: false,
 });
