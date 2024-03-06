@@ -15,10 +15,13 @@ import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 
 function Post({ post }: { post: ArticleModel }) {
   const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
+
   const { token } = useAppSelector((state) => state.authState);
   const { listPost } = useAppSelector((state) => state.postState);
-  const [showComment, setShowComment] = useState(false);
   const dispatch = useAppDispatch();
+
+  const [showComment, setShowComment] = useState(false);
+
   const handleFetchComment = async (id: string) => {
     const dataRes = await apiGetListCommentByPostId({ postId: id });
     if (dataRes.status && dataRes.data.length > 0) {
@@ -97,7 +100,9 @@ function Post({ post }: { post: ArticleModel }) {
             <h4 className='font-semibold'>{post.title}</h4>
             <p
               className='dot-4 post-desc'
-              dangerouslySetInnerHTML={{ __html: post.short_description }}
+              dangerouslySetInnerHTML={{
+                __html: post.short_description,
+              }}
             />
             <div className='flex float-right gap-2 text-neutral-300 mt-2'>
               <p>{post.view} lượt xem</p>
@@ -138,7 +143,10 @@ function Post({ post }: { post: ArticleModel }) {
                   height={18}
                 />
               }
-              onClick={() => handleFetchComment(post.id)}
+              onClick={() => {
+                setShowComment(!showComment);
+                handleFetchComment(post.id);
+              }}
             >
               Comment
             </Button>
@@ -156,7 +164,7 @@ function Post({ post }: { post: ArticleModel }) {
             </Button>
           </div>
 
-          {dataComment.length > 0 && (
+          {token && showComment && (
             <div className='py-4 w-full'>
               <CreateComment />
               {dataComment.map((item) => (
