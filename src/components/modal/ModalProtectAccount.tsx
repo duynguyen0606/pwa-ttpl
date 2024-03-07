@@ -1,7 +1,10 @@
+import { useAppSelector } from '@/src/redux/hooks';
 import { Button, Input, Modal, ModalProps, Typography } from 'antd';
 
 function ModalProtectAccount(props: ModalProps) {
   const { open, onOk, onCancel } = props;
+  const { user } = useAppSelector((state) => state.authState);
+  console.log(user);
   return (
     <Modal
       title='Bảo mật tài khoản'
@@ -23,7 +26,11 @@ function ModalProtectAccount(props: ModalProps) {
         </div>
         <div className='mb-4'>
           <Typography.Title level={5}>Số Điện thoại</Typography.Title>
-          <Input placeholder='Nhập số điện thoại' />
+          <Input
+            defaultValue={user?.phone}
+            disabled
+            placeholder='Nhập số điện thoại'
+          />
         </div>
         <div style={{ textAlign: 'center' }}>
           <Button size='large' className='button-primary'>
