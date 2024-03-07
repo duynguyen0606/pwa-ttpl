@@ -1,6 +1,7 @@
 import {
   apiGetListCategory,
   apiGetListMostViewArticle,
+  apiGetListPost,
 } from '@/src/api/home-page';
 import ArticleModel from '@/src/models/Article';
 import Category from '@/src/models/Category';
@@ -22,6 +23,13 @@ export const getListArticle = createAsyncThunk(
   }
 );
 
+export const getListPost = createAsyncThunk('post/getListPost', async () => {
+  const dataRes = await apiGetListPost({ page: 1 });
+  if (dataRes.status) {
+    return dataRes.data ?? [];
+  }
+});
+
 const initialState: CategoryState = {
   listArticle: [],
   listPost: [],
@@ -36,12 +44,16 @@ const postSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      getListArticle.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        state.listArticle = action.payload;
-      }
-    );
+    builder
+      .addCase(getListPost.fulfilled, (state, action: PayloadAction<any>) => {
+        state.listPost = action.payload;
+      })
+      .addCase(
+        getListArticle.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.listArticle = action.payload;
+        }
+      );
   },
 });
 

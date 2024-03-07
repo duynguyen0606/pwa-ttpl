@@ -30,6 +30,7 @@ enum RiderStatus {
   FINDING_DRIVER = 0,
   ACCEPT_DRIVER = 1,
   CANCEL_DRIVER = 2,
+  CANCEL_DRIVER_ACCEPT = 3,
 }
 
 function Index() {
@@ -80,8 +81,9 @@ function Index() {
     socketGrab.disconnect();
   };
 
-  const handleUserCancel = () => {
-    socketGrab.emit('riderResponse');
+  const handleUserCancel = (status: number) => {
+    // socketGrab.disconnect();
+    socketGrab.emit('riderResponse', { status });
   };
 
   // phía người đặt xe
@@ -123,7 +125,14 @@ function Index() {
   return (
     <div>
       <Button onClick={handleUser}>User bắn </Button>
-      <Button onClick={handleUserCancel}>User huỷ chuyến</Button>
+      <Button onClick={() => handleUserCancel(RiderStatus.CANCEL_DRIVER)}>
+        User huỷ chuyến khi tài xế chưa chấp nhận
+      </Button>
+      <Button
+        onClick={() => handleUserCancel(RiderStatus.CANCEL_DRIVER_ACCEPT)}
+      >
+        User huỷ chuyến sau khi tài xế đã chấp nhận
+      </Button>
       <Button onClick={handleTurnOn}>Bật app</Button>
       <Button onClick={hanldeTurnOff}>Tắt app</Button>
     </div>

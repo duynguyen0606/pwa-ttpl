@@ -20,7 +20,7 @@ function RankPost() {
         }
       }
     })();
-  }, [currentPage, dataRankPosts.length]);
+  }, [currentPage]);
 
   return (
     <div className='overflow-auto'>

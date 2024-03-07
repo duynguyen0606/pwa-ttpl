@@ -37,8 +37,9 @@ function Index({ params }: { params: { id: string } }) {
   const [userInfor, setUserInfor] = useState<any>();
   const { user, token } = useAppSelector((state) => state.authState);
   const [listPost, setListPost] = useState([]);
-  const [listWatching, setListWatching] = useState([]);
-  const [listFollower, setListFollower] = useState([]);
+  const [listWatching, setListWatching] = useState<Array<any>>([]);
+  const [listFollower, setListFollower] = useState<Array<any>>([]);
+  const [typeFollowTab, setTypeFollowTab] = useState('');
 
   useEffect(() => {
     if (params.id) {
@@ -76,31 +77,40 @@ function Index({ params }: { params: { id: string } }) {
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
     return {
-      1: {
-        name: 'Bài viết',
-        key: 1,
-        dataContent: (
-          <ProfilePost
-            showPost={false}
-            listPost={listPost}
-            listFollower={listFollower}
-            listWatching={listWatching}
-          />
-        ),
-      },
-      2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-      3: {
-        name: 'Theo dõi',
-        key: 4,
-        dataContent: (
-          <ProfileFollow
-            listFollower={listFollower}
-            listWatching={listWatching}
-          />
-        ),
-      },
+        1: {
+            name: "Bài viết",
+            key: 1,
+            dataContent: (
+                <ProfilePost
+                    showPost={false}
+                    listPost={listPost}
+                    listFollower={listFollower}
+                    listWatching={listWatching}
+                    onTransferFollower={(typeTab) => {
+                        setKeyActive(3);
+                        setTypeFollowTab(typeTab);
+                    }}
+                />
+            ),
+        },
+        2: { name: "Video", key: 2, dataContent: <ProfileVideo /> },
+        3: {
+            name: "Theo dõi",
+            key: 3,
+            dataContent: (
+                <ProfileFollow
+                    listFollower={listFollower}
+                    listWatching={listWatching}
+                    activeKey={typeFollowTab}
+                    onSetMapFollower={(newListFollower) =>
+                        setListFollower(newListFollower)
+                    }
+                    onSetMapFollowing={(newListFollowing) => setListWatching(newListFollowing)}
+                />
+            ),
+        },
     };
-  }, [listPost, listFollower, listWatching, params.id, user]);
+  }, [listPost, listFollower, listWatching, typeFollowTab]);
 
   return (
     <div>

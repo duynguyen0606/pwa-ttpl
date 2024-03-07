@@ -157,8 +157,8 @@ function Index() {
       setDriverId(data?.driverSocketId);
       setRiderId(data?.riderId);
     });
-    socketGrab.on('riderResponse', () => {
-      console.log('Người đặt xe huỷ chuyến');
+    socketGrab.on('riderResponse', (data) => {
+      console.log('user huỷ chuyến', data);
     });
     // socketGrab.on('')
     return () => {

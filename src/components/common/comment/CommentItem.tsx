@@ -53,7 +53,7 @@ function CommentItem({
             {converDateToDays({ date: data.created_at })}
           </p>
           <div className='pt-2'>{data.title}</div>
-          {data.files.length > 0 && (
+          {data?.files?.length > 0 && (
             <div className='flex gap-2'>
               {data?.files.map((item: any, id: any) => (
                 <ImageAntd key={id} src={item.files} />

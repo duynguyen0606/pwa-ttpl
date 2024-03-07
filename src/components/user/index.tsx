@@ -35,6 +35,7 @@ function UserProfile() {
   const { listMyPost, listFollower, listWatching } = useAppSelector(
     (state) => state.userState
   );
+  const [typeFollowTab, setTypeFollowTab] = useState('');
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
     return {
@@ -43,14 +44,23 @@ function UserProfile() {
         key: 1,
         dataContent: (
           <ProfilePost
+            showPost={false}
             listPost={listMyPost}
             listFollower={listFollower}
             listWatching={listWatching}
+            onTransferFollower={(typeTab) => {
+              setKeyActive(4);
+              setTypeFollowTab(typeTab);
+            }}
           />
         ),
       },
       2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-      3: { name: 'Thủ tục của tôi', key: 3, dataContent: <ProfileProcedure /> },
+      3: {
+        name: 'Thủ tục của tôi',
+        key: 3,
+        dataContent: <ProfileProcedure />,
+      },
       4: {
         name: 'Theo dõi',
         key: 4,
@@ -58,6 +68,8 @@ function UserProfile() {
           <ProfileFollow
             listFollower={listFollower}
             listWatching={listWatching}
+            activeKey={typeFollowTab}
+            
           />
         ),
       },
@@ -68,7 +80,7 @@ function UserProfile() {
       },
       6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
     };
-  }, [listFollower, listWatching, listMyPost]);
+  }, [listFollower, listWatching, listMyPost, typeFollowTab]);
   return (
     <div>
       <div className='bg-white rounded-b-lg'>

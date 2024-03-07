@@ -26,7 +26,7 @@ function RankStaff(props: { type?: number }) {
         }
       }
     })();
-  }, [page, listRankLawyer.length]);
+  }, [page]);
 
   return (
     <>
