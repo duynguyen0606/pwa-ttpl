@@ -16,7 +16,7 @@ import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 function Post({ post }: { post: ArticleModel }) {
   const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
 
-  const { token } = useAppSelector((state) => state.authState);
+  const { token, user } = useAppSelector((state) => state.authState);
   const { listPost } = useAppSelector((state) => state.postState);
   const dispatch = useAppDispatch();
 
@@ -164,9 +164,9 @@ function Post({ post }: { post: ArticleModel }) {
             </Button>
           </div>
 
-          {token && showComment && (
+          {showComment && (
             <div className='py-4 w-full'>
-              <CreateComment />
+              {user && <CreateComment />}
               {dataComment.map((item) => (
                 <CommentItem key={item.created_at} data={item} />
               ))}
