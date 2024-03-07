@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 import { Avatar, Button, Col, Input, Row, Typography } from "antd";
@@ -17,25 +17,32 @@ function ProfilePost({
     listWatching,
     showPost = true,
     onTransferFollower,
+    onLoadMore,
 }: {
     listPost: Array<ArticleModel>;
     listFollower: Array<any>;
     listWatching: Array<any>;
     showPost?: boolean;
     onTransferFollower: (type: string) => void;
+    onLoadMore: () => void;
 }) {
     const [openModalPost, setOpenModalPost] = useState(false);
     // const { listMyPost, listFollower, listWatching } = useAppSelector(
     //   (state) => state.userState
     // );
+    const [isMobileClient, setIsMobileClient] = useState(false);
     const isMobileUI = useMediaQuery({
         query: "(max-width: 600px)",
     });
 
+    useEffect(() => {
+        setIsMobileClient(isMobileUI);
+    }, [isMobileUI]);
+
     return (
         <Row gutter={16}>
-            <Col span={isMobileUI ? 24 : 8}>
-                <div className="mb-4 p-4 bg-white rounded-lg">
+            <Col span={isMobileClient ? 24 : 8}>
+                <div className="my-4 p-4 bg-white rounded-lg">
                     <Typography.Title level={5}>
                         Tìm kiếm công ty Luật/ Doanh nghiệp
                     </Typography.Title>
@@ -147,7 +154,7 @@ function ProfilePost({
                     </div>
                 </div>
             </Col>
-            <Col span={isMobileUI ? 24 : 16}>
+            <Col span={isMobileClient ? 24 : 16}>
                 {showPost && (
                     <div className="mb-4 p-4 bg-white rounded-lg">
                         <UserPost onOpenModal={() => setOpenModalPost(true)} />
@@ -170,7 +177,7 @@ function ProfilePost({
                             font-bold 
                             bg-[#FFF0E6] 
                         "
-                        //   onClick={() => setPagePost((prev) => prev + 1)}
+                          onClick={onLoadMore}
                     >
                         Xem thêm
                     </button>
