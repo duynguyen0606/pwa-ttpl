@@ -300,7 +300,7 @@ function Note({ color: primaryColor }: { color: string }) {
   return (
     <div className='text-center text-[#A1A5AC] mb-4'>
       Với việc tiếp tục, bạn đã đồng ý với các{' '}
-      <span className={`text-[${primaryColor}]`}>Chính sách bảo mật</span> của
+      <span style={{color: primaryColor}}>Chính sách bảo mật</span> của
       chúng tôi
     </div>
   );
