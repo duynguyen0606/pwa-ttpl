@@ -20,7 +20,7 @@ import CommentItem from '../common/comment/CommentItem';
 import axios from 'axios';
 import { sendPostFormDataWithToken } from '@/src/utils';
 
-function ProcedureSlugComment({ id }: { id?: string }) {
+function ProcedureSlugComment({ id: procedureId }: { id?: string }) {
   const { user, token } = useAppSelector((state) => state.authState);
   const [showUpload, setShowUpload] = useState(false);
   const [data, setData] = useState<Array<any>>([]);
@@ -34,15 +34,15 @@ function ProcedureSlugComment({ id }: { id?: string }) {
   };
 
   useEffect(() => {
-    if (token && id) {
+    if (token && procedureId) {
       (async () => {
-        const dataRes = await apiGetListProcedureComment(id, token);
+        const dataRes = await apiGetListProcedureComment(procedureId, token);
         if (dataRes.status) {
           setData(dataRes.data);
         }
       })();
     }
-  }, [user, id, token]);
+  }, [user, procedureId, token]);
 
   const uploadFile = async (options: any) => {
     const { onSuccess, onError, file, onProgress } = options;
@@ -76,11 +76,14 @@ function ProcedureSlugComment({ id }: { id?: string }) {
   };
 
   const handleComment = async (values: any) => {
-    if ((message && user && id) || (user && fileListLink && id)) {
+    if (
+      (message && user && procedureId) ||
+      (user && fileListLink && procedureId)
+    ) {
       const dataRes = await apiProcedureComment({
         comment: message,
         files: fileListLink,
-        id_help_articles: id as string,
+        id_help_articles: procedureId as string,
         token,
       });
       if (dataRes?.status) {
@@ -144,6 +147,7 @@ function ProcedureSlugComment({ id }: { id?: string }) {
         data.map((item, id) => (
           <CommentItem
             key={id}
+            procedureId={procedureId as string}
             data={
               new CommentModel({
                 created_by_avartar: item.avatar,
@@ -151,6 +155,7 @@ function ProcedureSlugComment({ id }: { id?: string }) {
                 created_at: item.created_at,
                 title: item.comment,
                 files: item.files,
+                id: item.id,
               })
             }
           />
