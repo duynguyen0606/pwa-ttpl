@@ -1,25 +1,28 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { Collapse, Pagination } from 'antd';
+import { Collapse, Input, Pagination } from 'antd';
 
 import { apiGetFAQ } from '@/src/api/question';
 import { Question, Answer } from '@/src/components/mobile/law-qa';
+import { nonAccentVietnamese } from '@/src/utils';
 
 function ContentFAQ() {
   const [pageFAQ, setPageFAQ] = useState(1);
   const [listFAQ, setListFAQ] = useState<Array<any>>([]);
+  const [filterListFAQ, setFilterListFAQ] = useState<Array<any>>([]);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
 
-  useMemo(() => {
+  useEffect(() => {
     (async () => {
       const dataRes = await apiGetFAQ({ page: pageFAQ });
       if (dataRes.status) {
         setListFAQ(dataRes.data);
+        setFilterListFAQ(dataRes.data);
       }
     })();
   }, [pageFAQ]);
@@ -40,13 +43,50 @@ function ContentFAQ() {
     );
   };
 
+  const handleSearch = (value: string) => {
+    if (value) {
+      console.log(value, listFAQ);
+      setFilterListFAQ(
+        listFAQ.filter((qa) =>
+          nonAccentVietnamese(qa.title).includes(nonAccentVietnamese(value))
+        )
+      );
+    } else {
+      setFilterListFAQ(listFAQ);
+    }
+  };
+
   return (
     <>
+      {listFAQ.length > 0 && (
+        <div className='pt-2'>
+          <div className='flex justify-center p-4'>
+            <Input
+              style={{ width: '60%', margin: 'auto' }}
+              size='large'
+              placeholder='Tìm kiếm'
+              onChange={(e) => handleSearch(e.target.value)}
+              prefix={
+                <Image
+                  src='/images/icons/search.png'
+                  alt='search-icon'
+                  width={20}
+                  height={20}
+                />
+              }
+              alt='search-icon'
+              width={20}
+              height={20}
+            />
+          </div>
+        </div>
+      )}
+
       <Collapse
         // className={`bg-[#f1f5ff]`}
         collapsible='icon'
         ghost
-        items={listFAQ.map((faq) => {
+        items={filterListFAQ.map((faq) => {
           return {
             key: faq?.id,
             label: (
