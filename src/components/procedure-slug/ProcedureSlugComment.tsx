@@ -158,6 +158,7 @@ function ProcedureSlugComment({ id: procedureId }: { id?: string }) {
                 id: item.id,
               })
             }
+            type='procedure'
           />
         ))}
     </div>
