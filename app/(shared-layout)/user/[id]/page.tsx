@@ -90,6 +90,12 @@ function Index({ params }: { params: { id: string } }) {
                         setKeyActive(3);
                         setTypeFollowTab(typeTab);
                     }}
+                    onSetMapFollower={(newListFollower) =>
+                        setListFollower(newListFollower)
+                    }
+                    onSetMapFollowing={(newListFollowing) =>
+                        setListWatching(newListFollowing)
+                    }
                 />
             ),
         },
@@ -105,7 +111,9 @@ function Index({ params }: { params: { id: string } }) {
                     onSetMapFollower={(newListFollower) =>
                         setListFollower(newListFollower)
                     }
-                    onSetMapFollowing={(newListFollowing) => setListWatching(newListFollowing)}
+                    onSetMapFollowing={(newListFollowing) =>
+                        setListWatching(newListFollowing)
+                    }
                 />
             ),
         },
