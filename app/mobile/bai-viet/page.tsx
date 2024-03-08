@@ -82,7 +82,7 @@ function Index() {
 
             {/* btn add and q&a */}
             {showIconpaq && (
-                <div id="icon-paq" className="fixed top-[17vh] right-[60px]">
+                <div id="icon-paq" className="fixed top-[17vh] right-[60px] z-[1]">
                     <div
                         className="
                             mb-5
