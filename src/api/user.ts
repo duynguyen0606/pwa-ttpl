@@ -38,24 +38,6 @@ export const apiGetUserById = async ({ id }: { id: string }) => {
 ////////////////////////////////////////////////////////////////
 // -------------------------------Other User--------------------------------
 
-export const apiGetPostOfOtherUser = async ({
-  page = 1,
-  userID,
-}: {
-  page: number;
-  userID: string;
-}): Promise<{
-  status: boolean;
-  page: number;
-  userID: string;
-  data: Array<ArticleModel>;
-}> => {
-  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&created_by=${userID}`;
-  const { data } = await axios.get(url);
-  console.log(data);
-  return data ?? {};
-};
-
 export const apiGetVideoOfOtherUser = async ({
   page = 1,
   userID,
@@ -90,10 +72,12 @@ export const apiGetOtherFollowerByType = async ({
 export const apiGetOtherListPost = ({
   token,
   id,
+  page,
 }: {
   token: string;
   id: string;
+  page: number;
 }) => {
-  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=1&created_by=${id}`;
+  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&created_by=${id}`;
   return getWithToken({ url, token });
 };

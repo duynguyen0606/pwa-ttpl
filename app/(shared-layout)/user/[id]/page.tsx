@@ -63,6 +63,7 @@ function Index({ params }: { params: { id: string } }) {
         const dataPost = await apiGetOtherListPost({
           token,
           id: params.id,
+          page: 1,
         });
         if (dataPost.status) {
           setListPost(dataPost.data);
