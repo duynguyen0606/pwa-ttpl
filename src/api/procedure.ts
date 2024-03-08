@@ -142,3 +142,28 @@ export const apiProcedureComment = (args: {
 
   return data ?? {};
 };
+
+export const apiProcedureResponseComment = (args: {
+  token: string;
+  comment: string;
+  files: string;
+  id_help_articles: string;
+  procedural_comment_id: string;
+}) => {
+  const { token, comment, files, id_help_articles, procedural_comment_id } =
+    args;
+  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/add_procedural_comment`;
+  const data = sendPostFormDataWithToken({
+    url,
+    token,
+    data: {
+      type: 'comment',
+      comment,
+      files,
+      id_help_articles,
+      procedural_comment_id,
+    },
+  });
+
+  return data ?? {};
+};

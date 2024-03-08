@@ -168,7 +168,7 @@ function Post({ post }: { post: ArticleModel }) {
             <div className='py-4 w-full'>
               {user && <CreateComment />}
               {dataComment.map((item) => (
-                <CommentItem key={item.created_at} data={item} />
+                <CommentItem procedureId='' key={item.created_at} data={item} />
               ))}
             </div>
           )}

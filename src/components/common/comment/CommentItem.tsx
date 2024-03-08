@@ -3,22 +3,26 @@ import CommentModel from '@/src/models/Comment';
 import { converDateToDays } from '@/src/utils';
 import { Avatar, Button } from 'antd';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateComment from './CreateComment';
 import { Image as ImageAntd } from 'antd';
 import { apiGetListChildProcedureComment } from '@/src/api/procedure';
 import { useAppSelector } from '@/src/redux/hooks';
+import { usePathname } from 'next/navigation';
 
 function CommentItem({
   data,
   isChild = false,
   type = 'post',
+  procedureId,
 }: // type'
 {
   data: CommentModel;
   isChild?: boolean;
   type?: 'procedure' | 'post';
+  procedureId: string;
 }) {
+  const pathName = usePathname();
   const [dataCommentChild, setDataCommentChild] = useState<Array<CommentModel>>(
     []
   );
@@ -38,7 +42,7 @@ function CommentItem({
       } else if (type === 'procedure') {
         const dataRes = await apiGetListChildProcedureComment({
           token,
-          procedureId: '7720',
+          procedureId,
           commentId: id,
         });
         if (dataRes.status && dataRes.data.length > 0) {
@@ -106,7 +110,9 @@ function CommentItem({
 
             {!isChild && (
               <Button
-                onClick={() => setShowReplieComment((prev) => !prev)}
+                onClick={() => {
+                  setShowReplieComment((prev) => !prev);
+                }}
                 type='link'
               >
                 Trả lời
@@ -131,10 +137,15 @@ function CommentItem({
               Phản hồi
             </Button>
           )}
-          {showReplieComment && <CreateComment />}
+          {showReplieComment && <CreateComment parentId={data.id} procedureId={procedureId} />}
           {dataCommentChild.length > 0 &&
             dataCommentChild.map((item) => (
-              <CommentItem isChild key={item.id} data={item} />
+              <CommentItem
+                procedureId={procedureId}
+                isChild
+                key={item.id}
+                data={item}
+              />
             ))}
         </div>
       </div>

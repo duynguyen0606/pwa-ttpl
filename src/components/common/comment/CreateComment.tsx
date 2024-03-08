@@ -1,8 +1,28 @@
+import { apiProcedureResponseComment } from '@/src/api/procedure';
 import { useAppSelector } from '@/src/redux/hooks';
-import { Avatar, Input } from 'antd';
+import { Avatar, Form, Input } from 'antd';
 
-function CreateComment() {
-  const { user } = useAppSelector((state) => state.authState);
+function CreateComment(props: {
+  onSetDataChildComemnt?: (dataComment: any) => void;
+  parentId?: string;
+  procedureId?: string;
+}) {
+  const { onSetDataChildComemnt, parentId, procedureId } = props;
+  const { user, token } = useAppSelector((state) => state.authState);
+  const handleComment = async (values: { comment: string }) => {
+    if (token && parentId && procedureId) {
+      const dataRes = await apiProcedureResponseComment({
+        token,
+        procedural_comment_id: parentId,
+        id_help_articles: procedureId,
+        comment: values.comment,
+        files: '',
+      });
+
+      // pass callback
+      console.log(dataRes);
+    }
+  };
   return (
     <div id='create-comment' className='flex gap-4 mb-4'>
       {user && (
@@ -10,9 +30,13 @@ function CreateComment() {
           <Avatar src={user.image} alt='avatar' />
         </div>
       )}
-
       <div className='flex-1'>
-        <Input placeholder='Nhập bình luận của bạn' />
+        <Form onFinish={(values) => handleComment(values)}>
+          {/* <Input placeholder='Nhập bình luận của bạn' /> */}
+          <Form.Item name='comment'>
+            <Input placeholder='Nhập bình luận của bạn' />
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );
