@@ -6,26 +6,45 @@ import Image from 'next/image';
 import { useState } from 'react';
 import CreateComment from './CreateComment';
 import { Image as ImageAntd } from 'antd';
+import { apiGetListChildProcedureComment } from '@/src/api/procedure';
+import { useAppSelector } from '@/src/redux/hooks';
 
 function CommentItem({
   data,
   isChild = false,
-}: {
+  type = 'post',
+}: // type'
+{
   data: CommentModel;
   isChild?: boolean;
+  type?: 'procedure' | 'post';
 }) {
   const [dataCommentChild, setDataCommentChild] = useState<Array<CommentModel>>(
     []
   );
   const [showReplieComment, setShowReplieComment] = useState(false);
+  const { token } = useAppSelector((state) => state.authState);
   // const [handleShow]
 
   const handleFetchDataCommentChild = async (id: string) => {
-    const dataRes = await apiGetListChildCommentByParentCommentId({
-      postId: id,
-    });
-    if (dataRes.status && dataRes.data.length > 0) {
-      setDataCommentChild(dataRes.data);
+    if (token) {
+      if (type === 'post') {
+        const dataRes = await apiGetListChildCommentByParentCommentId({
+          postId: id,
+        });
+        if (dataRes.status && dataRes.data.length > 0) {
+          setDataCommentChild(dataRes.data);
+        }
+      } else if (type === 'procedure') {
+        const dataRes = await apiGetListChildProcedureComment({
+          token,
+          procedureId: '7720',
+          commentId: id,
+        });
+        if (dataRes.status && dataRes.data.length > 0) {
+          setDataCommentChild(dataRes.data);
+        }
+      }
     }
   };
 

@@ -115,6 +115,17 @@ export const apiGetListProcedureComment = (id: string, token: string) => {
   return data ?? {};
 };
 
+export const apiGetListChildProcedureComment = (args: {
+  procedureId: string;
+  token: string;
+  commentId: string;
+}) => {
+  const url = `https://thutucphapluat.com/api/Procedural_comment_controller/list_comment?procedure_id=${args.procedureId}&limit=1000&page=1&procedural_comment_id=${args.commentId}`;
+  const data = getWithToken({ url, token: args.token });
+
+  return data ?? {};
+};
+
 export const apiProcedureComment = (args: {
   token: string;
   comment: string;
