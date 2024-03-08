@@ -9,28 +9,38 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Skeleton, Divider } from "antd";
 
 import ArticleModel from "@/src/models/Article";
-import { useAppSelector } from "@/src/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { apiGetListPost } from "@/src/api/home-page";
 
 import Header from "@/src/components/mobile/header/Header";
 import Footer from "@/src/components/mobile/footer/Footer";
 import PostItem from "@/src/components/mobile/post-item/PostItem";
 import ModalPost from "@/src/components/modal/ModalPost";
+import { Post } from "@/src/components/common";
+import { setListPost } from "@/src/redux/feature/postSlice";
 
 function Index() {
-    const { user } = useAppSelector((state) => state.authState);
+    const { user, token } = useAppSelector((state) => state.authState);
+    console.log('xxx',token);
+    
+    const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);
-    const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+    // const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
+    const { listPost } = useAppSelector((state) => state.postState);
     const [page, setPage] = useState(1);
     const [showIconpaq, setShowIconpaq] = useState(false);
 
     useEffect(() => {
         (async () => {
-            const dataRes = await apiGetListPost({ page: 1 });
+            const dataRes = await apiGetListPost({ page });
+            console.log(dataRes);
             if (dataRes.status) {
-                setListPost(dataRes.data);
+                dispatch(setListPost(dataRes.data));
             }
         })();
+        return () => {
+            dispatch(setListPost([]));
+        };
     }, []);
 
     useEffect(() => {
@@ -43,13 +53,11 @@ function Index() {
             return;
         }
         setLoading(true);
-        const res = await apiGetListPost({ page: page });
+        const res = await apiGetListPost({ page });
         if (res.status) {
-            setListPost((prev) => [...prev, ...res.data]);
-            setLoading(false);
-        } else {
-            setLoading(false);
+            dispatch(setListPost([...listPost, ...res.data]));
         }
+        setLoading(false);
     };
 
     return (
@@ -123,7 +131,7 @@ function Index() {
             >
                 <div className="pt-[62px]">
                     {listPost.map((post) => (
-                        <PostItem key={post.id} post={post} />
+                        <Post key={post?.id} post={post} />
                     ))}
                 </div>
             </InfiniteScroll>
