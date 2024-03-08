@@ -74,6 +74,7 @@ function Index() {
                     rounded-full 
                     bg-[#4755D4] 
                     fixed right-0 top-[20vh]
+                    z-[2]
                 "
             >
                 <div>+</div>

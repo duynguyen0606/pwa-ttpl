@@ -11,6 +11,7 @@ import {
     setDataUser,
     setOpenModalForgotPassword,
     setOpenModalRegister,
+    setToken,
 } from "@/src/redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { ModalForgotPassword, ModalRegister } from "@/src/components/modal";
@@ -33,6 +34,7 @@ function Index() {
         const dataRes = await apiLogin(values);
         if (dataRes.status) {
             dispatch(setDataUser(dataRes?.data_user));
+            dispatch(setToken(dataRes?.jwt_token));
 
             message.success("Bạn đã đăng nhập thành công!");
 
@@ -177,14 +179,14 @@ function Index() {
 
             {/* Forgot password modal */}
             <ModalForgotPassword
-              onCancel={() => dispatch(setOpenModalForgotPassword(false))}
-              onOk={() => dispatch(setOpenModalForgotPassword(false))}
+                onCancel={() => dispatch(setOpenModalForgotPassword(false))}
+                onOk={() => dispatch(setOpenModalForgotPassword(false))}
             />
 
             {/* Register modal */}
             <ModalRegister
-              onCancel={() => dispatch(setOpenModalRegister(false))}
-              onOk={() => dispatch(setOpenModalRegister(false))}
+                onCancel={() => dispatch(setOpenModalRegister(false))}
+                onOk={() => dispatch(setOpenModalRegister(false))}
             />
         </div>
     );
