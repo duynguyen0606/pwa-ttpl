@@ -11,8 +11,10 @@ import ProfileFollow from "@/src/components/user/ProfileFollow";
 import {
     apiGetOtherFollowerByType,
     apiGetOtherListPost,
+    apiGetPostOfOtherUser,
     apiGetUserById,
 } from "@/src/api/user";
+import { ModalInfoRate } from "@/src/components/modal";
 
 interface NavItem {
     name: string;
@@ -21,21 +23,28 @@ interface NavItem {
 }
 
 function Index({ params }: { params: { id: string } }) {
+    // ID của người dùng
+    const { id } = params;
+
+    // ID, token của bản thân
+    const { user, token } = useAppSelector((state) => state.authState);
+
     const [keyActive, setKeyActive] = useState(1);
     const [userInfor, setUserInfor] = useState<any>();
-    const { user, token } = useAppSelector((state) => state.authState);
-    const [listPost, setListPost] = useState([]);
+    const [listPost, setListPost] = useState<Array<any>>([]);
     const [listWatching, setListWatching] = useState<Array<any>>([]);
     const [listFollower, setListFollower] = useState<Array<any>>([]);
     const [typeFollowTab, setTypeFollowTab] = useState("");
+    const [showDetailPoint, setShowDetailPoint] = useState(false);
+    const [pagePost, setPagePost] = useState(1);
 
     useEffect(() => {
-        if (params.id) {
+        if (id) {
             (async () => {
                 const dataFollower = await apiGetOtherFollowerByType({
                     type: "follower",
                     token,
-                    user_id: params.id,
+                    user_id: id,
                 });
                 if (dataFollower.status) {
                     setListFollower(dataFollower.data);
@@ -43,25 +52,42 @@ function Index({ params }: { params: { id: string } }) {
                 const dataWatching = await apiGetOtherFollowerByType({
                     type: "watching",
                     token,
-                    user_id: params.id,
+                    user_id: id,
                 });
                 if (dataWatching.status) {
                     setListWatching(dataWatching.data);
                 }
-                const dataPost = await apiGetOtherListPost({
-                    token,
-                    id: params.id,
-                });
-                if (dataPost.status) {
-                    setListPost(dataPost.data);
-                }
-                const dataUser = await apiGetUserById({ id: params.id });
+                // const dataPost = await apiGetOtherListPost({
+                //     token,
+                //     id: id,
+                // });
+                // if (dataPost.status) {
+                //     setListPost(dataPost.data);
+                // }
+                const dataUser = await apiGetUserById({ id: id });
                 if (dataUser.status) {
                     setUserInfor(dataUser.data);
                 }
             })();
         }
-    }, [params.id, token]);
+    }, [id, token]);
+
+    useEffect(() => {
+        (async () => {
+            const dataPost = await apiGetPostOfOtherUser({
+                page: pagePost,
+                userID: id,
+            });
+
+            if (dataPost.status) {
+                if (listPost.length > 0) {
+                    setListPost((prev) => [...prev, ...dataPost.data]);
+                } else {
+                    setListPost(dataPost.data);
+                }
+            }
+        })();
+    }, [pagePost]);
 
     const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
         return {
@@ -78,6 +104,7 @@ function Index({ params }: { params: { id: string } }) {
                             setKeyActive(3);
                             setTypeFollowTab(typeTab);
                         }}
+                        onLoadMore={() => setPagePost((prev) => prev + 1)}
                     />
                 ),
             },
@@ -130,12 +157,13 @@ function Index({ params }: { params: { id: string } }) {
                         </div>
                         <div className="flex gap-2 items-center justify-center">
                             <div>
-                                Điểm thưởng: 
+                                Điểm thưởng:
                                 <span
                                     className="font-semibold"
                                     style={{ color: "var(--primary-color)" }}
                                 >
-                                    {" "}{userInfor?.point}
+                                    {" "}
+                                    {userInfor?.point}
                                 </span>
                             </div>
                             <Image
@@ -143,11 +171,16 @@ function Index({ params }: { params: { id: string } }) {
                                 alt="info"
                                 width={20}
                                 height={20}
+                                style={{ cursor: "pointer" }}
+                                onClick={() => setShowDetailPoint(true)}
+                            />
+                            <ModalInfoRate
+                                open={showDetailPoint}
+                                onCancel={() => setShowDetailPoint(false)}
                             />
                         </div>
-                        
                     </div>
-                    <div className="flex gap-4 justify-center border-t border-gray-200 py-2">
+                    <div className="flex gap-4 justify-center border-t border-gray-200 pt-2">
                         {Object.values(mapObjNav).map((item) => (
                             <Button
                                 onClick={() => setKeyActive(item.key)}
@@ -167,7 +200,9 @@ function Index({ params }: { params: { id: string } }) {
                     </div>
                 </div>
             </div>
-            <div className="my-4">{mapObjNav[keyActive]?.dataContent}</div>
+            <div className="my-4 bg-[#F7F7F7]">
+                {mapObjNav[keyActive]?.dataContent}
+            </div>
         </div>
     );
 }

@@ -73,7 +73,14 @@ export const getListWatching = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setListFollower: (state, action) => {
+      state.listFollower = action.payload;
+    },
+    setListWatching: (state, action) => {
+      state.listWatching = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -108,5 +115,5 @@ const userSlice = createSlice({
 
 const userReducer = userSlice.reducer;
 
-export const {} = userSlice.actions;
+export const { setListFollower, setListWatching } = userSlice.actions;
 export default userReducer;

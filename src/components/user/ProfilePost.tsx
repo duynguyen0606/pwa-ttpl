@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Image from 'next/image';
 import { Avatar, Button, Col, Input, Row, Typography } from 'antd';
 
-import { useAppSelector } from '@/src/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import { Post } from '../common';
 import ModalPost from '../modal/ModalPost';
 import UserPost from '../common/home-page/UserPost';
 import PostModel from '@/src/models/Post';
 import ArticleModel from '@/src/models/Article';
 import ProfileFollowComp from '../mobile/user/ProfileFollowComp';
+import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
+import { apiFollowUser } from '@/src/api/home-page';
 
 function ProfilePost({
   listPost,
@@ -17,25 +19,81 @@ function ProfilePost({
   listWatching,
   showPost = true,
   onTransferFollower,
+  onLoadMore,
+  onSetMapFollower,
+  onSetMapFollowing,
 }: {
   listPost: Array<ArticleModel>;
   listFollower: Array<any>;
   listWatching: Array<any>;
   showPost?: boolean;
   onTransferFollower: (type: string) => void;
+  onLoadMore?: () => void;
+  onSetMapFollower: (newListFollower: Array<any>) => void;
+  onSetMapFollowing: (newListWatching: Array<any>) => void;
 }) {
+  const { token } = useAppSelector((state) => state.authState);
+  const dispatch = useAppDispatch();
   const [openModalPost, setOpenModalPost] = useState(false);
-  // const { listMyPost, listFollower, listWatching } = useAppSelector(
-  //   (state) => state.userState
-  // );
+
+  // UI for mobile
+  const [isMobileClient, setIsMobileClient] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
+  // Follow other user
+  const handleInFollow = async (id: string) => {
+    if (id && token) {
+      const dataRes = await apiFollowUser({ id, token });
+      if (dataRes.status) {
+        console.log(dataRes);
+        onSetMapFollower(
+          listFollower.map((item) => {
+            if (item?.id_customer_follows == id) {
+              return {
+                ...item,
+                follow: +dataRes.action,
+              };
+            }
+            return item;
+          })
+        );
+      }
+    } else {
+      dispatch(setOpenModalLogin(true));
+    }
+  };
+
+  const handleInWatching = async (id: string) => {
+    if (id && token) {
+      const dataRes = await apiFollowUser({ id, token });
+      if (dataRes.status) {
+        console.log(dataRes);
+        onSetMapFollowing(
+          listWatching.map((item) => {
+            if (item?.id_customer.toString() == id) {
+              return {
+                ...item,
+                follow: +dataRes.action,
+              };
+            }
+            return item;
+          })
+        );
+      }
+    } else {
+      dispatch(setOpenModalLogin(true));
+    }
+  };
 
   return (
     <Row gutter={16}>
-      <Col span={isMobileUI ? 24 : 8}>
-        <div className='mb-4 p-4 bg-white rounded-lg'>
+      <Col span={isMobileClient ? 24 : 8}>
+        <div className='my-4 p-4 bg-white rounded-lg'>
           <Typography.Title level={5}>
             Tìm kiếm công ty Luật/ Doanh nghiệp
           </Typography.Title>
@@ -80,35 +138,20 @@ function ProfilePost({
                       <Avatar src={item?.avatar_user_follow} size='large' />
                       <div>{item?.name_user_follow}</div>
                     </div>
-                    {item?.is_follow ? (
-                      <Button>Đang theo dõi</Button>
-                    ) : (
-                      <Button>Theo dõi</Button>
-                    )}
+                    <Button
+                      className={item?.follow == 1 ? 'button-primary' : ''}
+                      onClick={() =>
+                        handleInFollow(item?.id_customer_follows.toString())
+                      }
+                    >
+                      {item?.follow == 1 ? 'Bỏ theo dõi' : 'Theo dõi'}
+                    </Button>
                   </div>
                 ))}
               </div>
             ) : (
               <div></div>
             )}
-          </div>
-        </div>
-        <div className='mb-4 p-4 bg-white rounded-lg'>
-          <div>
-            <div className='flex items-center justify-between'>
-              <div className='flex flex-col'>
-                <span className='font-semibold text-lg'>Đang theo dõi</span>
-                <span style={{ color: '#898A8D' }}>
-                  {listWatching.length} người
-                </span>
-              </div>
-              <Button
-                type='text'
-                onClick={() => onTransferFollower('watching')}
-              >
-                Xem tất cả
-              </Button>
-            </div>
 
             {listWatching?.length ? (
               <div>
@@ -121,11 +164,14 @@ function ProfilePost({
                       <Avatar src={item?.avatar_user_watching} size='large' />
                       <div>{item?.name_user_watching}</div>
                     </div>
-                    {item?.is_follow ? (
-                      <Button>Đang theo dõi</Button>
-                    ) : (
-                      <Button>Theo dõi</Button>
-                    )}
+                    <Button
+                      className={item?.follow == 1 ? 'button-primary' : ''}
+                      onClick={() =>
+                        handleInWatching(item?.id_customer.toString())
+                      }
+                    >
+                      {item?.follow == 1 ? 'Bỏ theo dõi' : 'Theo dõi'}
+                    </Button>
                   </div>
                 ))}
               </div>
@@ -135,30 +181,33 @@ function ProfilePost({
           </div>
         </div>
       </Col>
-      <Col span={isMobileUI ? 24 : 16}>
+      <Col span={isMobileClient ? 24 : 16}>
         {showPost && (
           <div className='mb-4 p-4 bg-white rounded-lg'>
             <UserPost onOpenModal={() => setOpenModalPost(true)} />
           </div>
         )}
         <div className='p-4 rounded-lg'>
-          {listPost?.length > 0 &&
-            listPost.map((item) => (
-              <Post post={new ArticleModel(item)} key={item.title} />
-            ))}
-        </div>
-        <div className='flex items-center justify-center py-5'>
-          <button
-            className='
-                            py-2 px-3
-                            text-[var(--primary-color)] 
-                            font-bold 
-                            bg-[#FFF0E6] 
-                        '
-            //   onClick={() => setPagePost((prev) => prev + 1)}
-          >
-            Xem thêm
-          </button>
+          {listPost?.length > 0 && (
+            <>
+              {listPost.map((item) => (
+                <Post post={new ArticleModel(item)} key={item.title} />
+              ))}
+              <div className='flex items-center justify-center py-5'>
+                <button
+                  className='
+                                        py-2 px-3
+                                        text-[var(--primary-color)] 
+                                        font-bold 
+                                        bg-[#FFF0E6] 
+                                    '
+                  onClick={onLoadMore}
+                >
+                  Xem thêm
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </Col>
 
