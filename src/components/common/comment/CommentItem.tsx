@@ -26,9 +26,9 @@ function CommentItem({
   const [dataCommentChild, setDataCommentChild] = useState<Array<CommentModel>>(
     []
   );
-  console.log(dataCommentChild);
-  
+
   const [showReplieComment, setShowReplieComment] = useState(false);
+  
   const { token } = useAppSelector((state) => state.authState);
   // const [handleShow]
 
@@ -55,6 +55,13 @@ function CommentItem({
       }
     }
   };
+
+  // bug
+  useEffect(() => {
+    if (data?.id) {
+      handleFetchDataCommentChild(data.id)
+    }
+  }, [data?.id])
 
   return (
       <div id="comment-item" className="my-4">
@@ -123,7 +130,7 @@ function CommentItem({
                           </Button>
                       )}
                   </div>
-                  {data.total_comment_child > 0 && (
+                  {/* {!isChild && (
                       <Button
                           className="button-flex"
                           type="link"
@@ -140,27 +147,38 @@ function CommentItem({
                       >
                           Phản hồi
                       </Button>
-                  )}
+                  )} */}
                   {showReplieComment && (
                       <CreateComment
                           parentId={data.id}
                           procedureId={procedureId}
-                          onSetDataChildComemnt={(newDataChildComment) =>
+                          onSetDataChildComemnt={(newDataChildComment) =>{
+                            console.log('xx', newDataChildComment);
+                            
                               setDataCommentChild([
                                   newDataChildComment,
                                   ...dataCommentChild,
                               ])
+                            }
                           }
-                          
                       />
                   )}
-                  {dataCommentChild.length > 0 &&
-                      dataCommentChild.map((item) => (
+                  {showReplieComment && dataCommentChild.length > 0 &&
+                      dataCommentChild.map((item: any) => (
                           <CommentItem
                               procedureId={procedureId}
                               isChild
                               key={item.id}
-                              data={item}
+                              data={
+                                  new CommentModel({
+                                      created_by_avartar: item.avatar,
+                                      created_by_full_name: item.first_name,
+                                      created_at: item.created_at,
+                                      title: item.comment,
+                                      files: item.files,
+                                      id: item.id,
+                                  })
+                              }
                               type={type}
                           />
                       ))}
