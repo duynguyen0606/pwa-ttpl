@@ -26,16 +26,14 @@ function CreateComment(props: {
             if (dataRes.status) {
                 form.resetFields();
                 const dataComment = dataRes.data[0];
-                onSetDataChildComemnt(
-                    new CommentModel({
-                        created_by_avartar: dataComment.avatar,
-                        created_by_full_name: dataComment.first_name,
-                        created_at: dataComment.created_at,
-                        title: dataComment.comment,
-                        files: dataComment.files,
-                        id: dataComment.id,
-                    })
-                );
+                onSetDataChildComemnt({
+                    avatar: dataComment.avatar,
+                    first_name: dataComment.first_name,
+                    created_at: dataComment.created_at,
+                    comment: dataComment.comment,
+                    files: dataComment.files,
+                    id: dataComment.id,
+                });
             }
             console.log(dataRes);
         }
