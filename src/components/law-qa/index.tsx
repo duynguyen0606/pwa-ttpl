@@ -522,7 +522,7 @@ function LawQuestion() {
             </nav>
           ))}
         </div>
-        <div className='flex justify-center p-4'>
+        {/* <div className='flex justify-center p-4'>
           <Input
             placeholder='Tìm kiếm'
             size='large'
@@ -539,7 +539,7 @@ function LawQuestion() {
             width={20}
             height={20}
           />
-        </div>
+        </div> */}
         <div className='qa-list p-4'>{renderContent}</div>
       </div>
     </Layout>
