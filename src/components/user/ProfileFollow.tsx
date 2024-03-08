@@ -100,7 +100,11 @@ function ProfileFollow({
                             label: item.label,
                         };
                     })}
-                    style={{ justifyContent: "center", fontSize: 18 }}
+                    style={{
+                        justifyContent: "center",
+                        fontSize: 16,
+                        color: "#a1a5ac",
+                    }}
                     onSelect={({ item, key }) => setTypeNav(key)}
                 />
             </ConfigProvider>
@@ -141,46 +145,41 @@ function ProfileFollow({
                                 ))}
                         </div>
                     ) : (
-                        <>
-                            {listWatching.length && listWatching?.length && (
-                                <div className="grid grid-cols-2 gap-4">
-                                    {listWatching.map((item) => (
-                                        <div
-                                            key={item.name_user_watching}
-                                            className="flex items-center justify-between p-2 rounded-lg border border-gray-300"
-                                        >
-                                            <div className="flex items-center gap-2">
-                                                <Avatar
-                                                    src={
-                                                        item?.avatar_user_watching
-                                                    }
-                                                    size="large"
-                                                />
-                                                <div>
-                                                    {item?.name_user_watching}
-                                                </div>
+                        <div className="grid grid-cols-2 gap-4" key={2}>
+                            {listWatching.length &&
+                                listWatching?.map((item) => (
+                                    <div
+                                        key={item.avatar_user_answer}
+                                        className="flex items-center justify-between p-2 rounded-lg border border-gray-300"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <Avatar
+                                                src={item?.avatar_user_watching}
+                                                size="large"
+                                            />
+                                            <div>
+                                                {item?.name_user_watching}
                                             </div>
-                                            <Button
-                                                className={
-                                                    item?.follow == 1
-                                                        ? "button-primary"
-                                                        : ""
-                                                }
-                                                onClick={() =>
-                                                    handleInWatching(
-                                                        item?.id_customer.toString()
-                                                    )
-                                                }
-                                            >
-                                                {item?.follow == 1
-                                                    ? "Bỏ theo dõi"
-                                                    : "Theo dõi"}
-                                            </Button>
                                         </div>
-                                    ))}
-                                </div>
-                            )}
-                        </>
+                                        <Button
+                                            className={
+                                                item?.follow == 1
+                                                    ? "button-primary"
+                                                    : ""
+                                            }
+                                            onClick={() =>
+                                                handleInFollow(
+                                                    item?.id_customer.toString()
+                                                )
+                                            }
+                                        >
+                                            {item?.follow == 1
+                                                ? "Bỏ theo dõi"
+                                                : "Theo dõi"}
+                                        </Button>
+                                    </div>
+                                ))}
+                        </div>
                     )}
                 </div>
             </div>
