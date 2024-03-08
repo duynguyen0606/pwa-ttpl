@@ -109,7 +109,7 @@ function Index() {
                             rounded-[10px]
                         "
                         >
-                            Tài khoản: {user?.type}
+                            Tài khoản: {user?.vip === null ? "Free" : user?.vip}
                         </div>
                     </div>
 

@@ -11,7 +11,6 @@ import ProfileFollow from "@/src/components/user/ProfileFollow";
 import {
     apiGetOtherFollowerByType,
     apiGetOtherListPost,
-    apiGetPostOfOtherUser,
     apiGetUserById,
 } from "@/src/api/user";
 import { ModalInfoRate } from "@/src/components/modal";
@@ -49,6 +48,7 @@ function Index({ params }: { params: { id: string } }) {
                 if (dataFollower.status) {
                     setListFollower(dataFollower.data);
                 }
+
                 const dataWatching = await apiGetOtherFollowerByType({
                     type: "watching",
                     token,
@@ -57,13 +57,7 @@ function Index({ params }: { params: { id: string } }) {
                 if (dataWatching.status) {
                     setListWatching(dataWatching.data);
                 }
-                // const dataPost = await apiGetOtherListPost({
-                //     token,
-                //     id: id,
-                // });
-                // if (dataPost.status) {
-                //     setListPost(dataPost.data);
-                // }
+
                 const dataUser = await apiGetUserById({ id: id });
                 if (dataUser.status) {
                     setUserInfor(dataUser.data);
@@ -74,9 +68,10 @@ function Index({ params }: { params: { id: string } }) {
 
     useEffect(() => {
         (async () => {
-            const dataPost = await apiGetPostOfOtherUser({
+            const dataPost = await apiGetOtherListPost({
+                token,
+                id: id,
                 page: pagePost,
-                userID: id,
             });
 
             if (dataPost.status) {
@@ -104,6 +99,12 @@ function Index({ params }: { params: { id: string } }) {
                             setKeyActive(3);
                             setTypeFollowTab(typeTab);
                         }}
+                        onSetMapFollower={(newListFollower) =>
+                            setListFollower(newListFollower)
+                        }
+                        onSetMapFollowing={(newListFollowing) =>
+                            setListWatching(newListFollowing)
+                        }
                         onLoadMore={() => setPagePost((prev) => prev + 1)}
                     />
                 ),
@@ -191,7 +192,8 @@ function Index({ params }: { params: { id: string } }) {
                                     color:
                                         keyActive === item.key
                                             ? "var(--primary-color)"
-                                            : "#000",
+                                            : " #A1A5AC",
+                                    fontWeight: "600",
                                 }}
                             >
                                 {item.name}
