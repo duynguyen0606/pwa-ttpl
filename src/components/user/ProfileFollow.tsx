@@ -28,7 +28,7 @@ function ProfileFollow({
     onSetMapFollower: (newListFollower: Array<any>) => void;
     onSetMapFollowing: (newListWatching: Array<any>) => void;
 }) {
-    const [typeNav, setTypeNav] = useState(activeKey);    
+    const [typeNav, setTypeNav] = useState(activeKey);
 
     const { token } = useAppSelector((state) => state.authState);
     const dispatch = useAppDispatch();
@@ -41,7 +41,10 @@ function ProfileFollow({
                 onSetMapFollower(
                     listFollower.map((item) => {
                         if (item?.id_customer_follows == id) {
-                             item.follow = +dataRes.action;
+                            return {
+                                ...item,
+                                follow: +dataRes.action,
+                            };
                         }
                         return item;
                     })
@@ -60,7 +63,10 @@ function ProfileFollow({
                 onSetMapFollowing(
                     listWatching.map((item) => {
                         if (item?.id_customer.toString() == id) {
-                             item.follow = +dataRes.action;
+                            return {
+                                ...item,
+                                follow: +dataRes.action,
+                            };
                         }
                         return item;
                     })
