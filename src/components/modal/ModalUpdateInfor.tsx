@@ -2,7 +2,14 @@ import { useAppSelector } from '@/src/redux/hooks';
 import { Col, Form, Input, Modal, ModalProps, Row, Typography } from 'antd';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
-import { useMemo } from 'react';
+import {
+  ChangeEvent,
+  MutableRefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 type FieldType = {
   username?: string;
@@ -18,6 +25,30 @@ type FieldType = {
 function ModalUpdateInfor(props: ModalProps) {
   const { open, onOk, onCancel } = props;
   const { user } = useAppSelector((state) => state.authState);
+  const fileInputBGRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const fileInputAvatarRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const [previewBGImage, setPreviewBGImage] = useState('');
+  const [previewAvatar, setPreviewAvatar] = useState('');
+
+  useEffect(() => {
+    return () => {
+      previewBGImage && URL.revokeObjectURL(previewBGImage);
+      fileInputAvatarRef && URL.revokeObjectURL(previewAvatar);
+    };
+  }, [previewBGImage, fileInputAvatarRef]);
+
+  const handleChangeBG = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setPreviewBGImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
+  const handleChangeAvatar = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setPreviewAvatar(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
   return (
     <Modal
       open={open}
@@ -27,7 +58,10 @@ function ModalUpdateInfor(props: ModalProps) {
     >
       <div className='relative mb-16'>
         <ImageLegacy
-          src='https://ttpl.vn/assets/images/myprofile/anh-bia.png'
+          src={
+            previewBGImage ||
+            'https://ttpl.vn/assets/images/myprofile/anh-bia.png'
+          }
           layout='responsive'
           width={900}
           height={280}
@@ -38,11 +72,26 @@ function ModalUpdateInfor(props: ModalProps) {
             alt='camera'
             width={25}
             height={25}
+            onClick={() => {
+              // if (fileInputRef?.current) {
+              fileInputBGRef?.current.click();
+              // }
+            }}
+          />
+          <input
+            onChange={handleChangeBG}
+            multiple={false}
+            ref={fileInputBGRef}
+            type='file'
+            hidden
           />
         </div>
-        <div className='w-40 h-40 rounded-full absolute text-center right-1/2 bottom-0 border-4 border-white translate-x-1/2 translate-y-1/4'>
+        <div className='w-40 h-40 bg-white rounded-full absolute text-center right-1/2 bottom-0 border-4 border-white translate-x-1/2 translate-y-1/4'>
           <ImageLegacy
-            src='https://drive.google.com/thumbnail?id=1elps2eDFZtgScBOX8Bd3ypZtUJ2Pfn4R&sz=s1000'
+            src={
+              previewAvatar ||
+              'https://drive.google.com/thumbnail?id=1elps2eDFZtgScBOX8Bd3ypZtUJ2Pfn4R&sz=s1000'
+            }
             layout='responsive'
             width={150}
             height={150}
@@ -54,6 +103,18 @@ function ModalUpdateInfor(props: ModalProps) {
               alt='camera'
               width={25}
               height={25}
+              onClick={() => {
+                // if (fileInputRef?.current) {
+                fileInputAvatarRef?.current.click();
+                // }
+              }}
+            />
+            <input
+              onChange={handleChangeAvatar}
+              multiple={false}
+              ref={fileInputAvatarRef}
+              type='file'
+              hidden
             />
           </div>
         </div>
