@@ -43,6 +43,23 @@ export const apiGetListPost = async ({
   return data ?? {};
 };
 
+export const apiLikePost = async ({
+  id_post,
+  token,
+  status,
+}: {
+  id_post: string;
+  token: string;
+  status: string; // 0 bỏ like, 1 là like, 2 là dislike
+}): Promise<{ status: boolean; msg: string; action: string }> => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/like`;
+  return sendPostFormDataWithToken({
+    url,
+    token,
+    data: { id_post, status },
+  });
+};
+
 export const apiGetListCommentByPostId = async ({
   postId,
 }: {
