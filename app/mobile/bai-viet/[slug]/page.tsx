@@ -9,8 +9,6 @@ import { apiGetListMostViewArticle } from "@/src/api/home-page";
 import ArticleModel from "@/src/models/Article";
 import { Article } from "@/src/components/common";
 
-import FooterPostItem from "@/src/components/mobile/post-item/FooterPost";
-import HeaderPostItem from "@/src/components/mobile/post-item/HeaderPost";
 import "./detailPost.scss";
 
 function Index({ params }: { params: { slug: string } }) {
@@ -91,11 +89,12 @@ function Index({ params }: { params: { slug: string } }) {
                         dangerouslySetInnerHTML={{ __html: post.description }}
                     />
 
+                    {/* Header Post */}
                     <div className="mt-7 mb-2">
-                        <HeaderPostItem post={post} />
                     </div>
+
+                    {/* Footer Post */}
                     <div className="mt-0.5">
-                        <FooterPostItem post={post} />
                     </div>
 
                     {/* Bài viết xem nhiều nhất */}

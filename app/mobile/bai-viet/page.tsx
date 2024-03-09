@@ -14,7 +14,6 @@ import { apiGetListPost } from "@/src/api/home-page";
 
 import Header from "@/src/components/mobile/header/Header";
 import Footer from "@/src/components/mobile/footer/Footer";
-import PostItem from "@/src/components/mobile/post-item/PostItem";
 import ModalPost from "@/src/components/modal/ModalPost";
 import { Post } from "@/src/components/common";
 import { setListPost } from "@/src/redux/feature/postSlice";
