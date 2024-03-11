@@ -147,7 +147,7 @@ function ProcedureSlugComment({ id: procedureId }: { id?: string }) {
         data.map((item, id) => (
           <CommentItem
             key={id}
-            procedureId={procedureId as string}
+            itemId={procedureId as string}
             data={
               new CommentModel({
                 created_by_avartar: item.avatar,
