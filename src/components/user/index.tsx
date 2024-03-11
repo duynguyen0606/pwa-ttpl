@@ -11,7 +11,10 @@ import { Content } from 'antd/es/layout/layout';
 import ModalProtectAccount from '../modal/ModalProtectAccount';
 import ModalUpdateInfor from '../modal/ModalUpdateInfor';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import { setListFollower, setListWatching } from '@/src/redux/feature/userSlice';
+import {
+  setListFollower,
+  setListWatching,
+} from '@/src/redux/feature/userSlice';
 
 interface NavItem {
   name: string;
@@ -33,7 +36,7 @@ function UserProfile() {
   const [openModalProtect, setOpenModalProtect] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const { user } = useAppSelector((state) => state.authState);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const { listMyPost, listFollower, listWatching } = useAppSelector(
     (state) => state.userState
   );
@@ -41,57 +44,57 @@ function UserProfile() {
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
     return {
-        1: {
-            name: "Bài viết",
-            key: 1,
-            dataContent: (
-                <ProfilePost
-                    showPost={true}
-                    listPost={listMyPost}
-                    listFollower={listFollower}
-                    listWatching={listWatching}
-                    onTransferFollower={(typeTab) => {
-                        setKeyActive(4);
-                        setTypeFollowTab(typeTab);
-                    }}
-                    onSetMapFollower={(newListFollower) =>
-                        dispatch(setListFollower(newListFollower))
-                    }
-                    onSetMapFollowing={(newListWatching) =>
-                        dispatch(setListWatching(newListWatching))
-                    }
-                />
-            ),
-        },
-        2: { name: "Video", key: 2, dataContent: <ProfileVideo /> },
-        3: {
-            name: "Thủ tục của tôi",
-            key: 3,
-            dataContent: <ProfileProcedure />,
-        },
-        4: {
-            name: "Theo dõi",
-            key: 4,
-            dataContent: (
-                <ProfileFollow
-                    listFollower={listFollower}
-                    listWatching={listWatching}
-                    activeKey={typeFollowTab}
-                    onSetMapFollower={(newListFollower) =>
-                        dispatch(setListFollower(newListFollower))
-                    }
-                    onSetMapFollowing={(newListWatching) =>
-                        dispatch(setListWatching(newListWatching))
-                    }
-                />
-            ),
-        },
-        5: {
-            name: "Hỏi đáp pháp luật",
-            key: 5,
-            dataContent: <ProfileProcedure />,
-        },
-        6: { name: "Gói premium", key: 6, dataContent: <ProfilePremium /> },
+      1: {
+        name: 'Bài viết',
+        key: 1,
+        dataContent: (
+          <ProfilePost
+            showPost={true}
+            listPost={listMyPost}
+            listFollower={listFollower}
+            listWatching={listWatching}
+            onTransferFollower={(typeTab) => {
+              setKeyActive(4);
+              setTypeFollowTab(typeTab);
+            }}
+            onSetMapFollower={(newListFollower) =>
+              dispatch(setListFollower(newListFollower))
+            }
+            onSetMapFollowing={(newListWatching) =>
+              dispatch(setListWatching(newListWatching))
+            }
+          />
+        ),
+      },
+      2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
+      3: {
+        name: 'Thủ tục của tôi',
+        key: 3,
+        dataContent: <ProfileProcedure />,
+      },
+      4: {
+        name: 'Theo dõi',
+        key: 4,
+        dataContent: (
+          <ProfileFollow
+            listFollower={listFollower}
+            listWatching={listWatching}
+            activeKey={typeFollowTab}
+            onSetMapFollower={(newListFollower) =>
+              dispatch(setListFollower(newListFollower))
+            }
+            onSetMapFollowing={(newListWatching) =>
+              dispatch(setListWatching(newListWatching))
+            }
+          />
+        ),
+      },
+      5: {
+        name: 'Hỏi đáp pháp luật',
+        key: 5,
+        dataContent: <ProfileProcedure />,
+      },
+      6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
     };
   }, [listFollower, listWatching, listMyPost, typeFollowTab]);
   return (

@@ -16,7 +16,7 @@ const navbarArr = [
   { name: 'Cơ quan thực hiện', slug: 'co-quan-thuc-hien' },
 ];
 function Index({ params }: { params: { id: string } }) {
-  const [dataContent, setDataContent] = useState();
+  const [dataContent, setDataContent] = useState<any>();
   const [dataRelative, setDataRelative] = useState<Array<any>>();
   const { listArticle } = useAppSelector((state) => state.postState);
   const [isMobileClient, setIsMobileClient] = useState(false);
@@ -29,7 +29,10 @@ function Index({ params }: { params: { id: string } }) {
     (async () => {
       const dataRes = await apiGetProcedureContentDesktop(params.id);
       if (dataRes.data?.actual_implementation) {
-        setDataContent(dataRes.data.actual_implementation);
+        setDataContent({
+          ...dataRes.data.actual_implementation,
+          author: dataRes?.data.author,
+        });
         const dataRelativeRes = await apiGetListProcedureRelative(
           dataRes.data.actual_implementation.area_id
         );

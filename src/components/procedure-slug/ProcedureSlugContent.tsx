@@ -50,7 +50,9 @@ function ProcedureSlugContent({ data }: { data: any }) {
       <div className='flex m-4'>
         {dataChildNavs.map((item) => (
           <div
-            className={`font-semibold text-${isMobileClient ? 'sm' : 'lg'} py-2 px-4 flex-1 text-center bg-slate-100 cursor-pointer`}
+            className={`font-semibold text-${
+              isMobileClient ? 'sm' : 'lg'
+            } py-2 px-4 flex-1 text-center bg-slate-100 cursor-pointer`}
             style={{
               backgroundColor:
                 tabChildActive === item.key
@@ -263,6 +265,19 @@ function ProcedureSlugContent({ data }: { data: any }) {
                     }}
                   />
                 </div>
+                <div
+                  className={`${
+                    isMobileClient ? 'flex-col' : 'items-center'
+                  } flex py-2 gap-2 border-b border-slate-300 p-4 m-4`}
+                >
+                  <div className='font-semibold min-w-40'>Tác giả</div>
+                  <span
+                    className='font-semibold'
+                    style={{ color: 'var(--primary-color)' }}
+                  >
+                    {data?.author?.name ?? ''}
+                  </span>
+                </div>
               </div>
             </>
           )}
@@ -275,19 +290,6 @@ function ProcedureSlugContent({ data }: { data: any }) {
           }}
         />
       )}
-      <div
-        className={`${
-          isMobileClient ? 'flex-col' : 'items-center'
-        } flex py-2 gap-2 border-b border-slate-300 p-4 m-4`}
-      >
-        <div className='font-semibold min-w-40'>Tác giả</div>
-        <span
-          className='font-semibold'
-          style={{ color: 'var(--primary-color)' }}
-        >
-          Công ty Luật legalzone
-        </span>
-      </div>
     </div>
   );
 }

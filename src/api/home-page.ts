@@ -34,13 +34,16 @@ export const apiGetListMostViewArticle = async (): Promise<{
 
 export const apiGetListPost = async ({
   page = 1,
+  token,
 }: {
   page: number;
+  token?: string;
 }): Promise<{ status: boolean; page: number; data: Array<ArticleModel> }> => {
   const url = `https://thutucphapluat.com/api/posts_controller/list?page=${page}`;
-  const { data } = await axios.get(url);
-  console.log(data);
-  return data ?? {};
+  return getWithToken({
+    url,
+    token,
+  });
 };
 
 export const apiLikePost = async ({

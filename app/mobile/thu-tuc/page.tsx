@@ -25,10 +25,6 @@ function Index() {
     })();
   }, []);
 
-  useEffect(() => {
-    loadMoreData();
-  }, []);
-
   const loadMoreData = async () => {
     setPage((prev) => prev + 1);
     if (loading) {
