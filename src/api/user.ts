@@ -35,6 +35,12 @@ export const apiGetUserById = async ({ id }: { id: string }) => {
   return data ?? {};
 };
 
+// export const apiProtectAccount = async ({ id }: { id: string }) => {
+//   const url = `https://thutucphapluat.com/api/login/get_user_by_id/${id}`;
+//   const { data } = await axios.get(url);
+//   return data ?? {};
+// };
+
 ////////////////////////////////////////////////////////////////
 // -------------------------------Other User--------------------------------
 
@@ -59,7 +65,7 @@ export const apiGetVideoOfOtherUser = async ({
 export const apiGetOtherFollowerByType = async ({
   type,
   token,
-  user_id
+  user_id,
 }: {
   type: 'follower' | 'watching';
   token?: string;
