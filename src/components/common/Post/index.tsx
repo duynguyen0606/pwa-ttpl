@@ -118,10 +118,13 @@ function Post({ post }: { post: ArticleModel }) {
                             </div>
                             <div>
                                 <Link
-                                    href={`${isMobileClient? '/mobile': ''}/user/${post.created_by}`}
+                                    href={`${
+                                        isMobileClient ? "/mobile" : ""
+                                    }/user/${post.created_by}`}
                                     style={{ color: "black" }}
                                 >
-                                    {post.created_by_full_name}
+                                    {post.created_by_full_name ||
+                                        post.created_by_user}
                                 </Link>
                                 <p className="text-neutral-300">
                                     {post.created_at}
@@ -140,17 +143,19 @@ function Post({ post }: { post: ArticleModel }) {
                             {post.is_follow == 1 ? "Bỏ theo dõi" : "Theo dõi"}
                         </Button>
                     </div>
-                    <ImageLegacy
+                    {post?.images && <ImageLegacy
                         src={post?.images}
                         alt="body-image"
                         layout="responsive"
                         width={412}
                         height={232}
                         objectFit="cover"
-                    />
+                    />}
                     <div className="pb-4 border-b-[1px] border-solid border-slate-100">
                         <Link
-                            href={`${isMobileClient? '/mobile' : ''}/bai-viet/${post.url_key}`}
+                            href={`${
+                                isMobileClient ? "/mobile" : ""
+                            }/bai-viet/${post.url_key}`}
                             style={{ color: "black", fontWeight: "600" }}
                         >
                             {post.title}
@@ -243,7 +248,7 @@ function Post({ post }: { post: ArticleModel }) {
                             )}
                             {dataComment.map((item) => (
                                 <CommentItem
-                                    itemId=''
+                                    itemId=""
                                     key={item.id}
                                     data={item}
                                 />

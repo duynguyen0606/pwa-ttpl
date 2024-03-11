@@ -17,6 +17,7 @@ class ArticleModel {
   like: number;
   created_at: string;
   total_comment: number;
+  created_by_user: string;
 
   constructor(args: any) {
     this.id = args.id ?? null;
@@ -37,6 +38,7 @@ class ArticleModel {
     this.is_follow = args.is_follow ?? null;
     this.created_at = args.created_at ?? '';
     this.total_comment = args.total_comment ?? null;
+    this.created_by_user = args.created_by_user ?? '';
   }
 }
 
