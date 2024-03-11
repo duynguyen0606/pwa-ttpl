@@ -11,7 +11,10 @@ function Index({ params }: { params: { slug: string } }) {
     (async () => {
       const dataRes = await apiGetProcedureContentDesktop(params.slug);
       if (dataRes.data?.actual_implementation) {
-        setDataContent(dataRes.data.actual_implementation);
+        setDataContent({
+          ...dataRes.data.actual_implementation,
+          author: dataRes.data.author,
+        });
       }
     })();
   }, [params.slug]);

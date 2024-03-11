@@ -80,7 +80,7 @@ export const apiGetProcedureContentDesktop = async (
   id: string
 ): Promise<{
   status: boolean;
-  data: { actual_implementation: any; diagram: any };
+  data: { actual_implementation: any; diagram: any; author: any };
   comment: Array<any>;
   msg: string;
 }> => {

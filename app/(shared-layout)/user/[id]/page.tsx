@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from 'antd';
+import { Button, Rate } from 'antd';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
 // import ProfilePost from './ProfilePost';
@@ -146,6 +146,14 @@ function Index({ params }: { params: { id: string } }) {
           <div className='flex flex-col items-center pb-4 pt-4'>
             <div className='font-semibold text-2xl pb-4'>
               {userInfor?.full_name}
+            </div>
+            <div>
+              {userInfor?.data_star?.count_star > 0 && (
+                <Rate
+                  disabled
+                  defaultValue={userInfor?.data_star?.count_star}
+                />
+              )}
             </div>
             <div className='flex gap-2 items-center justify-center'>
               <div>

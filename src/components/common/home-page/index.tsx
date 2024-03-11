@@ -27,7 +27,7 @@ export default function HomePage() {
   const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
   const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalPost, setOpenModalPost] = useState(false);
-  const { user } = useAppSelector((state) => state.authState);
+  const { user, token } = useAppSelector((state) => state.authState);
   const { listPost } = useAppSelector((state) => state.postState);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
@@ -50,8 +50,7 @@ export default function HomePage() {
 
   useEffect(() => {
     (async () => {
-      const dataRes = await apiGetListPost({ page });
-      console.log(dataRes);
+      const dataRes = await apiGetListPost({ page, token });
       if (dataRes.status) {
         dispatch(setListPost(dataRes.data));
       }
@@ -59,11 +58,7 @@ export default function HomePage() {
     return () => {
       dispatch(setListPost([]));
     };
-  }, []);
-
-  useEffect(() => {
-    loadMoreData();
-  }, []);
+  }, [token]);
 
   const loadMoreData = async () => {
     setPage((prev) => prev + 1);
@@ -77,6 +72,8 @@ export default function HomePage() {
     }
     setLoading(false);
   };
+
+  console.log(listPost);
 
   return (
     <DefaultLayout>
