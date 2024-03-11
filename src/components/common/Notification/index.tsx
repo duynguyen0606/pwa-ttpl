@@ -12,12 +12,12 @@ function Notification() {
   };
 
   return (
-    <Badge count={listNotification.length}>
+    <Badge count={listNotification?.length}>
       <Popover
         content={
           <div>
-            {listNotification.length > 0 &&
-              listNotification.map((item) => (
+            {listNotification?.length > 0 &&
+              listNotification?.map((item) => (
                 <div
                   key={item.avatar_create_by}
                   className='flex items-start gap-2 py-2'
