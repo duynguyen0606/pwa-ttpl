@@ -72,7 +72,7 @@ function Index() {
                 case TypeQA.QA_FAQ:
                     return <ContentFAQ />;
                 case TypeQA.QA_USER:
-                    return <ContenUserQ page={1} />;
+                    return <ContenUserQ />;
             }
         } else if (activeNav === 2) {
             switch (activeQuesToLawyerChildTab) {
@@ -210,7 +210,7 @@ function Index() {
                                             color: "#fff",
                                             backgroundColor: "#4755D4",
                                             margin: 4,
-                                            fontWeight: '600',
+                                            fontWeight: "600",
                                         }}
                                         size="large"
                                     >
@@ -222,11 +222,7 @@ function Index() {
                     );
             }
         }
-    }, [
-        activeNav,
-        activeQuesListChildTab,
-        activeQuesToLawyerChildTab,
-    ]);
+    }, [activeNav, activeQuesListChildTab, activeQuesToLawyerChildTab]);
 
     return (
         <div>
@@ -336,31 +332,6 @@ function Index() {
                     ))}
                 </div>
             </>
-
-            {/* Search box in QA_List nav-tab */}
-            {activeNav === 1 &&
-                (activeQuesListChildTab === TypeQA.QA_FAQ ||
-                    activeQuesListChildTab === TypeQA.QA_USER) && (
-                    <div className="pt-2">
-                        <div className="flex justify-center p-4">
-                            <Input
-                                size="large"
-                                placeholder="Tìm kiếm"
-                                prefix={
-                                    <Image
-                                        src="/images/icons/search.png"
-                                        alt="search-icon"
-                                        width={20}
-                                        height={20}
-                                    />
-                                }
-                                alt="search-icon"
-                                width={20}
-                                height={20}
-                            />
-                        </div>
-                    </div>
-                )}
 
             <div className="qa-list p-4">{renderContent}</div>
         </div>

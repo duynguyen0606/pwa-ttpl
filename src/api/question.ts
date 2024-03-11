@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const apiGetFAQ = async ({
+export const apiGetListFAQ = async ({
     page = 1
 }: {
     page: number
@@ -15,7 +15,6 @@ export const apiGetFAQ = async ({
     
     return data ?? {}
 }
-
 
 export const apiGetListArea = async (): Promise<{
     status: boolean,
@@ -36,5 +35,17 @@ export const apiGetListField = async (): Promise<{
     const url = `https://thutucphapluat.com/api/Administrative_field_controller/read`
     const { data } = await axios.get(url)
     console.log(data)
+    return data ?? {}
+}
+
+export const apiGetListUserQuestion = async ({
+    page = 0
+}: {
+    page: number
+}) => {
+    const url = `https://thutucphapluat.com/api/Question_controller/list?limit=10&page=${page}&type=user`
+    const { data } = await axios.get(url)
+    console.log(data);
+
     return data ?? {}
 }
