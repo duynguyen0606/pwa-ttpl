@@ -36,13 +36,13 @@ module.exports = withPWA({
   //     );
   //     return config;
   // },
-  experimental: {
-    appDir: true,
-  },
-  lessLoaderOptions: {
-    javascriptEnabled: true,
-    importLoaders: true,
-  },
+  // experimental: {
+  //   appDir: true,
+  // },
+  // lessLoaderOptions: {
+  //   javascriptEnabled: true,
+  //   importLoaders: true,
+  // },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src/styles')],
   },
