@@ -81,12 +81,13 @@ function ModalLogin(props: ModalProps) {
               type='password'
             />
           </Form.Item>
-          <div className='text-right'>
-            <Button 
+          <div className='text-right pb-4'>
+            <Button
               size='small'
               style={{ color: '#4262AE' }}
               type='link'
               onClick={() => {
+                console.log('xxx');
                 dispatch(setOpenModalLogin(false));
                 dispatch(setOpenModalForgotPassword(true));
               }}

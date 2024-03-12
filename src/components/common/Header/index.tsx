@@ -17,15 +17,18 @@ import './style.scss';
 // import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { ModalLogin, ModalRegister } from '../../modal';
+import { ModalForgotPassword, ModalLogin, ModalRegister } from '../../modal';
 import ModalSearch from '../../modal/ModalSearch';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import {
   authLogout,
+  setOpenModalForgotPassword,
   setOpenModalLogin,
   setOpenModalRegister,
+  setOpenModalResetPassword,
 } from '@/src/redux/feature/authSlice';
 import Notification from '../Notification';
+import ModalResetPassword from '../../modal/ModalResetPassword';
 const { Header } = Layout;
 
 const navbarArr = [
@@ -400,6 +403,14 @@ function HeaderCom() {
       <ModalSearch
         open={openModalSearch}
         onCancel={() => setOpenModalSearch(false)}
+      />
+
+      <ModalForgotPassword
+        onCancel={() => dispatch(setOpenModalForgotPassword(false))}
+      />
+
+      <ModalResetPassword
+        onCancel={() => dispatch(setOpenModalResetPassword(false))}
       />
     </header>
   );

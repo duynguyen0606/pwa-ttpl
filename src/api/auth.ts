@@ -27,3 +27,26 @@ export const apiLogout = (args: {
     data,
   });
 };
+
+export const apiForgotPassword = async (args: { email: string }) => {
+  const form = new FormData();
+  const url = 'https://thutucphapluat.com/api/Login/forget_password_by_email';
+  form.append('email', args.email);
+  const { data } = await axios.post(url, form);
+  return data ?? {};
+};
+
+export const apiResetPassword = async (args: {
+  email: string;
+  newPassword: string;
+  otp: string;
+}) => {
+  const form = new FormData();
+  form.append('email', args.email);
+  form.append('password', args.newPassword);
+  form.append('otp', args.otp);
+  const url = 'https://thutucphapluat.com/api/Login/reset_password_by_email';
+
+  const { data } = await axios.post(url, form);
+  return data ?? {};
+};
