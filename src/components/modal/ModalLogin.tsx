@@ -87,7 +87,6 @@ function ModalLogin(props: ModalProps) {
               style={{ color: '#4262AE' }}
               type='link'
               onClick={() => {
-                console.log('xxx');
                 dispatch(setOpenModalLogin(false));
                 dispatch(setOpenModalForgotPassword(true));
               }}

@@ -58,7 +58,6 @@ export const apiGetVideoOfOtherUser = async ({
 }> => {
   const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&type_post=video&created_by=${userID}`;
   const { data } = await axios.get(url);
-  console.log(data);
   return data ?? {};
 };
 

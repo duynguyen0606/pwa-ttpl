@@ -61,7 +61,6 @@ function ProfileProcedure() {
   const { token } = useAppSelector((state) => state.authState);
 
   const handleSelectItem = async (type: string) => {
-    console.log(type);
     setDataProcedure([]);
     if (token) {
       const dataRes = await apiGetUserProcedureByType({

@@ -48,8 +48,6 @@ function CommentItem({
           commentId: id,
         });
         if (dataRes.status && dataRes.data.length > 0) {
-          console.log(dataRes);
-
           setDataCommentChild(dataRes.data);
         }
       }

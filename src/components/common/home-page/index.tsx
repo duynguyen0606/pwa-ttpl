@@ -73,8 +73,6 @@ export default function HomePage() {
     setLoading(false);
   };
 
-  console.log(listPost);
-
   return (
     <DefaultLayout>
       {!isMobileClient && (

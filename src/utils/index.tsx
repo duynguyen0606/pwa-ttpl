@@ -95,8 +95,6 @@ export const sendPostWithToken = async (args: {
       },
     });
 
-    console.log('response', response);
-
     // Xử lý kết quả trả về
     return response.data;
   } catch (error) {

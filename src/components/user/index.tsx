@@ -80,9 +80,9 @@ function UserProfile() {
             listFollower={listFollower}
             listWatching={listWatching}
             activeKey={typeFollowTab}
-            onSetMapFollower={(newListFollower) =>
-              dispatch(setListFollower(newListFollower))
-            }
+            onSetMapFollower={(newListFollower) => {
+              dispatch(setListFollower(newListFollower));
+            }}
             onSetMapFollowing={(newListWatching) =>
               dispatch(setListWatching(newListWatching))
             }
@@ -96,7 +96,7 @@ function UserProfile() {
       },
       6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
     };
-  }, [listFollower, listWatching, listMyPost, typeFollowTab]);
+  }, [listFollower, listWatching, listMyPost, typeFollowTab, user, keyActive]);
   return (
     <div>
       <div className='bg-white rounded-b-lg'>

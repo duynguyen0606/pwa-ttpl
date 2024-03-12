@@ -32,7 +32,6 @@ function Index() {
   useEffect(() => {
     (async () => {
       const dataRes = await apiGetListPost({ page });
-      console.log(dataRes);
       if (dataRes.status) {
         dispatch(setListPost(dataRes.data));
       }

@@ -258,8 +258,6 @@ function LawQuestion() {
   };
 
   const handleChangeTabs = (tabActive: number) => {
-    console.log(tabActive);
-
     setTabActive(tabActive);
     if (tabActive == 1) {
       setChildTabs([
@@ -303,8 +301,6 @@ function LawQuestion() {
   };
 
   const renderContent = useMemo(() => {
-    console.log(tabActive, childTabActive, childTabActive2);
-
     if (tabActive == 1) {
       switch (childTabActive) {
         case TypeQA.QA_FAQ:
@@ -499,7 +495,6 @@ function LawQuestion() {
               key={item.name}
               className='flex justify-center text-xl font-semibold py-4 px-10 flex-1'
               onClick={() => {
-                console.log('hgdfhfhs', item.tabActive);
                 tabActive === 1
                   ? setChildTabActive(item.tabActive)
                   : setChildTabActive2(item.tabActive);

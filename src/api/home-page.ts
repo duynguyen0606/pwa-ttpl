@@ -95,12 +95,16 @@ export const apiGetListChildCommentByParentCommentId = async ({
   return data ?? {};
 };
 
-export const apiFollowUser = (args: { id: string; token: string }) => {
+export const apiFollowUser = (args: {
+  id: string;
+  token: string;
+  type: 'follow' | 'unfollow';
+}) => {
   const url = `https://thutucphapluat.com/api/Posts_controller/follow`;
   return sendPostFormDataWithToken({
     token: args.token,
     url,
-    data: { id_customer: args.id },
+    data: { id_customer: args.id, type: args.type },
   });
 };
 
