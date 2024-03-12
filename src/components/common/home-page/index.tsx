@@ -107,8 +107,8 @@ export default function HomePage() {
               scrollableTarget='scrollableDiv'
             >
               <div>
-                {listPost.map((item) => (
-                  <Post post={item} key={item?.id} />
+                {listPost.map((item, idx) => (
+                  <Post post={item} key={idx} />
                 ))}
               </div>
             </InfiniteScroll>
