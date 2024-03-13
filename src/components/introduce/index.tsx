@@ -188,6 +188,7 @@ function IntroducePage() {
                 Menu: {
                   horizontalItemSelectedColor: '#fff',
                   itemHoverColor: '#fff',
+                  itemColor: '#fff',
                 },
               },
             }}
