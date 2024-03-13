@@ -8,7 +8,7 @@ import Category from '@/src/models/Category';
 import PostModel from '@/src/models/Post';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export type CategoryState = {
+export type postState = {
   listArticle: Array<ArticleModel | any>;
   listPost: Array<ArticleModel>;
 };
@@ -30,7 +30,7 @@ export const getListPost = createAsyncThunk('post/getListPost', async () => {
   }
 });
 
-const initialState: CategoryState = {
+const initialState: postState = {
   listArticle: [],
   listPost: [],
 };

@@ -4,15 +4,17 @@ import authReducer from './feature/authSlice';
 import postReducer from './feature/postSlice';
 import userReducer from './feature/userSlice';
 
+export const store = configureStore({
+  reducer: {
+    categoriesState: categoriesReducer,
+    authState: authReducer,
+    postState: postReducer,
+    userState: userReducer,
+  },
+});
+
 export const makeStore = () => {
-  return configureStore({
-    reducer: {
-      categoriesState: categoriesReducer,
-      authState: authReducer,
-      postState: postReducer,
-      userState: userReducer,
-    },
-  });
+  return store;
 };
 
 // Infer the type of makeStore

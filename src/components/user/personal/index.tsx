@@ -8,13 +8,15 @@ import ProfileFollow from './ProfileFollow';
 import ProfilePremium from './ProfilePremium';
 import { useMemo, useState } from 'react';
 import { Content } from 'antd/es/layout/layout';
-import ModalProtectAccount from '../modal/ModalProtectAccount';
-import ModalUpdateInfor from '../modal/ModalUpdateInfor';
+// import ModalProtectAccount from './../modal/ModalProtectAccount';
+// import ModalUpdateInfor from '../modal/ModalUpdateInfor';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import {
   setListFollower,
   setListWatching,
 } from '@/src/redux/feature/userSlice';
+import ModalProtectAccount from '../../modal/ModalProtectAccount';
+import ModalUpdateInfor from '../../modal/ModalUpdateInfor';
 
 interface NavItem {
   name: string;

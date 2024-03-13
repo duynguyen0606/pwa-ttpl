@@ -1,17 +1,16 @@
 'use client';
 
-import { PropsWithChildren, useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import Link from 'next/link';
-import { getListArticle } from '@/src/redux/feature/postSlice';
-import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import {
   getListFollower,
   getListMyPost,
   getListNotification,
   getListWatching,
 } from '@/src/redux/feature/userSlice';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
 import Image from 'next/image';
+import Link from 'next/link';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 function LayoutState(props: PropsWithChildren) {
   const isMobileUI = useMediaQuery({
@@ -25,10 +24,6 @@ function LayoutState(props: PropsWithChildren) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getListArticle());
-  }, []);
-
-  useEffect(() => {
     setIsMobileClient(isMobileUI);
   }, [isMobileUI]);
 
@@ -39,9 +34,8 @@ function LayoutState(props: PropsWithChildren) {
       dispatch(getListFollower({ token }));
       dispatch(getListWatching({ token }));
       dispatch(getListMyPost({ token }));
-      // dispatch()
     }
-  }, [token, dispatch]);
+  }, [token]);
 
   return (
     <div>
