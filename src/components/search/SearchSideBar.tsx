@@ -147,7 +147,7 @@ function SearchSideBar({
       <div className='py-4 mb-4 border-b boder-slate-400'>
         <Typography.Title level={4}>Kết quả tìm kiếm</Typography.Title>
         <Input
-          defaultValue={'x'}
+          defaultValue={valueSearch ?? ''}
           prefix={
             <Image
               src='/images/icons/search.png'
