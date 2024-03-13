@@ -3,11 +3,6 @@
 import { Button, Rate } from 'antd';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
-// import ProfilePost from './ProfilePost';
-// import ProfileVideo from './ProfileVideo';
-// import ProfileProcedure from './ProfileProcedure';
-// import ProfileFollow from './ProfileFollow';
-// import ProfilePremium from './ProfilePremium';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '@/src/redux/hooks';
 import ProfilePost from '@/src/components/user/ProfilePost';
@@ -17,20 +12,14 @@ import {
   apiGetOtherFollowerByType,
   apiGetOtherListPost,
   apiGetUserById,
+  apiGetVideoOfOtherUser,
 } from '@/src/api/user';
-import User from '@/src/models/User';
 
 interface NavItem {
   name: string;
   key: number;
   dataContent: JSX.Element;
 }
-
-// const mapObjNav: { [key: number]: NavItem } = {
-//   1: { name: 'Bài viết', key: 1, dataContent: <ProfilePost /> },
-//   2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-//   3: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
-// };
 
 function Index({ params }: { params: { id: string } }) {
   const [keyActive, setKeyActive] = useState(1);
@@ -40,6 +29,7 @@ function Index({ params }: { params: { id: string } }) {
   const [listWatching, setListWatching] = useState<Array<any>>([]);
   const [listFollower, setListFollower] = useState<Array<any>>([]);
   const [typeFollowTab, setTypeFollowTab] = useState('');
+  const [listVideo, setListVideo] = useState<Array<any>>([]);
 
   useEffect(() => {
     if (params.id) {
@@ -72,6 +62,11 @@ function Index({ params }: { params: { id: string } }) {
         if (dataUser.status) {
           setUserInfor(dataUser.data);
         }
+
+        const dataVideos = await apiGetVideoOfOtherUser({ userId: params.id });
+        if (dataVideos.status) {
+          setListVideo(dataVideos.data);
+        }
       })();
     }
   }, [params.id, token]);
@@ -100,7 +95,11 @@ function Index({ params }: { params: { id: string } }) {
           />
         ),
       },
-      2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
+      2: {
+        name: 'Video',
+        key: 2,
+        dataContent: <ProfileVideo listVideo={listVideo} />,
+      },
       3: {
         name: 'Theo dõi',
         key: 3,
@@ -119,7 +118,7 @@ function Index({ params }: { params: { id: string } }) {
         ),
       },
     };
-  }, [listPost, listFollower, listWatching, typeFollowTab]);
+  }, [listPost, listFollower, listWatching, typeFollowTab, listVideo]);
 
   return (
     <div>

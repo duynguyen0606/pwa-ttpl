@@ -38,6 +38,7 @@ function LayoutState(props: PropsWithChildren) {
       dispatch(getListMyPost({ token }));
       dispatch(getListFollower({ token }));
       dispatch(getListWatching({ token }));
+      dispatch(getListMyPost({ token }));
       // dispatch()
     }
   }, [token, dispatch]);
