@@ -6,7 +6,8 @@ import StoreProvider from './StoreProvider';
 import { useAppDispatch } from '@/src/redux/hooks';
 import LayoutState from '@/src/components/layout/LayoutState';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-
+import { getListArticle } from '@/src/redux/feature/postSlice';
+import { store } from '@/src/redux/store';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -22,6 +23,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  store.dispatch(getListArticle());
+
   return (
     <StoreProvider>
       <html lang='en'>
