@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
-import CrownIcon from '../common/icons/CrownIcon';
+import { CrownIcon } from '../../common/icons';
+// import CrownIcon from '../common/icons/CrownIcon';
 
 const dataPremium = [
   {
