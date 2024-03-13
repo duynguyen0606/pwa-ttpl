@@ -5,7 +5,12 @@ function ProfileVideo({ listVideo }: { listVideo?: Array<any> }) {
       {listVideo ? (
         <div className='flex gap-2 flex-wrap'>
           {listVideo.map((video) => (
-            <iframe width='420' height='280' src={video.images} />
+            <iframe
+              key={video.images}
+              width='420'
+              height='280'
+              src={video.images}
+            />
           ))}
         </div>
       ) : (
