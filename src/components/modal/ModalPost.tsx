@@ -18,13 +18,13 @@ import Image from 'next/image';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
-const getBase64 = (file: FileType): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
+const getBase64 = (file: any): Promise<string> =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file as Blob);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (error) => reject(error);
+    });
 
 function ModalPost(props: ModalProps) {
   const { open, onCancel, onOk } = props;
@@ -38,14 +38,6 @@ function ModalPost(props: ModalProps) {
     () => import('../../components/common/customer-editor'),
     { ssr: false }
   );
-
-  const getBase64 = (file: any): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file as Blob);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -97,10 +89,10 @@ function ModalPost(props: ModalProps) {
 
   return (
     <Modal title='Đăng bài viết' open={open} onCancel={onCancel}>
-      <div className='flex justify-between my-4'>
+      <div className='flex justify-between items-center my-4'>
         <div className='flex gap-1 items-center gap-2'>
           <Avatar size='large' src={user?.image} />
-          <div>duynguyen</div>
+          <div>{user?.full_name}</div>
         </div>
         <div className='flex gap-2'>
           <Switch defaultChecked />
