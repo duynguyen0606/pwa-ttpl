@@ -24,7 +24,7 @@ function SearchQuestionResult({ listQuestion }: { listQuestion: Array<any> }) {
 
     return (
         <div>
-            <Typography.Title level={4}>Câu hỏi thường gặp</Typography.Title>
+            <Typography.Title level={2}>Câu hỏi thường gặp</Typography.Title>
             {listQuestion.length > 0 ? (
                 listQuestion.map((faq, idx) => (
                     <Collapse

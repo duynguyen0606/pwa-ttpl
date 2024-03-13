@@ -4,7 +4,7 @@ import { Post } from "../common";
 function SearchPostResult({ listPost }: { listPost: Array<any> }) {
     return (
         <div>
-            <Typography.Title level={4}>Bài viết</Typography.Title>
+            <Typography.Title level={2}>Bài viết</Typography.Title>
             {listPost.length > 0 ? (
                 listPost.map((post) => <Post key={post?.item} post={post} />)
             ) : (

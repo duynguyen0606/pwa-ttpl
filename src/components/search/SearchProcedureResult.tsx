@@ -8,7 +8,7 @@ function SearchProcedureResult({
 }) {
     return (
         <div>
-            <Typography.Title level={4}>Thủ tục pháp luật</Typography.Title>
+            <Typography.Title level={2}>Thủ tục pháp luật</Typography.Title>
             {listProcedure.length > 0 ? (
                 <TableProcedure data={listProcedure} />
             ) : (

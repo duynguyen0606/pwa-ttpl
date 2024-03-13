@@ -5,7 +5,7 @@ import { Typography } from "antd";
 function SearchLawyerResult({ listLawyer }: { listLawyer: Array<any> }) {
     return (
         <div>
-            <Typography.Title level={4}>Luật sư</Typography.Title>
+            <Typography.Title level={2}>Luật sư</Typography.Title>
             {listLawyer.length > 0 ? (
                 listLawyer.map((lawyer, idx) => (
                     <div

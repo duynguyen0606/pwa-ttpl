@@ -83,13 +83,13 @@ function SearchPage() {
             className="flex justify-between flex-wrap"
             style={{ maxWidth: 1460, margin: "auto" }}
         >
-            <div style={{ width: 400 }}>
+            <div style={{ width: 350 }}>
                 <SearchSideBar
                     tabActive={tabActive}
                     onSetTabActive={(typeTab) => setTabActive(typeTab)}
                 />
             </div>
-            <div style={{ width: 650 }}>{renderContent}</div>
+            <div style={{ width: 600 }}>{renderContent}</div>
         </div>
     );
 }

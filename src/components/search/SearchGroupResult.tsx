@@ -5,7 +5,7 @@ import { Typography } from "antd";
 function SearchGroupResult({ listGroup }: { listGroup: Array<any> }) {
     return (
         <div>
-            <Typography.Title level={4}>Mọi người</Typography.Title>
+            <Typography.Title level={2}>Mọi người</Typography.Title>
             {listGroup.length > 0 ? (
                 listGroup.map((member, idx) => (
                     <div
