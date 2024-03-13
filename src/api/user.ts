@@ -13,8 +13,16 @@ export const apiGetUserProcedureByType = ({
   return getWithToken({ url, token });
 };
 
-export const apiGetListMyPost = ({ token }: { token: string }) => {
-  const url = `https://thutucphapluat.com/api/Posts_controller/list_by_me?page=0`;
+export const apiGetListMyPost = ({
+  token,
+  type,
+}: {
+  token: string;
+  type?: string;
+}) => {
+  const url = `https://thutucphapluat.com/api/Posts_controller/list_by_me?page=0${
+    type && 'type_post=video'
+  }`;
   return getWithToken({ url, token });
 };
 
@@ -34,7 +42,6 @@ export const apiGetUserById = async ({ id }: { id: string }) => {
   const { data } = await axios.get(url);
   return data ?? {};
 };
-
 // export const apiProtectAccount = async ({ id }: { id: string }) => {
 //   const url = `https://thutucphapluat.com/api/login/get_user_by_id/${id}`;
 //   const { data } = await axios.get(url);
@@ -46,17 +53,17 @@ export const apiGetUserById = async ({ id }: { id: string }) => {
 
 export const apiGetVideoOfOtherUser = async ({
   page = 1,
-  userID,
+  userId,
 }: {
-  page: number;
-  userID: string;
+  page?: number;
+  userId: string;
 }): Promise<{
   status: boolean;
   page: number;
-  userID: string;
+  userId: string;
   data: Array<ArticleModel>;
 }> => {
-  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&type_post=video&created_by=${userID}`;
+  const url = `https://thutucphapluat.com/api/Posts_controller/list?page=${page}&type_post=video&created_by=${userId}`;
   const { data } = await axios.get(url);
   return data ?? {};
 };

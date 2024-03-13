@@ -22,24 +22,14 @@ interface NavItem {
   dataContent: JSX.Element;
 }
 
-// const mapObjNav: { [key: number]: NavItem } = {
-//   1: { name: 'Bài viết', key: 1, dataContent: <ProfilePost /> },
-//   2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
-//   3: { name: 'Thủ tục của tôi', key: 3, dataContent: <ProfileProcedure /> },
-//   4: { name: 'Theo dõi', key: 4, dataContent: <ProfileFollow /> },
-//   5: { name: 'Hỏi đáp pháp luật', key: 5, dataContent: <ProfileProcedure /> },
-//   6: { name: 'Gói premium', key: 6, dataContent: <ProfilePremium /> },
-// };
-
 function UserProfile() {
   const [keyActive, setKeyActive] = useState(1);
   const [openModalProtect, setOpenModalProtect] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const { user } = useAppSelector((state) => state.authState);
   const dispatch = useAppDispatch();
-  const { listMyPost, listFollower, listWatching } = useAppSelector(
-    (state) => state.userState
-  );
+  const { listMyPost, listFollower, listWatching, listMyVideo } =
+    useAppSelector((state) => state.userState);
   const [typeFollowTab, setTypeFollowTab] = useState('');
 
   const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
@@ -66,7 +56,11 @@ function UserProfile() {
           />
         ),
       },
-      2: { name: 'Video', key: 2, dataContent: <ProfileVideo /> },
+      2: {
+        name: 'Video',
+        key: 2,
+        dataContent: <ProfileVideo listVideo={listMyVideo} />,
+      },
       3: {
         name: 'Thủ tục của tôi',
         key: 3,

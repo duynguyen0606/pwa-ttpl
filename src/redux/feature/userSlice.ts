@@ -15,6 +15,7 @@ export type UserState = {
   listMyPost: Array<ArticleModel>;
   listFollower: Array<any>;
   listWatching: Array<any>;
+  listMyVideo: Array<any>;
 };
 
 const initialState: UserState = {
@@ -22,6 +23,7 @@ const initialState: UserState = {
   listMyPost: [],
   listFollower: [],
   listWatching: [],
+  listMyVideo: [],
 };
 
 export const getListNotification = createAsyncThunk(
@@ -70,6 +72,20 @@ export const getListWatching = createAsyncThunk(
   }
 );
 
+export const getListUserVideo = createAsyncThunk(
+  'user/getListUserVideo',
+  async (args: { token: string; type: string }) => {
+    const { token, type = 'video' } = args;
+    const res = await apiGetListMyPost({
+      token,
+      type,
+    });
+    if (res.status) {
+      return res.data;
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -90,8 +106,14 @@ const userSlice = createSlice({
         }
       )
       .addCase(getListMyPost.fulfilled, (state, action: PayloadAction<any>) => {
-        state.listMyPost = action.payload;
+        state.listMyVideo = action.payload;
       })
+      .addCase(
+        getListUserVideo.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.listMyPost = action.payload;
+        }
+      )
       .addCase(
         getListFollower.fulfilled,
         (state, action: PayloadAction<any>) => {
