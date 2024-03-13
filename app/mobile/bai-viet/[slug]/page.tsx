@@ -7,20 +7,20 @@ import Image from "next/image";
 import { apiGetDetailPost } from "@/src/api/post";
 import { apiGetListMostViewArticle } from "@/src/api/home-page";
 import ArticleModel from "@/src/models/Article";
-import { Article } from "@/src/components/common";
+import { Article, Post } from "@/src/components/common";
 
 import "./detailPost.scss";
+import { Button } from "antd";
 
 function Index({ params }: { params: { slug: string } }) {
     const { slug } = params;
-    const [blackArrow, setBlackArrow] = useState(false);
     const [post, setPost] = useState<ArticleModel | null>();
     const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
 
     useEffect(() => {
         if (slug)
             (async () => {
-                const response = await apiGetDetailPost({ url_key: slug });
+                const response = await apiGetDetailPost({ url_key: slug, });
                 if (response.status && response.data) {
                     setPost(response.data[0]);
                 }
@@ -36,22 +36,14 @@ function Index({ params }: { params: { slug: string } }) {
         })();
     }, []);
 
-    useEffect(() => {
-        const onScroll = () => setBlackArrow(window.scrollY >= 10);
-
-        window.addEventListener("scroll", onScroll);
-
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
-
     return (
-        <>
-            {post && (
-                <div className="flex-1 px-4">
-                    <div className="fixed top-3">
+        post && (
+            <>
+                <div className="flex-1">
+                    <div className="fixed left-4 top-3">
                         <Link href="/mobile/bai-viet">
                             <Image
-                                src={`/images/icons/${blackArrow ? "" : "white-"}left-arrow.png`}
+                                src={`/images/icons/left-arrow.png`}
                                 alt=""
                                 width={24}
                                 height={24}
@@ -59,44 +51,14 @@ function Index({ params }: { params: { slug: string } }) {
                         </Link>
                     </div>
 
-                    {/* timeline & image */}
-                    <div className="mb-4" style={{ margin: "0 -16px" }}>
-                        <Link href={post.images}>
-                            <Image
-                                loading="lazy"
-                                className="w-full object-contain"
-                                src={post.images}
-                                alt="anh bai viet"
-                                width={390}
-                                height={326}
-                            />
-                        </Link>
+                    <div style={{ padding: "-4px" }} className="mt-8">
+                        <Post
+                            post={{ ...post, short_description: "" }}
+                            key={slug}
+                        />
                     </div>
-
-                    {/* title  */}
-                    <div className="mt-5">
-                        <Link
-                            href="#"
-                            className="text-base text-[#444] font-bold"
-                        >
-                            {post.title}
-                        </Link>
-                    </div>
-
-                    {/* description */}
-                    <div
-                        className="desciption-post-item"
-                        dangerouslySetInnerHTML={{ __html: post.description }}
-                    />
-
-                    {/* Header Post */}
-                    <div className="mt-7 mb-2">
-                    </div>
-
-                    {/* Footer Post */}
-                    <div className="mt-0.5">
-                    </div>
-
+                </div>
+                <div className="px-4">
                     {/* Bài viết xem nhiều nhất */}
                     <div className="mt-10">
                         <div className="text-[20px] text-[#262C41] font-semibold mb-5">
@@ -108,8 +70,8 @@ function Index({ params }: { params: { slug: string } }) {
                             ))}
                     </div>
                 </div>
-            )}
-        </>
+            </>
+        )
     );
 }
 

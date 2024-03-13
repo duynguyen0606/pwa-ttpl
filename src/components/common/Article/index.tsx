@@ -1,19 +1,28 @@
-import Image from 'next/image';
-import './style.scss';
 import { useEffect, useState } from 'react';
-import ArticleModel from '@/src/models/Article';
-import { apiGetListMostViewArticle } from '@/src/api/home-page';
-import { converDateToDays } from '@/src/utils';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useMediaQuery } from 'react-responsive';
+import { apiGetListMostViewArticle } from '@/src/api/home-page';
+import ArticleModel from '@/src/models/Article';
+import { converDateToDays } from '@/src/utils';
+import './style.scss';
 
 function Article({ article }: { article: ArticleModel }) {
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+      query: "(max-width: 600px)",
+  });
+  useEffect(() => {
+      setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);  
+
   return (
     <div
       key={article.id}
       id='article'
       className='flex items-center gap-2 py-4 border-b-[1px] border-solid border-slate-100'
     >
-      <Link href={`/bai-viet/${article.url_key}`}>
+      <Link href={`${isMobileClient ? '/mobile' : ''}/bai-viet/${article.url_key}`}>
         <Image
           src={article?.images ?? 'https://ttpl.vn/assets/images/unsplash.jpg'}
           alt='article image'
@@ -23,7 +32,7 @@ function Article({ article }: { article: ArticleModel }) {
       </Link>
       <div className='inline-grid flex-col'>
         <Link
-          href={`/bai-viet/${article.url_key}`}
+          href={`${isMobileClient ? '/mobile' : ''}/bai-viet/${article.url_key}`}
           style={{ color: '#4262AE' }}
           className='title dot-1 text-sm font-semibold'
         >

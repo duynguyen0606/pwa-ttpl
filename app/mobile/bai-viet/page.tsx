@@ -31,7 +31,7 @@ function Index() {
 
   useEffect(() => {
     (async () => {
-      const dataRes = await apiGetListPost({ page });
+      const dataRes = await apiGetListPost({ page, token });
       if (dataRes.status) {
         dispatch(setListPost(dataRes.data));
       }
@@ -39,7 +39,7 @@ function Index() {
     return () => {
       dispatch(setListPost([]));
     };
-  }, []);
+  }, [token]);
 
   const loadMoreData = async () => {
     setPage((prev) => prev + 1);
@@ -124,7 +124,7 @@ function Index() {
       >
         <div className='pt-[62px]'>
           {listPost.map((post) => (
-            <Post key={post?.id} post={post} />
+            <Post key={post?.id} post={{...post, description: ''}} />
           ))}
         </div>
       </InfiniteScroll>

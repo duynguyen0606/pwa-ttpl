@@ -172,9 +172,9 @@ function Post({ post }: { post: ArticleModel }) {
                               {post.title}
                           </div>
                           <p
-                              className="dot-4 post-desc"
+                              className={`${post.short_description ? 'line-clamp-4' : ''}`}
                               dangerouslySetInnerHTML={{
-                                  __html: post.short_description,
+                                  __html: post.short_description || post.description,
                               }}
                           />
                       </Link>
@@ -203,7 +203,7 @@ function Post({ post }: { post: ArticleModel }) {
                       >
                           Like
                       </Button>
-                      <Button
+                      {/* <Button
                           icon={
                               <Image
                                   src="/images/icons/dislike.png"
@@ -214,7 +214,7 @@ function Post({ post }: { post: ArticleModel }) {
                           }
                       >
                           Dislike
-                      </Button>
+                      </Button> */}
                       <Button
                           icon={
                               <Image
@@ -231,7 +231,7 @@ function Post({ post }: { post: ArticleModel }) {
                       >
                           Comment
                       </Button>
-                      <Button
+                      {/* <Button
                           icon={
                               <Image
                                   src="/images/icons/share.png"
@@ -242,7 +242,7 @@ function Post({ post }: { post: ArticleModel }) {
                           }
                       >
                           Share
-                      </Button>
+                      </Button> */}
                   </div>
 
                   {showComment && (

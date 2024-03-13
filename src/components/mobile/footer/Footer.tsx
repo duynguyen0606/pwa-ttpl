@@ -56,7 +56,7 @@ function Footer() {
 
           {user ? (
             <Link href='/mobile/my-profile' className='mx-4'>
-              <Image className='w-7 h-7' src={user?.image} alt='logo-legalzone' width={28} height={28}/>
+              <Image className='w-7 h-7 rounded-full' src={user?.image} alt='logo-legalzone' width={28} height={28}/>
             </Link>
           ) : (
             <Link href='/mobile/dang-nhap' className='mx-4'>

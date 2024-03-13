@@ -96,7 +96,7 @@ function SidebarDrawer(props: DrawerProps) {
                       {/* Law QA */}
                       <Link
                           href="/mobile/cau-hoi/"
-                          className="flex items-center mb-5"
+                          className="flex items-center mb-5 text-black"
                       >
                           <Image
                               src="https://ttpl.vn/assets/images/mobile/question.png"
@@ -110,7 +110,7 @@ function SidebarDrawer(props: DrawerProps) {
                       {/* Các gói dịch vụ */}
                       <Link
                           href="/mobile/premium"
-                          className="flex items-center mb-5"
+                          className="flex items-center mb-5 text-black"
                       >
                           <Image
                               src="https://ttpl.vn/assets/images/mobile/box.jpg"
@@ -184,7 +184,7 @@ function SidebarDrawer(props: DrawerProps) {
               <div
                   className="
                         text-[#B5B9C7]
-                        px-8 pt-10
+                        px-8 pt-10 pb-5
                     "
               >
                   {/* border */}
@@ -220,7 +220,7 @@ function SidebarDrawer(props: DrawerProps) {
                   {/* Phone */}
                   <Link
                       href="tel:0888889366"
-                      className="flex items-center mb-3"
+                      className="flex items-center mb-3 text-[#B5B9C7]"
                   >
                       <Image
                           src="https://ttpl.vn/assets/images/mobile/Icon-feather-phone.png"
@@ -234,7 +234,7 @@ function SidebarDrawer(props: DrawerProps) {
                   {/* Mail to */}
                   <Link
                       href="mailto:support@legalzone.vn"
-                      className="flex items-center"
+                      className="flex items-center text-[#B5B9C7]"
                   >
                       <Image
                           src="https://ttpl.vn/assets/images/mobile/Icon-feather-mail.png"
