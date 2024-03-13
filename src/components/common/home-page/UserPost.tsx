@@ -17,7 +17,7 @@ function UserPost({ onOpenModal }: { onOpenModal: () => void }) {
         />
       </div>
       <div className='flex justify-center gap-2 py-4 '>
-        <div className='p-2 rounded-full bg-orange-100'>
+        <div className='p-2 rounded-full bg-orange-100' onClick={onOpenModal}>
           <Image
             src='/images/icons/orange-document.png'
             alt='document'
@@ -25,7 +25,7 @@ function UserPost({ onOpenModal }: { onOpenModal: () => void }) {
             height={25}
           />
         </div>
-        <div className='p-2 rounded-full bg-orange-100'>
+        <div className='p-2 rounded-full bg-orange-100' onClick={onOpenModal}>
           <Image
             src='/images/icons/orange-video.png'
             alt='video'

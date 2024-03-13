@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ArticleModel from '@/src/models/Article';
 import { apiGetListMostViewArticle } from '@/src/api/home-page';
 import { converDateToDays } from '@/src/utils';
+import Link from 'next/link';
 
 function Article({ article }: { article: ArticleModel }) {
   return (
@@ -12,19 +13,22 @@ function Article({ article }: { article: ArticleModel }) {
       id='article'
       className='flex items-center gap-2 py-4 border-b-[1px] border-solid border-slate-100'
     >
-      <Image
-        src={article?.images ?? 'https://ttpl.vn/assets/images/unsplash.jpg'}
-        alt='article image'
-        width={70}
-        height={70}
-      />
+      <Link href={`/bai-viet/${article.url_key}`}>
+        <Image
+          src={article?.images ?? 'https://ttpl.vn/assets/images/unsplash.jpg'}
+          alt='article image'
+          width={70}
+          height={70}
+        />
+      </Link>
       <div className='inline-grid flex-col'>
-        <h3
+        <Link
+          href={`/bai-viet/${article.url_key}`}
           style={{ color: '#4262AE' }}
           className='title dot-1 text-sm font-semibold'
         >
           {article.title}
-        </h3>
+        </Link>
         <span
           className='description dot-1 text-xs'
           dangerouslySetInnerHTML={{ __html: article.short_description }}

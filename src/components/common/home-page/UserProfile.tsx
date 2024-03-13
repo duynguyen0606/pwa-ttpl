@@ -1,22 +1,26 @@
 import { useAppSelector } from '@/src/redux/hooks';
 import { Button } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const actionsArr = [
   {
     name: 'Bài viết của tôi',
     icon: '/images/icons/document.png',
     iconAlt: 'document',
+    link: '/user',
   },
   {
     name: 'Video của tôi',
     icon: '/images/icons/face-time.png',
     iconAlt: 'face-time',
+    link: '/user',
   },
   {
     name: 'Gói Premium',
     icon: '/images/icons/premium.png',
     iconAlt: 'premium',
+    link: ''
   },
 ];
 
@@ -38,21 +42,21 @@ function UserProfile() {
         <div>{user?.email}</div>
         <div className='flex items-center justify-between my-4'>
           <div>
-            <div>0</div>
+            <div className='font-bold'>0</div>
             <div>Bài đăng</div>
           </div>
           <div>
-            <div>0</div>
+            <div className='font-bold'>0</div>
             <div>Theo dõi</div>
           </div>
           <div>
-            <div>0</div>
+            <div className='font-bold'>0</div>
             <div>Lượt view</div>
           </div>
         </div>
-        <div className='flex items-center justify-between my-4'>
-          <div>Người theo dõi của tôi</div>
-          <Button type='text' className='button-flex'>
+        <div className='flex items-center justify-between my-4 py-2'>
+          <div className='font-semibold'>Người theo dõi của tôi</div>
+          <Link href='/user' className='button-flex text-black hover:text-black'>
             <span>Xem tất cả </span>
             <Image
               src='/images/icons/right.png'
@@ -60,12 +64,12 @@ function UserProfile() {
               width={15}
               height={15}
             />
-          </Button>
+          </Link>
         </div>
       </div>
       <div>
         {actionsArr.map((item) => (
-          <div key={item.name} className='flex justify-between mb-4'>
+          <Link key={item.name} className='text-black hover:text-black flex justify-between mb-4' href={item.link} >
             <div className='flex gap-1'>
               <div className='w-5'>
                 <Image
@@ -88,7 +92,7 @@ function UserProfile() {
                 />
               }
             />
-          </div>
+          </Link>
         ))}
       </div>
     </div>
