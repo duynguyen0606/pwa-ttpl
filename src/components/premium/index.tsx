@@ -1,18 +1,18 @@
 "use client";
 
-import { Col, Row } from "antd";
-import CrownIcon from "../common/icons/CrownIcon";
-import CanBackLayout from "../layout/mobile/CanBackLayout";
-import { apiGetListMostViewArticle } from "@/src/api/home-page";
 import { useEffect, useState } from "react";
-import Sider from "antd/es/layout/Sider";
-import { Article } from "../common";
 import Link from "next/link";
 import Image from "next/image";
+import { Col, Row } from "antd";
+import Sider from "antd/es/layout/Sider";
+
+import { apiGetListMostViewArticle } from "@/src/api/home-page";
+import { Article } from "../common";
 import FreeContent from "./FreeContent";
 import BasicContent from "./BasicContent";
 import Pro1Content from "./Pro1Content";
 import DiamondContent from "./DiamondContent";
+import CrownIcon from "../common/icons/CrownIcon";
 
 const dataPremium = [
     {
@@ -142,7 +142,7 @@ function PremiumPage() {
                     ))}
                 </Row>
 
-                <div>{dataPremium[activeTab - 1]?.dataContent}</div>
+                <div className="px-4">{dataPremium[activeTab - 1]?.dataContent}</div>
             </div>
 
             <Sider

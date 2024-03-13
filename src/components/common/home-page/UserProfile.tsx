@@ -20,7 +20,7 @@ const actionsArr = [
     name: 'Gói Premium',
     icon: '/images/icons/premium.png',
     iconAlt: 'premium',
-    link: ''
+    link: '/premium'
   },
 ];
 

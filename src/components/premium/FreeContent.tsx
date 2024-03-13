@@ -1,12 +1,38 @@
+import { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+
 function FreeContent() {
+    const [isMobileClient, setIsMobileClient] = useState(false);
+    const isMobileUI = useMediaQuery({
+        query: "(max-width: 600px)",
+    });
+    useEffect(() => {
+        setIsMobileClient(isMobileUI);
+    }, [isMobileUI]);
+
     return (
-        <div className="mt-8 mb-16">
-            <div className="text-center font-semibold mb-0.5 text-lg">
+        <div
+            className={`${
+                isMobileClient ? "text-sm px-1 mobile-client" : "mt-8 mb-16"
+            }`}
+        >
+            <div
+                className={`${
+                    isMobileClient
+                        ? "text-[--secondary-color] font-bold mb-4 leading-6"
+                        : "text-center font-semibold mb-0.5 text-lg"
+                }`}
+            >
                 Xem toàn bộ thủ tục hành chính Online
             </div>
-            <div className="text-center mb-2">Có thể tra cứu:</div>
-            <div className="mt-4 px-4 flex flex-wrap">
-                <ul className="grid grid-cols-2 gap-3 list-disc">
+            {!isMobileClient && (
+                <div className="text-center mb-2">Có thể tra cứu:</div>
+            )}
+            <div className="mt-4 flex flex-wrap justify-center">
+                <ul
+                    className={`list-disc
+                    ${isMobileClient ? "" : "grid grid-cols-2 gap-3"}`}
+                >
                     <li>Được tặng 200 điểm là nhân viên</li>
                     <li>Hiển thị cho bảng điều khiển</li>
                     <li>
@@ -27,10 +53,12 @@ function FreeContent() {
                     </li>
                 </ul>
             </div>
-            <div className="text-center mt-1">
-                Mua gói chỉ có tác dụng với tài khoản công ty luật , doanh
-                nghiệp
-            </div>
+            {!isMobileClient && (
+                <div className="text-center mt-4">
+                    Mua gói chỉ có tác dụng với tài khoản công ty luật , doanh
+                    nghiệp
+                </div>
+            )}
         </div>
     );
 }

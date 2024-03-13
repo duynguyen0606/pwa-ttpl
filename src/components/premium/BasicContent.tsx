@@ -1,13 +1,40 @@
+import { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import "./premiumStyle.scss";
+
 function BasicContent() {
+    const [isMobileClient, setIsMobileClient] = useState(false);
+    const isMobileUI = useMediaQuery({
+        query: "(max-width: 600px)",
+    });
+    useEffect(() => {
+        setIsMobileClient(isMobileUI);
+    }, [isMobileUI]);
+
     return (
-        <div className="mt-8 mb-16">
-            <div className="text-center font-semibold mb-0.5 text-lg">
+        <div
+            className={`${
+                isMobileClient ? "text-sm px-1 mobile-client" : "mt-8 mb-16"
+            }`}
+        >
+            <div
+                className={`${
+                    isMobileClient
+                        ? "text-[--secondary-color] font-bold mb-4 leading-6"
+                        : "text-center font-semibold mb-0.5 text-lg"
+                }`}
+            >
                 Thành viên Basic được nhận các quyền lợi của thành viên Free và
                 thêm
             </div>
-            <div className="text-center mb-2">Có thể tra cứu:</div>
-            <div className="mt-4 px-4 flex flex-wrap">
-                <ul className="grid grid-cols-2 gap-3 list-disc">
+            {!isMobileClient && (
+                <div className="text-center mb-2">Có thể tra cứu:</div>
+            )}
+            <div className="mt-4 flex flex-wrap">
+                <ul
+                    className={`list-disc
+                    ${isMobileClient ? "" : "grid grid-cols-2 gap-3"}`}
+                >
                     <li>Được tặng 250 điểm là nhân viên</li>
                     <li>Hiển thị bảng điều khiển : Vào làm, và Ra về</li>
                     <li>
@@ -71,7 +98,7 @@ function BasicContent() {
                     </li>
                 </ul>
             </div>
-            <div className="text-center mt-1">
+            <div className="text-center mt-4">
                 Mua gói chỉ có tác dụng với tài khoản công ty luật , doanh
                 nghiệp
             </div>
