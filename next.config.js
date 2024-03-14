@@ -1,11 +1,16 @@
-const prod = process.env.NODE_ENV === 'production';
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const runtimeCaching = require('next-pwa/cache');
 
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
+  cacheOnFrontEndNav: true,
+  runtimeCaching,
+  // runtimeCaching,
+  // workboxOptions: {
+  //   disableDevLogs: true,
+  // },
   // disable: process.env.NODE_ENV === 'development',
   // register: true,
   // scope: '/app',
