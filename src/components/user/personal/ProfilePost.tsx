@@ -9,7 +9,6 @@ import ModalPost from '../../modal/ModalPost';
 import UserPost from '../../common/home-page/UserPost';
 import PostModel from '@/src/models/Post';
 import ArticleModel from '@/src/models/Article';
-import ProfileFollowComp from '../../mobile/user/ProfileFollowComp';
 import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 import { apiFollowUser } from '@/src/api/home-page';
 
