@@ -1,0 +1,6 @@
+export {default as ProfilePost} from './ProfilePost'
+export {default as ProfileVideo} from './ProfileVideo'
+export {default as ProfileFollow} from './ProfileFollow'
+export {default as ProfileProcedure} from './ProfileProcedure'
+export {default as ProfileManagement} from './ProfileManagement'
+export {default as ProfileEvaluation} from './ProfileEvaluation'

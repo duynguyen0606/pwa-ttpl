@@ -1,22 +1,20 @@
 import { Button } from "antd";
 import Image from "next/image";
 import ImageLegacy from "next/legacy/image";
-import ProfilePost from "./ProfilePost";
-import ProfileVideo from "./ProfileVideo";
-import ProfileProcedure from "./ProfileProcedure";
-import ProfileFollow from "./ProfileFollow";
+import ProfilePost from "../general/ProfilePost";
+import ProfileVideo from "../general/ProfileVideo";
+import ProfileProcedure from "../general/ProfileProcedure";
+import ProfileFollow from "../general/ProfileFollow";
 import ProfilePremium from "./ProfilePremium";
 import { useMemo, useState } from "react";
 import { Content } from "antd/es/layout/layout";
-// import ModalProtectAccount from './../modal/ModalProtectAccount';
-// import ModalUpdateInfor from '../modal/ModalUpdateInfor';
+import ModalProtectAccount from "../../modal/ModalProtectAccount";
+import ModalUpdateInfor from "../../modal/ModalUpdateInfor";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import {
     setListFollower,
     setListWatching,
 } from "@/src/redux/feature/userSlice";
-import ModalProtectAccount from "../../modal/ModalProtectAccount";
-import ModalUpdateInfor from "../../modal/ModalUpdateInfor";
 
 interface NavItem {
     name: string;
@@ -24,7 +22,7 @@ interface NavItem {
     dataContent: JSX.Element;
 }
 
-function UserProfile() {
+function PersonalProfile() {
     const [keyActive, setKeyActive] = useState(1);
     const [openModalProtect, setOpenModalProtect] = useState(false);
     const [openModalUpdate, setOpenModalUpdate] = useState(false);
@@ -201,4 +199,4 @@ function UserProfile() {
     );
 }
 
-export default UserProfile;
+export default PersonalProfile;

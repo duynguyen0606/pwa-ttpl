@@ -10,11 +10,11 @@ import {
 } from "@/src/redux/feature/userSlice";
 
 import LawyerInfomation from "./LawyerInfomation";
-import LawyerEvaluation from "./LawyerEvaluation";
-import ProfileProcedure from "../personal/ProfileProcedure";
-import ProfilePost from "../personal/ProfilePost";
-import ProfileVideo from "../personal/ProfileVideo";
-import ProfileFollow from "../personal/ProfileFollow";
+import LawyerEvaluation from "../general/ProfileEvaluation";
+import ProfileProcedure from "../general/ProfileProcedure";
+import ProfilePost from "../general/ProfilePost";
+import ProfileVideo from "../general/ProfileVideo";
+import ProfileFollow from "../general/ProfileFollow";
 
 import ModalProtectAccount from "../../modal/ModalProtectAccount";
 import ModalUpdateInfor from "../../modal/ModalUpdateInfor";

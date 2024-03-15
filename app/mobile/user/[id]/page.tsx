@@ -5,15 +5,15 @@ import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '@/src/redux/hooks';
-import ProfilePost from '@/src/components/user/personal/ProfilePost';
+import ProfilePost from '@/src/components/user/general/ProfilePost';
 import {
   apiGetOtherFollowerByType,
   apiGetOtherListPost,
   apiGetUserById,
 } from '@/src/api/user';
 import { ModalInfoRate } from '@/src/components/modal';
-import ProfileVideo from '@/src/components/user/personal/ProfileVideo';
-import ProfileFollow from '@/src/components/user/personal/ProfileFollow';
+import ProfileVideo from '@/src/components/user/general/ProfileVideo';
+import ProfileFollow from '@/src/components/user/general/ProfileFollow';
 
 interface NavItem {
   name: string;
