@@ -28,7 +28,7 @@ function ProfileFollow({
   onSetMapFollower: (newListFollower: Array<any>) => void;
   onSetMapFollowing: (newListWatching: Array<any>) => void;
 }) {
-  const [typeNav, setTypeNav] = useState(activeKey);
+  const [typeNav, setTypeNav] = useState(activeKey || 'follower');
   const { token } = useAppSelector((state) => state.authState);
   const dispatch = useAppDispatch();
 
