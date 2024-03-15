@@ -1,5 +1,6 @@
 'use client';
 
+import { getListArticle } from '@/src/redux/feature/postSlice';
 import {
   getListFollower,
   getListMyPost,
@@ -22,6 +23,10 @@ function LayoutState(props: PropsWithChildren) {
 
   const { children } = props;
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getListArticle());
+  }, []);
 
   useEffect(() => {
     setIsMobileClient(isMobileUI);
