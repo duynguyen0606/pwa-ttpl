@@ -8,6 +8,7 @@ const withPWA = require('next-pwa')({
   // cacheOnFrontEndNav: true,
   runtimeCaching,
   buildExcludes: [/app-build-manifest.json$/],
+  dynamicStartUrl: true,
 });
 
 module.exports = withPWA({
