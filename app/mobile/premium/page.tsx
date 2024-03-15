@@ -100,45 +100,86 @@ function Index() {
 function ModalBuyPremium(props: DrawerProps) {
     const { open, onClose } = props;
     const [active, setActive] = useState(false);
+    const [guide, setGuide] = useState(false);
     return (
         <Drawer
             open={open}
             onClose={onClose}
             closeIcon={null}
             placement="bottom"
-            title="Bạn muốn áp dụng gói cho công ty nào ?"
+            title={
+                guide
+                    ? "Hướng dẫn cách mua gói"
+                    : "Bạn muốn áp dụng gói cho công ty nào ?"
+            }
             className="rounded-t-[40px]"
         >
-            <div className="flex flex-col items-center mb-4 text-base">
-                <div
-                    className="flex items-center text-base w-full p-2 rounded-lg"
-                    style={{
-                        color: active ? "var(--secondary-color)" : "black",
-                        backgroundColor: active ? "#F0F1FC" : "white",
-                        border: active ? "1px solid #E6E7EA" : "none,",
-                    }}
-                    onClick={() => setActive(!active)}
-                >
-                    <Image
-                        className="mr-3 rounded-full"
-                        width={40}
-                        height={40}
-                        src="https://ttpl.vn/files/system/_file64b792e27abc0-site-logo.png"
-                        alt=""
-                    />
-                    <span className="uppercase">Công ty mẫu</span>
-                </div>
+            {guide ? (
+                <ShoppingGuide onClickBack={() => setGuide(false)} />
+            ) : (
+                <div className="flex flex-col items-center mb-4 text-base">
+                    <div
+                        className="flex items-center text-base w-full p-2 rounded-lg"
+                        style={{
+                            color: active ? "var(--secondary-color)" : "black",
+                            backgroundColor: active ? "#F0F1FC" : "white",
+                            border: active ? "1px solid #E6E7EA" : "none,",
+                        }}
+                        onClick={() => setActive(!active)}
+                    >
+                        <Image
+                            className="mr-3 rounded-full"
+                            width={40}
+                            height={40}
+                            src="https://ttpl.vn/files/system/_file64b792e27abc0-site-logo.png"
+                            alt=""
+                        />
+                        <span className="uppercase">Công ty mẫu</span>
+                    </div>
 
-                <div className="flex mt-4">
-                    <button className="text-white font-semibold bg-[--secondary-color] w-[162px] h-[56px] rounded-xl mx-1.5">
-                        Đăng ký gói
-                    </button>
-                    <button className="text-black font-semibold bg-[#EBEDF3] w-[162px] h-[56px] rounded-xl mx-1.5">
-                        Hướng dẫn mua
-                    </button>
+                    <div className="flex mt-4">
+                        <button className="text-white font-semibold bg-[--secondary-color] w-[162px] h-[56px] rounded-xl mx-1.5">
+                            Đăng ký gói
+                        </button>
+                        <button
+                            className="text-black font-semibold bg-[#EBEDF3] w-[162px] h-[56px] rounded-xl mx-1.5"
+                            onClick={() => setGuide(true)}
+                        >
+                            Hướng dẫn mua
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
         </Drawer>
+    );
+}
+
+function ShoppingGuide({ onClickBack }: { onClickBack: () => void }) {
+    return (
+        <div>
+            <p className="mb-3">
+                Bước 1: Truy cập vào <br></br>
+                <a>https://thutucphapluat.com/mobile/premium</a>
+            </p>
+            <p className="mb-3">
+                Bước 2: Chọn <strong>gói Free</strong>
+            </p>
+            <p className="mb-3">
+                Bước 3: Chọn <strong>Đăng ký gói</strong>
+            </p>
+            <p className="mb-3">Bước 4: Chọn Công ty muốn áp dụng</p>
+            <button
+                className=" mt-10 flex justify-center items-center w-full"
+                onClick={onClickBack}
+            >
+                <Image
+                    src="/images/icons/left-arrow.png"
+                    alt="back"
+                    width={24}
+                    height={24}
+                />
+            </button>
+        </div>
     );
 }
 
