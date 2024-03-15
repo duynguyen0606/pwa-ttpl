@@ -45,10 +45,14 @@ function Index() {
 
                     <Form.Item>
                         <Button
-                            className="top-[45vh] w-full font-medium text-white bg-[#4755D4]"
                             style={{
                                 height: "54px",
                                 borderRadius: "40px",
+                                color: "white",
+                                backgroundColor: "var(--secondary-color)",
+                                fontWeight: "500",
+                                width: "100%",
+                                top: "45vh",
                             }}
                             size="large"
                         >
