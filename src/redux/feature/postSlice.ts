@@ -42,6 +42,9 @@ const postSlice = createSlice({
     setListPost: (state, action) => {
       state.listPost = action.payload;
     },
+    setListArticle: (state, action) => {
+      state.listArticle = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,5 +62,5 @@ const postSlice = createSlice({
 
 const postReducer = postSlice.reducer;
 
-export const { setListPost } = postSlice.actions;
+export const { setListPost, setListArticle } = postSlice.actions;
 export default postReducer;

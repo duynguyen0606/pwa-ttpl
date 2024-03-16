@@ -1,13 +1,13 @@
 // import DefaultLayout from '@/src/components/layout';
+import { apiGetListMostViewArticle } from '@/src/api/home-page';
+import LayoutState from '@/src/components/layout/LayoutState';
 import '@/src/styles/global.scss';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { Spin } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Suspense } from 'react';
 import StoreProvider from './StoreProvider';
-import { useAppDispatch } from '@/src/redux/hooks';
-import LayoutState from '@/src/components/layout/LayoutState';
-import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { getListArticle } from '@/src/redux/feature/postSlice';
-import { store } from '@/src/redux/store';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -18,19 +18,28 @@ export const metadata: Metadata = {
   // themeColor: '#042940',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  store.dispatch(getListArticle());
-
+  const articleRes = await apiGetListMostViewArticle();
   return (
     <StoreProvider>
       <html lang='en'>
         <body className={inter.className}>
           <AntdRegistry>
-            <LayoutState>{children}</LayoutState>
+            <Suspense
+              fallback={
+                <div className='flex justify-center pt-20'>
+                  <Spin size='large' />
+                </div>
+              }
+            >
+              <LayoutState listArticle={articleRes?.data}>
+                {children}
+              </LayoutState>
+            </Suspense>
           </AntdRegistry>
         </body>
       </html>

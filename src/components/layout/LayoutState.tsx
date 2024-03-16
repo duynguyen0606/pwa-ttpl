@@ -1,6 +1,6 @@
 'use client';
 
-import { getListArticle } from '@/src/redux/feature/postSlice';
+import { getListArticle, setListArticle } from '@/src/redux/feature/postSlice';
 import {
   getListFollower,
   getListMyPost,
@@ -13,7 +13,11 @@ import Link from 'next/link';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-function LayoutState(props: PropsWithChildren) {
+function LayoutState(
+  props: PropsWithChildren & {
+    listArticle?: Array<any>;
+  }
+) {
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
@@ -25,7 +29,7 @@ function LayoutState(props: PropsWithChildren) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getListArticle());
+    dispatch(setListArticle(props.listArticle));
   }, []);
 
   useEffect(() => {

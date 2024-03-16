@@ -21,14 +21,14 @@ import { setListPost } from '@/src/redux/feature/postSlice';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
-  const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
+  // const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   // const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
   const [page, setPage] = useState(1);
   const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
   const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalPost, setOpenModalPost] = useState(false);
   const { user, token } = useAppSelector((state) => state.authState);
-  const { listPost } = useAppSelector((state) => state.postState);
+  const { listPost, listArticle } = useAppSelector((state) => state.postState);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
@@ -39,14 +39,14 @@ export default function HomePage() {
     setIsMobileClient(isMobileUI);
   }, [isMobileUI]);
 
-  useEffect(() => {
-    (async () => {
-      const dataRes = await apiGetListMostViewArticle();
-      if (dataRes.status) {
-        setListArticle(dataRes.data);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const dataRes = await apiGetListMostViewArticle();
+  //     if (dataRes.status) {
+  //       setListArticle(dataRes.data);
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async () => {
