@@ -3,11 +3,13 @@ import { apiGetListMostViewArticle } from '@/src/api/home-page';
 import LayoutState from '@/src/components/layout/LayoutState';
 import '@/src/styles/global.scss';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { Spin } from 'antd';
+// import { Spin } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 import StoreProvider from './StoreProvider';
+import { Spin } from 'antd';
+import Loading from '@/src/components/common/loading';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -29,14 +31,8 @@ export default async function RootLayout({
       <html lang='en'>
         <body className={inter.className}>
           <AntdRegistry>
-            <Suspense
-              fallback={
-                <div className='flex justify-center pt-20'>
-                  <Spin size='large' />
-                </div>
-              }
-            >
-              <LayoutState listArticle={articleRes?.data}>
+            <Suspense fallback={<Loading />}>
+              <LayoutState listArticle={articleRes.data}>
                 {children}
               </LayoutState>
             </Suspense>

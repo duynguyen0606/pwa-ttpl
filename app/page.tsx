@@ -2,9 +2,10 @@
 
 import AlertMobile from '@/src/components/common/AlertMobile';
 import HomePageDesktop from '@/src/components/common/home-page';
+import Loading from '@/src/components/common/loading';
 import HomePageMobile from '@/src/components/mobile/home-page';
 // import DefaultLayout from '@/src/components/layout';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 export default function Index() {

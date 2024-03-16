@@ -27,10 +27,7 @@ function LayoutState(
 
   const { children } = props;
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setListArticle(props.listArticle));
-  }, []);
+  dispatch(setListArticle(props.listArticle));
 
   useEffect(() => {
     setIsMobileClient(isMobileUI);
@@ -42,7 +39,6 @@ function LayoutState(
       dispatch(getListMyPost({ token }));
       dispatch(getListFollower({ token }));
       dispatch(getListWatching({ token }));
-      dispatch(getListMyPost({ token }));
     }
   }, [token]);
 
