@@ -25,6 +25,8 @@ import LawyerInfomation from "./lawyer/LawyerInfomation";
 import LawyerAnswer from "./lawyer/LawyerAnswer";
 import LawCompanyInfomation from "./enterprise/law-company/LawCompanyInfomation";
 import LawCompanyPost from "./enterprise/law-company/LawCompanyPost";
+import EnterpriseVertification from "./enterprise/EnterpriseVertification";
+import ListLawyer from "./enterprise/law-company/ListLawyer";
 
 interface NavItem {
     key: number;
@@ -250,7 +252,7 @@ function UserProfilePage() {
                     9: {
                         key: 9,
                         name: "Xác thực doanh nghiệp",
-                        dataContent: <></>,
+                        dataContent: <EnterpriseVertification />,
                     },
                 };
             case "company":
@@ -282,7 +284,7 @@ function UserProfilePage() {
                     5: {
                         key: 5,
                         name: "Danh sách luật sư",
-                        dataContent: <></>,
+                        dataContent: <ListLawyer />,
                     },
                     6: {
                         key: 6,
@@ -292,7 +294,7 @@ function UserProfilePage() {
                     7: {
                         key: 7,
                         name: "Xác thực doanh nghiệp",
-                        dataContent: <></>,
+                        dataContent: <EnterpriseVertification />,
                     },
                 };
             default:
