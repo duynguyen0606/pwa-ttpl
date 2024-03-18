@@ -11,6 +11,7 @@ import PostModel from '@/src/models/Post';
 import ArticleModel from '@/src/models/Article';
 import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 import { apiFollowUser } from '@/src/api/home-page';
+import { useMobileClient } from '@/src/utils/hook';
 
 function ProfilePost({
   listPost,
@@ -34,15 +35,7 @@ function ProfilePost({
   const { token } = useAppSelector((state) => state.authState);
   const dispatch = useAppDispatch();
   const [openModalPost, setOpenModalPost] = useState(false);
-
-  // UI for mobile
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   // Follow other user
   const handleInFollow = async (id: string, type: 'follow' | 'unfollow') => {

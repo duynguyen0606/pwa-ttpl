@@ -8,6 +8,7 @@ import {
   getListWatching,
 } from '@/src/redux/feature/userSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import { useMobileClient } from '@/src/utils/hook';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren, useEffect, useState } from 'react';
@@ -18,20 +19,11 @@ function LayoutState(
     listArticle?: Array<any>;
   }
 ) {
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
   const { token } = useAppSelector((state) => state.authState);
-  const [isMobileClient, setIsMobileClient] = useState(false);
-
+  const isMobileClient = useMobileClient();
   const { children } = props;
   const dispatch = useAppDispatch();
   dispatch(setListArticle(props.listArticle));
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
 
   useEffect(() => {
     if (token) {

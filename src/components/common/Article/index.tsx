@@ -6,15 +6,10 @@ import { apiGetListMostViewArticle } from '@/src/api/home-page';
 import ArticleModel from '@/src/models/Article';
 import { converDateToDays } from '@/src/utils';
 import './style.scss';
+import { useMobileClient } from '@/src/utils/hook';
 
 function Article({ article }: { article: ArticleModel }) {
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   return (
     <div

@@ -6,17 +6,11 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import { Content } from 'antd/es/layout/layout';
 import { StyleProvider } from '@ant-design/cssinjs';
 import { useMediaQuery } from 'react-responsive';
+import { useMobileClient } from '@/src/utils/hook';
 
 function DefaultLayout(props: PropsWithChildren) {
   const { children } = props;
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   return (
     <StyleProvider hashPriority='low'>

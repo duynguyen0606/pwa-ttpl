@@ -1,17 +1,11 @@
+import { useMobileClient } from '@/src/utils/hook';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 function BannerConnect() {
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   return (
     <div

@@ -19,6 +19,7 @@ import { setOpenModalLogin } from '@/src/redux/feature/authSlice';
 import { LikeIcon } from '../icons';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
+import { useMobileClient } from '@/src/utils/hook';
 
 function Post({ post }: { post: ArticleModel }) {
   const [dataComment, setDataComment] = useState<Array<CommentModel>>([]);
@@ -90,120 +91,107 @@ function Post({ post }: { post: ArticleModel }) {
     }
   };
 
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   return (
-      <>
-          {post && (
-              <div
-                  id="post"
-                  className="p-4 flex flex-col gap-4 bg-white rounded-lg mb-4"
-              >
-                  <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                          <div style={{ width: 40 }}>
-                              <Image
-                                  src="https://drive.google.com/uc?id=1vLPCXwk1Fo3LkXI9N2ejCz2J0abYImZB"
-                                  alt="avatar"
-                                  width={40}
-                                  height={40}
-                                  objectFit="cover"
-                                  className="rounded-full"
-                              />
-                          </div>
-                          <div>
-                              <Link
-                                  href={`${
-                                      isMobileClient ? "/mobile" : ""
-                                  }/user/${post.created_by}`}
-                                  style={{ color: "black" }}
-                              >
-                                  {post.created_by_full_name ||
-                                      post.created_by_user}
-                              </Link>
-                              <p className="text-neutral-300">
-                                  {post.created_at}
-                              </p>
-                          </div>
-                      </div>
+    <>
+      {post && (
+        <div
+          id='post'
+          className='p-4 flex flex-col gap-4 bg-white rounded-lg mb-4'
+        >
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-4'>
+              <div style={{ width: 40 }}>
+                <Image
+                  src='https://drive.google.com/uc?id=1vLPCXwk1Fo3LkXI9N2ejCz2J0abYImZB'
+                  alt='avatar'
+                  width={40}
+                  height={40}
+                  objectFit='cover'
+                  className='rounded-full'
+                />
+              </div>
+              <div>
+                <Link
+                  href={`${isMobileClient ? '/mobile' : ''}/user/${
+                    post.created_by
+                  }`}
+                  style={{ color: 'black' }}
+                >
+                  {post.created_by_full_name || post.created_by_user}
+                </Link>
+                <p className='text-neutral-300'>{post.created_at}</p>
+              </div>
+            </div>
 
-                      <Button
-                          onClick={() =>
-                              handleFollow(
-                                  post.created_by.toString(),
-                                  post.is_follow == 1 ? "unfollow" : "follow"
-                              )
-                          }
-                          className={
-                              post.is_follow == 1 ? "button-primary" : ""
-                          }
-                      >
-                          {post.is_follow == 1 ? "Bỏ theo dõi" : "Theo dõi"}
-                      </Button>
-                  </div>
-                  {post?.images && (
-                      <ImageLegacy
-                          src={post?.images}
-                          alt="body-image"
-                          layout="responsive"
-                          width={412}
-                          height={232}
-                          objectFit="cover"
-                      />
-                  )}
-                  <div className=" pb-4 border-b-[1px] border-solid border-slate-100">
-                      <Link
-                          href={`${isMobileClient ? "/mobile" : ""}/bai-viet/${
-                              post.url_key
-                          }`}
-                          className="text-black hover:text-black"
-                      >
-                          <div
-                              className={`font-bold text-base ${
-                                  isMobileClient ? "my-1" : "my-2"
-                              } `}
-                          >
-                              {post.title}
-                          </div>
-                          <p
-                              className={`${post.short_description ? 'line-clamp-4' : ''}`}
-                              dangerouslySetInnerHTML={{
-                                  __html: post.short_description || post.description,
-                              }}
-                          />
-                      </Link>
-                      <div className="flex float-right gap-2 text-neutral-300 mt-2">
-                          <p>{post.view} lượt xem</p>
-                          <p>{post.like} lượt thích</p>
-                      </div>
-                  </div>
-                  <div className="post-actions flex justify-between items-center">
-                      <Button
-                          style={{
-                              backgroundColor:
-                                  post.like == 1
-                                      ? "var(--secondary-color)"
-                                      : "#fff",
-                              color: post.like == 1 ? "#fff" : "#000",
-                          }}
-                          icon={
-                              <LikeIcon
-                                  width="20px"
-                                  height="20px"
-                                  bgColor={post.like == 1 ? "#fff" : "#000"}
-                              />
-                          }
-                          onClick={handleLikePost}
-                      >
-                          Like
-                      </Button>
-                      {/* <Button
+            <Button
+              onClick={() =>
+                handleFollow(
+                  post.created_by.toString(),
+                  post.is_follow == 1 ? 'unfollow' : 'follow'
+                )
+              }
+              className={post.is_follow == 1 ? 'button-primary' : ''}
+            >
+              {post.is_follow == 1 ? 'Bỏ theo dõi' : 'Theo dõi'}
+            </Button>
+          </div>
+          {post?.images && (
+            <ImageLegacy
+              src={post?.images}
+              alt='body-image'
+              layout='responsive'
+              width={412}
+              height={232}
+              objectFit='cover'
+            />
+          )}
+          <div className=' pb-4 border-b-[1px] border-solid border-slate-100'>
+            <Link
+              href={`${isMobileClient ? '/mobile' : ''}/bai-viet/${
+                post.url_key
+              }`}
+              className='text-black hover:text-black'
+            >
+              <div
+                className={`font-bold text-base ${
+                  isMobileClient ? 'my-1' : 'my-2'
+                } `}
+              >
+                {post.title}
+              </div>
+              <p
+                className={`${post.short_description ? 'line-clamp-4' : ''}`}
+                dangerouslySetInnerHTML={{
+                  __html: post.short_description || post.description,
+                }}
+              />
+            </Link>
+            <div className='flex float-right gap-2 text-neutral-300 mt-2'>
+              <p>{post.view} lượt xem</p>
+              <p>{post.like} lượt thích</p>
+            </div>
+          </div>
+          <div className='post-actions flex justify-between items-center'>
+            <Button
+              style={{
+                backgroundColor:
+                  post.like == 1 ? 'var(--secondary-color)' : '#fff',
+                color: post.like == 1 ? '#fff' : '#000',
+              }}
+              icon={
+                <LikeIcon
+                  width='20px'
+                  height='20px'
+                  bgColor={post.like == 1 ? '#fff' : '#000'}
+                />
+              }
+              onClick={handleLikePost}
+            >
+              Like
+            </Button>
+            {/* <Button
                           icon={
                               <Image
                                   src="/images/icons/dislike.png"
@@ -215,23 +203,23 @@ function Post({ post }: { post: ArticleModel }) {
                       >
                           Dislike
                       </Button> */}
-                      <Button
-                          icon={
-                              <Image
-                                  src="/images/icons/comment.png"
-                                  alt="like icon"
-                                  width={18}
-                                  height={18}
-                              />
-                          }
-                          onClick={() => {
-                              setShowComment(!showComment);
-                              handleFetchComment(post.id);
-                          }}
-                      >
-                          Comment
-                      </Button>
-                      {/* <Button
+            <Button
+              icon={
+                <Image
+                  src='/images/icons/comment.png'
+                  alt='like icon'
+                  width={18}
+                  height={18}
+                />
+              }
+              onClick={() => {
+                setShowComment(!showComment);
+                handleFetchComment(post.id);
+              }}
+            >
+              Comment
+            </Button>
+            {/* <Button
                           icon={
                               <Image
                                   src="/images/icons/share.png"
@@ -243,33 +231,26 @@ function Post({ post }: { post: ArticleModel }) {
                       >
                           Share
                       </Button> */}
-                  </div>
+          </div>
 
-                  {showComment && (
-                      <div className="py-4 w-full">
-                          {user && (
-                              <CreateComment
-                                  itemId={post.id}
-                                  onSetDataComment={(cmtParent) =>
-                                      setDataComment([
-                                          cmtParent,
-                                          ...dataComment,
-                                      ])
-                                  }
-                              />
-                          )}
-                          {dataComment.map((item) => (
-                              <CommentItem
-                                  itemId=""
-                                  key={item.id}
-                                  data={item}
-                              />
-                          ))}
-                      </div>
-                  )}
-              </div>
+          {showComment && (
+            <div className='py-4 w-full'>
+              {user && (
+                <CreateComment
+                  itemId={post.id}
+                  onSetDataComment={(cmtParent) =>
+                    setDataComment([cmtParent, ...dataComment])
+                  }
+                />
+              )}
+              {dataComment.map((item) => (
+                <CommentItem itemId='' key={item.id} data={item} />
+              ))}
+            </div>
           )}
-      </>
+        </div>
+      )}
+    </>
   );
 }
 

@@ -1,3 +1,4 @@
+import { useMobileClient } from '@/src/utils/hook';
 import Image from 'next/image';
 import ImageLegacy from 'next/legacy/image';
 import { useEffect, useState } from 'react';
@@ -13,14 +14,7 @@ type ProcedureType = {
 
 function Procedure(props: ProcedureType) {
   const { title, dataNav, bannerLink, description, id } = props;
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   return (
     <div id={id} className='procedure text-center pb-20'>

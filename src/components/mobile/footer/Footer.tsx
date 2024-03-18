@@ -23,7 +23,12 @@ function Footer() {
         href='/mobile'
         className='absolute translate-x-2/4 right-1/2 z-[1] rounded-full bottom-[14px]'
       >
-        <Image src='https://ttpl.vn/assets/images/Home.png' alt='' width={77} height={77} />
+        <Image
+          src='https://ttpl.vn/assets/images/Home.png'
+          alt=''
+          width={77}
+          height={77}
+        />
       </Link>
       <div
         className='
@@ -40,23 +45,44 @@ function Footer() {
             className='mx-4'
             onClick={user ? () => setOpenDialog(true) : undefined}
           >
-            <Image src='https://ttpl.vn/assets/images/icon/briefcase.png' alt='' width={33} height={33}/>
+            <Image
+              src='https://ttpl.vn/assets/images/icon/briefcase.png'
+              alt=''
+              width={33}
+              height={33}
+            />
           </div>
 
           <Link href='/mobile/bai-viet' className='mx-4'>
-            <Image src='https://ttpl.vn/assets/images/icon/file-text.png' alt='' width={33} height={33}/>
+            <Image
+              src='https://ttpl.vn/assets/images/icon/file-text.png'
+              alt=''
+              width={33}
+              height={33}
+            />
           </Link>
         </div>
 
         {/* right icon HOME */}
         <div className='flex items-center'>
           <Link href='#' className='mx-4'>
-            <Image src='https://ttpl.vn/assets/images/icon/message-circle-2.png' alt='' width={33} height={33} />
+            <Image
+              src='https://ttpl.vn/assets/images/icon/message-circle-2.png'
+              alt=''
+              width={33}
+              height={33}
+            />
           </Link>
 
           {user ? (
             <Link href='/mobile/my-profile' className='mx-4'>
-              <Image className='w-7 h-7 rounded-full' src={user?.image} alt='logo-legalzone' width={28} height={28}/>
+              <Image
+                className='w-7 h-7 rounded-full'
+                src={user?.image}
+                alt='logo-legalzone'
+                width={28}
+                height={28}
+              />
             </Link>
           ) : (
             <Link href='/mobile/dang-nhap' className='mx-4'>
