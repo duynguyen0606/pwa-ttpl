@@ -13,6 +13,7 @@ import {
 import ArticleModel from '@/src/models/Article';
 import ProcedureModel from '@/src/models/Procedure';
 import { useAppSelector } from '@/src/redux/hooks';
+import { useMobileClient } from '@/src/utils/hook';
 import { Col, Row } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { useRouter } from 'next/navigation';
@@ -26,14 +27,9 @@ const navbarArr = [
 
 function Index({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const [tabSlug, setTabSlug] = useState(slug);
   const router = useRouter();
-  // const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
   const [listProcedure, setListProcedure] = useState<Array<ProcedureModel>>([]);
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
+  const isMobileClient = useMobileClient();
   const { listArticle } = useAppSelector((state) => state.postState);
 
   useEffect(() => {
@@ -44,10 +40,6 @@ function Index({ params }: { params: { slug: string } }) {
       }
     })();
   }, []);
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
 
   return (
     <Row gutter={16}>
@@ -60,8 +52,8 @@ function Index({ params }: { params: { slug: string } }) {
                 className='flex justify-center text-xl font-semibold p-4'
                 onClick={() => router.push(item.slug)}
                 style={{
-                  color: tabSlug === item.slug ? '#fff' : '#444',
-                  backgroundColor: tabSlug === item.slug ? '#4262AE' : '#fff',
+                  color: slug === item.slug ? '#fff' : '#444',
+                  backgroundColor: slug === item.slug ? '#4262AE' : '#fff',
                   borderBottom: '1px solid #d8d8d8',
                 }}
               >
@@ -69,7 +61,7 @@ function Index({ params }: { params: { slug: string } }) {
               </nav>
             ))}
           </div>
-          {tabSlug === 'thu-tuc' ? (
+          {slug === 'thu-tuc' ? (
             <TableProcedure data={listProcedure} />
           ) : (
             <TableProcedureAgent />

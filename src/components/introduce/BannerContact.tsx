@@ -1,3 +1,4 @@
+import { useMobileClient } from '@/src/utils/hook';
 import { Button } from 'antd';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -20,14 +21,7 @@ function BannerContact({
   image,
   id,
 }: BannerContactType) {
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   if (direction === 'text-left') {
     return (

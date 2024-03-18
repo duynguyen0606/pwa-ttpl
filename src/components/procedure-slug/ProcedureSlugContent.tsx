@@ -1,5 +1,6 @@
 'use client';
 
+import { useMobileClient } from '@/src/utils/hook';
 import { Button, ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -36,15 +37,7 @@ const dataChildNavs = [
 
 function ProcedureSlugContent({ data }: { data: any }) {
   const [tabChildActive, setTabChildActive] = useState(1);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
-  const [isMobileClient, setIsMobileClient] = useState(false);
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
   return (
     <div>
       <div className='flex m-4'>

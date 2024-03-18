@@ -13,6 +13,7 @@ import './style.scss';
 import { Header } from '../common';
 import { useMemo, useState } from 'react';
 import ContentFAQ from '@/app/mobile/cau-hoi/ContentFAQ';
+import ContenUserQ from '@/app/mobile/cau-hoi/ContentUserQ';
 
 enum TypeQA {
   QA_FAQ = 1,
@@ -24,219 +25,6 @@ enum TypeQA {
 const navbarArr = [
   { name: 'Danh sách câu hỏi', tabActive: 1 },
   { name: 'Đặt câu hỏi với luật sư', tabActive: 2 },
-];
-
-const items: CollapseProps['items'] = [
-  {
-    key: '1',
-    label: (
-      <div>
-        <h2 className='qa-title'>Lĩnh vực khác</h2>
-        <p className='qa-desc'>
-          Quy định về các biện pháp làm việc với điện cao áp
-        </p>
-        <p className='qa-subdesc'>
-          Không rõ thời gian tới đây có quy định thế nào về các biện pháp khi
-          làm việc với điện cao áp? Nhờ hỗ trợ.
-        </p>
-      </div>
-    ),
-    children: (
-      <div className='qa-children'>
-        <h2>Câu trả lời</h2>
-        <p>
-          Theo Khoản 25 Tiểu mục II.III Mục II Quy chuẩn kỹ thuật quốc gia về an
-          toàn điện QCVN 01:2020/BCT (Có hiệu lực từ 01/06/2021) quy định về các
-          biện pháp làm việc với điện cao áp như sau: - Khi làm việc với điện
-          cao áp như kiểm tra, sửa chữa và vệ sinh phần có điện hoặc sứ cách
-          điện (vật liệu cách điện khác), nhân viên đơn vị công tác sử dụng các
-          trang bị, dụng cụ cho làm việc có điện, trong trường hợp này khoảng
-          cách cho phép nhỏ nhất đối với các phần có điện xung quanh khác (nếu
-          chưa được bọc cách điện) phải bảo đảm tương ứng theo cấp điện áp công
-          tác của mạch điện quy định ở bảng sau: Cấp điện áp đường dây (kV)Từ 01
-          đến 35 Khoảng cách cho phép nhỏ nhất (m) 0,6, trên 35 đến 110 là 1,0;
-          220 là 2,0;500 là 4,0 - Khi chuyển các dụng cụ hoặc chi tiết bằng kim
-          loại lên cột phải bảo đảm cho chúng không đến gần dây dẫn với khoảng
-          quy định tại khoản 25.1. Trân trọng!
-        </p>
-      </div>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <div>
-        <h2 className='qa-title'>Lĩnh vực khác</h2>
-        <p className='qa-desc'>
-          Quy định về các biện pháp làm việc với điện cao áp
-        </p>
-        <p className='qa-subdesc'>
-          Không rõ thời gian tới đây có quy định thế nào về các biện pháp khi
-          làm việc với điện cao áp? Nhờ hỗ trợ.
-        </p>
-      </div>
-    ),
-    children: (
-      <div className='qa-children'>
-        <h2>Câu trả lời</h2>
-        <p>
-          Theo Khoản 25 Tiểu mục II.III Mục II Quy chuẩn kỹ thuật quốc gia về an
-          toàn điện QCVN 01:2020/BCT (Có hiệu lực từ 01/06/2021) quy định về các
-          biện pháp làm việc với điện cao áp như sau: - Khi làm việc với điện
-          cao áp như kiểm tra, sửa chữa và vệ sinh phần có điện hoặc sứ cách
-          điện (vật liệu cách điện khác), nhân viên đơn vị công tác sử dụng các
-          trang bị, dụng cụ cho làm việc có điện, trong trường hợp này khoảng
-          cách cho phép nhỏ nhất đối với các phần có điện xung quanh khác (nếu
-          chưa được bọc cách điện) phải bảo đảm tương ứng theo cấp điện áp công
-          tác của mạch điện quy định ở bảng sau: Cấp điện áp đường dây (kV)Từ 01
-          đến 35 Khoảng cách cho phép nhỏ nhất (m) 0,6, trên 35 đến 110 là 1,0;
-          220 là 2,0;500 là 4,0 - Khi chuyển các dụng cụ hoặc chi tiết bằng kim
-          loại lên cột phải bảo đảm cho chúng không đến gần dây dẫn với khoảng
-          quy định tại khoản 25.1. Trân trọng!
-        </p>
-      </div>
-    ),
-  },
-  {
-    key: '3',
-    label: (
-      <div>
-        <h2 className='qa-title'>Lĩnh vực khác</h2>
-        <p className='qa-desc'>
-          Quy định về các biện pháp làm việc với điện cao áp
-        </p>
-        <p className='qa-subdesc'>
-          Không rõ thời gian tới đây có quy định thế nào về các biện pháp khi
-          làm việc với điện cao áp? Nhờ hỗ trợ.
-        </p>
-      </div>
-    ),
-    children: (
-      <div className='qa-children'>
-        <h2>Câu trả lời</h2>
-        <p>
-          Theo Khoản 25 Tiểu mục II.III Mục II Quy chuẩn kỹ thuật quốc gia về an
-          toàn điện QCVN 01:2020/BCT (Có hiệu lực từ 01/06/2021) quy định về các
-          biện pháp làm việc với điện cao áp như sau: - Khi làm việc với điện
-          cao áp như kiểm tra, sửa chữa và vệ sinh phần có điện hoặc sứ cách
-          điện (vật liệu cách điện khác), nhân viên đơn vị công tác sử dụng các
-          trang bị, dụng cụ cho làm việc có điện, trong trường hợp này khoảng
-          cách cho phép nhỏ nhất đối với các phần có điện xung quanh khác (nếu
-          chưa được bọc cách điện) phải bảo đảm tương ứng theo cấp điện áp công
-          tác của mạch điện quy định ở bảng sau: Cấp điện áp đường dây (kV)Từ 01
-          đến 35 Khoảng cách cho phép nhỏ nhất (m) 0,6, trên 35 đến 110 là 1,0;
-          220 là 2,0;500 là 4,0 - Khi chuyển các dụng cụ hoặc chi tiết bằng kim
-          loại lên cột phải bảo đảm cho chúng không đến gần dây dẫn với khoảng
-          quy định tại khoản 25.1. Trân trọng!
-        </p>
-      </div>
-    ),
-  },
-  {
-    key: '4',
-    label: (
-      <div>
-        <h2 className='qa-title'>Lĩnh vực khác</h2>
-        <p className='qa-desc'>
-          Quy định về các biện pháp làm việc với điện cao áp
-        </p>
-        <p className='qa-subdesc'>
-          Không rõ thời gian tới đây có quy định thế nào về các biện pháp khi
-          làm việc với điện cao áp? Nhờ hỗ trợ.
-        </p>
-      </div>
-    ),
-    children: (
-      <div className='qa-children'>
-        <h2>Câu trả lời</h2>
-        <p>
-          Theo Khoản 25 Tiểu mục II.III Mục II Quy chuẩn kỹ thuật quốc gia về an
-          toàn điện QCVN 01:2020/BCT (Có hiệu lực từ 01/06/2021) quy định về các
-          biện pháp làm việc với điện cao áp như sau: - Khi làm việc với điện
-          cao áp như kiểm tra, sửa chữa và vệ sinh phần có điện hoặc sứ cách
-          điện (vật liệu cách điện khác), nhân viên đơn vị công tác sử dụng các
-          trang bị, dụng cụ cho làm việc có điện, trong trường hợp này khoảng
-          cách cho phép nhỏ nhất đối với các phần có điện xung quanh khác (nếu
-          chưa được bọc cách điện) phải bảo đảm tương ứng theo cấp điện áp công
-          tác của mạch điện quy định ở bảng sau: Cấp điện áp đường dây (kV)Từ 01
-          đến 35 Khoảng cách cho phép nhỏ nhất (m) 0,6, trên 35 đến 110 là 1,0;
-          220 là 2,0;500 là 4,0 - Khi chuyển các dụng cụ hoặc chi tiết bằng kim
-          loại lên cột phải bảo đảm cho chúng không đến gần dây dẫn với khoảng
-          quy định tại khoản 25.1. Trân trọng!
-        </p>
-      </div>
-    ),
-  },
-  {
-    key: '5',
-    label: (
-      <div>
-        <h2 className='qa-title'>Lĩnh vực khác</h2>
-        <p className='qa-desc'>
-          Quy định về các biện pháp làm việc với điện cao áp
-        </p>
-        <p className='qa-subdesc'>
-          Không rõ thời gian tới đây có quy định thế nào về các biện pháp khi
-          làm việc với điện cao áp? Nhờ hỗ trợ.
-        </p>
-      </div>
-    ),
-    children: (
-      <div className='qa-children'>
-        <h2>Câu trả lời</h2>
-        <p>
-          Theo Khoản 25 Tiểu mục II.III Mục II Quy chuẩn kỹ thuật quốc gia về an
-          toàn điện QCVN 01:2020/BCT (Có hiệu lực từ 01/06/2021) quy định về các
-          biện pháp làm việc với điện cao áp như sau: - Khi làm việc với điện
-          cao áp như kiểm tra, sửa chữa và vệ sinh phần có điện hoặc sứ cách
-          điện (vật liệu cách điện khác), nhân viên đơn vị công tác sử dụng các
-          trang bị, dụng cụ cho làm việc có điện, trong trường hợp này khoảng
-          cách cho phép nhỏ nhất đối với các phần có điện xung quanh khác (nếu
-          chưa được bọc cách điện) phải bảo đảm tương ứng theo cấp điện áp công
-          tác của mạch điện quy định ở bảng sau: Cấp điện áp đường dây (kV)Từ 01
-          đến 35 Khoảng cách cho phép nhỏ nhất (m) 0,6, trên 35 đến 110 là 1,0;
-          220 là 2,0;500 là 4,0 - Khi chuyển các dụng cụ hoặc chi tiết bằng kim
-          loại lên cột phải bảo đảm cho chúng không đến gần dây dẫn với khoảng
-          quy định tại khoản 25.1. Trân trọng!
-        </p>
-      </div>
-    ),
-  },
-  {
-    key: '6',
-    label: (
-      <div>
-        <h2 className='qa-title'>Lĩnh vực khác</h2>
-        <p className='qa-desc'>
-          Quy định về các biện pháp làm việc với điện cao áp
-        </p>
-        <p className='qa-subdesc'>
-          Không rõ thời gian tới đây có quy định thế nào về các biện pháp khi
-          làm việc với điện cao áp? Nhờ hỗ trợ.
-        </p>
-      </div>
-    ),
-    children: (
-      <div className='qa-children'>
-        <h2>Câu trả lời</h2>
-        <p>
-          Theo Khoản 25 Tiểu mục II.III Mục II Quy chuẩn kỹ thuật quốc gia về an
-          toàn điện QCVN 01:2020/BCT (Có hiệu lực từ 01/06/2021) quy định về các
-          biện pháp làm việc với điện cao áp như sau: - Khi làm việc với điện
-          cao áp như kiểm tra, sửa chữa và vệ sinh phần có điện hoặc sứ cách
-          điện (vật liệu cách điện khác), nhân viên đơn vị công tác sử dụng các
-          trang bị, dụng cụ cho làm việc có điện, trong trường hợp này khoảng
-          cách cho phép nhỏ nhất đối với các phần có điện xung quanh khác (nếu
-          chưa được bọc cách điện) phải bảo đảm tương ứng theo cấp điện áp công
-          tác của mạch điện quy định ở bảng sau: Cấp điện áp đường dây (kV)Từ 01
-          đến 35 Khoảng cách cho phép nhỏ nhất (m) 0,6, trên 35 đến 110 là 1,0;
-          220 là 2,0;500 là 4,0 - Khi chuyển các dụng cụ hoặc chi tiết bằng kim
-          loại lên cột phải bảo đảm cho chúng không đến gần dây dẫn với khoảng
-          quy định tại khoản 25.1. Trân trọng!
-        </p>
-      </div>
-    ),
-  },
 ];
 function LawQuestion() {
   const [form] = Form.useForm();
@@ -284,48 +72,17 @@ function LawQuestion() {
     }
   };
 
-  const renderIcon = (isActive?: boolean) => {
-    return (
-      <div
-        className='rounded-full p-1 overflow-hidden'
-        style={{ backgroundColor: 'var(--primary-color)' }}
-      >
-        <Image
-          src={!!isActive ? '/images/icons/up.png' : '/images/icons/down.png'}
-          alt='expand icon'
-          width={20}
-          height={20}
-        />
-      </div>
-    );
-  };
-
   const renderContent = useMemo(() => {
     if (tabActive == 1) {
       switch (childTabActive) {
         case TypeQA.QA_FAQ:
           return (
             <div className='p-[20px]'>
-              {/* <Collapse
-                bordered={false}
-                expandIcon={({ isActive }) => renderIcon(isActive)}
-                expandIconPosition='end'
-                items={items}
-                onChange={onChange}
-              /> */}
               <ContentFAQ />
             </div>
           );
         case TypeQA.QA_USER:
-          return (
-            <Collapse
-              bordered={false}
-              expandIcon={({ isActive }) => renderIcon(isActive)}
-              expandIconPosition='end'
-              items={items}
-              onChange={onChange}
-            />
-          );
+          return <ContenUserQ />;
       }
     } else {
       switch (childTabActive2) {

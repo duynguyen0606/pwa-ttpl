@@ -1,7 +1,11 @@
 import { Drawer, DrawerProps } from 'antd';
+import { useRouter } from 'next/navigation';
 
-function AlertMobile(props: DrawerProps & { handleTransformView: () => void }) {
+function AlertMobile(
+  props: DrawerProps & { handleTransformView?: () => void }
+) {
   const { open, onClose, handleTransformView } = props;
+  const router = useRouter();
   return (
     <Drawer
       placement='bottom'
@@ -12,7 +16,10 @@ function AlertMobile(props: DrawerProps & { handleTransformView: () => void }) {
     >
       <span className='font-semibold'>
         Bạn đang sử dụng thiết bị di động, chọn{' '}
-        <span onClick={handleTransformView} className='text-red-500 cursor-pointer'>
+        <span
+          onClick={() => router.push('/mobile')}
+          className='text-red-500 cursor-pointer'
+        >
           Mobile
         </span>{' '}
         để hiển thị bản tối ưu hoá hơn

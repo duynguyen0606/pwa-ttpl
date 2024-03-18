@@ -1,52 +1,29 @@
 'use client';
 
-import { apiGetListMostViewArticle, apiGetListPost } from '@/src/api/home-page';
+import { apiGetListPost } from '@/src/api/home-page';
 import { Article, Category, Post } from '@/src/components/common';
-import AlertMobile from '@/src/components/common/AlertMobile';
 import DefaultLayout from '@/src/components/layout';
-import ArticleModel from '@/src/models/Article';
-import { Button, Divider, List, Skeleton } from 'antd';
+import { Divider, Skeleton } from 'antd';
 // import DefaultLayout from '@/src/components/layout';
+import { setListPost } from '@/src/redux/feature/postSlice';
+import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import { useMobileClient } from '@/src/utils/hook';
 import Sider from 'antd/es/layout/Sider';
-import { NextRequest, NextResponse } from 'next/server';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useMediaQuery } from 'react-responsive';
-import UserProfile from './UserProfile';
-import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
-import CustomEditor from '../customer-editor';
 import ModalPost from '../../modal/ModalPost';
 import UserPost from './UserPost';
-import { setListPost } from '@/src/redux/feature/postSlice';
+import UserProfile from './UserProfile';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
-  // const [listArticle, setListArticle] = useState<Array<ArticleModel>>([]);
-  // const [listPost, setListPost] = useState<Array<ArticleModel>>([]);
   const [page, setPage] = useState(1);
   const [openDrawerAlert, setOpenDrawerAlert] = useState(false);
-  const [isMobileClient, setIsMobileClient] = useState(false);
   const [openModalPost, setOpenModalPost] = useState(false);
   const { user, token } = useAppSelector((state) => state.authState);
   const { listPost, listArticle } = useAppSelector((state) => state.postState);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
+  const isMobileClient = useMobileClient();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    setOpenDrawerAlert(isMobileUI);
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const dataRes = await apiGetListMostViewArticle();
-  //     if (dataRes.status) {
-  //       setListArticle(dataRes.data);
-  //     }
-  //   })();
-  // }, []);
 
   useEffect(() => {
     (async () => {

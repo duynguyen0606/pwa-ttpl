@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../redux/hooks';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useMediaQuery } from 'react-responsive';
 
 export const usePageAuth = () => {
   const { user } = useAppSelector((state) => state.authState);
@@ -11,4 +12,17 @@ export const usePageAuth = () => {
       router.push('/');
     }
   }, [router, user]);
+};
+
+export const useMobileClient = () => {
+  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileUI = useMediaQuery({
+    query: '(max-width: 600px)',
+  });
+
+  useEffect(() => {
+    setIsMobileClient(isMobileUI);
+  }, [isMobileUI]);
+
+  return isMobileClient;
 };

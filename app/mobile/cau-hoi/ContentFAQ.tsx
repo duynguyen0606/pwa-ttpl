@@ -8,19 +8,13 @@ import { Collapse, Input, Pagination } from 'antd';
 import { Question } from '@/src/components/mobile/law-qa';
 import { apiGetListFAQ } from '@/src/api/question';
 import { nonAccentVietnamese } from '@/src/utils';
+import { useMobileClient } from '@/src/utils/hook';
 
 function ContentFAQ() {
   const [pageFAQ, setPageFAQ] = useState(1);
   const [listFAQ, setListFAQ] = useState<Array<any>>([]);
   const [filterListFAQ, setFilterListFAQ] = useState<Array<any>>([]);
-
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
 
   useEffect(() => {
     (async () => {

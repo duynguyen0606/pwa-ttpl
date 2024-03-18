@@ -1,3 +1,4 @@
+import { useMobileClient } from '@/src/utils/hook';
 import { Button, Col, Form, Input, Row, Space } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import Image from 'next/image';
@@ -6,15 +7,8 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 function BannerRegister() {
+  const isMobileClient = useMobileClient();
   const [form] = useForm();
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
 
   return (
     <div id='dang-ky' className='relative banner-register'>

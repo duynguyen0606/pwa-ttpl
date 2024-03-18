@@ -29,6 +29,7 @@ import {
 } from '@/src/redux/feature/authSlice';
 import Notification from '../Notification';
 import ModalResetPassword from '../../modal/ModalResetPassword';
+import { useMobileClient } from '@/src/utils/hook';
 const { Header } = Layout;
 
 const navbarArr = [
@@ -61,24 +62,17 @@ function HeaderCom() {
   const [tabActive, setTabActive] = useState('');
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [isMobileClient, setIsMobileClient] = useState(false);
+  const isMobileClient = useMobileClient();
   const [openModalSearch, setOpenModalSearch] = useState(false);
   const [openPopoverUser, setOpenPopoverUser] = useState(false);
   // const { message } = App.useApp();
   const { loading, user, loginCode, token } = useAppSelector(
     (state) => state.authState
   );
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
 
   useEffect(() => {
     setTabActive(pathName);
   }, [pathName]);
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
 
   return (
     <header

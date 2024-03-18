@@ -10,6 +10,7 @@ import ProcedureSlugAction from './ProcedureSlugAction';
 import ProcedureSlugDiagram from './ProcedureSlugDiagram';
 import { useMediaQuery } from 'react-responsive';
 import { apiSaveProcedure } from '@/src/api/procedure';
+import { useMobileClient } from '@/src/utils/hook';
 
 const dataNavs = [
   {
@@ -42,11 +43,7 @@ function ProcedureSlug({
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
   });
-  const [isMobileClient, setIsMobileClient] = useState(false);
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
+  const isMobileClient = useMobileClient();
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {

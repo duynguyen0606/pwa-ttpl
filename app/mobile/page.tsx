@@ -1,135 +1,132 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { apiGetListProcedure } from "@/src/api/procedure";
+import { apiGetListProcedure } from '@/src/api/procedure';
 
-import Header from "@/src/components/mobile/header/Header";
-import Slider from "@/src/components/mobile/slider/Slider";
-import Footer from "@/src/components/mobile/footer/Footer";
+import Header from '@/src/components/mobile/header/Header';
+import Slider from '@/src/components/mobile/slider/Slider';
+import Footer from '@/src/components/mobile/footer/Footer';
 
-import ProcedureModel from "@/src/models/Procedure";
-import ProcedureItem from "@/src/components/mobile/procedure-item/ProcedureItem";
+import ProcedureModel from '@/src/models/Procedure';
+import ProcedureItem from '@/src/components/mobile/procedure-item/ProcedureItem';
 
 function Index() {
-    const dataSlider = [
-        {
-            id: 0,
-            img: "https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp",
-        },
-        {
-            id: 1,
-            img: "https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp",
-        },
-        {
-            id: 2,
-            img: "https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp",
-        },
-    ];
+  const dataSlider = [
+    {
+      id: 0,
+      img: 'https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp',
+    },
+    {
+      id: 1,
+      img: 'https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp',
+    },
+    {
+      id: 2,
+      img: 'https://ttpl.vn/assets/images/banner/slide_home_mobile.png.webp',
+    },
+  ];
 
-    const [listArticle, setListArticle] = useState<Array<ProcedureModel>>([]);
+  const [listArticle, setListArticle] = useState<Array<ProcedureModel>>([]);
 
-    useEffect(() => {
-        (async () => {
-            const dataRes = await apiGetListProcedure({ page: 1 });
-            if (dataRes.status) {
-                setListArticle(dataRes.data);
-            }
-        })();
-    }, []);
+  useEffect(() => {
+    (async () => {
+      const dataRes = await apiGetListProcedure({ page: 1 });
+      if (dataRes.status) {
+        setListArticle(dataRes.data);
+      }
+    })();
+  }, []);
 
-    return (
-        <>
-            <Header />
+  return (
+    <>
+      <Header />
 
-            {/* Content legalzone */}
-            <div className="m-4 mt-0 pt-[100px]">
-                {/* Search component */}
-                <div className="flex relative w-full h-10 mb-4">
-                    <Image
-                        className="absolute left-4 top-3"
-                        src="/images/icons/Search.png"
-                        alt=""
-                        width={20}
-                        height={20}
-                    />
-                    <input
-                        placeholder="Tìm kiếm"
-                        className="w-full h-full text-sm bg-[#F4F5F8]"
-                        style={{ paddingLeft: 48, borderRadius: "5px" }}
-                    />
-                </div>
+      {/* Content legalzone */}
+      <div className='m-4 mt-0 pt-[100px]'>
+        {/* Search component */}
+        <div className='flex relative w-full h-10 mb-4'>
+          <Image
+            className='absolute left-4 top-3'
+            src='/images/icons/Search.png'
+            alt=''
+            width={20}
+            height={20}
+          />
+          <input
+            placeholder='Tìm kiếm'
+            className='w-full h-full text-sm bg-[#F4F5F8]'
+            style={{ paddingLeft: 48, borderRadius: '5px' }}
+          />
+        </div>
 
-                <Slider data={dataSlider} />
+        {/* <Slider data={dataSlider} /> */}
 
-                {/* Thủ tục mới nhất */}
-                <div className="p-2 mt-2">
-                    <div
-                        className="
+        {/* Thủ tục mới nhất */}
+        <div className='p-2 mt-2'>
+          <div
+            className='
                             flex justify-between items-center 
                             text-base font-bold text-[#262C41]
                             pb-5
-                        "
-                    >
-                        Thủ tục mới nhất
-                    </div>
-                    <Slider data={dataSlider} />
-                </div>
+                        '
+          >
+            Thủ tục mới nhất
+          </div>
+          <Slider data={dataSlider} />
+        </div>
 
-                {/* Danh sách thủ tục */}
-                <div className="p-2 pb-28">
-                    <div
-                        className="
+        {/* Danh sách thủ tục */}
+        <div className='p-2 pb-28'>
+          <div
+            className='
                             flex justify-between items-center 
                             text-base font-bold text-[#262C41]
-                        "
-                    >
-                        Danh sách thủ tục
-                        <Link
-                            href="mobile/thu-tuc"
-                            className="text-sm text-[--primary-color]"
-                        >
-                            Xem tất cả
-                        </Link>
-                    </div>
+                        '
+          >
+            Danh sách thủ tục
+            <Link
+              href='mobile/thu-tuc'
+              className='text-sm text-[--primary-color]'
+            >
+              Xem tất cả
+            </Link>
+          </div>
 
-                    {listArticle.map((article) => (
-                        <ProcedureItem key={article.id} procedure={article} />
-                    ))}
-                </div>
+          {listArticle.map((article) => (
+            <ProcedureItem key={article.id} procedure={article} />
+          ))}
+        </div>
 
-                <Link
-                    href="tel: 0888888888"
-                    className="fixed bottom-16 left-4 z-[2] "
-                >
-                    <div
-                        className="
+        <Link href='tel: 0888888888' className='fixed bottom-16 left-4 z-[2] '>
+          <div
+            className='
                             flex items-center justify-left
                             pl-2
                             w-28 h-9 
                             bg-[--primary-color] 
                             rounded-3xl  
-                        "
-                    >
-                        <Image
-                            src="/images/introduce/phone.png"
-                            alt="phone"
-                            className="pr-1"
-                            width={20}
-                            height={20}
-                        />
-                        <span className="text-white text-xs">0888888888</span>
-                    </div>
-                </Link>
-            </div>
+                        '
+          >
+            <Image
+              src='/images/introduce/phone.png'
+              alt='phone'
+              className='pr-1'
+              width={20}
+              height={20}
+            />
+            <span className='text-white text-xs'>0888888888</span>
+          </div>
+        </Link>
+      </div>
 
-            <Footer />
-        </>
-    );
+      <Footer />
+    </>
+  );
 }
 
 export default Index;

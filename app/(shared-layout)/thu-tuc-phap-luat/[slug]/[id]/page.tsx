@@ -11,6 +11,7 @@ import { Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
+import { useMobileClient } from '@/src/utils/hook';
 const navbarArr = [
   { name: 'Thủ tục', slug: 'thu-tuc' },
   { name: 'Cơ quan thực hiện', slug: 'co-quan-thuc-hien' },
@@ -19,10 +20,7 @@ function Index({ params }: { params: { id: string } }) {
   const [dataContent, setDataContent] = useState<any>();
   const [dataRelative, setDataRelative] = useState<Array<any>>();
   const { listArticle } = useAppSelector((state) => state.postState);
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
+  const isMobileClient = useMobileClient();
   const router = useRouter();
 
   useEffect(() => {
@@ -42,10 +40,6 @@ function Index({ params }: { params: { id: string } }) {
       }
     })();
   }, [params.id]);
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
 
   return (
     <Row gutter={6}>

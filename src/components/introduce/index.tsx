@@ -13,6 +13,7 @@ import ModalProfile from './ModalProfile';
 import ModalMarketing from './ModalMarketing';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
+import { useMobileClient } from '@/src/utils/hook';
 
 const navArr = [
   {
@@ -132,10 +133,7 @@ function IntroducePage() {
   const [isFixed, setIsFixed] = useState(false);
   const [showModalProfile, setShowModalProfile] = useState(false);
   const [showModalMarketing, setShowModalMarketing] = useState(false);
-  const [isMobileClient, setIsMobileClient] = useState(false);
-  const isMobileUI = useMediaQuery({
-    query: '(max-width: 600px)',
-  });
+  const isMobileClient = useMobileClient();
   // const [selectedKeys, setSelectedKeys] = useState(navArr.filter(item => item.key === ))
 
   const handleScroll = () => {
@@ -156,10 +154,6 @@ function IntroducePage() {
       };
     }
   }, []);
-
-  useEffect(() => {
-    setIsMobileClient(isMobileUI);
-  }, [isMobileUI]);
 
   return (
     <Layout id='introduce-page'>
