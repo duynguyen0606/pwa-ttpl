@@ -27,6 +27,10 @@ import LawCompanyInfomation from "./enterprise/law-company/LawCompanyInfomation"
 import LawCompanyPost from "./enterprise/law-company/LawCompanyPost";
 import EnterpriseVertification from "./enterprise/EnterpriseVertification";
 import ListLawyer from "./enterprise/law-company/ListLawyer";
+import LawEnterpriseInfomation from "./enterprise/law-enterprise/LawEnterpriseInfomation";
+import LawEnterprisePost from "./enterprise/law-enterprise/LawEnterprisePost";
+import LawEnterpriseProfile from "./enterprise/law-enterprise/LawEnterpriseProfile";
+import GalleryImage from "./enterprise/law-enterprise/GalleryImage";
 
 interface NavItem {
     key: number;
@@ -212,45 +216,37 @@ function UserProfilePage() {
                     1: {
                         key: 1,
                         name: "Thông tin",
-                        dataContent: <></>,
+                        dataContent: <LawEnterpriseInfomation />,
                     },
                     2: {
                         key: 2,
                         name: "Bài viết",
-                        dataContent: <></>,
+                        dataContent: (
+                            <LawEnterprisePost listPost={listMyPost} />
+                        ),
                     },
                     3: {
                         key: 3,
                         name: "Video",
-                        dataContent: <></>,
+                        dataContent: <ProfileVideo listVideo={listMyVideo} />,
                     },
                     4: {
                         key: 4,
                         name: "Thư viện hình ảnh",
-                        dataContent: <></>,
+                        dataContent: <GalleryImage />,
                     },
                     5: {
                         key: 5,
                         name: "Hồ sơ công ty",
-                        dataContent: <></>,
+                        dataContent: <LawEnterpriseProfile />,
                     },
                     6: {
                         key: 6,
-                        name: "Gửi email",
-                        dataContent: <></>,
+                        name: "Đánh giá",
+                        dataContent: <ProfileEvaluation />,
                     },
                     7: {
                         key: 7,
-                        name: "Đánh giá",
-                        dataContent: <></>,
-                    },
-                    8: {
-                        key: 8,
-                        name: "Quản lý",
-                        dataContent: <></>,
-                    },
-                    9: {
-                        key: 9,
                         name: "Xác thực doanh nghiệp",
                         dataContent: <EnterpriseVertification />,
                     },
