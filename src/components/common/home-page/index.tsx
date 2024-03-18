@@ -62,9 +62,15 @@ export default function HomePage() {
         >
           {user && <UserProfile />}
           <Category />
+          <div className='text-lg' style={{ paddingTop: 50 }}>
+            Quyền riêng tư, Điều khoản, Quảng cáo, Lựa chọn quảng cáo
+          </div>
         </div>
       )}
-      <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height w-full'>
+      <div
+        style={{ margin: !isMobileClient ? '0 16px' : 'unset' }}
+        className='flex flex-col gap-4 overflow-auto fixed-height w-full'
+      >
         {user && <UserPost onOpenModal={() => setOpenModalPost(true)} />}
         {
           <div
@@ -91,11 +97,9 @@ export default function HomePage() {
               endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
               scrollableTarget='scrollableDiv'
             >
-              <div>
-                {listPost.map((item, idx) => (
-                  <Post post={item} key={idx} />
-                ))}
-              </div>
+              {listPost.map((item, idx) => (
+                <Post post={item} key={idx} />
+              ))}
             </InfiniteScroll>
           </div>
         }

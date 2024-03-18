@@ -24,7 +24,7 @@ function DefaultLayout(props: PropsWithChildren) {
           }}
         >
           <Layout
-            style={{ maxWidth: 1440, margin: '0 auto' }}
+            style={{ maxWidth: 1464, margin: '0 auto', paddingBottom: 'unset' }}
             className={`${!isMobileClient && 'p-6'}`}
           >
             {children}
