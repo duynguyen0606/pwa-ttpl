@@ -84,15 +84,93 @@ export default function HomePage() {
               next={loadMoreData}
               hasMore={true}
               loader={
-                <Skeleton
-                  avatar
-                  paragraph={{ rows: 4 }}
-                  active
+                <div
                   style={{
+                    height: 740,
                     width: '100%',
-                    height: '400px',
+                    padding: 16,
+                    backgroundColor: '#fff',
                   }}
-                />
+                >
+                  <div className='flex justify-between mb-4'>
+                    <div
+                      style={{ backgroundColor: '#f0f0f0' }}
+                      className='w-10 h-10 rounded-full rounded-lg'
+                    />
+                    <div
+                      style={{
+                        width: 150,
+                        height: 40,
+                        backgroundColor: '#f0f0f0',
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 412,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: 200,
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div className='flex justify-between mt-8'>
+                    <div
+                      style={{
+                        backgroundColor: '#f0f0f0',
+                        width: 150,
+                        height: 40,
+                      }}
+                      className='rounded-lg'
+                    />
+                    <div
+                      style={{
+                        backgroundColor: '#f0f0f0',
+                        width: 150,
+                        height: 40,
+                      }}
+                      className='rounded-lg'
+                    />
+                  </div>
+                </div>
               }
               endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
               scrollableTarget='scrollableDiv'
