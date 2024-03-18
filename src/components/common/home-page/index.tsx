@@ -62,11 +62,17 @@ export default function HomePage() {
         >
           {user && <UserProfile />}
           <Category />
+          <div className='text-lg' style={{ paddingTop: 50 }}>
+            Quyền riêng tư, Điều khoản, Quảng cáo, Lựa chọn quảng cáo
+          </div>
         </div>
       )}
-      <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
+      <div
+        style={{ margin: !isMobileClient ? '0 16px' : 'unset' }}
+        className='flex flex-col gap-4 overflow-auto fixed-height w-full'
+      >
         {user && <UserPost onOpenModal={() => setOpenModalPost(true)} />}
-        {listPost.length > 0 && (
+        {
           <div
             id='scrollableDiv'
             style={{
@@ -78,19 +84,103 @@ export default function HomePage() {
               next={loadMoreData}
               hasMore={true}
               loader={
-                <Skeleton style={{ width: '100%', height: 100 }} active />
+                <div
+                  style={{
+                    height: 740,
+                    width: '100%',
+                    padding: 16,
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  <div className='flex justify-between mb-4'>
+                    <div
+                      style={{ backgroundColor: '#f0f0f0' }}
+                      className='w-10 h-10 rounded-full rounded-lg'
+                    />
+                    <div
+                      style={{
+                        width: 150,
+                        height: 40,
+                        backgroundColor: '#f0f0f0',
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 412,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: 200,
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: '#f0f0f0',
+                      width: '100%',
+                      height: 20,
+                      marginTop: 16,
+                    }}
+                  />
+                  <div className='flex justify-between mt-8'>
+                    <div
+                      style={{
+                        backgroundColor: '#f0f0f0',
+                        width: 150,
+                        height: 40,
+                      }}
+                      className='rounded-lg'
+                    />
+                    <div
+                      style={{
+                        backgroundColor: '#f0f0f0',
+                        width: 150,
+                        height: 40,
+                      }}
+                      className='rounded-lg'
+                    />
+                  </div>
+                </div>
               }
               endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
               scrollableTarget='scrollableDiv'
             >
-              <div>
-                {listPost.map((item, idx) => (
-                  <Post post={item} key={idx} />
-                ))}
-              </div>
+              {listPost.map((item, idx) => (
+                <Post post={item} key={idx} />
+              ))}
             </InfiniteScroll>
           </div>
-        )}
+        }
       </div>
       {!isMobileClient && (
         <Sider
