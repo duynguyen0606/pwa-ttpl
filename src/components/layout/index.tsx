@@ -23,7 +23,12 @@ function DefaultLayout(props: PropsWithChildren) {
             // overflow: 'hidden',
           }}
         >
-          <Layout className={`${!isMobileClient && 'p-6'}`}>{children}</Layout>
+          <Layout
+            style={{ maxWidth: 1440, margin: '0 auto' }}
+            className={`${!isMobileClient && 'p-6'}`}
+          >
+            {children}
+          </Layout>
         </Content>
       </Layout>
     </StyleProvider>

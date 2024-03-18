@@ -64,9 +64,9 @@ export default function HomePage() {
           <Category />
         </div>
       )}
-      <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height'>
+      <div className='mx-4 flex flex-col gap-4 overflow-auto fixed-height w-full'>
         {user && <UserPost onOpenModal={() => setOpenModalPost(true)} />}
-        {listPost.length > 0 && (
+        {
           <div
             id='scrollableDiv'
             style={{
@@ -78,7 +78,15 @@ export default function HomePage() {
               next={loadMoreData}
               hasMore={true}
               loader={
-                <Skeleton style={{ width: '100%', height: 100 }} active />
+                <Skeleton
+                  avatar
+                  paragraph={{ rows: 4 }}
+                  active
+                  style={{
+                    width: '100%',
+                    height: '400px',
+                  }}
+                />
               }
               endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
               scrollableTarget='scrollableDiv'
@@ -90,7 +98,7 @@ export default function HomePage() {
               </div>
             </InfiniteScroll>
           </div>
-        )}
+        }
       </div>
       {!isMobileClient && (
         <Sider
