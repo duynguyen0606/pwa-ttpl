@@ -12,7 +12,7 @@ function RankPage() {
         activeTab={activeTab}
         onSelectedTab={(active: number) => setActiveTab(active)}
       />
-      <div className='flex-1 overflow-auto' style={{ maxHeight: '80vh' }}>
+      <div className='flex-1 overflow-auto' style={{ maxHeight: '90vh' }}>
         <RankDetail activeTab={activeTab} />
       </div>
     </div>

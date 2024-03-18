@@ -56,7 +56,7 @@ export default function HomePage() {
         <div
           style={{
             overflow: 'auto',
-            height: '80vh',
+            height: '90vh',
             minWidth: 300,
           }}
         >
