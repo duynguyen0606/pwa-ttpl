@@ -1,16 +1,18 @@
 "use client";
 
+import { Switch } from "antd";
 import Link from "next/link";
 import Image from "next/image";
-import { Switch } from "antd";
 import { useRouter } from "next/navigation";
 
+import { usePageAuth } from "@/src/utils/hook";
 import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import { authLogout } from "@/src/redux/feature/authSlice";
 
 import Footer from "@/src/components/mobile/footer/Footer";
 
 function Index() {
+    usePageAuth();
     const router = useRouter();
     const { user, token } = useAppSelector((state) => state.authState);
     const dispatch = useAppDispatch();
@@ -54,11 +56,11 @@ function Index() {
                     {/* header-user  */}
                     <div
                         className="
-                        flex flex-col 
-                        justify-center items-center
-                        pt-9
-                        text-[#FCFCFE]
-                    "
+                            flex flex-col 
+                            justify-center items-center
+                            pt-9
+                            text-[#FCFCFE]
+                        "
                     >
                         {/* back btn */}
                         <Link href="/mobile" className="absolute top-5 left-5">
@@ -102,12 +104,12 @@ function Index() {
                         {/* type account */}
                         <div
                             className="
-                            flex justify-center items-center
-                            py-1 px-4
-                            text-sm text-[#4755D4] font-bold
-                            bg-[#FCFCFE]
-                            rounded-[10px]
-                        "
+                                flex justify-center items-center
+                                py-1 px-4
+                                text-sm text-[#4755D4] font-bold
+                                bg-[#FCFCFE]
+                                rounded-[10px]
+                            "
                         >
                             Tài khoản: {user?.vip === null ? "Free" : user?.vip}
                         </div>
@@ -116,13 +118,13 @@ function Index() {
                     {/* content-user */}
                     <div
                         className="
-                        h-[60vh]
-                        bg-[#FCFCFE]
-                        mt-[30px]
-                        px-5 pt-8 pb-20
-                        rounded-t-3xl
-                        overflow-scroll
-                    "
+                            h-[60vh]
+                            bg-[#FCFCFE]
+                            mt-[30px]
+                            px-5 pt-8 pb-20
+                            rounded-t-3xl
+                            overflow-scroll
+                        "
                     >
                         {/* top content */}
                         <div className="flex justify-between mb-5 text-base">
@@ -133,11 +135,11 @@ function Index() {
 
                             {/* Edit profile */}
                             <Link
-                                href="my-profile/edit-profile"
+                                href="/mobile/profile/edit_profile"
                                 className="
-                                flex items-center justify-center
-                                text-[#4755D4] font-medium 
-                            "
+                                    flex items-center justify-center
+                                    text-[#4755D4] font-medium 
+                                "
                             >
                                 Sửa
                                 <Image
@@ -156,10 +158,10 @@ function Index() {
                                 <div
                                     key={index}
                                     className="
-                                    flex items-center
-                                    text-sm text-[#262C41]
-                                    mb-5
-                                "
+                                        flex items-center
+                                        text-sm text-[#262C41]
+                                        mb-5
+                                    "
                                 >
                                     <Image
                                         src={item.icons}
@@ -177,10 +179,10 @@ function Index() {
                             {/* timeout */}
                             <div
                                 className="
-                                flex justify-between items-center
-                                py-4
-                                border-b-[1px] border-solid border-[#EBEDF3] border-opacity-50
-                            "
+                                    flex justify-between items-center
+                                    py-4
+                                    border-b-[1px] border-solid border-[#EBEDF3] border-opacity-50
+                                "
                             >
                                 <div className="flex items-center">
                                     <Image
@@ -188,7 +190,7 @@ function Index() {
                                         src="https://ttpl.vn/assets/images/mobile/Icon-feather-clock.png"
                                         alt=""
                                         width={18}
-                                        height={17}
+                                        height={18}
                                     />
                                     <span>Thời hạn sử dụng gói dịch vụ</span>
                                 </div>
@@ -197,12 +199,12 @@ function Index() {
 
                             {/* my procedure */}
                             <Link
-                                href="my-profile/my-procedure"
+                                href="/mobile/profile/loadProcedure"
                                 className="
-                                flex justify-between items-center
-                                py-4
-                                border-b-[1px] border-solid border-[#EBEDF3] border-opacity-50
-                            "
+                                    flex justify-between items-center
+                                    py-4
+                                    border-b-[1px] border-solid border-[#EBEDF3] border-opacity-50
+                                "
                             >
                                 <div className="flex items-center">
                                     <Image
@@ -227,10 +229,10 @@ function Index() {
                             {/* turn on notification */}
                             <div
                                 className="
-                                flex justify-between items-center
-                                py-4
-                                border-b-[1px] border-solid border-[#EBEDF3] border-opacity-50
-                            "
+                                    flex justify-between items-center
+                                    py-4
+                                    border-b-[1px] border-solid border-[#EBEDF3] border-opacity-50
+                                "
                             >
                                 <div className="flex items-center">
                                     <Image
@@ -250,11 +252,8 @@ function Index() {
 
                             {/* change password */}
                             <Link
-                                href="my-profile/change-password"
-                                className="
-                                flex justify-between items-center
-                                py-4
-                            "
+                                href="/mobile/profile/change_password"
+                                className="flex justify-between items-center py-4"
                             >
                                 <div className="flex items-center">
                                     <Image
@@ -263,7 +262,7 @@ function Index() {
                                         alt=""
                                         width={18}
                                         height={18}
-                                    />  
+                                    />
                                     <span>Đổi mật khẩu</span>
                                 </div>
                                 <div>
@@ -279,13 +278,13 @@ function Index() {
 
                         <button
                             className="
-                            flex items-center justify-center
-                            w-full
-                            mt-10 mb-[50px]
-                            py-3
-                            text-base text-[#4755D4] font-medium
-                            bg-[#4755D4] bg-opacity-10
-                            rounded-3xl
+                                flex items-center justify-center
+                                w-full
+                                mt-10 mb-[50px]
+                                py-3
+                                text-base text-[#4755D4] font-medium
+                                bg-[#4755D4] bg-opacity-10
+                                rounded-3xl
                             "
                             onClick={handleLogout}
                         >

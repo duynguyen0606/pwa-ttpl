@@ -2,12 +2,14 @@
 
 import { Button, Form, Input } from "antd";
 import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
+import { useAppSelector } from "@/src/redux/hooks";
 
 function Index() {
+    const {user} = useAppSelector((state) => state.authState)
     const [form] = Form.useForm();
 
     return (
-        <CanBackLayout back="/mobile/my-profile" title="Sửa thông tin">
+        <CanBackLayout back="/mobile/homepage/user" title="Sửa thông tin">
             {/* content */}
             <div className="px-5 py-7">
                 <Form
@@ -19,7 +21,7 @@ function Index() {
                     <Form.Item name="fullname" label="Họ và tên">
                         <Input
                             size="large"
-                            placeholder="Họ và tên"
+                            placeholder={user?.full_name}
                             style={{ backgroundColor: "#F4F5F8" }}
                         />
                     </Form.Item>
@@ -27,7 +29,7 @@ function Index() {
                     <Form.Item name="address" label="Địa chỉ">
                         <Input
                             size="large"
-                            placeholder="Địa chỉ"
+                            placeholder={user?.address}
                             style={{ backgroundColor: "#F4F5F8" }}
                         />
                     </Form.Item>
@@ -35,17 +37,19 @@ function Index() {
                     <Form.Item name="email" label="Email">
                         <Input
                             size="large"
-                            placeholder="Email"
+                            placeholder={user?.email}
                             style={{ backgroundColor: "#F4F5F8" }}
                         />
                     </Form.Item>
 
                     <Form.Item>
                         <Button
-                            className="top-[45vh] w-full font-medium text-white bg-[#4755D4]"
+                            className="top-[45vh] w-full font-medium"
                             style={{
                                 height: "54px",
                                 borderRadius: "40px",
+                                color: 'white',
+                                backgroundColor: 'var(--secondary-color)'
                             }}
                             size="large"
                         >

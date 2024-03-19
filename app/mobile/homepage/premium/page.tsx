@@ -37,7 +37,7 @@ function Index() {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <CanBackLayout back="/mobile/my-profile" title="Các gói dịch vụ">
+        <CanBackLayout back="/mobile/homepage/user" title="Các gói dịch vụ">
             <div className="px-3">
                 {/* nav tabs */}
                 <div className="flex justify-center items-center text-sm">

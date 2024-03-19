@@ -12,8 +12,8 @@ import {
 import './style.scss';
 import { Header } from '../common';
 import { useMemo, useState } from 'react';
-import ContentFAQ from '@/app/mobile/cau-hoi/ContentFAQ';
-import ContenUserQ from '@/app/mobile/cau-hoi/ContentUserQ';
+import ContentFAQ from '@/app/mobile/law-qa/ContentFAQ';
+import ContenUserQ from '@/app/mobile/law-qa/ContentUserQ';
 
 enum TypeQA {
   QA_FAQ = 1,

@@ -1,13 +1,13 @@
 "use client";
 
-import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
 import { Form, Input, Button } from "antd";
+import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
 
 function Index() {
     const [form] = Form.useForm();
 
     return (
-        <CanBackLayout back="/mobile/my-profile" title="Đổi mật khẩu">
+        <CanBackLayout back="/mobile/homepage/user" title="Đổi mật khẩu">
             <div className="px-5 py-7">
                 <Form
                     form={form}

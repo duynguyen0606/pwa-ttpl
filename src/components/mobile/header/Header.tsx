@@ -73,7 +73,7 @@ function Header({ title }: { title?: string }) {
                     </div>
 
                     {/* Notification */}
-                    <Link href="/mobile/thong-bao" className="absolute right-4">
+                    <Link href="/mobile/notifications" className="absolute right-4">
                         <Image
                             src="/images/icons/notification.png"
                             alt=""

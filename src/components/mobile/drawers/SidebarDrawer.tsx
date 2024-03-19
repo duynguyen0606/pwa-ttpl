@@ -95,7 +95,7 @@ function SidebarDrawer(props: DrawerProps) {
                   >
                       {/* Law QA */}
                       <Link
-                          href="/mobile/cau-hoi/"
+                          href="/mobile/law-qa"
                           className="flex items-center mb-5 text-black"
                       >
                           <Image
@@ -109,7 +109,7 @@ function SidebarDrawer(props: DrawerProps) {
 
                       {/* Các gói dịch vụ */}
                       <Link
-                          href="/mobile/premium"
+                          href="/mobile/homepage/premium"
                           className="flex items-center mb-5 text-black"
                       >
                           <Image

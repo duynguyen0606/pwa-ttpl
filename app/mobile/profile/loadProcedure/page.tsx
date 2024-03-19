@@ -5,21 +5,21 @@ import CanBackLayout from "@/src/components/layout/mobile/CanBackLayout";
 const data = [
     {
         title: "Thủ tục đã lưu",
-        href: "my-procedure/saved",
+        href: "/mobile/profile/loadListProcedureByType/follower",
     },
     {
         title: "Thủ tục đã xem",
-        href: "my-procedure/watched",
+        href: "/mobile/profile/loadListProcedureByType/watching",
     },
     {
         title: "Thủ tục đã sửa",
-        href: "my-procedure/repaired",
+        href: "/mobile/profile/loadListProcedureByType/need",
     },
 ];
 
 function Index() {
     return (
-        <CanBackLayout back="/mobile/my-profile" title="Thủ tục của tôi">
+        <CanBackLayout back="/mobile/homepage/user" title="Thủ tục của tôi">
             <div className="py-5 px-4">
                 {data.map((row, index) => (
                     <>

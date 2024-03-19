@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { useAppSelector } from '@/src/redux/hooks';
 import { ModalDialog } from '../../modal';
-import Image from 'next/image';
 
 function Footer() {
   const { user } = useAppSelector((state) => state.authState);
@@ -53,7 +53,7 @@ function Footer() {
             />
           </div>
 
-          <Link href='/mobile/bai-viet' className='mx-4'>
+          <Link href='/mobile/homepage/index_post' className='mx-4'>
             <Image
               src='https://ttpl.vn/assets/images/icon/file-text.png'
               alt=''
@@ -75,7 +75,7 @@ function Footer() {
           </Link>
 
           {user ? (
-            <Link href='/mobile/my-profile' className='mx-4'>
+            <Link href='/mobile/homepage/user' className='mx-4'>
               <Image
                 className='w-7 h-7 rounded-full'
                 src={user?.image}
@@ -85,7 +85,7 @@ function Footer() {
               />
             </Link>
           ) : (
-            <Link href='/mobile/dang-nhap' className='mx-4'>
+            <Link href='/mobile/homepage/register_login' className='mx-4'>
               <Image
                 className='w-7 h-7'
                 src='https://ttpl.vn/assets/images/header/User.png'
