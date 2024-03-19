@@ -14,7 +14,7 @@ export const usePageAuth = () => {
   }, [router, user]);
 };
 
-export const useMobileClient = () => {
+export const useMobileClient: () => boolean = () => {
   const [isMobileClient, setIsMobileClient] = useState(false);
   const isMobileUI = useMediaQuery({
     query: '(max-width: 600px)',
