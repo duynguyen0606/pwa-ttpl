@@ -22,7 +22,7 @@ const columns: ColumnsType<DataType> = [
     width: '40%',
     render: (item) => (
       <div className='max-w-60 text-sky-500'>
-        <Link href={`/thu-tuc-phap-luat/thu-tuc/${item.id}`}>{item.title}</Link>
+        <Link href={`/thu-tuc/${item.id}`}>{item.title}</Link>
       </div>
     ),
   },

@@ -1,20 +1,13 @@
 import {
-  Button,
-  ConfigProvider,
-  Pagination,
-  PaginationProps,
-  Select,
-  Tabs,
-} from 'antd';
+  apiGetListChildrentAgentByProcedureAgentId,
+  apiGetListProcedureAgentByType,
+} from '@/src/api/procedure';
+import { Button, ConfigProvider, Tabs } from 'antd';
 import Input from 'antd/es/input/Input';
 import Table, { ColumnsType } from 'antd/es/table';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import TableProcedureDetail from './TableProcedureDetail';
-import {
-  apiGetListChildrentAgentByProcedureAgentId,
-  apiGetListProcedureAgentByType,
-} from '@/src/api/procedure';
 
 const navbarArr = [
   { name: 'Cấp bộ', type: 'bo' },

@@ -41,30 +41,6 @@ function Index({ params }: { params: { slug: string } }) {
       {dataDetail && (
         <Row gutter={16} className='bg-white p-4'>
           <Col span={16}>
-            {/* <div className='rounded-lg overflow-hidden bg-white fixed-height'>
-          <div className='grid grid-cols-2'>
-            {navbarArr.map((item) => (
-              <nav
-                key={item.name}
-                className='flex justify-center text-xl font-semibold p-4'
-                onClick={() => setTabActive(item.tabActive)}
-                style={{
-                  color: tabActive === item.tabActive ? '#fff' : '#444',
-                  backgroundColor:
-                    tabActive === item.tabActive ? '#4262AE' : '#fff',
-                  borderBottom: '1px solid #d8d8d8',
-                }}
-              >
-                {item.name}
-              </nav>
-            ))}
-          </div>
-          {tabActive === 1 ? (
-            <TableProcedure data={listProcedure} />
-          ) : (
-            <TableProcedureAgent />
-          )}
-        </div> */}
             <div className='overflow-auto fixed-height'>
               <Carousel autoplay>
                 {dataDetail.list_file.map((item, idx) => (
