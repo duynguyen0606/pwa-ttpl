@@ -1,9 +1,14 @@
-import { useAppSelector } from "@/src/redux/hooks";
-import { Row, Col, Typography, Button, Input } from "antd";
+import { useState } from "react";
 import Image from "next/image";
+import { Row, Col, Typography, Button, Input } from "antd";
+import { useAppSelector } from "@/src/redux/hooks";
+import CustomEditor from "@/src/components/common/customer-editor";
 
 function LawCompanyInfomation() {
     const { user } = useAppSelector((state) => state.authState);
+
+    const [editIntroduce, setEditIntroduce]=useState(false);
+    const [editExperience, setEditExperience] = useState(false);
 
     return (
         <Row gutter={16}>
@@ -117,37 +122,84 @@ function LawCompanyInfomation() {
                 </div>
             </Col>
             <Col span={16}>
-                <div className="mb-4 p-4 bg-white rounded-lg flex items-center justify-between">
-                    <Typography.Title level={3}>
-                        Giới thiệu
-                    </Typography.Title>
-                    <Button
-                        type="text"
-                        icon={
-                            <Image
-                                src="/images/icons/pencil.png"
-                                alt="pencil"
-                                width={24}
-                                height={24}
-                            />
-                        }
-                    />
+                <div className="mb-4 p-4 bg-white rounded-lg flex flex-col">
+                    <div className="flex items-center justify-between">
+                        <Typography.Title level={3}>
+                            Giới thiệu
+                        </Typography.Title>
+                        <Button
+                            type="text"
+                            icon={
+                                <Image
+                                    src="/images/icons/pencil.png"
+                                    alt="pencil"
+                                    width={24}
+                                    height={24}
+                                />
+                            }
+                            onClick={() => setEditIntroduce(true)}
+                        />
+                    </div>
+
+                    {editIntroduce && (
+                        <div className="mt-1">
+                            <CustomEditor />.
+                            <div className="flex items-center justify-center mt-4">
+                                <button
+                                    className="rounded px-4 py-2 mx-2 font-semibold text-black bg-[#F7F7F7] "
+                                    onClick={() => setEditIntroduce(false)}
+                                >
+                                    Hủy
+                                </button>
+                                <button
+                                    className="rounded px-4 py-2 mx-2 font-semibold text-white bg-[#F58533] "
+                                    // onClick={() => setIsEditing(false)}
+                                >
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
-                <div className="mb-4 p-4 bg-white rounded-lg flex items-center justify-between">
-                    <Typography.Title level={3}>
-                        Kinh nghiệm
-                    </Typography.Title>
-                    <Button
-                        type="text"
-                        icon={
-                            <Image
-                                src="/images/icons/pencil.png"
-                                alt="pencil"
-                                width={24}
-                                height={24}
-                            />
-                        }
-                    />
+
+                <div className="mb-4 p-4 bg-white rounded-lg  flex flex-col">
+                    <div className="flex items-center justify-between">
+                        <Typography.Title level={3}>
+                            Kinh nghiệm
+                        </Typography.Title>
+                        <Button
+                            type="text"
+                            icon={
+                                <Image
+                                    src="/images/icons/pencil.png"
+                                    alt="pencil"
+                                    width={24}
+                                    height={24}
+                                />
+                            }
+                            onClick={() => setEditExperience(true)}
+                        />
+                    </div>
+
+                    {editExperience && (
+                        <div className="mt-1">
+                            <CustomEditor />.
+                            <div className="flex items-center justify-center mt-4">
+                                <button
+                                    className="rounded px-4 py-2 mx-2 font-semibold text-black bg-[#F7F7F7] "
+                                    onClick={() => setEditExperience(false)}
+                                >
+                                    Hủy
+                                </button>
+                                <button
+                                    className="rounded px-4 py-2 mx-2 font-semibold text-white bg-[#F58533] "
+                                    // onClick={() => setIsEditing(false)}
+                                >
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </Col>
         </Row>

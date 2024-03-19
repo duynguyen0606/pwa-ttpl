@@ -101,7 +101,7 @@ function ModalPost(props: ModalProps) {
       </div>
       <div className='my-4'>
         <Typography.Title level={5}>Nội dung bài viết</Typography.Title>
-        <CustomEditor />
+        <CustomEditor placeholder='Bạn đang nghĩ gì' />
       </div>
       <div className='my-4'>
         <Typography.Title level={5}>Tiêu đề</Typography.Title>

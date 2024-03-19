@@ -9,9 +9,12 @@ import {
     ModalAddPrize,
     ModalAddWorkspace,
 } from "../../modal";
+import CustomEditor from "../../common/customer-editor";
 
 function LawyerInfomation() {
     const { user } = useAppSelector((state) => state.authState);
+    const [editIntroduce, setEditIntroduce] = useState(false);
+
     return (
         <div className="pb-10">
             <div className="my-4 p-4 bg-white rounded-lg">
@@ -19,21 +22,61 @@ function LawyerInfomation() {
                 <InfoContact lawyer={user} />
             </div>
             <div className="my-4 p-4 bg-white rounded-lg">
-                <div className="w-full flex justify-between">
-                    <Typography.Title level={4}>
-                        Giới thiệu về Luật sư
-                    </Typography.Title>
-                    <Button
-                        type="text"
-                        icon={
-                            <Image
-                                src="/images/icons/pencil.png"
-                                alt="pencil"
-                                width={24}
-                                height={24}
-                            />
-                        }
-                    />
+                <div className="flex flex-col">
+                    <div className="w-full flex justify-between">
+                        <Typography.Title level={4}>
+                            Giới thiệu về Luật sư
+                        </Typography.Title>
+                        <Button
+                            type="text"
+                            icon={
+                                <Image
+                                    src="/images/icons/pencil.png"
+                                    alt="pencil"
+                                    width={24}
+                                    height={24}
+                                />
+                            }
+                            onClick={() => setEditIntroduce(true)}
+                        />
+                    </div>
+                    {editIntroduce && (
+                        <div>
+                            <CustomEditor />.
+                            <button
+                                className="button-flex"
+                                style={{
+                                    backgroundColor: "rgba(245, 133, 51, 0.2)",
+                                    color: "var(--primary-color)",
+                                    padding: 8,
+                                    borderRadius: 8,
+                                    fontWeight: "500",
+                                }}
+                            >
+                                <Image
+                                    src="/images/icons/orange-plus.png"
+                                    alt="add field"
+                                    width={18}
+                                    height={18}
+                                />
+                                <span className="ml-1">Thêm lĩnh vực</span>
+                            </button>
+                            <div className="flex items-center justify-center mt-4">
+                                <button
+                                    className="rounded px-4 py-2 mx-2 font-semibold text-black bg-[#F7F7F7] "
+                                    onClick={() => setEditIntroduce(false)}
+                                >
+                                    Hủy
+                                </button>
+                                <button
+                                    className="rounded px-4 py-2 mx-2 font-semibold text-white bg-[#F58533] "
+                                    // onClick={() => setIsEditing(false)}
+                                >
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="my-4 p-4 bg-white rounded-lg">
@@ -249,7 +292,9 @@ function InfoCharge({ lawyer }: { lawyer: any }) {
                     </button>
                     <button
                         className="rounded px-4 py-2 mx-2 font-semibold text-white bg-[#F58533] "
-                        onClick={() => setIsEditing(false)}
+                        onClick={() => {
+                            setIsEditing(false);
+                        }}
                     >
                         Lưu
                     </button>
