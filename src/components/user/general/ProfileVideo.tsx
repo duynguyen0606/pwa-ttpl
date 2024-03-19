@@ -1,7 +1,7 @@
 function ProfileVideo({ listVideo }: { listVideo?: Array<any> }) {
   console.log(listVideo);
   return (
-    <div className="mb-4 p-4 bg-white rounded-lg">
+    <div className='mb-4 p-4 bg-white rounded-lg'>
       {listVideo ? (
         <div className='flex gap-2 flex-wrap'>
           {listVideo.map((video) => (
