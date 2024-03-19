@@ -1,27 +1,16 @@
-import { apiGetUserProcedureByType } from '@/src/api/user';
-import { useAppSelector } from '@/src/redux/hooks';
-import { ConfigProvider, Menu } from 'antd';
-import Table, { ColumnsType } from 'antd/es/table';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-const dataNavs = [
-  {
-    label: 'Thủ tục đã xem',
-    key: 1,
-    type: '',
-  },
-  {
-    label: 'Thủ tục đã lưu',
-    key: 2,
-    type: 'save',
-  },
-  {
-    label: 'Thủ tục đã sửa',
-    key: 3,
-    type: 'edit',
-  },
-];
+import { apiGetUserProcedureByType } from "@/src/api/user";
+import { useAppSelector } from "@/src/redux/hooks";
+import { ConfigProvider, Menu } from "antd";
+import Table, { ColumnsType } from "antd/es/table";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
+
+interface NavItem {
+  key: number;
+  label: string;
+  data: Array<any>;
+}
 interface DataType {
   key: string;
   name: string;
@@ -31,46 +20,58 @@ interface DataType {
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Thủ tục',
-    dataIndex: 'title',
-    key: 'title',
-    width: '40%',
+    title: "Thủ tục",
+    dataIndex: "title",
+    key: "title",
+    width: "40%",
     render: (text) => (
-      <div className='max-w-60 text-sky-500'>
-        <Link href='/'>{text}</Link>
+      <div className="max-w-60 text-sky-500">
+        <Link href="/">{text}</Link>
       </div>
     ),
   },
   {
-    title: 'Cơ quan thực hiện',
-    dataIndex: 'co_quan_thuc_hien',
-    key: 'co_quan_thuc_hien',
-    width: '30%',
+    title: "Cơ quan thực hiện",
+    dataIndex: "co_quan_thuc_hien",
+    key: "co_quan_thuc_hien",
+    width: "30%",
     // render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Kết quả thực hiện',
-    dataIndex: 'result',
-    key: 'result',
-    width: '30%',
+    title: "Kết quả thực hiện",
+    dataIndex: "result",
+    key: "result",
+    width: "30%",
   },
 ];
 
 function ProfileProcedure() {
   const [dataProcedure, setDataProcedure] = useState<Array<any>>();
-  const { token } = useAppSelector((state) => state.authState);
+  const { listProcedureSaved, listProcedureEdited, listProcedureWatched } =
+    useAppSelector((state) => state.procedureState);
+    
+  const dataNavs: { [key: number]: NavItem } = useMemo(() => {
+    return {
+      1: {
+        key: 1,
+        label: "Thủ tục đã xem",
+        data: listProcedureWatched,
+      },
+      2: {
+        key: 2,
+        label: "Thủ tục đã lưu",
+        data: listProcedureSaved,
+      },
+      3: {
+        key: 3,
+        label: "Thủ tục đã sửa",
+        data: listProcedureEdited,
+      },
+    };
+  }, []);
 
-  const handleSelectItem = async (type: string) => {
-    setDataProcedure([]);
-    if (token) {
-      const dataRes = await apiGetUserProcedureByType({
-        type,
-        token: token,
-      });
-      if (dataRes.status) {
-        setDataProcedure(dataRes.data);
-      }
-    }
+  const handleSelectItem = (item: any) => {
+    setDataProcedure(dataNavs[item.key].data);
   };
 
   return (
@@ -78,34 +79,34 @@ function ProfileProcedure() {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: 'var(--primary-color)',
+            colorPrimary: "var(--primary-color)",
           },
           components: {
             Menu: {
-              horizontalItemSelectedColor: 'var(--primary-color)',
+              horizontalItemSelectedColor: "var(--primary-color)",
             },
           },
         }}
       >
         <Menu
-          style={{ justifyContent: 'center', fontSize: 18 }}
-          mode='horizontal'
-          defaultSelectedKeys={['1']}
-          items={dataNavs.map((item) => {
+          style={{ justifyContent: "center", fontSize: 18 }}
+          mode="horizontal"
+          defaultSelectedKeys={["1"]}
+          items={Object.values(dataNavs).map((item) => {
             return {
-              key: item.type,
+              key: item.key,
               label: item.label,
             };
           })}
-          onSelect={async ({ item, key: type }) => handleSelectItem(type)}
+          onSelect={(item) => handleSelectItem(item)}
         />
       </ConfigProvider>
-      <div className='p-10 bg-white'>
+      <div className="p-10 bg-white">
         <Table
           bordered
           columns={columns}
           dataSource={dataProcedure}
-          pagination={{ position: ['bottomCenter'] }}
+          pagination={{ position: ["bottomCenter"] }}
         />
       </div>
     </div>
