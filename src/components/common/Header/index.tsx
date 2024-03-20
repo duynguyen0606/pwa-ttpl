@@ -39,7 +39,7 @@ const navbarArr = [
   },
   {
     name: 'Thủ tục pháp luật',
-    link: '/thu-tuc-phap-luat/thu-tuc',
+    link: '/thu-tuc',
   },
   {
     name: 'Hướng dẫn sử dụng',
