@@ -11,10 +11,12 @@ import {
     setDataUser,
     setOpenModalForgotPassword,
     setOpenModalRegister,
+    setOpenModalResetPassword,
     setToken,
 } from "@/src/redux/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { ModalForgotPassword, ModalRegister } from "@/src/components/modal";
+import ModalResetPassword from "@/src/components/modal/ModalResetPassword";
 
 type FormSubmitValueType = {
     email: string;
@@ -181,6 +183,10 @@ function Index() {
             <ModalForgotPassword
                 onCancel={() => dispatch(setOpenModalForgotPassword(false))}
                 onOk={() => dispatch(setOpenModalForgotPassword(false))}
+            />
+
+            <ModalResetPassword
+                onCancel={() => dispatch(setOpenModalResetPassword(false))}
             />
 
             {/* Register modal */}

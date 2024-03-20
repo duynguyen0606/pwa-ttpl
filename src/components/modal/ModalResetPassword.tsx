@@ -1,6 +1,7 @@
 import { apiResetPassword } from '@/src/api/auth';
 import { setOpenModalResetPassword } from '@/src/redux/feature/authSlice';
 import { useAppDispatch, useAppSelector } from '@/src/redux/hooks';
+import { useMobileClient } from '@/src/utils/hook';
 import { Button, Form, Input, Modal, ModalProps, notification } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 
@@ -9,6 +10,7 @@ function ModalResetPassword(props: ModalProps) {
   const [form] = useForm();
   const dispatch = useAppDispatch();
   const { openModalResetPassword } = useAppSelector((state) => state.authState);
+  const isMobileClient = useMobileClient()
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
@@ -46,7 +48,7 @@ function ModalResetPassword(props: ModalProps) {
         footer={null}
       >
         <div className='p-4'>
-          <div className='font-semibold text-2xl uppercase py-4 text-center'>
+          <div className={`font-semibold ${isMobileClient ? 'text-base' : 'text-2xl'} uppercase py-4 text-center`}>
             Đổi mật khẩu
           </div>
           <Form
@@ -127,9 +129,12 @@ function ModalResetPassword(props: ModalProps) {
             </Form.Item>
             <Form.Item>
               <Button
-                className='button-primary'
+                className='mt-4'
                 style={{
                   width: '100%',
+                  color: 'white',
+                  backgroundColor: isMobileClient ? 'var(--secondary-color)' : 'var(--primary-color)',
+                  border: 'none',
                 }}
                 htmlType='submit'
                 size='large'
