@@ -1,9 +1,14 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 import { Modal, ModalProps } from "antd";
 import CreateFieldActivity from "../common/field-activity/CreateFieldActivity";
+import { ButtonAdd } from "../common/custom-button";
 
 function ModalEditFieldActivity(props: ModalProps) {
     const { open, onCancel } = props;
+    const [addFieldActivity, setAddFieldActivity] = useState(false);
+
     return (
         <Modal open={open} onCancel={onCancel} footer={null}>
             <p className="mb-8 text-2xl font-semibold">
@@ -12,26 +17,13 @@ function ModalEditFieldActivity(props: ModalProps) {
             <div className="flex flex-col justify-center">
                 {/* Add field */}
                 <CreateFieldActivity />
+                {addFieldActivity && <CreateFieldActivity />}
 
-                <div className="flex justify-center mx-4">
-                    <button
-                        className="flex items-center p-2"
-                        style={{
-                            backgroundColor: "rgba(245, 133, 51, 0.2)",
-                            borderRadius: 8,
-                            width: "30%",
-                        }}
-                    >
-                        <Image
-                            src="/images/icons/orange-plus.png"
-                            alt="Upload"
-                            width={20}
-                            height={20}
-                        />
-                        <span className="text-[--primary-color] ml-1">
-                            Thêm lĩnh vực
-                        </span>
-                    </button>
+                <div className="flex justify-center">
+                    <ButtonAdd
+                        title="Thêm lĩnh vực"
+                        onClick={() => setAddFieldActivity(true)}
+                    />
                 </div>
 
                 <div className="flex items-center justify-center mt-4">

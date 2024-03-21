@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Row, Col, Typography, Button, Input } from "antd";
+import { Row, Col, Typography, Button, Input, Form, Select } from "antd";
 import { useAppSelector } from "@/src/redux/hooks";
 import dynamic from "next/dynamic";
 import ModalEditContactInfo from "@/src/components/modal/ModalEditContactInfo";
+import { ButtonAdd } from "@/src/components/common/custom-button";
 // import CustomEditor from "@/src/components/common/customer-editor";
 
 function LawEnterpriseInfomation() {
@@ -164,36 +165,12 @@ function LawEnterpriseInfomation() {
                         </div>
                     )}
                 </div>
-                <div className="mb-4 p-4 bg-white rounded-lg flex items-center justify-between">
-                    <Typography.Title level={3}>Ngành nghề</Typography.Title>
-                    <Button
-                        type="text"
-                        icon={
-                            <Image
-                                src="/images/icons/pencil.png"
-                                alt="pencil"
-                                width={24}
-                                height={24}
-                            />
-                        }
-                    />
-                </div>
-                <div className="mb-4 p-4 bg-white rounded-lg flex items-center justify-between">
-                    <Typography.Title level={3}>
-                        Sản phẩm dịch vụ
-                    </Typography.Title>
-                    <Button
-                        type="text"
-                        icon={
-                            <Image
-                                src="/images/icons/pencil.png"
-                                alt="pencil"
-                                width={24}
-                                height={24}
-                            />
-                        }
-                    />
-                </div>
+
+                {/* Ngành nghề */}
+                <Career />
+
+                {/* Sản phẩm dịch vụ */}
+                <ServiceProduct />
             </Col>
 
             <ModalEditContactInfo
@@ -201,6 +178,151 @@ function LawEnterpriseInfomation() {
                 onCancel={() => setEditContactInfo(false)}
             />
         </Row>
+    );
+}
+
+function Career() {
+    const [isEdit, setIsEdit] = useState(false);
+    const [showInput, setShowInput] = useState(false);
+    return (
+        <div className="mb-4 p-4 bg-white rounded-lg">
+            <div className=" flex items-center justify-between">
+                <Typography.Title level={3}>Ngành nghề</Typography.Title>
+                <Button
+                    type="text"
+                    icon={
+                        <Image
+                            src="/images/icons/pencil.png"
+                            alt="pencil"
+                            width={24}
+                            height={24}
+                        />
+                    }
+                    onClick={() => setIsEdit(true)}
+                />
+            </div>
+
+            <Input
+                size="large"
+                variant={isEdit ? "outlined" : "borderless"}
+                defaultValue={"Luật sư"}
+                disabled={!isEdit}
+            />
+
+            {isEdit && (
+                <>
+                    {showInput && (
+                        <div className="my-4">
+                            <Input
+                                size="large"
+                                placeholder="Nhập tên ngành nghề"
+                                disabled={!isEdit}
+                            />
+                        </div>
+                    )}
+
+                    <ButtonAdd
+                        title="Thêm lĩnh vực"
+                        onClick={() => setShowInput(true)}
+                    />
+
+                    <div className="flex items-center justify-center mt-4">
+                        <button
+                            className="rounded px-4 py-2 mx-2 font-semibold text-black bg-[#F7F7F7]"
+                            onClick={() => setIsEdit(false)}
+                        >
+                            Hủy
+                        </button>
+                        <button className="rounded px-4 py-2 mx-2 font-semibold text-white bg-[#F58533]">
+                            Lưu
+                        </button>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+}
+
+function ServiceProduct() {
+    const [edit, setEdit] = useState(false);
+    const [addServiece, setAddService] = useState(false);
+    const [addCategory, setAddCategory] = useState(false);
+    return (
+        <div className="mb-4 p-4 bg-white rounded-lg">
+            <div className=" flex items-center justify-between">
+                <Typography.Title level={3}>Sản phẩm dịch vụ</Typography.Title>
+                <Button
+                    type="text"
+                    icon={
+                        <Image
+                            src="/images/icons/pencil.png"
+                            alt="pencil"
+                            width={24}
+                            height={24}
+                        />
+                    }
+                    onClick={() => setEdit(true)}
+                />
+            </div>
+
+            {edit && (
+                <div>
+                    <Form layout="vertical">
+                        <Form.Item label="Danh mục sản phẩm dịch vụ">
+                            <Select />
+                        </Form.Item>
+
+                        <Form.Item label="Tên sản phẩm dịch vụ">
+                            <Input
+                                size="large"
+                                placeholder="Nhập tên sản phẩm dịch vụ"
+                            />
+                        </Form.Item>
+                        {addServiece && (
+                            <Input
+                                size="large"
+                                placeholder="Nhập tên sản phẩm dịch vụ"
+                            />
+                        )}
+                        <ButtonAdd
+                            title="Thêm sản phẩm dịch vụ"
+                            onClick={() => setAddService(true)}
+                            marginTop={8}
+                        />
+
+                        <Form.Item label="Danh mục khác">
+                            <Input
+                                size="large"
+                                placeholder="Nhập tên danh mục"
+                            />
+                        </Form.Item>
+                        {addCategory && (
+                            <Input
+                                size="large"
+                                placeholder="Nhập tên danh mục"
+                            />
+                        )}
+                        <ButtonAdd
+                            title="Thêm danh mục"
+                            onClick={() => setAddCategory(true)}
+                            marginTop={8}
+                        />
+                    </Form>
+
+                    <div className="flex items-center justify-center mt-4">
+                        <button
+                            className="rounded px-4 py-2 mx-2 font-semibold text-black bg-[#F7F7F7]"
+                            onClick={() => setEdit(false)}
+                        >
+                            Hủy
+                        </button>
+                        <button className="rounded px-4 py-2 mx-2 font-semibold text-white bg-[#F58533]">
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
 

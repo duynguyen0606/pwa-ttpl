@@ -10,6 +10,7 @@ import {
   ModalAddWorkspace,
 } from '../../modal';
 import dynamic from 'next/dynamic';
+import { ButtonAdd } from '../../common/custom-button';
 // import CustomEditor from "../../common/customer-editor";
 
 function LawyerInfomation() {
@@ -46,24 +47,7 @@ function LawyerInfomation() {
           {editIntroduce && (
             <div>
               <CustomEditor />.
-              <button
-                className='button-flex'
-                style={{
-                  backgroundColor: 'rgba(245, 133, 51, 0.2)',
-                  color: 'var(--primary-color)',
-                  padding: 8,
-                  borderRadius: 8,
-                  fontWeight: '500',
-                }}
-              >
-                <Image
-                  src='/images/icons/orange-plus.png'
-                  alt='add field'
-                  width={18}
-                  height={18}
-                />
-                <span className='ml-1'>Thêm lĩnh vực</span>
-              </button>
+              <ButtonAdd title='Thêm lĩnh vực' />
               <div className='flex items-center justify-center mt-4'>
                 <button
                   className='rounded px-4 py-2 mx-2 font-semibold text-black bg-[#F7F7F7] '

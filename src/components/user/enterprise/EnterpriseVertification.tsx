@@ -1,7 +1,14 @@
-import { Button, Select, Typography } from "antd";
 import Image from "next/image";
+import { Form, Select, Typography, Upload } from "antd";
 
 function EnterpriseVertification() {
+    const [form] = Form.useForm();
+    const normFile = (e: any) => {
+        if (Array.isArray(e)) {
+            return e;
+        }
+        return e?.fileList;
+    };
     return (
         <div className="mb-4 p-4 bg-white rounded-lg">
             <Typography.Title level={4}>
@@ -27,32 +34,42 @@ function EnterpriseVertification() {
                     <span className="text-lg font-bold text-[#a1a5ac] mb-4">
                         Tài liệu yêu cầu
                     </span>
-                    <div>
-                        {/* form */}
-                        <div className="flex flex-col mb-4">
-                            <span className="font-bold">
-                                1. Giấy đăng ký doanh nghiệp
-                            </span>
-                            <button
-                                className="flex items-center p-2 mt-5"
-                                style={{
-                                    backgroundColor: "rgba(245, 133, 51, 0.2)",
-                                    borderRadius: 8,
-                                    width: "30%",
-                                }}
-                            >
-                                <Image
-                                    src="/images/icons/orange-upload.png"
-                                    alt="Upload"
-                                    width={20}
-                                    height={20}
-                                />
-                                <span className="text-[--primary-color]">
-                                    Tải file lên
-                                </span>
-                            </button>
-                        </div>
-                        <div className="flex flex-col pt-5">
+
+                    {/* form */}
+                    <Form form={form} layout="vertical">
+                        <Form.Item
+                            label="1. Giấy đăng ký doanh nghiệp"
+                            name="giay-dang-ky"
+                            valuePropName="fileList"
+                            getValueFromEvent={normFile}
+                        >
+                            <Upload action="/upload.do" listType="picture">
+                                <button
+                                    className="flex items-center p-2 mt-5"
+                                    style={{
+                                        backgroundColor:
+                                            "rgba(245, 133, 51, 0.2)",
+                                        borderRadius: 8,
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Image
+                                        src="/images/icons/orange-upload.png"
+                                        alt="Upload"
+                                        width={20}
+                                        height={20}
+                                    />
+                                    <span className="text-[--primary-color]">
+                                        Tải file lên
+                                    </span>
+                                </button>
+                            </Upload>
+                        </Form.Item>
+
+                        <Form.Item
+                            valuePropName="fileList"
+                            getValueFromEvent={normFile}
+                        >
                             <Select
                                 labelInValue
                                 defaultValue={"2. Hộ chiếu"}
@@ -67,30 +84,38 @@ function EnterpriseVertification() {
                                     },
                                 ]}
                             />
-                            <button
-                                className="flex items-center p-2 mt-5"
-                                style={{
-                                    backgroundColor: "rgba(245, 133, 51, 0.2)",
-                                    borderRadius: 8,
-                                    width: "30%",
-                                }}
-                            >
-                                <Image
-                                    src="/images/icons/orange-upload.png"
-                                    alt="Upload"
-                                    width={20}
-                                    height={20}
-                                />
-                                <span className="text-[--primary-color]">
-                                    Tải file lên
-                                </span>
-                            </button>
-                        </div>
+                            <Upload action="/upload.do" listType="picture">
+                                <button
+                                    className="flex items-center p-2 mt-5"
+                                    style={{
+                                        backgroundColor:
+                                            "rgba(245, 133, 51, 0.2)",
+                                        borderRadius: 8,
+                                        width: "100%",
+                                    }}
+                                >
+                                    <Image
+                                        src="/images/icons/orange-upload.png"
+                                        alt="Upload"
+                                        width={20}
+                                        height={20}
+                                    />
+                                    <span className="text-[--primary-color]">
+                                        Tải file lên
+                                    </span>
+                                </button>
+                            </Upload>
+                        </Form.Item>
 
-                        <button className="bg-[var(--primary-color)] text-white mt-14  py-2 px-4 font-bold rounded">
-                            Gửi xác thực
-                        </button>
-                    </div>
+                        <Form.Item>
+                            <button
+                                className="bg-[var(--primary-color)] text-white mt-14  py-2 px-4 font-bold rounded"
+                                type="submit"
+                            >
+                                Gửi xác thực
+                            </button>
+                        </Form.Item>
+                    </Form>
                 </div>
             </div>
         </div>
