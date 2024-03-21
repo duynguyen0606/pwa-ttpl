@@ -9,6 +9,7 @@ import { Post } from "@/src/components/common";
 import ArticleModel from "@/src/models/Article";
 import ModalPost from "@/src/components/modal/ModalPost";
 import UserPost from "@/src/components/common/home-page/UserPost";
+import ModalEditContactInfo from "@/src/components/modal/ModalEditContactInfo";
 
 function LawEnterprisePost({
     listPost,
@@ -21,6 +22,7 @@ function LawEnterprisePost({
 }) {
     const { user, token } = useAppSelector((state) => state.authState);
     const [openModalPost, setOpenModalPost] = useState(false);
+    const [editContactInfo, setEditContactInfo] = useState(false);
 
     return (
         <Row gutter={16}>
@@ -58,6 +60,7 @@ function LawEnterprisePost({
                                     height={24}
                                 />
                             }
+                            onClick={() => setEditContactInfo(true)}
                         />
                     </div>
                     <div className="flex flex-col">
@@ -129,8 +132,6 @@ function LawEnterprisePost({
                         </div>
                     </div>
                 </div>
-
-                
             </Col>
             <Col span={16}>
                 {showPost && (
@@ -168,6 +169,11 @@ function LawEnterprisePost({
             <ModalPost
                 open={openModalPost}
                 onCancel={() => setOpenModalPost(false)}
+            />
+
+            <ModalEditContactInfo
+                open={editContactInfo}
+                onCancel={() => setEditContactInfo(false)}
             />
         </Row>
     );

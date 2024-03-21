@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -9,6 +9,10 @@ import { Post } from "@/src/components/common";
 import ArticleModel from "@/src/models/Article";
 import ModalPost from "@/src/components/modal/ModalPost";
 import UserPost from "@/src/components/common/home-page/UserPost";
+import {
+    ModalEditContactInfo,
+    ModalEditFieldActivity,
+} from "@/src/components/modal";
 
 function LawCompanyPost({
     listPost,
@@ -21,6 +25,8 @@ function LawCompanyPost({
 }) {
     const { user, token } = useAppSelector((state) => state.authState);
     const [openModalPost, setOpenModalPost] = useState(false);
+    const [editContactInfo, setEditContactInfo] = useState(false);
+    const [editFieldActivity, setEditFieldActivity] = useState(false);
 
     return (
         <Row gutter={16}>
@@ -58,6 +64,7 @@ function LawCompanyPost({
                                     height={24}
                                 />
                             }
+                            onClick={() => setEditContactInfo(true)}
                         />
                     </div>
                     <div className="flex flex-col">
@@ -129,6 +136,7 @@ function LawCompanyPost({
                                     height={24}
                                 />
                             }
+                            onClick={() => setEditFieldActivity(true)}
                         />
                     </div>
                 </div>
@@ -169,6 +177,15 @@ function LawCompanyPost({
             <ModalPost
                 open={openModalPost}
                 onCancel={() => setOpenModalPost(false)}
+            />
+
+            <ModalEditContactInfo
+                open={editContactInfo}
+                onCancel={() => setEditContactInfo(false)}
+            />
+            <ModalEditFieldActivity
+                open={editFieldActivity}
+                onCancel={() => setEditFieldActivity(false)}
             />
         </Row>
     );
