@@ -128,7 +128,10 @@ function HeaderCom() {
                       />
                       <span>Dành riêng cho bạn</span>
                     </div>
-                    <div className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'>
+                    <div
+                      onClick={() => router.push('/dashboard')}
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'
+                    >
                       <Image
                         src='/images/icons/home.png'
                         alt='dashboard'
@@ -315,7 +318,10 @@ function HeaderCom() {
                       />
                       <span>Dành riêng cho bạn</span>
                     </div>
-                    <div className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'>
+                    <div
+                      onClick={() => router.push('/dashboard')}
+                      className='flex gap-2 items-center p-2 border-b border-slate-200 cursor-pointer'
+                    >
                       <Image
                         src='/images/icons/home.png'
                         alt='dashboard'
