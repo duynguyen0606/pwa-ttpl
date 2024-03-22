@@ -24,7 +24,7 @@ function CustomerManagement() {
   const [seletecTab, setSelectedTab] = useState('');
   const handleChange = (value: string) => {
     setSelectedTab(value);
-  };
+  }; 
 
   const renderChild = useMemo(() => {
     switch (seletecTab) {
