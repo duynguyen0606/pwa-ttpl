@@ -1,7 +1,52 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Select } from 'antd';
 import CustomerInfor from './CustomerInfor';
+import { useMemo, useState } from 'react';
+import CustomerFlow from './CustomerFlow';
+import CustomerRecipe from './CustomerRecipe';
+import CustomerSp from './CustomerSp';
+import CustomerNote from './CustomerNote';
+import CustomerDocument from './CustomerDocument';
+import CustomerEvent from './CustomerEvent';
+import CustomerPrice from './CustomerPrice';
+
+enum TabSelection {
+  CS_FLOW = 'customer_flow',
+  CS_RECIPE = 'customer_recipe',
+  CS_PRICE = 'customer_price',
+  CS_SP = 'customer_support',
+  CS_NOTE = 'customer_note',
+  CS_DOCUMENT = 'customer_document',
+  CS_EVENT = 'customer_event',
+  CS_INFOR = 'customer_infor',
+}
 
 function CustomerManagement() {
+  const [seletecTab, setSelectedTab] = useState('');
+  const handleChange = (value: string) => {
+    setSelectedTab(value);
+  };
+
+  const renderChild = useMemo(() => {
+    switch (seletecTab) {
+      case TabSelection.CS_FLOW:
+        return <CustomerFlow />;
+      case TabSelection.CS_RECIPE:
+        return <CustomerRecipe />;
+      case TabSelection.CS_SP:
+        return <CustomerSp />;
+      case TabSelection.CS_NOTE:
+        return <CustomerNote />;
+      case TabSelection.CS_DOCUMENT:
+        return <CustomerDocument />;
+      case TabSelection.CS_EVENT:
+        return <CustomerEvent />;
+      case TabSelection.CS_PRICE:
+        return <CustomerPrice />;
+      default:
+        return <CustomerInfor />;
+    }
+  }, [seletecTab]);
+
   return (
     <div>
       <Row gutter={16}>
@@ -27,7 +72,22 @@ function CustomerManagement() {
               className={`flex justify-between items-center p-4 text-white`}
               style={{ backgroundColor: 'var(--secondary-color)' }}
             >
-              <div>Thông tin</div>
+              <Select
+                defaultValue={TabSelection.CS_INFOR}
+                style={{ width: 120 }}
+                onChange={handleChange}
+                options={[
+                  { value: TabSelection.CS_INFOR, label: 'Thông tin' },
+                  { value: TabSelection.CS_FLOW, label: 'Quy trình' },
+                  { value: TabSelection.CS_RECIPE, label: 'Hoá đơn' },
+                  { value: TabSelection.CS_PRICE, label: 'Báo giá' },
+                  { value: TabSelection.CS_SP, label: 'Chăm sóc khách hàng' },
+                  { value: TabSelection.CS_NOTE, label: 'Ghi chú cá nhân' },
+                  { value: TabSelection.CS_DOCUMENT, label: 'Tài liệu' },
+                  { value: TabSelection.CS_EVENT, label: 'Sự kiện' },
+                ]}
+              />
+
               <div>
                 <div>Công ty B</div>
                 <div>test@gmail.com</div>
@@ -49,9 +109,7 @@ function CustomerManagement() {
                 <div>0Đ</div>
               </div>
             </div>
-            <div>
-              <CustomerInfor />
-            </div>
+            <div className='p-4'>{renderChild}</div>
           </div>
         </Col>
       </Row>

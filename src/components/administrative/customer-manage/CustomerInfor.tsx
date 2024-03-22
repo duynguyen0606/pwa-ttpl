@@ -110,7 +110,7 @@ function CustomerInfor() {
     }
   };
   return (
-    <div className='p-4'>
+    <div>
       <Row gutter={16}>
         <Col span={6}>
           <div className='font-semibold p-2 uppercase border-l-4 border-l-[#000]'>
