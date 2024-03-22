@@ -202,12 +202,28 @@ function Career() {
                 />
             </div>
 
-            <Input
-                size="large"
-                variant={isEdit ? "outlined" : "borderless"}
-                defaultValue={"Luật sư"}
-                disabled={!isEdit}
-            />
+            <div className="flex justify-between">
+                <Input
+                    size="large"
+                    variant={isEdit ? "outlined" : "borderless"}
+                    defaultValue={"Luật sư"}
+                    disabled={!isEdit}
+                    style={{ color: "#000" }}
+                />
+                {isEdit && (
+                    <Button
+                        type="link"
+                        icon={
+                            <Image
+                                src="/images/icons/trash.png"
+                                alt="delete"
+                                width={22}
+                                height={22}
+                            />
+                        }
+                    />
+                )}
+            </div>
 
             {isEdit && (
                 <>
@@ -276,36 +292,37 @@ function ServiceProduct() {
                             <Input
                                 size="large"
                                 placeholder="Nhập tên sản phẩm dịch vụ"
+                                style={{ marginBottom: 16 }}
                             />
+                            {addServiece && (
+                                <Input
+                                    size="large"
+                                    placeholder="Nhập tên sản phẩm dịch vụ"
+                                />
+                            )}
                         </Form.Item>
-                        {addServiece && (
-                            <Input
-                                size="large"
-                                placeholder="Nhập tên sản phẩm dịch vụ"
-                            />
-                        )}
                         <ButtonAdd
                             title="Thêm sản phẩm dịch vụ"
                             onClick={() => setAddService(true)}
-                            marginTop={8}
+                            style={{marginBottom: 24}}
                         />
 
                         <Form.Item label="Danh mục khác">
                             <Input
                                 size="large"
                                 placeholder="Nhập tên danh mục"
+                                style={{ marginBottom: 16 }}
                             />
+                            {addCategory && (
+                                <Input
+                                    size="large"
+                                    placeholder="Nhập tên danh mục"
+                                />
+                            )}
                         </Form.Item>
-                        {addCategory && (
-                            <Input
-                                size="large"
-                                placeholder="Nhập tên danh mục"
-                            />
-                        )}
                         <ButtonAdd
                             title="Thêm danh mục"
                             onClick={() => setAddCategory(true)}
-                            marginTop={8}
                         />
                     </Form>
 

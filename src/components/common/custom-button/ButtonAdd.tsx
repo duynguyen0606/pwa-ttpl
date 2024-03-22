@@ -1,23 +1,25 @@
 import Image from "next/image";
+import { CSSProperties } from "react";
 
 function ButtonAdd({
     title,
-    marginTop,
+    style,
     onClick,
 }: {
     title: string;
-    marginTop?: number;
+    style?: CSSProperties;
     onClick?: () => void;
 }) {
     // console.log('clicl: ',onClick);
-    
+
     return (
         <button
             className="flex items-center p-2"
             style={{
+                marginTop: 16,
+                ...style,
                 backgroundColor: "rgba(245, 133, 51, 0.2)",
                 borderRadius: 8,
-                marginTop: marginTop ?? 16,
             }}
             onClick={onClick}
         >

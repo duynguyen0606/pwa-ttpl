@@ -74,7 +74,6 @@ function CreateAlbum(props: ModalProps) {
                     style={{
                         backgroundColor: "rgba(245, 133, 51, 0.2)",
                         borderRadius: 8,
-                        width: "25%",
                     }}
                     onClick={() => setAddImage(true)}
                 >
