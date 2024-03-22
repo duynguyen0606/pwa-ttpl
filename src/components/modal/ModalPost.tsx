@@ -19,12 +19,12 @@ import Image from 'next/image';
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
 const getBase64 = (file: any): Promise<string> =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file as Blob);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = (error) => reject(error);
-    });
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file as Blob);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
 
 function ModalPost(props: ModalProps) {
   const { open, onCancel, onOk } = props;
@@ -43,8 +43,6 @@ function ModalPost(props: ModalProps) {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-
-    console.log(file);
 
     setPreviewImage(file.url || (file.preview as string));
     setPreviewOpen(true);
