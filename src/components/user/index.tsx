@@ -17,7 +17,7 @@ import {
     ProfilePost,
     ProfileProcedure,
     ProfileManagement,
-    ProfileEvaluation
+    ProfileEvaluation,
 } from "./general";
 import ProfilePremium from "./personal/ProfilePremium";
 import ProfileQA from "./personal/ProfileQA";
@@ -25,11 +25,12 @@ import LawyerInfomation from "./lawyer/LawyerInfomation";
 import LawyerAnswer from "./lawyer/LawyerAnswer";
 import LawCompanyInfomation from "./enterprise/law-company/LawCompanyInfomation";
 import LawCompanyPost from "./enterprise/law-company/LawCompanyPost";
-import EnterpriseVertification from "./enterprise/EnterpriseVertification";
 import ListLawyer from "./enterprise/law-company/ListLawyer";
+import EnterpriseVertification from "./enterprise/EnterpriseVertification";
 import LawEnterpriseInfomation from "./enterprise/law-enterprise/LawEnterpriseInfomation";
 import LawEnterprisePost from "./enterprise/law-enterprise/LawEnterprisePost";
 import LawEnterpriseProfile from "./enterprise/law-enterprise/LawEnterpriseProfile";
+import LawEnterpriseSendEmail from "./enterprise/law-enterprise/LawEnterpriseSendEmail";
 import GalleryImage from "./enterprise/law-enterprise/GalleryImage";
 
 interface NavItem {
@@ -67,7 +68,6 @@ function UserProfilePage() {
     const [openModalUpdate, setOpenModalUpdate] = useState(false);
 
     const [keyActive, setKeyActive] = useState(1);
-
 
     const mapObjNav: { [key: number]: NavItem } = useMemo(() => {
         switch (user?.user_type as string) {
@@ -242,11 +242,21 @@ function UserProfilePage() {
                     },
                     6: {
                         key: 6,
-                        name: "Đánh giá",
-                        dataContent: <ProfileEvaluation />,
+                        name: "Gửi email",
+                        dataContent: <LawEnterpriseSendEmail />,
                     },
                     7: {
                         key: 7,
+                        name: "Đánh giá",
+                        dataContent: <ProfileEvaluation />,
+                    },
+                    8: {
+                        key: 8,
+                        name: "Quản lý",
+                        dataContent: <ProfileManagement />,
+                    },
+                    9: {
+                        key: 9,
                         name: "Xác thực doanh nghiệp",
                         dataContent: <EnterpriseVertification />,
                     },
@@ -256,16 +266,12 @@ function UserProfilePage() {
                     1: {
                         key: 1,
                         name: "Thông tin",
-                        dataContent: (
-                            <LawCompanyInfomation />
-                        ),
+                        dataContent: <LawCompanyInfomation />,
                     },
                     2: {
                         key: 2,
                         name: "Bài viết",
-                        dataContent: (
-                            <LawCompanyPost listPost={listMyPost} />
-                        ),
+                        dataContent: <LawCompanyPost listPost={listMyPost} />,
                     },
                     3: {
                         key: 3,
@@ -304,7 +310,6 @@ function UserProfilePage() {
         typeFollowTab,
         keyActive,
     ]);
-
 
     return (
         <div>
