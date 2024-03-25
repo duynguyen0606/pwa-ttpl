@@ -17,7 +17,6 @@ import {
 import Image from 'next/image';
 import { useState } from 'react';
 import CustomButton from '../../common/CustomButton';
-import ModalAddContact from './ModalAddContact';
 
 interface DataType {
   key: string;
@@ -69,7 +68,7 @@ const data: DataType[] = [
   },
 ];
 
-function CustomerInfor() {
+function EmployeeInfor() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [fileListLink, setFileListLink] = useState<string>('');
   const { token } = useAppSelector((state) => state.authState);
@@ -167,24 +166,73 @@ function CustomerInfor() {
         <Col span={18}>
           <div className='flex justify-between mb-4'>
             <div className='font-semibold p-2 uppercase border-l-4 border-l-[#000]'>
-              Tất cả thông tin liên lạc
+              Giấy tờ tuỳ thân
             </div>
-            <div className='flex gap-2'>
-              <Button>Gửi lời mời</Button>
-              <Button
-                icon={
-                  <Image
-                    src='/images/dashboard/plus.png'
-                    width={20}
-                    alt='plus'
-                    height={20}
-                  />
-                }
-                onClick={() => setOpenModalAddContact(true)}
-                className='button-primary button-flex'
-              >
-                Thêm liên hệ mới
-              </Button>
+          </div>
+          <div className='mb-4'>
+            <Row gutter={16}>
+              <Col span={12}>
+                <div
+                  className='rounded-lg p-4'
+                  style={{
+                    background:
+                      'radial-gradient(circle at 36%, #FFEADB, #FFEADB 65%, #FEE6D0 66%, #FEE6D0 75%)',
+                  }}
+                >
+                  <div>Noi cap</div>
+                  <div>
+                    <span>So CMND/CCCD</span>
+                    <div>031833213213</div>
+                  </div>
+                  <div>
+                    <span>Ngay cap</span>
+                    <div>2024-02-23</div>
+                  </div>
+                </div>
+              </Col>
+              <Col span={12}>
+                <div
+                  className='rounded-lg p-4'
+                  style={{
+                    background:
+                      'radial-gradient(circle at 36%, #F58837, #F58837 65%, #F99953 66%, #F99953 75%)',
+                  }}
+                >
+                  <div>Chi nhanh</div>
+                  <div>
+                    <span>So tai khoan</span>
+                    <div>031833213213</div>
+                  </div>
+                  <div>
+                    <span>Chi nhanh</span>
+                    <div>Sam son thanh hoa</div>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+          <div className='flex justify-between mb-4'>
+            <div className='font-semibold p-2 uppercase border-l-4 border-l-[#000]'>
+              Thông tin về công việc
+            </div>
+          </div>
+          <div>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Table: {
+                    headerBg: 'var(--primary-color)',
+                    headerColor: '#fff',
+                  },
+                },
+              }}
+            >
+              <Table columns={columns} dataSource={data} />
+            </ConfigProvider>
+          </div>
+          <div className='flex justify-between mb-4'>
+            <div className='font-semibold p-2 uppercase border-l-4 border-l-[#000]'>
+              Thông tin account
             </div>
           </div>
           <div>
@@ -203,12 +251,8 @@ function CustomerInfor() {
           </div>
         </Col>
       </Row>
-      <ModalAddContact
-        onCancel={() => setOpenModalAddContact(false)}
-        open={openModalAddContact}
-      />
     </div>
   );
 }
 
-export default CustomerInfor;
+export default EmployeeInfor;
