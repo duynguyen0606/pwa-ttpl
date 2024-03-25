@@ -1,4 +1,4 @@
-import { Col, Row, Select } from 'antd';
+import { Col, ConfigProvider, Row, Select } from 'antd';
 import CustomerInfor from './CustomerInfor';
 import { useMemo, useState } from 'react';
 import CustomerFlow from './CustomerFlow';
@@ -24,7 +24,7 @@ function CustomerManagement() {
   const [seletecTab, setSelectedTab] = useState('');
   const handleChange = (value: string) => {
     setSelectedTab(value);
-  }; 
+  };
 
   const renderChild = useMemo(() => {
     switch (seletecTab) {
