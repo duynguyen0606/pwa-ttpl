@@ -1,19 +1,29 @@
 import { ConfigProvider, Menu } from "antd";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { HistoryTransaction, WalletManagement } from "./management-tab";
 
-const dataNavs = [
-    {
-        label: "Quản lý Ví",
-        key: "wallet",
-    },
-    {
-        label: "Lịch sử giao dịch",
-        key: "history",
-    },
-];
+interface NavItem {
+    key: string;
+    label: string;
+    dataContent: JSX.Element;
+}
 
 function ProfileManagement() {
-    const [nav, setNav] = useState('wallet')
+    const [nav, setNav] = useState("wallet");
+    const dataNavs: { [key: string]: NavItem } = useMemo(() => {
+        return {
+            wallet: {
+                key: "wallet",
+                label: "Quản lý Ví",
+                dataContent: <WalletManagement />,
+            },
+            history: {
+                key: "history",
+                label: "Lịch sử giao dịch",
+                dataContent: <HistoryTransaction />,
+            },
+        };
+    }, []);
     return (
         <div>
             <ConfigProvider
@@ -32,7 +42,7 @@ function ProfileManagement() {
                     mode="horizontal"
                     defaultSelectedKeys={[nav]}
                     selectedKeys={[nav]}
-                    items={dataNavs.map((item) => {
+                    items={Object.values(dataNavs).map((item) => {
                         return {
                             key: item.key,
                             label: item.label,
@@ -42,15 +52,16 @@ function ProfileManagement() {
                         justifyContent: "center",
                         fontSize: 16,
                         color: "#a1a5ac",
-                        fontWeight: '400',
+                        fontWeight: "400",
                     }}
                     onSelect={({ item, key }) => {
                         setNav(key);
                     }}
                 />
             </ConfigProvider>
+            <div>{dataNavs[nav]?.dataContent}</div>
         </div>
     );
 }
 
-export default ProfileManagement
+export default ProfileManagement;
