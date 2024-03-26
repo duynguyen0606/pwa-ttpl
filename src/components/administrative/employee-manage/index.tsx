@@ -57,6 +57,31 @@ function CustomerManagement() {
     }
   }, [seletecTab]);
 
+  const renderTitleChild = useMemo(() => {
+    switch (seletecTab) {
+      case TabSelection.EE_SOCIAL:
+        return 'Social Links';
+      case TabSelection.EE_DOCUMENT:
+        return 'Tài liệu';
+      case TabSelection.EE_FLOW:
+        return 'Quy trình';
+      case TabSelection.EE_WORKDAY:
+        return 'Ngày công';
+      case TabSelection.EE_KPI:
+        return '%KPI';
+      case TabSelection.EE_SALARY:
+        return 'Phiếu lương';
+      case TabSelection.EE_DAYS_OFF:
+        return 'Ngày nghỉ';
+      case TabSelection.EE_COST:
+        return 'Chi phí';
+      case TabSelection.EE_MISSION:
+        return 'Nhiệm vụ';
+      default:
+        return '';
+    }
+  }, [seletecTab]);
+
   return (
     <div>
       <Row gutter={16}>
@@ -121,7 +146,15 @@ function CustomerManagement() {
                 <div>0Đ</div>
               </div>
             </div>
-            <div className='p-4'>{renderChild}</div>
+
+            <div className='p-4'>
+              {!!renderTitleChild && (
+                <div className='uppercase font-semibold mb-4'>
+                  {renderTitleChild}
+                </div>
+              )}
+              {renderChild}
+            </div>
           </div>
         </Col>
       </Row>
