@@ -47,6 +47,27 @@ function CustomerManagement() {
     }
   }, [seletecTab]);
 
+  const renderTitleChild = useMemo(() => {
+    switch (seletecTab) {
+      case TabSelection.CS_FLOW:
+        return 'Quy trình';
+      case TabSelection.CS_RECIPE:
+        return 'Hoá đơn';
+      case TabSelection.CS_SP:
+        return 'Hỗ trợ khách hàng';
+      case TabSelection.CS_NOTE:
+        return 'Ghi chú';
+      case TabSelection.CS_DOCUMENT:
+        return 'Tài liệu';
+      case TabSelection.CS_EVENT:
+        return 'Sự kiện';
+      case TabSelection.CS_PRICE:
+        return 'Báo giá';
+      default:
+        return '';
+    }
+  }, [seletecTab]);
+
   return (
     <div>
       <Row gutter={16}>
@@ -109,7 +130,14 @@ function CustomerManagement() {
                 <div>0Đ</div>
               </div>
             </div>
-            <div className='p-4'>{renderChild}</div>
+            <div className='p-4'>
+              {!!renderTitleChild && (
+                <div className='uppercase font-semibold mb-4'>
+                  {renderTitleChild}
+                </div>
+              )}
+              {renderChild}
+            </div>
           </div>
         </Col>
       </Row>

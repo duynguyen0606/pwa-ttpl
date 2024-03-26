@@ -6,6 +6,7 @@ import {
   ConfigProvider,
   Form,
   Input,
+  Radio,
   Row,
   Space,
   Table,
@@ -131,35 +132,56 @@ function EmployeeInfor() {
             </Upload>
           </div>
           <Form layout='vertical'>
-            <Form.Item label='Tên công ty'>
-              <Input placeholder='Tên công ty' />
+            <Form.Item label='Họ'>
+              <Input placeholder='Họ' />
             </Form.Item>
-            <Form.Item label='Email'>
-              <Input placeholder='Email' />
-            </Form.Item>
-            <Form.Item label='Địa chỉ'>
-              <Input placeholder='Địa chỉ' />
-            </Form.Item>
-            <Form.Item label='Thành phố'>
-              <Input placeholder='Thành phố' />
-            </Form.Item>
-            <Form.Item label='Tiểu bang'>
-              <Input placeholder='Tiểu bang' />
-            </Form.Item>
-            <Form.Item label='Mã vùng'>
-              <Input placeholder='Mã vùng' />
-            </Form.Item>
-            <Form.Item label='Đất nước'>
-              <Input placeholder='Đất nước' />
+            <Form.Item label='Tên'>
+              <Input placeholder='Tên' />
             </Form.Item>
             <Form.Item label='Số điện thoại'>
               <Input placeholder='Số điện thoại' />
             </Form.Item>
-            <Form.Item label='Website'>
-              <Input placeholder='Website' />
+            <Form.Item label='Email'>
+              <Input placeholder='Email' />
             </Form.Item>
-            <Form.Item label='VAT'>
-              <Input placeholder='VAT' />
+            <Form.Item label='Ngày tháng năm sinh'>
+              <Input placeholder='Ngày tháng năm sinh' />
+            </Form.Item>
+            <Form.Item label='Giới tính'>
+              <Radio.Group>
+                <Radio value='men'> Nam </Radio>
+                <Radio value='female'> Nữ </Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item label='Dân tộc'>
+              <Input placeholder='Dân tộc' />
+            </Form.Item>
+            <Form.Item label='Tôn giáo'>
+              <Input placeholder='Tôn giáo' />
+            </Form.Item>
+            <Form.Item label='Tình trạng hôn nhân'>
+              <Radio.Group>
+                <Radio value='single'> Độc thân </Radio>
+                <Radio value='married'> Đã kết hôn </Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item label='Quốc tịch'>
+              <Input placeholder='Quốc tịch' />
+            </Form.Item>
+            <Form.Item label='Địa chỉ'>
+              <Input placeholder='Địa chỉ' />
+            </Form.Item>
+            <Form.Item label='Địa chỉ thường chú'>
+              <Input placeholder='Địa chỉ thường chú' />
+            </Form.Item>
+            <Form.Item label='Địa chỉ hiện tại'>
+              <Input placeholder='Địa chỉ hiện tại' />
+            </Form.Item>
+            <Form.Item label='Quận/huyện'>
+              <Input placeholder='Quận/huyện' />
+            </Form.Item>
+            <Form.Item label='Tỉnh/thành phố'>
+              <Input placeholder='Tỉnh/thành phố' />
             </Form.Item>
           </Form>
         </Col>
@@ -179,33 +201,51 @@ function EmployeeInfor() {
                       'radial-gradient(circle at 36%, #FFEADB, #FFEADB 65%, #FEE6D0 66%, #FEE6D0 75%)',
                   }}
                 >
-                  <div>Noi cap</div>
-                  <div>
-                    <span>So CMND/CCCD</span>
-                    <div>031833213213</div>
+                  <div className='flex items-center gap-2'>
+                    <Image
+                      src='/images/dashboard/building.png'
+                      alt='building'
+                      width={30}
+                      height={30}
+                    />
+                    <span>Nơi cấp</span>
                   </div>
                   <div>
-                    <span>Ngay cap</span>
-                    <div>2024-02-23</div>
+                    <span className='text-xs'>So CMND/CCCD</span>
+                    <div className='font-semibold text-xl'>031833213213</div>
+                  </div>
+                  <div>
+                    <span className='text-xs'>Ngay cap</span>
+                    <div className='font-semibold text-xl'>2024-02-23</div>
                   </div>
                 </div>
               </Col>
               <Col span={12}>
                 <div
-                  className='rounded-lg p-4'
+                  className='rounded-lg p-4 text-white'
                   style={{
                     background:
                       'radial-gradient(circle at 36%, #F58837, #F58837 65%, #F99953 66%, #F99953 75%)',
                   }}
                 >
-                  <div>Chi nhanh</div>
-                  <div>
-                    <span>So tai khoan</span>
-                    <div>031833213213</div>
+                  <div className='flex items-center gap-2'>
+                    <Image
+                      src='/images/dashboard/credit-card.png'
+                      alt='credit-card'
+                      width={30}
+                      height={30}
+                    />
+                    <div>Chi nhanh</div>
                   </div>
                   <div>
-                    <span>Chi nhanh</span>
-                    <div>Sam son thanh hoa</div>
+                    <span className='text-xs'>So tai khoan</span>
+                    <div className='font-semibold text-xl'>031833213213</div>
+                  </div>
+                  <div>
+                    <span className='text-xs'>Chi nhanh</span>
+                    <div className='font-semibold text-xl'>
+                      Sam son thanh hoa
+                    </div>
                   </div>
                 </div>
               </Col>
