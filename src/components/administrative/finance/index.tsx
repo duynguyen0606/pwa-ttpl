@@ -38,7 +38,6 @@ function Finance() {
               itemHoverColor: 'var(--primary-color)',
               itemSelectedColor: 'var(--primary-color)',
               inkBarColor: 'var(--primary-color)',
-              fontSize: 18,
             },
           },
         }}
