@@ -1,84 +1,102 @@
-import { Button, ConfigProvider, Space, Table, TableProps, Tag } from 'antd';
+import { Avatar, Button, ConfigProvider, Space, Table, TableProps, Tag } from 'antd';
 import Image from 'next/image';
 
 interface DataType {
   key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+  action: any;
+  mission: any;
+  process: any;
+  implementer: any;
+  time: any;
+  status: any;
+
 }
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
+    title: 'Hành động',
+    dataIndex: 'action',
     key: 'action',
-    render: (_, record) => (
-      <Space size='middle'>
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
+    render: (text) => (
+    <div className='flex justify-center items-center'> 
+      <div className='p-1 rounded text-white bg-[#41DC8F]'>
+        {text}
+      </div>
+    </div>
+    )
   },
+  {
+    title: 'Nhiệm vụ',
+    dataIndex: 'mission',
+    key: 'mission',
+    render: (text) => <a>{text}</a>
+  },
+  {
+    title: 'Quy trình',
+    dataIndex: 'process',
+    key: 'process',
+    render: (text) => <a>{text}</a>
+  },
+  {
+    title: 'Người thực hiện',
+    key: 'implementer',
+    dataIndex: 'implementer',
+    render: (user) => (
+      <div className='flex items-center' >
+        <Avatar src={user.images} />
+        <div className='flex flex-col ml-1'>
+          <span className='font-bold'>{user.name}</span>
+          <span>{user.email}</span>
+        </div>
+      </div>
+    )
+  },
+  {
+    title: 'Thời gian',
+    dataIndex: 'time',
+    key: 'time',
+  },
+  {
+    title: 'Trạng thái',
+    dataIndex: 'status',
+    key: 'status',
+    render: (text) => (
+      <div className='flex justify-center items-center'> 
+        <div className='p-1 rounded text-white bg-black'>
+          {text}
+        </div>
+      </div>
+    )
+  }
 ];
 
 const data: DataType[] = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    action: 'created',
+    mission: '# 4211 saldsjaslkd',
+    process: 'Quy trình ABC',
+    implementer: {images: '', name: 'Ngô Long VŨ', email: 'ngovu5122000@gmail.com'},
+    time: '2024-03-26 08:02:56',
+    status: 'Quản lý giao việc'
   },
   {
     key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    action: 'created',
+    mission: '# 4211 saldsjaslkd',
+    process: 'Quy trình ABC',
+    implementer: {images: '', name: 'Ngô Long VŨ', email: 'ngovu5122000@gmail.com'},
+    time: '2024-03-26 08:02:56',
+    status: 'Quản lý giao việc'
   },
   {
     key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    action: 'created',
+    mission: '# 4211 saldsjaslkd',
+    process: 'Quy trình ABC',
+    implementer: {images: '', name: 'Ngô Long VŨ', email: 'ngovu5122000@gmail.com'},
+    time: '2024-03-26 08:02:56',
+    status: 'Quản lý giao việc'
   },
 ];
 
