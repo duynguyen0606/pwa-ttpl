@@ -9,13 +9,13 @@ const onChange = (key: string) => {
 const items: TabsProps['items'] = [
   {
     key: '1',
-    label: 'Bài viết của tôi',
-    children: <MyPosts />,
+    label: 'Bài viết của công ty',
+    children: <CompanyPosts />,
   },
   {
     key: '2',
-    label: 'Bài viết của công ty',
-    children: <CompanyPosts />,
+    label: 'Bài viết của tôi',
+    children: <MyPosts />,
   },
 ];
 

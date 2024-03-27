@@ -5,26 +5,46 @@ import Image from 'next/image';
 interface DataType {
   key: string;
   name: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  title: string;
+  classification: string;
+  author: string;
+  time: any;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Mã bài viết",
+    dataIndex: "name",
+    key: "name",
     render: (text) => <a>{text}</a>,
-    width: '80%',
   },
   {
-    title: 'Action',
-    key: 'action',
+    title: "Tiêu đề",
+    dataIndex: "title",
+    key: "title",
+  },
+  {
+    title: "Danh mục",
+    dataIndex: "classification",
+    key: "classification",
+  },
+  {
+    title: "Tác giả",
+    dataIndex: "author",
+    key: "author",
+  },
+  {
+    title: "Thời gian",
+    dataIndex: "time",
+    key: "time",
+  },
+  {
+    title: "Thao tác",
+    key: "action",
     render: (_, record) => (
-      <Space size='middle'>
-        <CustomButton type='update' />
-        <CustomButton type='delete' />
+      <Space size="middle">
+        <CustomButton type="update" />
+        <CustomButton type="delete" />
       </Space>
     ),
   },
@@ -32,16 +52,28 @@ const columns: TableProps<DataType>['columns'] = [
 
 const data: DataType[] = [
   {
-    key: '1',
-    name: 'John Brown',
+    key: "1",
+    name: "HELLO8",
+    title: "HELLO",
+    classification: "1216",
+    author: "ngo long vu",
+    time: "2024-03-26 23:26:38",
   },
   {
-    key: '2',
-    name: 'Jim Green',
+    key: "2",
+    name: "6263",
+    title: "test",
+    classification: "1216",
+    author: "ngo long vu",
+    time: "2024-03-25 15:07:28",
   },
   {
-    key: '3',
-    name: 'Joe Black',
+    key: "3",
+    name: "",
+    title: "Test phản hồi bình luận có id là 4550",
+    classification: "",
+    author: "ngo long vu",
+    time: "2024-03-12 10:11:45",
   },
 ];
 
