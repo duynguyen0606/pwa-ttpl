@@ -26,7 +26,7 @@ const items: TabsProps['items'] = [
   },
   {
     key: '4',
-    label: 'Cơ quản thực hiện',
+    label: 'Cơ quan thực hiện',
     children: <ObjectAgency />,
   },
 ];

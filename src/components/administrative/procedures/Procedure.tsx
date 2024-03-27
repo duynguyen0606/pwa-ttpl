@@ -4,22 +4,34 @@ import Image from 'next/image';
 
 interface DataType {
   key: string;
+  id: string;
   name: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  result: string;
+  // action: string;
 }
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-    width: '80%',
+    title: 'Mã thủ tục',
+    dataIndex: 'id',
+    key: 'id',
+    render: (text) => <a className='font-bold'>{text}</a>,
+    width: '20%',
   },
   {
-    title: 'Action',
+    title: 'Tên thủ tục',
+    dataIndex: 'name',
+    key: 'name',
+    render: (text) => <a>{text}</a>
+  },
+  {
+    title: 'Kết quả thực hiện',
+    dataIndex: 'result',
+    key: 'result',
+    render: (text) => <a>{text}</a>
+  },
+  {
+    title: 'Thao tác',
     key: 'action',
     render: (_, record) => (
       <Space size='middle'>
@@ -32,16 +44,22 @@ const columns: TableProps<DataType>['columns'] = [
 
 const data: DataType[] = [
   {
-    key: '1',
-    name: 'John Brown',
+    key: "1",
+    id: "LGZ-10.201123010",
+    name: "Thủ tục chứng nhận lãnh sự, hợp pháp hóa lãnh sự giấy tờ, tài liệu tại các cơ quan ở trong nước",
+    result: "Chứng nhận hợp pháp hóa lãnh lãnh sự",
   },
   {
-    key: '2',
-    name: 'Jim Green',
+    key: "2",
+    id: "LGZ-10.20112309",
+    name: "Thủ tục xác định tình trạng nghiện ma túy đối với người bị tạm giữ hành chính được đề nghị xác định tình trạng nghiện ma túy tại nơi tạm giữ không có cơ sở y tế đủ điều kiện",
+    result: "Sau khi hoàn thành quy trình xác định tình trạng nghiện ma túy, cơ sở y tế lập Phiếu kết quả xác định tình trạng nghiện ma túy thành 02 bản trình thủ trưởng đơn vị phê duyệt theo mẫu quy định tại điểm e Khoản 1 Điều này; 01 bản lưu bệnh án, 01 bản trả cơ quan công an đề nghị xác định tình trạng nghiện ma túy.",
   },
   {
-    key: '3',
-    name: 'Joe Black',
+    key: "3",
+    id: "LGZ-10.201123008",
+    name: "thủ tục xác định tình trạng nghiện ma túy đối với người tự nguyện xác định tình trạng nghiện ma túy",
+    result: "Cơ sở y tế lập Phiếu kết quả xác định tình trạng nghiện ma túy thành 02 bản theo mẫu quy định tại điểm c Khoản 1 Điều này; 01 bản lưu bệnh án, 01 bản trả cho người tự nguyện xác định tình trạng nghiện ma túy.",
   },
 ];
 
@@ -71,7 +89,7 @@ function Procedure() {
           },
         }}
       >
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={data} pagination={{ position: ['bottomCenter'] }} />
       </ConfigProvider>
     </div>
   );

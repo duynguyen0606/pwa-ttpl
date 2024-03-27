@@ -12,7 +12,7 @@ interface DataType {
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: 'Name',
+    title: 'Đối tượng thực hiện',
     dataIndex: 'name',
     key: 'name',
     render: (text) => <a>{text}</a>,
@@ -31,18 +31,18 @@ const columns: TableProps<DataType>['columns'] = [
 ];
 
 const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-  },
+    {
+        key: "1",
+        name: "Tổ chức, cá nhân nhập khẩu, sản xuất, sử dụng các chất POP tại Việt Nam theo quy định.",
+    },
+    {
+        key: "2",
+        name: "Chủ dự án đầu tư, cơ sở",
+    },
+    {
+        key: "3",
+        name: "Đương sự, người đại diện hợp pháp của đương sự hoặc cơ quan, tổ chức, cá nhân khởi kiện vụ án",
+    },
 ];
 
 function ObjectAction() {
@@ -71,7 +71,7 @@ function ObjectAction() {
           },
         }}
       >
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={data} pagination={{ position: ['bottomCenter'] }} />
       </ConfigProvider>
     </div>
   );

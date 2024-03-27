@@ -12,7 +12,7 @@ interface DataType {
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: 'Name',
+    title: 'Tên lĩnh vực',
     dataIndex: 'name',
     key: 'name',
     render: (text) => <a>{text}</a>,
@@ -33,15 +33,15 @@ const columns: TableProps<DataType>['columns'] = [
 const data: DataType[] = [
   {
     key: '1',
-    name: 'John Brown',
+    name: 'Tố tụng hành chính',
   },
   {
     key: '2',
-    name: 'Jim Green',
+    name: 'Tố tụng hình sự',
   },
   {
     key: '3',
-    name: 'Joe Black',
+    name: 'Tố tụng dân sự',
   },
 ];
 
@@ -71,7 +71,7 @@ function Field() {
           },
         }}
       >
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={data} pagination={{ position: ['bottomCenter'] }} />
       </ConfigProvider>
     </div>
   );
