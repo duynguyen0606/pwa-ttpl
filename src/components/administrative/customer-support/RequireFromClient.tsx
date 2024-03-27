@@ -50,7 +50,7 @@ const data: DataType[] = [
   },
 ];
 
-function FinanceRecipe() {
+function RequireFormClient() {
   return (
     <div>
       <Button
@@ -64,7 +64,7 @@ function FinanceRecipe() {
         }
         className='button-primary button-flex'
       >
-        Thêm hóa đơn
+        Yêu cầu hỗ trợ khách hàng
       </Button>
       <br />
       <ConfigProvider
@@ -83,4 +83,4 @@ function FinanceRecipe() {
   );
 }
 
-export default FinanceRecipe;
+export default RequireFormClient;

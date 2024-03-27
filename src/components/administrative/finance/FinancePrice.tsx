@@ -1,4 +1,5 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { Button, ConfigProvider, Table, TableProps } from 'antd';
+import Image from 'next/image';
 interface DataType {
   key: string;
   name: string;
@@ -51,18 +52,34 @@ const data: DataType[] = [
 
 function FinancePrice() {
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+    <>
+      <Button
+        icon={
+          <Image
+            src='/images/dashboard/plus.png'
+            alt='plus'
+            width={15}
+            height={15}
+          />
+        }
+        className='button-primary button-flex'
+      >
+        Thêm báo giá
+      </Button>
+      <br />
+      <ConfigProvider
+        theme={{
+          components: {
+            Table: {
+              headerBg: 'var(--primary-color)',
+              headerColor: '#fff',
+            },
           },
-        },
-      }}
-    >
-      <Table columns={columns} dataSource={data} />
-    </ConfigProvider>
+        }}
+      >
+        <Table columns={columns} dataSource={data} />
+      </ConfigProvider>
+    </>
   );
 }
 
