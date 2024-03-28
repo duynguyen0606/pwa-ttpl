@@ -1,6 +1,6 @@
-import { Button, ConfigProvider, Space, Table, TableProps, Tag } from 'antd';
-import CustomButton from '../../common/CustomButton';
-import Image from 'next/image';
+import { Button, ConfigProvider, Space, Table, TableProps, Tag } from "antd";
+import CustomButton from "../../common/CustomButton";
+import Image from "next/image";
 
 interface DataType {
   key: string;
@@ -10,33 +10,33 @@ interface DataType {
   // action: string;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Mã thủ tục',
-    dataIndex: 'id',
-    key: 'id',
-    render: (text) => <a className='font-bold'>{text}</a>,
-    width: '20%',
+    title: "Mã thủ tục",
+    dataIndex: "id",
+    key: "id",
+    render: (text) => <a className="font-bold">{text}</a>,
+    width: "20%",
   },
   {
-    title: 'Tên thủ tục',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>
+    title: "Tên thủ tục",
+    dataIndex: "name",
+    key: "name",
+    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Kết quả thực hiện',
-    dataIndex: 'result',
-    key: 'result',
-    render: (text) => <a>{text}</a>
+    title: "Kết quả thực hiện",
+    dataIndex: "result",
+    key: "result",
+    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Thao tác',
-    key: 'action',
+    title: "Thao tác",
+    key: "action",
     render: (_, record) => (
-      <Space size='middle'>
-        <CustomButton type='update' />
-        <CustomButton type='delete' />
+      <Space size="middle">
+        <CustomButton type="update" />
+        <CustomButton type="delete" />
       </Space>
     ),
   },
@@ -69,13 +69,13 @@ function Procedure() {
       <Button
         icon={
           <Image
-            src='/images/dashboard/plus.png'
-            alt='plus'
+            src="/images/dashboard/plus.png"
+            alt="plus"
             width={20}
             height={20}
           />
         }
-        className='mb-4 button-primary button-flex'
+        className="mb-4 button-primary button-flex"
       >
         Thêm thủ tục
       </Button>
@@ -83,13 +83,17 @@ function Procedure() {
         theme={{
           components: {
             Table: {
-              headerBg: 'var(--primary-color)',
-              headerColor: '#fff',
+              headerBg: "var(--primary-color)",
+              headerColor: "#fff",
             },
           },
         }}
       >
-        <Table columns={columns} dataSource={data} pagination={{ position: ['bottomCenter'] }} />
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={{ position: ["bottomCenter"] }}
+        />
       </ConfigProvider>
     </div>
   );
