@@ -1,6 +1,6 @@
-import { Button, ConfigProvider, Space, Table, TableProps, Tag } from 'antd';
-import CustomButton from '../../common/CustomButton';
-import Image from 'next/image';
+import { Button, ConfigProvider, Space, Table, TableProps, Tag } from "antd";
+import CustomButton from "../../common/CustomButton";
+import Image from "next/image";
 
 interface DataType {
   key: string;
@@ -84,13 +84,17 @@ function CompanyPosts() {
         theme={{
           components: {
             Table: {
-              headerBg: 'var(--primary-color)',
-              headerColor: '#fff',
+              headerBg: "var(--primary-color)",
+              headerColor: "#fff",
             },
           },
         }}
       >
-        <Table columns={columns} dataSource={data} />
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={{ position: ["bottomCenter"] }}
+        />
       </ConfigProvider>
     </div>
   );
