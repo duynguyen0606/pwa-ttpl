@@ -31,7 +31,7 @@ interface DataType {
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: 'Name',
+    title: 'Tên',
     dataIndex: 'name',
     key: 'name',
     render: (text) => <a>{text}</a>,

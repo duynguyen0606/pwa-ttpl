@@ -1,4 +1,4 @@
-import { Col, Form, Input, Modal, ModalProps, Radio, Row } from 'antd';
+import { Checkbox, Col, Form, Input, Modal, ModalProps, Radio, Row } from 'antd';
 
 function ModalAddContact(props: ModalProps) {
   const { open, onOk, onCancel } = props;
@@ -40,7 +40,7 @@ function ModalAddContact(props: ModalProps) {
               <Input placeholder='Nhập lại mật khẩu' />
             </Form.Item>
             <Form.Item label='Gửi chi tiết đăng nhập qua email cho người dùng này'>
-              <Radio value='men' defaultChecked />
+              <Checkbox value='men' defaultChecked />
             </Form.Item>
           </Col>
         </Row>

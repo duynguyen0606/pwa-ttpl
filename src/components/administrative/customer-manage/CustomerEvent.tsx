@@ -1,4 +1,4 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { Calendar, ConfigProvider, Table, TableProps } from 'antd';
 interface DataType {
   key: string;
   name: string;
@@ -55,13 +55,18 @@ function CustomerEvent() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      {/* <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      /> */}
+      <Calendar />
     </ConfigProvider>
   );
 }

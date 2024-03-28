@@ -1,51 +1,75 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Table, TableProps } from "antd";
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  id: string;
+  flow: string;
+  payDate: any;
+  dueDate: any;
+  moneyPaid: string;
+  totalValue: string;
+  status: string;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Mã hóa đơn",
+    dataIndex: "id",
+    key: "id",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Quy trình",
+    key: "flow",
+    dataIndex: "flow",
+    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Ngày trả tiền",
+    key: "payDate",
+    dataIndex: "payDate",
+  },
+  {
+    title: "Ngày đáo hạn",
+    key: "dueDate",
+    dataIndex: "dueDate",
+  },
+  {
+    title: "Số tiền đã trả",
+    key: "moneyPaid",
+    dataIndex: "moneyPaid",
+  },
+  {
+    title: "Giá trị hóa đơn",
+    key: "totalValue",
+    dataIndex: "totalValue",
+  },
+  {
+    title: "Trạng thái",
+    key: "status",
+    dataIndex: "status",
   },
 ];
 
 const data: DataType[] = [
   {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
+    key: "1",
+    id: "Mã hóa đơn 270",
+    flow: "Quy trình ABC",
+    payDate: "26/03/2024",
+    dueDate: "26/03/2024",
+    moneyPaid: "0đ",
+    totalValue: "0đ",
+    status: "Nháp",
   },
   {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
+    key: "2",
+    id: "Mã hóa đơn 268",
+    flow: "Quy trình ABC",
+    payDate: "06/03/2024",
+    dueDate: "15/03/2024",
+    moneyPaid: "0đ",
+    totalValue: "0đ",
+    status: "Nháp",
   },
 ];
 
@@ -55,13 +79,17 @@ function CustomerRecipe() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

@@ -1,53 +1,48 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Table, TableProps } from "antd";
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  id: any;
+  file: any;
+  size: any;
+  uploadBy: any;
+  uploadAt: any;
+  status: string;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "File",
+    key: "file",
+    dataIndex: "file",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Dung lượng",
+    key: "size",
+    dataIndex: "size",
+  },
+  {
+    title: "Upload by",
+    key: "uploadBy",
+    dataIndex: "uploadBy",
+  },
+  {
+    title: "Ngày upload",
+    key: "uploadAt",
+    dataIndex: "uploadAt",
+  },
+  {
+    title: "Trạng thái",
+    key: "status",
+    dataIndex: "status",
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-];
+const data: DataType[] = [];
 
 function CustomerDocument() {
   return (
@@ -55,13 +50,17 @@ function CustomerDocument() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

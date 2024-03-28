@@ -2,51 +2,36 @@ import { ConfigProvider, Table, TableProps } from 'antd';
 interface DataType {
   key: string;
   name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  date: any;
+  money: any;
+  status: any;
 }
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: 'Name',
+    title: 'Báo giá',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: 'Ngày gửi báo giá',
+    key: 'date',
+    dataIndex: 'date',
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: 'Số tiền',
+    key: 'money',
+    dataIndex: 'money',
+  },
+  {
+    title: 'Trạng thái',
+    key: 'status',
+    dataIndex: 'status',
   },
 ];
 
 const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
+
 ];
 
 function CustomerPrice() {
@@ -55,13 +40,17 @@ function CustomerPrice() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

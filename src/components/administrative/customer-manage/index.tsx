@@ -54,7 +54,7 @@ function CustomerManagement() {
       case TabSelection.CS_RECIPE:
         return 'Hoá đơn';
       case TabSelection.CS_SP:
-        return 'Hỗ trợ khách hàng';
+        return 'Chăm sóc khách hàng';
       case TabSelection.CS_NOTE:
         return 'Ghi chú';
       case TabSelection.CS_DOCUMENT:

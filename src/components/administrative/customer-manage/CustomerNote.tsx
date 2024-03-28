@@ -1,52 +1,37 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Space, Table, TableProps } from 'antd';
+import CustomButton from '../../common/CustomButton';
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  createAt: any;
+  content: string;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: "Ngày tạo",
+    dataIndex: "createAt",
+    key: "createAt",
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Nội dung",
+    key: "content",
+    dataIndex: "content",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Thao tác",
+    key: "action",
+    dataIndex: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <CustomButton type="update" />
+        <CustomButton type="delete" />
+      </Space>
+    ),
   },
 ];
 
 const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
+
 ];
 
 function CustomerNote() {
@@ -55,13 +40,17 @@ function CustomerNote() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }
