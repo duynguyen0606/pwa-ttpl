@@ -1,52 +1,62 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Space, Table, TableProps } from 'antd';
+import CustomButton from '../../common/CustomButton';
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  date: any;
+  type: any;
+  title: string;
+  description: any;
+  file: any;
+  money: any;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Ngày",
+    dataIndex: "date",
+    key: "date",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Loại khoản chi",
+    key: "type",
+    dataIndex: "type",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Tiêu đề",
+    key: "title",
+    dataIndex: "title",
+  },
+  {
+    title: "Mô tả",
+    key: "description",
+    dataIndex: "description",
+  },
+  {
+    title: "File",
+    key: "file",
+    dataIndex: "file",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Số tiền",
+    key: "money",
+    dataIndex: "money",
+  },
+  {
+    title: "Thao tác",
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <CustomButton type="update" />
+        <CustomButton type="delete" />
+      </Space>
+    ),
   },
 ];
 
 const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
+
 ];
 
 function EmployeeCost() {
@@ -55,13 +65,17 @@ function EmployeeCost() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

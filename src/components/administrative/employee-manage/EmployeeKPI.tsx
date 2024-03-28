@@ -1,53 +1,42 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Table, TableProps } from "antd";
 interface DataType {
   key: string;
+  id: string;
   name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  type: string;
+  percent: any;
+  total: any;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Tên quy trình",
+    key: "name",
+    dataIndex: "name",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Loại quy trình",
+    key: "type",
+    dataIndex: "type",
+  },
+  {
+    title: "%KPI",
+    key: "percent",
+    dataIndex: "percent",
+  },
+  {
+    title: "Tổng",
+    key: "total",
+    dataIndex: "total",
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-];
+const data: DataType[] = [];
 
 function EmployeeKPI() {
   return (
@@ -55,13 +44,17 @@ function EmployeeKPI() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

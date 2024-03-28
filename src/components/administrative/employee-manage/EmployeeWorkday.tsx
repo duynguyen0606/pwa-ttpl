@@ -1,52 +1,66 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Space, Table, TableProps } from 'antd';
+import CustomButton from '../../common/CustomButton';
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  inDate: any;
+  inAt: any;
+  outDate: any;
+  outAt: any;
+  duration: any,
+  actualSalary: any;
+  note: any;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: "Tới ngày",
+    dataIndex: "inDate",
+    key: "inDate",
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Tới công ty giờ",
+    key: "inAt",
+    dataIndex: "inAt",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Về ngày",
+    dataIndex: "outDate",
+    key: "outDate",
+  },
+  {
+    title: "Ra về khỏi giờ",
+    key: "outAt",
+    dataIndex: "outAt",
+  },
+  {
+    title: "Thời lượng",
+    key: "duration",
+    dataIndex: "duration",
+  },
+  {
+    title: "Lương thực lĩnh",
+    key: "actualSalary",
+    dataIndex: "actualSalary",
+  },
+  {
+    title: "Ghi chú",
+    key: "note",
+    dataIndex: "note",
+  },
+  {
+    title: "Thao tác",
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <CustomButton type="update" />
+        <CustomButton type="delete" />
+      </Space>
+    ),
   },
 ];
 
 const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
+
 ];
 
 function EmployeeWorkday() {
@@ -55,13 +69,17 @@ function EmployeeWorkday() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

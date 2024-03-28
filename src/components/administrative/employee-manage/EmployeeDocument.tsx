@@ -1,51 +1,75 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { Avatar, ConfigProvider, Space, Table, TableProps } from "antd";
+import CustomButton from "../../common/CustomButton";
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  id: any;
+  file: any;
+  size: any;
+  uploadBy: any;
+  uploadAt: any;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "File",
+    key: "file",
+    dataIndex: "file",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Dung lượng",
+    key: "size",
+    dataIndex: "size",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Upload by",
+    key: "uploadBy",
+    dataIndex: "uploadBy",
+    render: (user, record) => (
+      <div className="flex items-center">
+        <Avatar src={user?.images} />
+        <div className="ml-2 flex flex-col">
+          <span>{user?.name}</span>
+          <span>{user?.email}</span>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Ngày upload",
+    key: "uploadAt",
+    dataIndex: "uploadAt",
+  },
+  {
+    title: "Thao tác",
+    key: "action",
+    dataIndex: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <CustomButton type="save" />
+        <CustomButton type="delete" />
+      </Space>
+    ),
   },
 ];
 
 const data: DataType[] = [
   {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
+    key: "1",
+    id: "#2022",
+    file: "_file651957a688213-laravel.jpg",
+    size: "5.06 kB",
+    uploadBy: {
+      name: "ngo long vu",
+      email: "ngovu5122000@gmail.com",
+      images: "",
+    },
+    uploadAt: "01/10/2023 18:35",
   },
 ];
 
@@ -55,13 +79,17 @@ function EmployeeDocument() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }

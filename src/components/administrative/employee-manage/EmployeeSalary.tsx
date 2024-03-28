@@ -1,53 +1,78 @@
-import { ConfigProvider, Table, TableProps } from 'antd';
+import { ConfigProvider, Space, Table, TableProps } from "antd";
+import CustomButton from "../../common/CustomButton";
 interface DataType {
   key: string;
-  name: string;
-  position: string;
-  phoneNumber: string;
-  //   age: number;
-  //   address: string;
-  //   tags: string[];
+  month: any;
+  totalWorkday: any;
+  basicSalary: any;
+  bonusSalary: any;
+  minusSalary: any;
+  hotReward: any;
+  phoneAllowance: any;
+  fuelAllowance: any;
+  actualSalary: any;
 }
 
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps<DataType>["columns"] = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: "Tháng",
+    dataIndex: "month",
+    key: "month",
+    fixed: "left",
   },
   {
-    title: 'Vị trí',
-    key: 'position',
-    dataIndex: 'position',
+    title: "Ngày công",
+    key: "totalWorkday",
+    dataIndex: "totalWorkday",
   },
   {
-    title: 'Số điện thoại',
-    key: 'phoneNumber',
-    dataIndex: 'phoneNumber',
+    title: "Lương cơ bản",
+    key: "basicSalary",
+    dataIndex: "basicSalary",
+  },
+  {
+    title: "Lương thưởng KPI",
+    key: "bonusSalary",
+    dataIndex: "bonusSalary",
+  },
+  {
+    title: "Giảm trừ lương",
+    key: "minusSalary",
+    dataIndex: "minusSalary",
+  },
+  {
+    title: "Thưởng nóng",
+    key: "hotReward",
+    dataIndex: "hotReward",
+  },
+  {
+    title: "Phụ cấp điện thoại",
+    key: "phoneAllowance",
+    dataIndex: "phoneAllowance",
+  },
+  {
+    title: "Phụ cấp xăng xe",
+    key: "fuelAllowance",
+    dataIndex: "fuelAllowance",
+  },
+  {
+    title: "Lương thực lĩnh",
+    key: "actualSalary",
+    dataIndex: "actualSalary",
+  },
+  {
+    title: "Thao tác",
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <CustomButton type="update" />
+        <CustomButton type="delete" />
+      </Space>
+    ),
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    position: 'Giám đốc',
-    phoneNumber: '0987654321',
-  },
-];
+const data: DataType[] = [];
 
 function EmployeeSalary() {
   return (
@@ -55,13 +80,17 @@ function EmployeeSalary() {
       theme={{
         components: {
           Table: {
-            headerBg: 'var(--primary-color)',
-            headerColor: '#fff',
+            headerBg: "var(--primary-color)",
+            headerColor: "#fff",
           },
         },
       }}
     >
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={{ position: ["bottomCenter"] }}
+      />
     </ConfigProvider>
   );
 }
